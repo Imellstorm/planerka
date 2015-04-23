@@ -109,9 +109,12 @@
             else alert("Нажмите CTRL-D, чтобы добавить страницу в закладки.");
             return false;
         }
+        $(document).ready(function(){
+            initialize();
+        });
     </script>
 </head>
-<body onload="initialize()">
+<body>
 
 <!-- HEADER
     ============================= -->
