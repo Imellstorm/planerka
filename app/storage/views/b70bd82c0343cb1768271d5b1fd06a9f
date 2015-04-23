@@ -1,0 +1,75 @@
+ 
+<?php $__env->startSection('title'); ?> 
+    <?php if (Request::segment(3)=='create'): ?> 
+        Создать пользователя
+    <?php else: ?>
+        Редактировать пользователя
+    <?php endif; ?>
+<?php $__env->stopSection(); ?>
+ 
+<?php $__env->startSection('main'); ?>
+  
+<h1 style="margin-left:20px"><i class='fa fa-user'></i> <?php echo Request::segment(3)=='create'?'Создать пользователя':'Редактировать пользователя'; ?></h1>
+
+<?php if (Request::segment(3)=='create'): ?>
+    <?php echo Form::open(array('role' => 'form', 'url' => 'admin/users/store')); ?>
+<?php else: ?>
+    <?php echo Form::model($user, array('role' => 'form', 'url' => 'admin/users/update/' . $user->id, 'method' => 'PUT')); ?>
+<?php endif; ?>
+
+<div class='col-lg-6'>
+
+   <div class='form-group'>
+        <?php echo Form::label('username', 'Имя'); ?>
+        <?php echo Form::text('username', null, array('placeholder' => 'Username', 'class' => 'form-control')); ?>
+    </div>
+ 
+    <div class='form-group'>
+        <?php echo Form::label('email', 'Email'); ?>
+        <?php echo Form::email('email', null, array('placeholder' => 'Email', 'class' => 'form-control')); ?>
+    </div>
+
+    <div class='form-group'>
+        <?php echo Form::label('address', 'Адрес'); ?>
+        <?php echo Form::text('address', null, array('placeholder' => 'Address', 'class' => 'form-control')); ?>
+    </div>
+
+    <div class='form-group'>
+        <?php echo Form::label('phone', 'Телефон'); ?>
+        <?php echo Form::text('phone', null, array('placeholder' => 'Phone', 'class' => 'form-control')); ?>
+    </div>
+
+</div>
+
+<div class='col-lg-6'>
+    <div class='form-group'>
+        <?php echo Form::label('role', 'Роль'); ?>
+        <?php echo Form::select('role', $roles_dd,isset($user->role->id)?$user->role->id:'3',array('class'=>'form-control'));; ?>
+    </div>
+
+    <div class='form-group'>
+        <?php echo Form::label('balance', 'Счёт'); ?>
+        <?php echo Form::text('balance', null, array('placeholder' => 'Balance', 'class' => 'form-control')); ?>
+    </div>
+
+ 
+    <div class='form-group'>
+        <?php echo Form::label('password', 'Пароль'); ?>
+        <?php echo Form::password('password', array('placeholder' => 'Password', 'class' => 'form-control')); ?>
+    </div>
+ 
+    <div class='form-group'>
+        <?php echo Form::label('password_confirmation', 'Подтверждение пароля'); ?>
+        <?php echo Form::password('password_confirmation', array('placeholder' => 'Confirm Password', 'class' => 'form-control')); ?>
+    </div>
+
+ </div> 
+
+<div class='form-group' style="text-align:center">
+    <?php echo Form::submit('Сохранить', array('class' => 'btn btn-primary')); ?>
+</div>
+
+<?php echo Form::close(); ?>
+ 
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('containers.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

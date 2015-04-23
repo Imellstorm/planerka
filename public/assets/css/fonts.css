@@ -1,0 +1,46 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Serif:700italic&subset=latin,cyrillic); /* PT Serif - Bold Italyc */
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400italic,400,700&subset=latin,cyrillic); /* Roboto - Regular / Bold */
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic); /* PT Sans - Regular / Bold */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic); /* Open Sans - Regular / SemiBold */
+
+
+@font-face {
+    font-family: 'NeuronLight';
+    src: url('../fonts/neuron-light.eot');
+    src: url('../fonts/neuron-light.svg#NeuronLight') format('svg'),
+         url('../fonts/neuron-light.eot') format('embedded-opentype'),
+         url('../fonts/neuron-light.woff2') format('woff2'),
+         url('../fonts/neuron-light.woff') format('woff'),
+         url('../fonts/neuron-light.ttf') format('truetype'),
+         url('../fonts/neuron-light.svg#NeuronLight') format('svg');
+}
+@font-face {
+    font-family: 'Neuron';
+    src: url('../fonts/neuron.eot');
+    src: url('../fonts/neuron.svg#NeuronRegular') format('svg'),
+         url('../fonts/neuron.eot') format('embedded-opentype'),
+         url('../fonts/neuron.woff2') format('woff2'),
+         url('../fonts/neuron.woff') format('woff'),
+         url('../fonts/neuron.ttf') format('truetype'),
+         url('../fonts/neuron.svg#NeuronRegular') format('svg');
+}
+@font-face {
+    font-family: 'NeuronB';
+    src: url('../fonts/neuron-bold.eot');
+    src: url('../fonts/neuron-bold.svg#NeuronBold') format('svg'),
+         url('../fonts/neuron-bold.eot') format('embedded-opentype'),
+         url('../fonts/neuron-bold.woff2') format('woff2'),
+         url('../fonts/neuron-bold.woff') format('woff'),
+         url('../fonts/neuron-bold.ttf') format('truetype'),
+         url('../fonts/neuron-bold.svg#NeuronBold') format('svg');
+}
+@font-face {
+    font-family: 'NeuronItalic';
+    src: url('../fonts/neuron-italic.eot');
+    src: url('../fonts/neuron-italic.svg#NeuronItalic') format('svg'),
+         url('../fonts/neuron-italic.eot') format('embedded-opentype'),
+         url('../fonts/neuron-italic.woff2') format('woff2'),
+         url('../fonts/neuron-italic.woff') format('woff'),
+         url('../fonts/neuron-italic.ttf') format('truetype'),
+         url('../fonts/neuron-italic.svg#NeuronItalic') format('svg');
+}

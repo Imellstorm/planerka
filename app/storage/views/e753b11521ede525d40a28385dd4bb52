@@ -1,0 +1,14 @@
+ 
+<?php $__env->startSection('title'); ?> <?php echo $page->title; ?> <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('main'); ?>
+<h1 class="text-center"><?php echo $page->title; ?></h1>
+<div class="row">	                           
+    <div class="col-md-12 text-center">
+        <?php echo $page->content; ?>    
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('containers.frontend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

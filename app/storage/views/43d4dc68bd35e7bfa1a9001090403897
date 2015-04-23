@@ -1,0 +1,62 @@
+ 
+<?php $__env->startSection('title'); ?> Статьи <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script type="text/javascript" src="<?php echo asset('assets/packs/tinymce/tinymce.min.js'); ?>"></script>
+<script>
+    tinymce.init({
+        selector: "textarea",
+        height : 300,
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor textcolor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste jbimages, pagebreak"
+        ],
+        pagebreak_separator: "<pagebreak>",
+        //outdent indent
+        toolbar: "insertfile undo redo | styleselect | fontsizeselect | fontselect | backcolor | forecolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image jbimages",
+        relative_urls: false
+    });
+</script>
+<?php $__env->stopSection(); ?>
+ 
+<?php $__env->startSection('main'); ?>
+
+<div class='col-4 col-offset-4'>
+
+    <?php if (Request::segment(3)=='create'): ?>
+        <?php echo Form::open(array('role' => 'form', 'url' => 'admin/articles/store')); ?>
+    <?php else: ?>
+        <?php echo Form::model($article, array('role' => 'form', 'url' => 'admin/articles/update/' . $article->id, 'method' => 'PUT')); ?>
+    <?php endif; ?>
+ 
+    <h1 class="fa fa-edit"> <?php echo Request::segment(3)=='create'?'Добавить':'Править'; ?> статью</h1>
+
+    <div class="row">
+
+        <div class='form-group col-md-6'>
+            <?php echo Form::label('title', 'Название'); ?>
+            <?php echo Form::text('title', null, array('class' => 'form-control')); ?>
+        </div>
+
+        <div class='form-group col-md-6'>
+            <?php echo Form::label('alias', 'Алиас'); ?>
+            <?php echo Form::text('alias', null, array('placeholder' => 'Оставить пустым если это новость', 'class' => 'form-control')); ?>
+        </div>
+
+        <div class='form-group col-md-12'>
+            <?php echo Form::textarea('content', null, array('class' => 'form-control')); ?>
+        </div>
+
+        <div class='form-group col-md-12'>
+            <?php echo Form::submit('Сохранить', array('class' => 'btn btn-primary')); ?>
+        </div>
+
+    </div>
+
+    <?php echo Form::close(); ?>
+ 
+</div>
+ 
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('containers.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

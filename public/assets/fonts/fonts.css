@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'NeuronB';
+    src: url('neuron-bold.eot');
+    src: url('neuron-bold.eot') format('embedded-opentype'),
+         url('neuron-bold.woff2') format('woff2'),
+         url('neuron-bold.woff') format('woff'),
+         url('neuron-bold.ttf') format('truetype'),
+         url('neuron-bold.svg#NeuronBold') format('svg');
+}
+@font-face {
+    font-family: 'NeuronAB';
+    src: url('neuronangled-bold.eot');
+    src: url('neuronangled-bold.eot') format('embedded-opentype'),
+         url('neuronangled-bold.woff2') format('woff2'),
+         url('neuronangled-bold.woff') format('woff'),
+         url('neuronangled-bold.ttf') format('truetype'),
+         url('neuronangled-bold.svg#NeuronAngledBold') format('svg');
+}

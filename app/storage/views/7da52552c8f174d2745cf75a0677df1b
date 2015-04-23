@@ -1,0 +1,49 @@
+<?php $__env->startSection('title'); ?> Статьи <?php $__env->stopSection(); ?>
+<?php $__env->startSection('main'); ?>
+
+<h1 class="fa fa-edit pull-left"> Статьи</h1>
+<?php echo link_to('admin/articles/create/', 'Добавить', array('class'=>'pull-right btn btn-primary top20 left10')); ?>
+  
+<?php 
+        $search_fields = array_flip($table_fields);
+        $search_fields = array_combine($search_fields, $search_fields);
+    ?>
+    <?php echo Form::open(array('role' => 'form', 'url' => 'admin/articles', 'method' =>'get', 'class' => 'pull-right top20 table-search-form')); ?>
+        <?php echo Form::select('field',$search_fields,'',array('class'=>'form-control pull-left')); ?> 
+        <?php echo Form::text('search','',array('class'=>'form-control pull-left')); ?>
+        <?php echo Form::submit('Поиск',array('class'=>'btn btn-info')); ?>
+    <?php echo Form::close(); ?>  
+
+    <?php if ($articles->count()): ?>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <?php echo Common_helper::sorting_table_fields($table_fields); ?>
+                    <th style="width: 150px;">Действия</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($articles as $article): ?>
+                    <tr>
+                        <td><?php echo $article->title; ?></td>
+                        <td><?php echo $article->user; ?></td>
+                        <td><?php echo $article->created_at; ?></td>
+                        <td><?php echo $article->updated_at; ?></td>
+                        <td>
+                            <?php echo link_to('admin/articles/edit/'.$article->id, 'править', array('class' => 'btn btn-info btn-xs pull-left', 'title'=>'Править')); ?>
+                            <?php echo Form::open(array('url' => 'admin/articles/destroy/' . $article->id, 'method' => 'DELETE')); ?>
+                                <?php echo Form::submit('удалить', array('class' => 'btn btn-danger btn-xs left10','onclick'=>'return confirm(\'Удалить?\')?true:false;')); ?>
+                            <?php echo Form::close(); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php echo $articles->links(); ?>    
+    <?php endif; ?>
+
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('containers.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

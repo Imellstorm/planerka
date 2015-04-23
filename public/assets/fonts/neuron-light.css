@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'NeuronLight';
+    src: url('neuron-light.eot');
+    src: url('neuron-light.eot') format('embedded-opentype'),
+         url('neuron-light.woff2') format('woff2'),
+         url('neuron-light.woff') format('woff'),
+         url('neuron-light.ttf') format('truetype'),
+         url('neuron-light.svg#NeuronLight') format('svg');
+}

@@ -1,0 +1,49 @@
+<div class="col-md-4">
+    <div class="block">
+        <div class="block_header"><i class="fa fa-search icon"></i><?php echo Lang::get('main.searchlots'); ?></div>
+        <?php echo Form::open(array('role'=>'form', 'url'=>'/', 'class'=>'search_form', 'method' => 'GET')); ?>
+            <div class='form-group'>
+                <?php echo Form::select('ownership', $ownerships,null,array('class'=>'form-control'));; ?>
+            </div>
+            <div class='form-group'>
+                <?php echo Form::select('nds', $nds,null,array('class'=>'form-control'));; ?>
+            </div>
+            <div class='form-group'>
+                <?php echo Form::select('region', $regions,null,array('class'=>'form-control','onChange'=>'getCityList(this.selectedIndex)'));; ?>
+            </div>
+            <div class="form-group city_list">
+            </div>
+            <div class='form-group'>
+                <?php echo Form::text('name', null, array('placeholder' => Lang::get('main.title'), 'class' => 'form-control')); ?>
+            </div> 
+            <div class='form-group'>
+                <div class="layout-slider">
+                    <label style="margin-bottom:20px"><?php echo Lang::get('main.price'); ?></label>
+                    <input name="price" type="hidden" class="range-slider" value="<?php echo $price['min']; ?>,<?php echo $price['max']; ?>" />
+                </div>
+            </div>
+            <?php if(!empty($licenses)): ?>
+                <div class='form-group licenses'>
+                    <label class="pointer toggle_licenses" style="margin-top:20px"><i class="fa fa-plus-circle"></i> <?php echo Lang::get('main.license'); ?></label>
+                    <div class="licenses_box">
+                        <?php foreach($licenses as $key => $val): ?>
+                            <div>
+                                <label class="license_label">
+                                    <div style="float:left">
+                                        <input name="license[]" type="checkbox" value="<?php echo $val->id; ?>">
+                                    </div>
+                                    <div data-toggle="tooltip" data-placement="top" title="<?php echo $locale=='ru'?$val->name:$val->name_ukr; ?>">
+                                        <?php echo $locale=='ru'?$val->abr:$val->abr_ukr; ?>
+                                    </div>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>                                          
+                </div>
+            <?php endif; ?>
+            <div class='form-group' style="text-align:center">
+                <?php echo Form::submit( Lang::get('main.search'), array('class' => 'btn btn-success')); ?>
+            </div>                                                                             
+        <?php echo Form::close(); ?>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+* {	margin: 0;	padding: 0;	border: 0;	outline: none; }
+
+a { color: #2685d6; text-decoration: none;} a:hover { text-decoration: underline; }
+
+ol, ul { list-style: none; }
+
+li { display: list-item; }
+
+img { border: none;	vertical-align:bottom; }
+
+table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+
+button,input,select,textarea {font-family:inherit; font-size:100%; }
+
+textarea { overflow: auto; }
+
+button { cursor: pointer; }
+
+/* HTML5 Block Elements For Old Browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+ 	display: block;
+}
