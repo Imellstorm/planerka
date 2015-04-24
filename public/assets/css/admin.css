@@ -302,7 +302,7 @@ border-color: #56A32F;
     padding: 0 10px;
     line-height: 0px;
 }
-.table-search-form .form-control:focus{
+.form-control:focus{
     outline: none;
 }
 .pointer{

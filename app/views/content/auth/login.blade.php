@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 @section('main')
-<div class="row">
+<div class="row" style="margin:0">
     <div class='login_box col-md-4 col-md-offset-4'>
 
         <h1><i class='fa fa-unlock-alt'></i> Вход</h1>
