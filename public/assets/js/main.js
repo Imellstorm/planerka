@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
 	//FIX LOGIN
 
 	//$("#header .login").sticky({topSpacing:0});
@@ -128,9 +126,9 @@ $(document).ready(function() {
 
 		'beforeClose': function(event) { 
 
-           $('input.red_input').tooltipster('hide');
+           //$('input.red_input').tooltipster('hide');
 
-           $('textarea.red_input').tooltipster('hide');
+           //$('textarea.red_input').tooltipster('hide');
 
         }
 
@@ -364,4 +362,59 @@ $(document).ready(function() {
       source: availableTags
     });
 
+
+    $('.create-account').on('click',function(){
+      var button = $(this);
+      var modalCont = $(this).parent().parent().parent();
+      username = $(modalCont).find('.username').val();
+      email = $(modalCont).find('.email').val();
+      password = $(modalCont).find('.password').val();
+      password_confirmation = $(modalCont).find('.confirm_password').val();
+
+      $(modalCont).find('.error').text('');
+      $.ajax({
+        url: '/admin/users/validate',
+        type: 'post',
+        dataType: 'json',
+        data:{
+          username: username,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
+        },
+        success: function(ret){
+          if(ret.success == 'success'){
+            $.fancybox(ret.view);
+            } else {
+            $.each(ret, function(key,val) {                
+              modalCont.find('.'+key+'.error').text(val);
+            });
+          }
+        }
+      });
+    });
+
+    $('body').on('click','.tipe',function(){
+      $.ajax({
+        url: '/admin/users/store',
+        type: 'post',
+        dataType: 'json',
+        data:{
+          username: username,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation,
+          role: $(this).attr('role')
+        },
+        success: function(ret){
+          if(ret.success == 'success'){
+            $.fancybox(ret.view);
+          } else {
+            $.each(ret, function(key,val) { 
+              
+            });
+          }
+        }
+      });
+    });
 });

@@ -12,7 +12,7 @@ Route::controller('/auth', 'AuthController');
 | For All
 |--------------------------------------------------------------------------
 */
-
+Route::post('admin/users/validate', 'UserController@postValidate');
 Route::post('admin/users/store', 'UserController@postStore');
 Route::put('admin/users/update/{id}', 'UserController@putUpdate');
 

@@ -3812,6 +3812,9 @@ form.project .checkbox span {
 #modal-filter .btn-main {
   margin-left: 122px;
 }
+.error{
+  color: red;
+}
 
 .ui-helper-hidden-accessible{
   display: none;

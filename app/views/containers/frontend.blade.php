@@ -126,7 +126,7 @@
                         <div class="login">
                             <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
                             <div class="registration">
-                                <a href="/auth">Вход</a>|<a href="#">Регистрация</a>
+                                <a href="/auth" class="fancybox">Вход</a>|<a href="#modal-login" class="fancybox">Регистрация</a>
                             </div>
                         </div>
 
@@ -232,6 +232,8 @@
         </div>
     </nav>
     @yield('main')
+    @include('content.front.register')
+
 
 <!-- NAV FOOTER
     ============================= -->

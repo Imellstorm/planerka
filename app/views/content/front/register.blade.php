@@ -1,78 +1,79 @@
-@extends('containers.frontend')
- 
-@section('title') Регистрация @stop
- 
-@section('main')
- 
+<div class="custom-modal" id="modal-login">
+    <div class="title">Регистрация на планерке</div>
 
-<div class="row">
-    <div class="col-md-4">
+    <div class="social-login">
+        <p>Войдите с помощью:</p>
+        <a href="#null" class="facebook"></a>
+        <a href="#null" class="vk"></a>
+        <a href="#null" class="twitter"></a>
     </div>
-    <div class="col-md-8">
-        <h2><i class='fa fa-user'></i> Регистрация</h2>
-        {{ Form::open(array('role' => 'form', 'url' => 'admin/users/store')) }}
 
-        <div class='form-group'>
-            {{ Form::label('username', 'Имя пользователя') }}*
-            {{ Form::text('username', null, array('placeholder' => 'vasya', 'class' => 'form-control')) }}
+    <form class="login">
+        <div class="form-group">
+            <input type="text" class="form-control username" placeholder="Planerca.ru/Ник нэйм">
+            <div class="username error"></div>
         </div>
-     
-        <div class='form-group'>
-            {{ Form::label('email', 'E-mail адрес') }}*
-            {{ Form::email('email', null, array('placeholder' => 'admin@domain.com', 'class' => 'form-control')) }}
+        <div class="form-group">
+            <input type="text" class="form-control email" placeholder="Электронная почта">
+            <div class="email error"></div>
         </div>
+        <div class="form-group">
+            <input type="password" class="form-control password" placeholder="Пароль">
+            <div class="password error"></div>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control confirm_password" placeholder="Пароль повторно">
+        </div>
+    
+        <footer>
+            <div class="pull-left">
+                <div>
+                    <a href="#null" class="rules">Прочитать правила</a>
+                </div>
+            </div>
+            <a href="#modal-reg-second" class="btn-main create-account" style="margin-top:5px;">Создать аккаунт</a>
+        </footer>
+    </form>
+</div>
 
-        <div class='form-group'>
-            {{ Form::label('phone', 'Телефон') }}
-            {{ Form::text('phone', null, array('placeholder' => '044 111 22 33', 'class' => 'form-control')) }}
+<div class="custom-modal" id="modal-reg-second" >
+    <div class="title">Выберите тип вашего аккаунта</div>
+    <div class="account-tipes">
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="rings"></a>
+            </figure>
+            <a href="#null">Я заказчик,<br> ищу исполнителя</a>
         </div>
-
-        <div class='form-group'>
-            {{ Form::label('legal_form', 'Правовая форма') }}
-            {{ Form::select('legal_form', array('0'=>'Частное лицо','1'=>'Организация'),0,array('class'=>'form-control')); }}
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="mic"></a>
+            </figure>
+            <a href="#null">Я ведущий<br> или тамада</a>
         </div>
-     
-        <div class='form-group'>
-            {{ Form::label('password', 'Пароль') }}*
-            {{ Form::password('password', array('placeholder' => 'password', 'class' => 'form-control')) }}
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="photo"></a>
+            </figure>
+            <a href="#null">Я фотограф<br> или оператор</a>
         </div>
-     
-        <div class='form-group'>
-            {{ Form::label('password_confirmation', 'Подтверждение пароля') }}*
-            {{ Form::password('password_confirmation', array('placeholder' => 'password', 'class' => 'form-control')) }}
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="make"></a>
+            </figure>
+            <a href="#null">Я стилист<br> или визажист</a>
         </div>
-
-        <div class='form-group'>
-            {{ Form::checkbox('license_agreement',1,null,array('id' => 'license_agreement')) }}
-            <label for='license_agreement'>
-                Я прочитал и принимаю условия <a href="/agreement" class="license_link">лицензионного соглацения</a>
-            </label>
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="anim"></a>
+            </figure>
+            <a href="#null">Я организатор<br> мероприятий</a>
         </div>
-
-        <img id="captcha" src="/assets/packs/securimage/securimage_show.php" alt="CAPTCHA Image" />
-        <input type="text" name="captcha_code" size="10" maxlength="6" />
-        <a href="#" onclick="document.getElementById('captcha').src = '/assets/packs/securimage/securimage_show.php?' + Math.random(); return false">
-            <img src="/assets/img/refresh.jpg" style="width:35px;margin-top:-6px;">
-        </a>
-     
-        <div class='form-group' style="margin-top:20px">
-            {{ Form::submit('Зарегистрировать', array('class' => 'btn btn-success')) }}
+        <div class="tipe">
+            <figure>
+                <a href="#null" class="role_chose" user_role="other"></a>
+            </figure>
+            <a href="#null">Другое</a>
         </div>
-     
-        {{ Form::close() }}
-
-        Поля отмеченные * обязательны к заполнению
-        <br><br>
-    </div>
-</div> 
-@stop
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $(".license_link").fancybox({
-                type: 'ajax'
-            });
-        });
-    </script>
-@stop
+    </div>                      
+</div>

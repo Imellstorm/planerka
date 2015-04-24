@@ -3,11 +3,11 @@
 class UserController extends BaseController {
 
 	protected $rules = array(
-		'username'	=> 'required|max:256',
+		'username'	=> 'required|max:256|unique:users,username',
 		'email'		=> 'required|email|unique:users,email|max:256',
 		'password'	=> 'required|same:password_confirmation|max:256',
 		'phone'		=> 'alpha_dash|max:32',
-		'role'		=> 'max:1',
+		'role'		=> 'max:9',
 		'address'	=> 'max:256',
 	);
 	protected $table_fields = array(
@@ -52,6 +52,19 @@ class UserController extends BaseController {
 		return View::make('content.admin.users.form',compact('roles_dd','user_status'));
 	}
 
+	/**
+	 * Validate registration data
+	 *
+	 * @return Response
+	 */
+	public function postValidate(){
+		$validator = Validator::make(Input::all(), $this->rules);
+		if ($validator->fails()){
+			return Response::json($validator->messages());
+		}
+		$view = View::make('content.front.register_step2')->render();
+		return Response::json(array('success'=>'success','view'=>$view));
+	}
 
 	/**
 	 * Store a newly created user in storage.
@@ -61,30 +74,28 @@ class UserController extends BaseController {
 	public function postStore()
 	{
 		if(!$this->is_admin()){
-			$this->rules['license_agreement'] = 'required';
+			$this->rules['agreed'] = 'required';
 		}
 		$validator = Validator::make(Input::all(), $this->rules);
 
 		if ($validator->fails())
 		{
-			return Redirect::back()->withErrors($validator)->withInput(Input::except('password'));
+			if($this->is_admin()){
+				return Redirect::back()->withErrors($validator)->withInput(Input::except('password'));
+			} else {
+				return Response::json($validator->messages());
+			}
 		} else {
 			if(!$this->is_admin() && !$this->checkCapcha()){
-				return Redirect::back()->withErrors('Неверная капча')->withInput(Input::except('password'));
+				return Response::json(array('Неверная капча'));
 			}
 
 			$user = new User;
-
-			if($this->is_admin() && Input::get('role')){
-				$role = Input::get('role');
+			$rawRole = Input::get('role');
+			if(!$this->is_admin() && $rawRole!=1 || $this->is_admin()){
+				$role = $rawRole;
 			} else {
-				$role = 3;
-			}
-
-			if($this->is_admin() && Input::get('status')){
-				$status = Input::get('status');
-			} else {
-				$status = 1;
+				return false;
 			}
 
 			$randomStr = str_random(40);
@@ -92,11 +103,7 @@ class UserController extends BaseController {
 	        $user->username   	= Input::get('username');
 	        $user->email      	= Input::get('email');
 	        $user->role_id    	= $role;
-	        $user->status    	= $status;
-	        $user->password   	= Hash::make(Input::get('password'));
-	        $user->address 	  	= Input::get('address')?Input::get('address'):'';	        
-	        $user->phone 	  	= Input::get('phone')?Input::get('phone'):'';
-	        $user->legal_form 	= Input::get('legal_form');
+	        $user->password   	= Hash::make(Input::get('password'));	       
 	        $user->email_verify	= $randomStr;
 
 	        if($this->is_admin() && Input::get('balance')){
@@ -109,19 +116,19 @@ class UserController extends BaseController {
 		mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
 
 		Session::flash('success', 'Пользователь создан! На ваш почтовый ящик выслано письмо с инструкцией по активации');
-		if($this->is_admin()){
+		if(!Request::ajax()){
 			return Redirect::to('/admin/users');
 		} else{
-			return Redirect::to('/');
+			return Response::json(array('success'=>'success','view'=>'<h4 class="text-center" style="margin-top:40px">Спасибо за регистрацию. Вам на почту отправлено письмо с активацией.</h4>'));
 		}
 	}
 
 	private function checkCapcha(){
-		include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/packs/securimage/securimage.php';
-		$securimage = new Securimage();
-		if ($securimage->check($_POST['captcha_code']) == false) {
-			return false;
-		}
+		// include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/packs/securimage/securimage.php';
+		// $securimage = new Securimage();
+		// if ($securimage->check($_POST['captcha_code']) == false) {
+		// 	return false;
+		// }
 		return true;
 	}
 
@@ -158,6 +165,7 @@ class UserController extends BaseController {
 		$user = User::findOrFail($id);
 		
 		$this->rules['email'] = 'required|email|max:256|unique:users,email,'.$id;
+		$this->rules['username'] = 'required|max:256|unique:users,username,'.$id;
 		$this->rules['password'] = 'max:256|same:password_confirmation';
 		$validator = Validator::make($data = Input::all(), $this->rules);
 
@@ -168,9 +176,6 @@ class UserController extends BaseController {
 			$data = array(
 		        'username'  	=> Input::get('username'),
 		        'email'     	=> Input::get('email'),		        
-		        'address' 		=> Input::get('address'),
-		        'phone' 		=> Input::get('phone'),
-		        'legal_form'	=> Input::get('legal_form'),
 	        );	        
 	        if(Input::get('password')){
 	        	$data['password'] = Hash::make(Input::get('password'));

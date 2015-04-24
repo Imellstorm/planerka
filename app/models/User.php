@@ -76,7 +76,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     	isset($table_fields[$field])?$search_field=$table_fields[$field]:$search_field='users.id';
 
     	$users =  DB::table('users')
-    					->join('roles', 'roles.id', '=', 'users.role_id')
+    					->leftjoin('roles', 'roles.id', '=', 'users.role_id')
     					->select('users.*', 'roles.name as role')
     					->where($search_field,'like','%'.$search.'%')
     					->orderBy($sort_by,$order)

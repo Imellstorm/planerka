@@ -1,4 +1,4 @@
-<div class='login_box'>
+<!-- <div class='login_box'>
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             <div class='bg-danger alert'>{{ $error }}</div>
@@ -32,4 +32,32 @@
     </div>
  
     {{ Form::close() }}                 
+</div> -->
+
+<div class="custom-modal" id="modal-login">
+    <div class="title">Регистрация на планерке</div>
+
+    <div class="social-login">
+        <p>Войдите с помощью:</p>
+        <a href="#null" class="facebook"></a>
+        <a href="#null" class="vk"></a>
+        <a href="#null" class="twitter"></a>
+    </div>
+
+    <form class="login">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Planerca.ru/Ник нэйм">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Электронная почта">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Пароль">
+        </div>
+    </form>
+
+    <footer>
+        <a href="#null" class="rules">Прочитать правила</a>
+        <a href="#null" class="btn-main">Создать аккаунт</a>
+    </footer>
 </div>
