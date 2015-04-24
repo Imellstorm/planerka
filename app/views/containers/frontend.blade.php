@@ -118,7 +118,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: #f5f5f3 url(/assets/img/body_bg.png) no-repeat top center; background-size: 100%;">
+    <header id="header" style="background: url(/assets/img/body_bg.png) no-repeat top center;   background-color: #726E68;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
