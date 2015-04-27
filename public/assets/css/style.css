@@ -517,28 +517,40 @@ input.btn-main {
 #nav-menu .show-menu:hover {
   text-decoration: none;
 }
-#nav-menu .menu {
+#nav-menu ul {
   list-style: none;
   padding: 15px 0;
   margin: 0;
 }
-#nav-menu .menu > li {
+#nav-menu ul li li{
+  margin: 0;
+}
+#nav-menu ul ul{
+  padding: 0;
+}
+#nav-menu ul > li {
   margin: 0 44px;
   float: left;
   text-align: center;
   position: relative;
 }
-#nav-menu .menu > li:first-child {
+#nav-menu ul > li:first-child {
   margin-left: 0;
 }
-#nav-menu .menu > li:last-child {
+#nav-menu ul > li:last-child {
   margin-top: 10px;
   margin-right: 0;
 }
-#nav-menu .menu > li:last-child:after {
+#nav-menu ul ul > li:last-child {
+  margin-top: 0;
+}
+#nav-menu ul > li:last-child:after {
   content: none;
 }
-#nav-menu .menu > li:after {
+#nav-menu .menu li ul li{
+  margin:0;
+}
+#nav-menu ul > li:after {
   content: '';
   display: block;
   height: 14px;
@@ -548,7 +560,10 @@ input.btn-main {
   right: -50px;
   top: 20px;
 }
-#nav-menu .menu > li a {
+/*#nav-menu li:hover>ul{
+  display: block !important;
+}*/
+#nav-menu ul > li a {
   color: #fff;
   font-family: 'NeuronB', sans-serif;
   font-size: 20px;
@@ -559,14 +574,14 @@ input.btn-main {
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-#nav-menu .menu > li a:hover {
+#nav-menu ul > li a:hover {
   text-decoration: none;
   color: #3c3c3c;
 }
-#nav-menu .menu > li #sub-menu-show:hover:after {
+#nav-menu ul > li #sub-menu-show:hover:after {
   border-top-color: #3c3c3c;
 }
-#nav-menu .menu > li #sub-menu-show:after {
+#nav-menu ul > li #sub-menu-show:after {
   content: '';
   width: 0;
   border: 5px solid transparent;
@@ -580,14 +595,14 @@ input.btn-main {
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-#nav-menu .sub-menu {
+#nav-menu ul ul {
   display: none;
   position: absolute;
   top: 78px;
   right: -33px;
   z-index: 20;
 }
-#nav-menu .sub-menu:before {
+#nav-menu ul ul:before {
   content: '';
   display: block;
   width: 0;
@@ -597,13 +612,13 @@ input.btn-main {
   top: -15px;
   right: 28px;
 }
-#nav-menu .sub-menu > li {
+#nav-menu ul ul > li {
   min-width: 212px;
   overflow: hidden;
   background: #44b39b;
   border-bottom: 1px solid #9dd1c6;
 }
-#nav-menu .sub-menu > li:first-child {
+#nav-menu ul ul > li:first-child {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   -moz-border-top-right-radius: 3px;
@@ -611,7 +626,7 @@ input.btn-main {
   -webkit-border-top-right-radius: 3px;
   -webkit-border-top-left-radius: 3px;
 }
-#nav-menu .sub-menu > li:last-child {
+#nav-menu ul ul > li:last-child {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   -moz-border-bottom-right-radius: 3px;
@@ -620,10 +635,10 @@ input.btn-main {
   -webkit-border-bottom-left-radius: 3px;
   border-bottom: none;
 }
-#nav-menu .sub-menu > li:hover a {
+#nav-menu ul ul > li:hover a {
   background: #fff;
 }
-#nav-menu .sub-menu > li a {
+#nav-menu ul ul > li a {
   padding-left: 30px;
   font-size: 14px;
   text-align: left;
@@ -1908,44 +1923,44 @@ input.btn-main {
 #header .user-nav .logo img{
   margin: 0;
 }
-.user-nav .menu-panel {
+.user-nav ul-panel {
   float: right;
   color: #fff;
   line-height: 56px;
 }
-.user-nav .menu-panel div {
+.user-nav ul-panel div {
   display: inline-block;
 }
-.user-nav .menu-panel a {
+.user-nav ul-panel a {
   color: #fff;
 }
-.user-nav .menu-panel a:hover {
+.user-nav ul-panel a:hover {
   text-decoration: none;
 }
-.user-nav .menu-panel .list {
+.user-nav ul-panel .list {
   margin-right: 0px;
 }
-  .user-nav .menu-panel .list a{
+  .user-nav ul-panel .list a{
     display: inline-block;
     padding: 0 10px;
     vertical-align: middle;
   }
-  .user-nav .menu-panel .list a:hover{
+  .user-nav ul-panel .list a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .mail {
+.user-nav ul-panel .mail {
   position: relative;
   margin-right: 0px;
 }
-.user-nav .menu-panel .mail a{
+.user-nav ul-panel .mail a{
   display: inline-block;
   padding: 0 10px;
   vertical-align: middle;
 }
-  .user-nav .menu-panel .mail a:hover{
+  .user-nav ul-panel .mail a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .mail span {
+.user-nav ul-panel .mail span {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -1959,63 +1974,63 @@ input.btn-main {
   top: 5px;
   left: 0px;
 }
-.user-nav .menu-panel .user {
+.user-nav ul-panel .user {
   position: relative;
 }
-.user-nav .menu-panel .name {
+.user-nav ul-panel .name {
   font-family: 'NeuronB', sans-serif;
   font-size: 16px;
   margin-right: 3px;
   cursor: pointer;
 }
-.user-nav .menu-panel .name a{
+.user-nav ul-panel .name a{
   line-height: 56px;
   display: inline-block;
   padding: 0 5px;
   vertical-align: middle;
 }
-  .user-nav .menu-panel .name a:hover{
+  .user-nav ul-panel .name a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel #show-user-menu {
+.user-nav ul-panel #show-user-menu {
   margin-right: 6px;
 }
-.user-nav .menu-panel .avatar {
+.user-nav ul-panel .avatar {
   margin-right: 5px;
 }
-.user-nav .menu-panel .avatar img {
+.user-nav ul-panel .avatar img {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.5);
 }
-.user-nav .menu-panel .count {
+.user-nav ul-panel .count {
   font-family: 'NeuronLight', sans-serif;
   font-family: 14px;
 }
-.user-nav .menu-panel .count a {
+.user-nav ul-panel .count a {
   color: #fff;
   display: block;
   padding: 0 10px;
 }
-  .user-nav .menu-panel .count a:hover {
+  .user-nav ul-panel .count a:hover {
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .status {
+.user-nav ul-panel .status {
   color: #685e85;
   background: #fff;
   float: none;
 }
-.user-nav .menu-panel #status{
+.user-nav ul-panel #status{
   display: inline-block;
   padding: 0 10px;
   vertical-align: middle;
   margin-right: 5px;
 }
-  .user-nav .menu-panel #status:hover {
+  .user-nav ul-panel #status:hover {
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .download {
+.user-nav ul-panel .download {
   font-family: 'Neuron', sans-serif;
   font-size: 20px;
   line-height: 56px;
@@ -2023,7 +2038,7 @@ input.btn-main {
   padding: 0 10px;
   vertical-align: middle;
 }
-  .user-nav .menu-panel .download:hover{
+  .user-nav ul-panel .download:hover{
     background: rgba(55, 66, 78, 0.7);
   }
 .user-nav #user-menu {

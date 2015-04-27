@@ -14,14 +14,11 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Контент <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li>{{ link_to('admin/articles','Страницы') }}</li>
-                <!--     <li>{{ link_to('admin/nds','Формы налогообложения') }}</li>
-                    <li>{{ link_to('admin/licenses','Лицензии') }}</li>
-                    <li>{{ link_to('admin/ownerships','Формы собственности') }}</li>
-                    <li>{{ link_to('admin/user_status','Типы пользователей') }}</li>   -->            
+                    <li class="{{ Request::segment(2)=='articles'?'active':'' }}">{{ link_to('admin/articles','Страницы') }}</li>  
                   </ul>
                 </li>                
                 <li class="{{ Request::segment(2)=='users'?'active':'' }}">{{ link_to('admin/users','Пользователи') }}</li>
+                <li class="{{ Request::segment(2)=='menus'?'active':'' }}">{{ link_to('admin/menus','Меню') }}</li>        
                 <!-- <li class="{{ Request::segment(2)=='settings'?'active':'' }}">{{ link_to('admin/settings/edit','Настройки') }}</li>                                -->
             </ul>
             <ul class="nav navbar-nav navbar-right">

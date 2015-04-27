@@ -194,9 +194,15 @@
     <nav id="nav-menu">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 top_menu">
                     <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
-                    <ul class="menu">
+                    {{ $menu->top }}
+                    <script>           
+                        $(".menu:first>li>a").width(function(i,val){
+                            $(this).css('width',val-val*0.48);
+                        });                 
+                    </script>
+                    <!-- <ul class="menu">
                         <li>
                             <a href="/?search=true">Ведущий<br>Тамада</a>
                         </li>
@@ -226,7 +232,7 @@
                                 <li><a href="#null">Обручальные кольца</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
@@ -241,14 +247,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <ul>
+                    {{ $menu->bottom }}
+                    <!-- <ul>
                         <li><a href="/faq">Частые вопросы</a></li>
                         <li><a href="/about">О проекте</a></li>
                         <li><a href="/contacts">Контакты</a></li>
                         <li><a href="/agreement">Пользовательское соглашение</a></li>
                         <li><a href="/rules">Правила</a></li>
                         <li><a href="/servises">Услуги</a></li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>

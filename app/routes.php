@@ -77,6 +77,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/ownerships', 'OwnershipController');
 	Route::controller('admin/user_status', 'UserstatusController');
 	Route::controller('admin/settings', 'SettingsController');
+	Route::controller('admin/menus', 'MenuController');
 });
 
 /*

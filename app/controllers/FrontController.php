@@ -3,11 +3,6 @@
 
 class FrontController extends BaseController {
 
-	public function __construct(){
-
-    }
-
-
 	public function getIndex(){
 		if(Input::get('search')){
 			return View::make('content.front.search');

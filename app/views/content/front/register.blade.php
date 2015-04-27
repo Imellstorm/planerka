@@ -1,39 +1,45 @@
 <div class="custom-modal" id="modal-login">
-    <div class="title">Регистрация на планерке</div>
-
-    <div class="social-login">
-        <p>Войдите с помощью:</p>
-        <a href="#null" class="facebook"></a>
-        <a href="#null" class="vk"></a>
-        <a href="#null" class="twitter"></a>
+    <div class="rules" style="display:none">
+        {{ $rules->content }}
+        <a href="#" class="btn-main rulesDone" style="margin-top:5px;">Прочитано</a>
     </div>
+    <div class="register-cont">
+        <div class="title">Регистрация на планерке</div>
 
-    <form class="login">
-        <div class="form-group">
-            <input type="text" class="form-control username" placeholder="Planerca.ru/Ник нэйм">
-            <div class="username error"></div>
+        <div class="social-login">
+            <p>Войдите с помощью:</p>
+            <a href="#null" class="facebook"></a>
+            <a href="#null" class="vk"></a>
+            <a href="#null" class="twitter"></a>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control email" placeholder="Электронная почта">
-            <div class="email error"></div>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control password" placeholder="Пароль">
-            <div class="password error"></div>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control confirm_password" placeholder="Пароль повторно">
-        </div>
-    
-        <footer>
-            <div class="pull-left">
-                <div>
-                    <a href="#null" class="rules">Прочитать правила</a>
-                </div>
+
+        <form class="login">
+            <div class="form-group">
+                <input type="text" class="form-control username" placeholder="Planerca.ru/Ник нэйм">
+                <div class="username error"></div>
             </div>
-            <a href="#modal-reg-second" class="btn-main create-account" style="margin-top:5px;">Создать аккаунт</a>
-        </footer>
-    </form>
+            <div class="form-group">
+                <input type="text" class="form-control email" placeholder="Электронная почта">
+                <div class="email error"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control password" placeholder="Пароль">
+                <div class="password error"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control confirm_password" placeholder="Пароль повторно">
+            </div>
+        
+            <footer>
+                <div class="pull-left">
+                    <div>
+                        <a href="#" class="rules fancybox2">Прочитать правила</a>
+                    </div>
+                </div>
+                <a href="#modal-reg-second" class="btn-main create-account" style="margin-top:5px;">Создать аккаунт</a>
+            </footer>
+        </form>
+    </div>
 </div>
 
 <div class="custom-modal" id="modal-reg-second" >

@@ -2,8 +2,22 @@
 
 class BaseController extends Controller {
 
-	public function __construct(){		
+	public function __construct(){
+		$this->getMenus();
+		$rules = Article::where('alias','rules')->first();
+		View::share('rules',$rules);
     }
+
+    private function getMenus(){
+		$result = Menu::all();
+		$menus = new stdClass();
+		
+		foreach ($result as $value) {
+			$key = $value->name;
+			$menus->$key = $value->content;
+		}
+		View::share('menu', $menus);
+	}
 
 	/**
 	 * Setup the layout used by the controller.

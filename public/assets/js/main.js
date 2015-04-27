@@ -8,12 +8,10 @@ $(document).ready(function() {
 
 	//SHOW SUB MENU
 
-	$('#sub-menu-show').click(function(event) {
-
-		$('.sub-menu').toggle(200);
-
+	$('.top_menu>ul>li:last-child>a').click(function(event) {
+		$('.menu ul').toggle(200);
+    return false;
 	});
-
 
 
 	//USER MENU 
@@ -417,4 +415,11 @@ $(document).ready(function() {
         }
       });
     });
+
+    $('body').on('click','.rules',function(){
+      $('.register-cont').toggle();
+      $('.rules').toggle();
+      $.fancybox.update();
+    });
+
 });
