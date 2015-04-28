@@ -77,9 +77,6 @@ class UserController extends BaseController {
 	 */
 	public function postStore()
 	{
-		if(!$this->is_admin()){
-			$this->rules['agreed'] = 'required';
-		}
 		$validator = Validator::make(Input::all(), $this->rules);
 
 		if ($validator->fails())
