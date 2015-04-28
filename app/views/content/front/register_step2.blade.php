@@ -1,4 +1,4 @@
-<div class="custom-modal" id="modal-reg-second" style="display:block">
+<div class="custom-modal" id="modal-reg-second" style="display:block;">
     <div class="title">Выберите тип вашего аккаунта</div>
     <div class="account-tipes">
         <div class="tipe" role="2">

@@ -1923,44 +1923,44 @@ input.btn-main {
 #header .user-nav .logo img{
   margin: 0;
 }
-.user-nav ul-panel {
+.user-nav .menu-panel {
   float: right;
   color: #fff;
   line-height: 56px;
 }
-.user-nav ul-panel div {
+.user-nav .menu-panel div {
   display: inline-block;
 }
-.user-nav ul-panel a {
+.user-nav .menu-panel a {
   color: #fff;
 }
-.user-nav ul-panel a:hover {
+.user-nav .menu-panel a:hover {
   text-decoration: none;
 }
-.user-nav ul-panel .list {
+.user-nav .menu-panel .list {
   margin-right: 0px;
 }
-  .user-nav ul-panel .list a{
+  .user-nav .menu-panel .list a{
     display: inline-block;
     padding: 0 10px;
     vertical-align: middle;
   }
-  .user-nav ul-panel .list a:hover{
+  .user-nav .menu-panel .list a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav ul-panel .mail {
+.user-nav .menu-panel .mail {
   position: relative;
   margin-right: 0px;
 }
-.user-nav ul-panel .mail a{
+.user-nav .menu-panel .mail a{
   display: inline-block;
   padding: 0 10px;
   vertical-align: middle;
 }
-  .user-nav ul-panel .mail a:hover{
+  .user-nav .menu-panel .mail a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav ul-panel .mail span {
+.user-nav .menu-panel .mail span {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -1974,63 +1974,63 @@ input.btn-main {
   top: 5px;
   left: 0px;
 }
-.user-nav ul-panel .user {
+.user-nav .menu-panel .user {
   position: relative;
 }
-.user-nav ul-panel .name {
+.user-nav .menu-panel .name {
   font-family: 'NeuronB', sans-serif;
   font-size: 16px;
   margin-right: 3px;
   cursor: pointer;
 }
-.user-nav ul-panel .name a{
+.user-nav .menu-panel .name a{
   line-height: 56px;
   display: inline-block;
   padding: 0 5px;
   vertical-align: middle;
 }
-  .user-nav ul-panel .name a:hover{
+  .user-nav .menu-panel .name a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav ul-panel #show-user-menu {
+.user-nav .menu-panel #show-user-menu {
   margin-right: 6px;
 }
-.user-nav ul-panel .avatar {
+.user-nav .menu-panel .avatar {
   margin-right: 5px;
 }
-.user-nav ul-panel .avatar img {
+.user-nav .menu-panel .avatar img {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.5);
 }
-.user-nav ul-panel .count {
+.user-nav .menu-panel .count {
   font-family: 'NeuronLight', sans-serif;
   font-family: 14px;
 }
-.user-nav ul-panel .count a {
+.user-nav .menu-panel .count a {
   color: #fff;
   display: block;
   padding: 0 10px;
 }
-  .user-nav ul-panel .count a:hover {
+  .user-nav .menu-panel .count a:hover {
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav ul-panel .status {
+.user-nav .menu-panel .status {
   color: #685e85;
   background: #fff;
   float: none;
 }
-.user-nav ul-panel #status{
+.user-nav .menu-panel #status{
   display: inline-block;
   padding: 0 10px;
   vertical-align: middle;
   margin-right: 5px;
 }
-  .user-nav ul-panel #status:hover {
+  .user-nav .menu-panel #status:hover {
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav ul-panel .download {
+.user-nav .menu-panel .download {
   font-family: 'Neuron', sans-serif;
   font-size: 20px;
   line-height: 56px;
@@ -2038,7 +2038,7 @@ input.btn-main {
   padding: 0 10px;
   vertical-align: middle;
 }
-  .user-nav ul-panel .download:hover{
+  .user-nav .menu-panel .download:hover{
     background: rgba(55, 66, 78, 0.7);
   }
 .user-nav #user-menu {
@@ -3528,14 +3528,14 @@ form.account .btn-main {
   margin-left: 127px;
   width: 180px;
 }
-#modal-login {
+#modal-login, #modal-register, #fancybox_password, #fancybox_reset_password {
   max-width: 530px;
   padding: 0 70px 50px 70px;
 }
-#modal-login .social-login {
+#modal-login .social-login, #modal-register .social-login {
   margin-bottom: 40px;
 }
-#modal-login .social-login p {
+#modal-login .social-login p, #modal-register .social-login p {
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 18px;
@@ -3543,35 +3543,35 @@ form.account .btn-main {
   vertical-align: top;
   margin: 11px 20px 0 0;
 }
-#modal-login .social-login a {
+#modal-login .social-login a, #modal-register .social-login a {
   display: inline-block;
   width: 48px;
   height: 48px;
   margin-right: 8px;
   background: url(../img/social-login.png) no-repeat;
 }
-#modal-login .social-login a.vk {
+#modal-login .social-login a.vk, #modal-register .social-login a.vk {
   background-position: -57px 0;
 }
-#modal-login .social-login a.twitter {
+#modal-login .social-login a.twitter, #modal-register .social-login a.vk {
   background-position: -112px 0;
 }
-#modal-login form.login .form-group {
+#modal-login form.login .form-group, #modal-register form.login .form-group {
   margin-bottom: 20px;
 }
 
-#modal-login footer {
+#modal-login footer, #modal-register footer {
   margin-top: 30px;
   overflow: hidden;
 }
-#modal-login footer .rules {
+#modal-login footer .rules, #modal-register footer .rules {
   float: left;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   line-height: 38px;
   color: #9f9d9d;
 }
-#modal-login footer .btn-main {
+#modal-login footer .btn-main, #modal-register footer .btn-main {
   float: right;
 }
 

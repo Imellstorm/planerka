@@ -62,6 +62,10 @@ class UserController extends BaseController {
 		if ($validator->fails()){
 			return Response::json($validator->messages());
 		}
+		if(!$this->checkCapcha()){
+			return Response::json(array('captcha'=>'Неверная капча'));
+		}
+
 		$view = View::make('content.front.register_step2')->render();
 		return Response::json(array('success'=>'success','view'=>$view));
 	}
@@ -85,10 +89,7 @@ class UserController extends BaseController {
 			} else {
 				return Response::json($validator->messages());
 			}
-		} else {
-			if(!$this->is_admin() && !$this->checkCapcha()){
-				return Response::json(array('Неверная капча'));
-			}
+		} else {	
 
 			$user = new User;
 			$rawRole = Input::get('role');
@@ -124,11 +125,11 @@ class UserController extends BaseController {
 	}
 
 	private function checkCapcha(){
-		// include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/packs/securimage/securimage.php';
-		// $securimage = new Securimage();
-		// if ($securimage->check($_POST['captcha_code']) == false) {
-		// 	return false;
-		// }
+		include_once $_SERVER['DOCUMENT_ROOT'] . '/assets/packs/securimage/securimage.php';
+		$securimage = new Securimage();
+		if ($securimage->check($_POST['captcha_code']) == false) {
+			return false;
+		}
 		return true;
 	}
 

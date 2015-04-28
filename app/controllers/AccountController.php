@@ -2,24 +2,6 @@
 
 class AccountController extends BaseController {
 
-	public function __construct(){
-		$lang = Cookie::get('lang');
-		if(!empty($lang)){
-			App::setLocale($lang);
-		}
-
-		$user = Auth::User();
-		View::share('user', $user);
-
-		$model = new Comment;
-		$lastComments = $model->take(3)->orderby('id','DESC')->get();
-		View::share('lastComments', $lastComments);
-
-		$model = new Article;
-		$lastNews = $model->where('alias','')->take(3)->orderby('id','DESC')->get();
-		View::share('lastNews', $lastNews);
-	}
-
 	private function checkSubscribe(){
 		$exppires = strtotime(Auth::User()->expires);
 		$now = strtotime(date('Y-m-d H:i:s'));
@@ -35,7 +17,7 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getUserinfo(){
-		return View::make('content.front.account.cont')->nest('content','content.front.account.userinfo',compact('subscribe_price','subscribe'));
+		return View::make('content.front.account.cont');
 	}
 
 	/**

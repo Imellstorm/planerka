@@ -368,6 +368,7 @@ $(document).ready(function() {
       email = $(modalCont).find('.email').val();
       password = $(modalCont).find('.password').val();
       password_confirmation = $(modalCont).find('.confirm_password').val();
+      captcha_code = $(modalCont).find('.captcha_code').val();
 
       $(modalCont).find('.error').text('');
       $.ajax({
@@ -378,15 +379,17 @@ $(document).ready(function() {
           username: username,
           email: email,
           password: password,
-          password_confirmation: password_confirmation
+          password_confirmation: password_confirmation,
+          captcha_code: captcha_code
         },
         success: function(ret){
           if(ret.success == 'success'){
             $.fancybox(ret.view);
             } else {
-            $.each(ret, function(key,val) {                
+            $.each(ret, function(key,val) {               
               modalCont.find('.'+key+'.error').text(val);
             });
+            jQuery('#captcha').prop('src', '/assets/packs/securimage/securimage_show.php?sid=' + Math.random());
           }
         }
       });
@@ -407,10 +410,6 @@ $(document).ready(function() {
         success: function(ret){
           if(ret.success == 'success'){
             $.fancybox(ret.view);
-          } else {
-            $.each(ret, function(key,val) { 
-              
-            });
           }
         }
       });
@@ -421,5 +420,4 @@ $(document).ready(function() {
       $('.rules').toggle();
       $.fancybox.update();
     });
-
 });

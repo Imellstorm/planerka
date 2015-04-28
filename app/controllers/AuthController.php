@@ -24,7 +24,7 @@ class AuthController extends BaseController {
                     return Redirect::intended('admin/users');
                 }else{
                     Session::flash('success', 'Вы вошли как '.Auth::User()->username);
-                    return Redirect::intended('/');
+                    return Redirect::intended('/account');
                 }
             } else {
                 return Redirect::back()
@@ -32,7 +32,6 @@ class AuthController extends BaseController {
                 ->withErrors('Вы не можете зайти так как у вас не подтверждён email. Проверте вашу почту.');
             }
         }
- 
         return Redirect::back()
             ->withInput()
             ->withErrors('Неверный логин или пароль.');

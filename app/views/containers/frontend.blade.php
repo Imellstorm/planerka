@@ -111,10 +111,23 @@
         }
         $(document).ready(function(){
             initialize();
+
+            @if (Session::has('status'))
+                $.fancybox('{{ Session::get('status') }}');
+            @endif
+
+            @if (Session::has('error'))
+                $.fancybox('{{ Session::get('error') }}');
+            @endif
+
+            @if(Session::has('token'))
+                $('#fancybox_reset_password_btn').trigger('click');
+            @endif     
         });
     </script>
 </head>
 <body>
+<a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 
 <!-- HEADER
     ============================= -->
@@ -126,7 +139,7 @@
                         <div class="login">
                             <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
                             <div class="registration">
-                                <a href="/auth" class="fancybox">Вход</a>|<a href="#modal-login" class="fancybox">Регистрация</a>
+                                <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox">Регистрация</a>
                             </div>
                         </div>
 
@@ -202,43 +215,12 @@
                             $(this).css('width',val-val*0.48);
                         });                 
                     </script>
-                    <!-- <ul class="menu">
-                        <li>
-                            <a href="/?search=true">Ведущий<br>Тамада</a>
-                        </li>
-                        <li>
-                            <a href="/?search=true">Фотограф<br>Оператор</a>
-                        </li>
-                        <li>
-                            <a href="/?search=true">Визажист<br>Стилист</a>
-                        </li>
-                        <li>
-                            <a href="/?search=true">Артисты<br>Шоу</a>
-                        </li>
-                        <li>
-                            <a href="/?search=true">Свадебные<br>блоги</a>
-                        </li>
-                        <li>
-                            <a href="/?search=true">Оформление<br>свадьбы</a>
-                        </li>
-                        <li>
-                            <a href="#null" id="sub-menu-show">Другое</a>
-                            <ul class="sub-menu">
-                                <li><a href="#null">Рестораны</a></li>
-                                <li><a href="#null">Лимузины</a></li>
-                                <li><a href="#null">Загсы</a></li>
-                                <li><a href="#null">Свадебные платья</a></li>
-                                <li><a href="#null">Свадебный регистратор</a></li>
-                                <li><a href="#null">Обручальные кольца</a></li>
-                            </ul>
-                        </li>
-                    </ul> -->
                 </div>
             </div>
         </div>
     </nav>
     @yield('main')
-    @include('content.front.register')
+    @include('content.front.modals')
 
 
 <!-- NAV FOOTER
@@ -248,14 +230,6 @@
             <div class="row">
                 <div class="col-md-12">
                     {{ $menu->bottom }}
-                    <!-- <ul>
-                        <li><a href="/faq">Частые вопросы</a></li>
-                        <li><a href="/about">О проекте</a></li>
-                        <li><a href="/contacts">Контакты</a></li>
-                        <li><a href="/agreement">Пользовательское соглашение</a></li>
-                        <li><a href="/rules">Правила</a></li>
-                        <li><a href="/servises">Услуги</a></li>
-                    </ul> -->
                 </div>
             </div>
         </div>
