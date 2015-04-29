@@ -33,7 +33,6 @@ class RemindersController extends Controller {
   public function getReset($token = null)
   {
     if (is_null($token)) App::abort(404);
-
     return Redirect::to('/')->with('token', $token);
   }
 

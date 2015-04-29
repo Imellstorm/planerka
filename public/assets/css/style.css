@@ -3553,7 +3553,7 @@ form.account .btn-main {
 #modal-login .social-login a.vk, #modal-register .social-login a.vk {
   background-position: -57px 0;
 }
-#modal-login .social-login a.twitter, #modal-register .social-login a.vk {
+#modal-login .social-login a.twitter, #modal-register .social-login a.twitter {
   background-position: -112px 0;
 }
 #modal-login form.login .form-group, #modal-register form.login .form-group {
