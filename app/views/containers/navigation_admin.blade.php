@@ -17,7 +17,13 @@
                     <li class="{{ Request::segment(2)=='articles'?'active':'' }}">{{ link_to('admin/articles','Страницы') }}</li>  
                   </ul>
                 </li>                
-                <li class="{{ Request::segment(2)=='users'?'active':'' }}">{{ link_to('admin/users','Пользователи') }}</li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Управление пользователями <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="{{ Request::segment(2)=='articles'?'active':'' }}">{{ link_to('admin/users','Пользователи') }}</li>
+                    <li class="{{ Request::segment(2)=='articles'?'active':'' }}">{{ link_to('admin/roles','Типы пользователей') }}</li>  
+                  </ul>
+                </li>
                 <li class="{{ Request::segment(2)=='menus'?'active':'' }}">{{ link_to('admin/menus','Меню') }}</li>        
                 <!-- <li class="{{ Request::segment(2)=='settings'?'active':'' }}">{{ link_to('admin/settings/edit','Настройки') }}</li>                                -->
             </ul>

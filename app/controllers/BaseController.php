@@ -5,7 +5,10 @@ class BaseController extends Controller {
 	public function __construct(){
 		$this->getMenus();
 		$rules = Article::where('alias','rules')->first();
+		$roles = Role::lists('id','name');
+		unset($roles['admin']);
 		View::share('rules',$rules);
+		View::share('roles',$roles);
     }
 
     private function getMenus(){

@@ -158,11 +158,14 @@
                             <form class="form-inline" role="form" method="get">
                                 <input type="hidden" name="search" value="true">
                                 <div class="form-group categ">
+                                    @if(!empty($roles))
                                     <select id="select-categ" class="selectpicker">
-                                        <option>Жанр Исполнителя</option>
-                                        <option>Фотография</option>
-                                        <option>Фотография</option>
+                                        <option value="0">Жанр исполнителя</option>
+                                        @foreach($roles as $key=>$val)
+                                            <option value="{{ $val }}">{{ $key }}</option>
+                                        @endforeach
                                     </select>
+                                    @endif
                                 </div>
                                 <div class="form-group theme">
                                     <select id="select-theme" class="selectpicker">

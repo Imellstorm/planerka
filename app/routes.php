@@ -71,7 +71,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/users', 'UserController');
 	Route::controller('admin/posts', 'PostController');
 	Route::controller('admin/articles', 'ArticleController');
-	Route::controller('admin/nds', 'NdsController');
+	Route::controller('admin/roles', 'RoleController');
 	Route::controller('admin/licenses', 'LicenseController');
 	Route::controller('admin/ownerships', 'OwnershipController');
 	Route::controller('admin/user_status', 'UserstatusController');

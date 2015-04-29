@@ -1,13 +1,11 @@
 <?php
 
-class NdsController extends BaseController {
+class RoleController extends BaseController {
 
 	protected $rules = array(
-		'abr'		=> 'required|max:128',
 		'name'		=> 'required|max:256'
 	);
 	protected $table_fields = array(
-			'Сокращенно'	=> 'abr',
 			'Наименование'	=> 'name',
 			'Создано'	=> 'created_at',
 			'Обновлено'	=> 'updated_at',
@@ -20,7 +18,7 @@ class NdsController extends BaseController {
 	*/
 	public function getIndex()
 	{
-		$model = new Nds;
+		$model = new Role;
 		$params = array(
 			'sort' 		=> Input::get('sort'),
 	    	'order' 	=> Input::get('order'),
@@ -29,9 +27,9 @@ class NdsController extends BaseController {
     	);
 		$table_fields = $this->table_fields;
 
-        $nds = $model->getNds($table_fields,$params);
+        $roles = $model->getRoles($table_fields,$params);
 
-		return View::make('content.admin.nds.index', compact('nds','table_fields'));
+		return View::make('content.admin.roles.index', compact('roles','table_fields'));
 	}
 
 	/**
@@ -41,7 +39,7 @@ class NdsController extends BaseController {
 	 */
 	public function getCreate()
 	{
-		return View::make('content.admin.nds.form');
+		return View::make('content.admin.roles.form');
 	}
 
 
@@ -58,38 +56,21 @@ class NdsController extends BaseController {
 		{
 			return Redirect::back()->withErrors($validator);
 		} else {
-			$model = new Nds;
- 
-	        $model->abr   	= Input::get('abr');
+			$model = new Role;
+
 	        $model->name   	= Input::get('name');
 
         	$model->save();
 		}
 
-		Session::flash('success', 'Форма создана!');
+		Session::flash('success', 'Тип пользователя добавлен!');
 		if(Auth::check() && Auth::User()->role->id == 1){
-			return Redirect::to('/admin/nds');
+			return Redirect::to('/admin/roles');
 		} else{
 			return Redirect::to('/');
 		}
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function getShow($id)
-	{
-		$nds = nds::find($id);
-
-		if(!empty($nds)){	
-			return View::make('nds::admin.form', compact('nds'));
-		} else {
-			App::abort(404);
-		}
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -99,9 +80,9 @@ class NdsController extends BaseController {
 	 */
 	public function getEdit($id)
 	{
-		$nds = Nds::find($id);
-		if(!empty($nds)){
-			return View::make('content.admin.nds.form', compact('nds'));
+		$role = Role::find($id);
+		if(!empty($role)){
+			return View::make('content.admin.roles.form', compact('role'));
 		} else {
 			App::abort(404);
 		}
@@ -115,8 +96,8 @@ class NdsController extends BaseController {
 	 */
 	public function putUpdate($id)
 	{
-		$nds = Nds::find($id);
-		if(empty($nds)){
+		$role = Role::find($id);
+		if(empty($role)){
 			App::abort(404);
 		}
 		
@@ -127,17 +108,14 @@ class NdsController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		} else {
 			$data = array(
-		        'abr'  	 	=> Input::get('abr'),
-		        'abr_ukr'  	=> Input::get('abr_ukr'),
-		        'name'      => Input::get('name'),
-		        'name_ukr'  => Input::get('name_ukr'),		        
+		        'name'      => Input::get('name'),	        
 	        );	        
 
-        	$nds->update($data);
+        	$role->update($data);
 		}
 		Session::flash('success', 'Данные обновлены!');
 
-		return Redirect::to('admin/nds');
+		return Redirect::to('admin/roles');
 	}
 
 	/**
@@ -148,9 +126,9 @@ class NdsController extends BaseController {
 	 */
 	public function deleteDestroy($id)
 	{
-		Nds::destroy($id);
+		Role::destroy($id);
 		Session::flash('success', 'Удалено!');
-		return Redirect::to('admin/nds');
+		return Redirect::to('admin/roles');
 	}
 
 }
