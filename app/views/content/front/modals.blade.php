@@ -50,7 +50,7 @@
 </div>
 
 <div class="custom-modal" id="modal-login">
-    <div class="register-cont">
+    <div>
         <div class="title">Вход на сайт</div>
 
         <div class="social-login">
@@ -81,7 +81,7 @@
 </div>
 
 <div class="custom-modal" id="fancybox_password">
-    <div class="register-cont">
+    <div>
         <div class="title">Напоминание пароля</div>
 
 
@@ -98,7 +98,7 @@
 </div>
 
 <div class="custom-modal" id="fancybox_password">
-    <div class="register-cont">
+    <div>
         <div class="title">Напоминание пароля</div>
 
 
@@ -116,22 +116,19 @@
 
 <a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 <div class="custom-modal" id="fancybox_reset_password">
-    <div class="register-cont">
+    <div>
         <div class="title">Восстановление пароля</div>
-        {{ Form::open(array('url' =>'/password/reset', 'role' => 'form', 'class'=>'login')) }}
-            <input type="hidden" class="form-control password" name="token" value="{{ Session::has('token')?Session::get('token'):'' }}">
+            <input type="hidden" class="form-control token" name="token" value="{{ Session::has('token')?Session::get('token'):'' }}">
             <div class="form-group">
-                <input type="password" class="form-control password" placeholder="Пароль" name="password">
-                <div class="password error"></div>
+                <input type="password" class="form-control password" placeholder="Пароль" name="password" >
             </div>
             <div class="form-group">
                 <input type="password" class="form-control confirm_password" placeholder="Пароль повторно" name="password_confirmation">
+                <div class="password error"></div>
             </div>
             <footer>
-                <input type="submit" style="margin:0 auto" class="btn-main rulesDone" value="Сохранить">
+                <input type="submit" style="margin:0 auto" class="btn-main rulesDone password_reset_submit" value="Сохранить">
             </footer>
-
-        {{ Form::close() }}   
     </div>
 </div>
 

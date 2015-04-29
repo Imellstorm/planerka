@@ -10,14 +10,18 @@ class RemindersController extends Controller {
    */
   public function postRemind()
   {
-    switch (Password::remind(Input::only('email')))
-    {
-      case Password::INVALID_USER:
+    $token = str_random(40);
+    $email = Input::get('email');
+    $user = User::where('email',$email)->first();
+    if(empty($user)){
       return Redirect::back()->with('error', '<div style="color:red; width:150px; margin:40px 0 0 35px">Неверный email</div>');
-
-      case Password::REMINDER_SENT:
-      return Redirect::back()->with('status', '<div style="color:green; width:200px; margin:40px 0 0 35px">Интсрукция для восстановления пароля выслана не email</div>');
     }
+    $mailSended = mail($email, 'Восстановление пароля', 'Для восстановления пароля на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/password/reset/'.$token);
+    if($mailSended){
+      $user->update(array('password_remind'=>$token));
+      return Redirect::back()->with('status', '<div style="color:green; width:200px; margin:20px 0 0 0px; text-align:center;">Интсрукция для восстановления пароля выслана не email</div>');
+    }
+    return Redirect::back()->with('status', '<div style="color:red; width:200px; margin:40px 0 0 0px; text-align:center;">Не удалось отправить почту</div>');  
   }
 
   /**
@@ -40,28 +44,20 @@ class RemindersController extends Controller {
    */
   public function postReset()
   {
-    return Redirect::to('/');
-    $credentials = Input::only(
-      'email', 'password', 'password_confirmation', 'token'
+    $rules = array(
+      'token'     => 'required',
+      'password'  => 'required|same:password_confirmation|max:256',
     );
-
-    $response = Password::reset($credentials, function($user, $password)
-    {
-      $user->password = Hash::make($password);
-
-      $user->save();
-    });
-
-    switch ($response)
-    {
-      case Password::INVALID_PASSWORD:
-      case Password::INVALID_TOKEN:
-      case Password::INVALID_USER:
-        return Redirect::back()->with('error', Lang::get($response));
-
-      case Password::PASSWORD_RESET:
-        return Redirect::to('/');
+    $validator = Validator::make(Input::all(), $rules);
+    if ($validator->fails()){
+      return Response::json($validator->messages());
     }
+    $user = User::where('password_remind',Input::get('token'))->first();
+    if(empty($user)){
+      return Response::json(array('password'=>'Неверный токен'));
+    }
+    $user->update(array('password'=>Hash::make(Input::get('password')),'password_remind'=>''));
+    return Response::json(array('success'=>'success','view'=>'<div style="color:green; width:200px; margin:40px 0 0 0px; text-align:center;">Пароль изменён</div>'));
   }
 }
 ?>

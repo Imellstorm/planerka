@@ -88,52 +88,6 @@ $(document).ready(function() {
 
     });
 
-    
-
-    
-
-    /*
-
-    $('.fancybox').fancybox({
-
-    	padding: 0,
-
-    	// scrolling: 'no'
-
-    });*/
-
-    $('.fancybox').fancybox({
-
-		openEffect: 'fade',
-
-		closeEffect: 'fade',
-
-		openSpeed: 400,
-
-		closeSpeed: 400,
-
-		helpers: {
-
-			overlay: {
-
-				locked: false
-
-			}
-
-		},
-
-		'beforeClose': function(event) { 
-
-           //$('input.red_input').tooltipster('hide');
-
-           //$('textarea.red_input').tooltipster('hide');
-
-        }
-
-    });
-
-
-
     //DATEPICKER 
 
 	$.datepicker.regional['ru'] = {
@@ -419,5 +373,44 @@ $(document).ready(function() {
       $('.register-cont').toggle();
       $('.rules').toggle();
       $.fancybox.update();
+    });
+
+    $('body').on('click','.password_reset_submit',function(){
+      var modalCont = $(this).parent().parent().parent();
+      var password = $(modalCont).find('.password').val();
+      var password_confirmation = $(modalCont).find('.confirm_password').val();
+      var token = $(modalCont).find('.token').val();
+      console.log(password);
+      $.ajax({
+        url: '/password/reset',
+        type: 'post',
+        dataType: 'json',
+        data:{
+          token: token,
+          password: password,
+          password_confirmation: password_confirmation
+        },
+        success: function(ret){
+          if(ret.success == 'success'){
+            $.fancybox(ret.view);
+          } else {
+            $.each(ret, function(key,val) {               
+              modalCont.find('.'+key+'.error').text(val);
+            });
+          }
+        }
+      });
+    });  
+
+    $('.fancybox').fancybox({
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      openSpeed: 400,
+      closeSpeed: 400,
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
     });
 });
