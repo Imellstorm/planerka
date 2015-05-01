@@ -349,7 +349,7 @@ $(document).ready(function() {
       });
     });
 
-    $('body').on('click','.tipe',function(){
+    $('body').on('click','.role_main',function(){
       $.ajax({
         url: '/admin/users/store',
         type: 'post',
@@ -407,10 +407,23 @@ $(document).ready(function() {
       closeEffect: 'fade',
       openSpeed: 400,
       closeSpeed: 400,
+      afterClose: function() {
+        $('.register-cont input').val('');
+        $('.error').html('');
+        jQuery('#captcha').prop('src', '/assets/packs/securimage/securimage_show.php?sid=' + Math.random());
+      },
       helpers: {
         overlay: {
           locked: false
         }
       }
+    });
+
+    $('.fancybox_ajax').fancybox({
+      type: 'ajax',
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      openSpeed: 400,
+      closeSpeed: 400
     });
 });

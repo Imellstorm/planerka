@@ -291,16 +291,6 @@ class AccountController extends BaseController {
 
 
 	/**
-	 * Show the form for register a new user
-	 *
-	 * @return Response
-	 */
-	public function getRegister()
-	{
-		return View::make('content.front.register');
-	}
-
-	/**
 	* Collect cities for region (for ajax)
 	*
 	* @return Response

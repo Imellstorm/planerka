@@ -15,6 +15,11 @@
         <h1 class="fa fa-edit"> {{Request::segment(3)=='create'?'Добавить':'Править'}} тип пользователя</h1>
 
         <div class='form-group'>
+            {{ Form::label('type', 'Категория') }}
+            {{ Form::select('type', array('системная'=>'системная','основная'=>'основная','другое'=>'другое'),isset($role->type)?$role->type:'',array('class'=>'form-control')); }}
+        </div>
+
+        <div class='form-group'>
             {{ Form::label('name', 'Название*') }}
             {{ Form::text('name', null, array('class' => 'form-control')) }}
         </div>

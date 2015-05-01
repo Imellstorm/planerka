@@ -28,13 +28,16 @@
                 @foreach ($roles as $item)
                     <tr>
                         <td>{{ $item->name }}</td>
+                        <td>{{ $item->type }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td>
-                            {{ link_to('admin/roles/edit/'.$item->id, 'править', array('class' => 'btn btn-info btn-xs pull-left', 'title'=>'Править')) }}
-                            {{ Form::open(array('url' => 'admin/roles/destroy/' . $item->id, 'method' => 'DELETE')) }}
-                                {{ Form::submit('удалить', array('class' => 'btn btn-danger btn-xs left10','onclick'=>'return confirm(\'Удалить?\')?true:false;'))}}
-                            {{ Form::close() }}
+                            @if($item->id > 6)
+                                {{ link_to('admin/roles/edit/'.$item->id, 'править', array('class' => 'btn btn-info btn-xs pull-left', 'title'=>'Править')) }}
+                                {{ Form::open(array('url' => 'admin/roles/destroy/' . $item->id, 'method' => 'DELETE')) }}
+                                    {{ Form::submit('удалить', array('class' => 'btn btn-danger btn-xs left10','onclick'=>'return confirm(\'Удалить?\')?true:false;'))}}
+                                {{ Form::close() }}
+                            @endif
                         </td>
                     </tr>
                 @endforeach
