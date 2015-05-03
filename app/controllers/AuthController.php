@@ -96,18 +96,28 @@ class AuthController extends BaseController {
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
 
-            // This was a callback request from facebook, get the token
-            $token = $vk->requestAccessToken( $code );
-var_dump($token); exit;
-            // Send a request with it
-            $result = json_decode( $vk->request( '/method/users.get' ), true );
+            $params = array(
+                'client_id' => Config::get('oauth-4-laravel.consumers.vk.client_id'),
+                'client_secret' => Config::get('oauth-4-laravel.consumers.vk.client_secret'),
+                'code' => $code,
+                'redirect_uri' => URL::to('/').'/auth/loginvk'
+            );
 
-            $message = 'Your unique vk user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
+            $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+            var_dump($token);exit;
 
-            //Var_dump
-            //display whole array().
-            dd($result);
+            // // This was a callback request from facebook, get the token
+            // $token = $vk->requestAccessToken( $code );
+
+            // // Send a request with it
+            // $result = json_decode( $vk->request( '/method/users.get' ), true );
+
+            // $message = 'Your unique vk user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
+            // echo $message. "<br/>";
+
+            // //Var_dump
+            // //display whole array().
+            // dd($result);
 
         }
         // if not ask for permission first
