@@ -49,10 +49,6 @@ class AuthController extends BaseController {
     }
 
     public function getLoginfacebook(){
-        $providerData = Config::get('oauth-4-laravel.consumers.facebook');
-        if(empty($providerData)){
-            App::abort(404);
-        }
         // get data from input
         $code = Input::get( 'code' );
 
@@ -89,9 +85,36 @@ class AuthController extends BaseController {
     }
 
     public function getLoginvk(){
-        $vk = OAuth::consumer( 'vkontakte', URL::to('/') );
-        $url = $vk->getAuthorizationUri();
-        return Redirect::to( (string)$url );
+        // get data from input
+        $code = Input::get( 'code' );
+
+        // get vk service
+        $vk = OAuth::consumer( 'vkontakte', URL::to('/').'/auth/loginvk' );
+
+        // check if code is valid
+
+        // if code is provided get user data and sign in
+        if ( !empty( $code ) ) {
+
+            // This was a callback request from facebook, get the token
+            $token = $vk->requestAccessToken( $code );
+
+            // Send a request with it
+            $result = json_decode( $vk->request( '/me' ), true );
+
+            $message = 'Your unique vk user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
+            echo $message. "<br/>";
+
+            //Var_dump
+            //display whole array().
+            dd($result);
+
+        }
+        // if not ask for permission first
+        else {
+            $url = $vk->getAuthorizationUri();
+            return Redirect::to( (string)$url );
+        }
     }
 
     public function getLogintwitter(){
