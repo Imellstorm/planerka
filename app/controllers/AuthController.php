@@ -57,7 +57,7 @@ class AuthController extends BaseController {
         $code = Input::get( 'code' );
 
         // get fb service
-        $fb = OAuth::consumer( $provider, 'http://planerka.appteka.cc' );
+        $fb = OAuth::consumer( $provider, URL::to('/').'/auth/sociallogin/faceboo' );
 
         // check if code is valid
 

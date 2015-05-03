@@ -8,7 +8,7 @@
 
         <div class="social-login">
             <p>Войдите с помощью:</p>
-            <a href="#null" class="facebook"></a>
+            <a href="/auth/sociallogin/facebook" class="facebook"></a>
             <a href="#null" class="vk"></a>
             <a href="#null" class="twitter"></a>
         </div>
@@ -55,7 +55,7 @@
 
         <div class="social-login">
             <p>Войдите с помощью:</p>
-            <a href="#null" class="facebook"></a>
+            <a href="/auth/sociallogin/facebook" class="facebook"></a>
             <a href="#null" class="vk"></a>
             <a href="#null" class="twitter"></a>
         </div>
