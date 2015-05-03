@@ -48,9 +48,9 @@ class AuthController extends BaseController {
         return Redirect::to('/');
     }
 
-    public function getSociallogin($provider='')
+    public function getLoginfacebook()
     {
-        $providerData = Config::get('oauth-4-laravel.consumers.'.$provider);
+        $providerData = Config::get('oauth-4-laravel.consumers.facebook');
         if(empty($providerData)){
             App::abort(404);
         }
@@ -58,7 +58,7 @@ class AuthController extends BaseController {
         $code = Input::get( 'code' );
 
         // get fb service
-        $fb = OAuth::consumer( $provider, URL::to('/').'/auth/sociallogin/'.$provider );
+        $fb = OAuth::consumer( 'facebook','planerka.appteka.cc/auth/loginfacebook' );
 
         // check if code is valid
 

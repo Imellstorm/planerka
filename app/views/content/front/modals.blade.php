@@ -55,7 +55,7 @@
 
         <div class="social-login">
             <p>Войдите с помощью:</p>
-            <a href="/auth/sociallogin/facebook" class="facebook"></a>
+            <a href="/auth/loginfacebook" class="facebook"></a>
             <a href="/auth/sociallogin/vk" class="vk"></a>
             <a href="/auth/sociallogin/twitter" class="twitter"></a>
         </div>
