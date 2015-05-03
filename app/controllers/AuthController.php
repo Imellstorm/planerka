@@ -100,7 +100,7 @@ class AuthController extends BaseController {
             $token = $vk->requestAccessToken( $code );
 
             // Send a request with it
-            $result = json_decode( $vk->request( '/me' ), true );
+            $result = json_decode( $vk->request( 'method/users.get' ), true );
 
             $message = 'Your unique vk user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
             echo $message. "<br/>";
