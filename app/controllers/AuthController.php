@@ -108,12 +108,12 @@ class AuthController extends BaseController {
 
            
 
-            // // This was a callback request from facebook, get the token
+            // This was a callback request from facebook, get the token
             $token = $vk->requestAccessToken( $code );
-            var_dump($token); exit;
-
+         
             // // Send a request with it
-            // $result = json_decode( $vk->request( '/method/users.get' ), true );
+            $result = json_decode( $vk->request( 'method/users.get' ), true );
+            var_dump($result); exit;
 
             // $message = 'Your unique vk user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
             // echo $message. "<br/>";
