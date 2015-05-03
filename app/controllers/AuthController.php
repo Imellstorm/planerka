@@ -50,14 +50,15 @@ class AuthController extends BaseController {
 
     public function getSociallogin($provider='')
     {
-        if(empty($provider)){
+        $providerData = Config::get('oauth-4-laravel.consumers.'.$provider);
+        if(empty($providerData)){
             App::abort(404);
         }
         // get data from input
         $code = Input::get( 'code' );
 
         // get fb service
-        $fb = OAuth::consumer( $provider, URL::to('/').'/auth/sociallogin/facebook' );
+        $fb = OAuth::consumer( $provider, URL::to('/').'/auth/sociallogin/'.$provider );
 
         // check if code is valid
 

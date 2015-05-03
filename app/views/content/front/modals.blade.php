@@ -56,8 +56,8 @@
         <div class="social-login">
             <p>Войдите с помощью:</p>
             <a href="/auth/sociallogin/facebook" class="facebook"></a>
-            <a href="#null" class="vk"></a>
-            <a href="#null" class="twitter"></a>
+            <a href="/auth/sociallogin/vk" class="vk"></a>
+            <a href="/auth/sociallogin/twitter" class="twitter"></a>
         </div>
 
         {{ Form::open(array('url' =>'/auth', 'role' => 'form', 'class'=>'login')) }}
