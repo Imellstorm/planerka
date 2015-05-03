@@ -4,10 +4,8 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*"
-	},
-	"require-dev": {
-    	"way/generators": "2.*"
+		"laravel/framework": "4.1.*",
+		"artdarek/oauth-4-laravel": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

@@ -105,12 +105,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		//'Way\Generators\GeneratorsServiceProvider',	//github.com/JeffreyWay/Laravel-4-Generators
-		// 'App\Modules\Users\ServiceProvider',
-		//'App\Modules\Menus\ServiceProvider',
-		//'App\Modules\Dashboard\ServiceProvider',
-		//'App\Modules\Folders\ServiceProvider',
-		//'App\Modules\Articles\ServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider',
 	),
 
 	/*
@@ -176,6 +171,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'OAuth' 		  => 'Artdarek\OAuth\Facade\OAuth',
 
 	),
 

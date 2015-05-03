@@ -9,6 +9,7 @@ use Illuminate\Support\Contracts\ArrayableInterface as Arrayable;
 use Illuminate\Support\Contracts\RenderableInterface as Renderable;
 
 class View implements ArrayAccess, Renderable {
+
 	/**
 	 * The view environment instance.
 	 *
@@ -78,7 +79,7 @@ class View implements ArrayAccess, Renderable {
 
 		// Once we have the contents of the view, we will flush the sections if we are
 		// done rendering all views so that there is nothing left hanging over when
-		// anothoer view is rendered in the future by the application developers.
+		// another view is rendered in the future via the application developers.
 		$this->environment->flushSectionsIfDoneRendering();
 
 		return $response ?: $contents;
