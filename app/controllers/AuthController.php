@@ -98,7 +98,7 @@ class AuthController extends BaseController {
 
             // This was a callback request from facebook, get the token
             $token = $vk->requestAccessToken( $code );
-
+var_dump($token);exit;
             $params = array(
                 'uids'         => $token['user_id'],
                 'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big',
