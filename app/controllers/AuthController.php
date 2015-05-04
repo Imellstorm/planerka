@@ -48,7 +48,7 @@ class AuthController extends BaseController {
         return Redirect::to('/');
     }
 
-    public function getLoginfacebook(){
+    public function getLoginfacebook($create=''){
         // get data from input
         $code = Input::get( 'code' );
 
@@ -87,7 +87,7 @@ class AuthController extends BaseController {
         }
     }
 
-    public function getLoginvk(){
+    public function getLoginvk($create=''){
         // get data from input
         $code = Input::get( 'code' );
 
