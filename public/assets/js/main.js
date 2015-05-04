@@ -414,6 +414,7 @@ $(document).ready(function() {
       afterClose: function() {
         $('.register-cont input').val('');
         $('.social-message').text('');
+        $('.social-login').show();
         $('.error').html('');
         jQuery('#captcha').prop('src', '/assets/packs/securimage/securimage_show.php?sid=' + Math.random());
       },

@@ -128,7 +128,8 @@
                 $('#registration-button').trigger('click');
                 $('.socNet').val('{{ Session::get('socNetwork') }}');
                 $('.socId').val('{{ Session::get('socId') }}');
-                $('.social-message').text('Вы авторизировались в {{ Session::get('socNetwork') }}');
+                $('.social-login').hide();
+                $('.social-message').text('Вы авторизировались в {{ Session::get('socNetwork') }}. Для продолжения регистрации заполните недостающие поля.');
             @endif     
         });
     </script>
