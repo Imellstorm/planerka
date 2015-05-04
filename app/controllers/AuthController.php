@@ -107,8 +107,6 @@ class AuthController extends BaseController {
                 'redirect_uri' => URL::to('/').'/auth/loginvk/'.$create
             );
 
-            var_dump('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))); exit;
-
             $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
             var_dump($token);exit;
