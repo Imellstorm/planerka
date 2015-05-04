@@ -99,10 +99,16 @@ class AuthController extends BaseController {
         // if code is provided get user data and sign in
         if ( !empty( $code ) ) {
 
-            // This was a callback request from facebook, get the token
-            $result = $vk->requestAccessToken( $code );
+            $params = array(
+                'client_id' => Config::get('oauth-4-laravel.consumers.vkontakte.client_id'),
+                'client_secret' => Config::get('oauth-4-laravel.consumers.vkontakte.client_secret'),
+                'code' => $code,
+                'redirect_uri' => 'vkontakte', URL::to('/').'/auth/loginvk/'.$create
+            );
 
-            var_dump($vk);exit;
+            $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+
+            var_dump($token);exit;
             if(isset($result->user_id) && !empty($result->user_id)){
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result->user_id)->with('socNetwork','vk');
