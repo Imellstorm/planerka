@@ -354,9 +354,10 @@ input.btn-main {
   border-bottom: none;
 }
 #header .logo {
-  position: absolute;
+  position: relative;
+  width: 230px;
   left: 50%;
-  top: 100px;
+  top: 30px;
 }
 #header .logo img {
   margin-left: -50%;
@@ -366,7 +367,7 @@ input.btn-main {
   color: #fff;
   text-align: center;
   font-family: 'NeuronB', sans-serif;
-  margin-top: 232px;
+  margin-top: 50px;
   margin-bottom: 35px;
   font-size: 28px;
   line-height: 42px;

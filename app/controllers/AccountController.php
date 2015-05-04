@@ -2,22 +2,76 @@
 
 class AccountController extends BaseController {
 
-	private function checkSubscribe(){
-		$exppires = strtotime(Auth::User()->expires);
-		$now = strtotime(date('Y-m-d H:i:s'));
-		if($exppires-$now>0){
-			return true;
-		}
-		return false;
-	}
-
 	/**
-	 * Show Userinfo page
+	 * Show Profile page
 	 *
 	 * @return Response
 	 */
-	public function getUserinfo(){
-		return View::make('content.front.account.cont');
+	public function getProfile(){
+		return View::make('content.front.account.profile');
+	}
+
+	/**
+	 * Show Specialization page
+	 *
+	 * @return Response
+	 */
+	public function getSpecialization(){
+		return View::make('content.front.account.specialization');
+	}
+
+	/**
+	 * Show Info page
+	 *
+	 * @return Response
+	 */
+	public function getInfo(){
+		return View::make('content.front.account.info');
+	}
+
+	/**
+	 * Show Orders page
+	 *
+	 * @return Response
+	 */
+	public function getOrders(){
+		return View::make('content.front.account.orders');
+	}
+
+	/**
+	 * Show Notifications page
+	 *
+	 * @return Response
+	 */
+	public function getNotifications(){
+		return View::make('content.front.account.notifications');
+	}
+
+	/**
+	 * Show Messages page
+	 *
+	 * @return Response
+	 */
+	public function getMessages(){
+		return View::make('content.front.account.messages');
+	}
+
+	/**
+	 * Show Favorites page
+	 *
+	 * @return Response
+	 */
+	public function getFavorites(){
+		return View::make('content.front.account.favorites');
+	}
+
+	/**
+	 * Show Shop page
+	 *
+	 * @return Response
+	 */
+	public function getShop(){
+		return View::make('content.front.account.shop');
 	}
 
 	/**
@@ -50,12 +104,9 @@ class AccountController extends BaseController {
 		$user = User::where('email_verify',$verificationCode)->first();		
 		if(!empty($user)){
 			$data['email_verify'] = '1';
-			if($user->expires == '0000-00-00 00:00:00'){
-				$data['expires'] = date('Y-m-d H:i:s', strtotime('+1 month'));		//добавляем триальное время							
-			}
 			$user->update($data);
 
-			Session::flash('success', 'Почта подтверждена. Спасибо!');
+			Session::flash('message', 'Почта подтверждена. Спасибо!');
 			return Redirect::to('/auth');
 		} else {
 			return Redirect::to('/auth')->withErrors(array('Код верификации email неверен'));

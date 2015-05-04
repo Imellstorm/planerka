@@ -116,6 +116,10 @@
                 $.fancybox('{{ Session::get('status') }}');
             @endif
 
+            @if (Session::has('message'))
+                $.fancybox('{{ Session::get('message') }}');
+            @endif
+
             @if (Session::has('error'))
                 $.fancybox('{{ Session::get('error') }}');
             @endif
@@ -140,17 +144,52 @@
 <!-- HEADER
     ============================= -->
     <header id="header" style="background: url(/assets/img/body_bg.png) no-repeat top center;   background-color: #726E68;">
+    @if(Auth::check())           
+        <div class="user-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="logo"><a href="/"><img src="/assets/img/user-logo.png" alt=""></a></div>
+                        
+                        <div class="menu-panel">
+                            <div class="list"><a href="#null"><img src="/assets/img/paper.png" alt=""></a></div>
+                            <div class="mail"><a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a><span>1</span></div>
+                            <div class="count">
+                                <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
+                            </div>
+                            <div class="status">PRO</div>
+                            <div class="user">
+                                <div class="name">{{ Auth::user()->username }}</div>
+                                <a href="#null" id="show-user-menu"><img src="/assets/img/dropdown_icon.png" alt=""></a>
+                                <ul id="user-menu">
+                                    <li><a href="/account/messages">Сообщения</a></li>
+                                    <li><a href="/account/favorites">Избранное</a></li>
+                                    <li><a href="/account/orders">Заказы / уведомления</a></li>
+                                    <li><a href="/account/profile">Профиль</a></li>
+                                    <li><a href="#null">Настройки</a></li>
+                                    <li><a href="/auth/logout">Выход</a></li>
+                                </ul>
+                                <div class="avatar"><img src="/assets/img/avatar.jpg" alt=""></div>
+                            </div>
+                            <a href="#null" class="download">Загрузить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="header-content">
-                        <div class="login">
-                            <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
-                            <div class="registration">
-                                <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox" id="registration-button">Регистрация</a>
+                        @if(!Auth::check())
+                            <div class="login">
+                                <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
+                                <div class="registration">
+                                    <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox" id="registration-button">Регистрация</a>
+                                </div>
                             </div>
-                        </div>
-
+                        @endif
                         <div class="logo">
                             <a href="/"><img src="/assets/img/logo.png" alt=""></a>
                         </div>

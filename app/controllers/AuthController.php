@@ -23,12 +23,10 @@ class AuthController extends BaseController {
                 if(Auth::user()->role->id == 1){
                     return Redirect::intended('admin/users');
                 }else{
-                    Session::flash('success', 'Вы вошли как '.Auth::User()->username);
-                    return Redirect::intended('/account');
+                    return Redirect::intended('/');
                 }
             } else {
                 return Redirect::back()
-                //->withInput()
                 ->withErrors('Вы не можете зайти так как у вас не подтверждён email. Проверте вашу почту.');
             }
         }
@@ -70,7 +68,7 @@ class AuthController extends BaseController {
                     return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','facebook');
                 } else {
                     if($this->socLogin('facebook',$result['id'])){
-                        return Redirect::to('/account');
+                        return Redirect::to('/');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Facebook');
                 }
@@ -113,7 +111,7 @@ class AuthController extends BaseController {
                     return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
                 } else {
                     if($this->socLogin('vk',$result['user_id'])){
-                        return Redirect::to('/account');
+                        return Redirect::to('/');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');
                 }
@@ -151,7 +149,7 @@ class AuthController extends BaseController {
                     return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','twitter');
                 } else {
                     if($this->socLogin('twitter',$result['id'])){
-                        return Redirect::to('/account');
+                        return Redirect::to('/');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Twitter');
                 }
