@@ -100,9 +100,9 @@ class AuthController extends BaseController {
         if ( !empty( $code ) ) {
 
             // This was a callback request from facebook, get the token
-            $result = json_decode((string)$vk->requestAccessToken( $code ));
+            $result = $vk->requestAccessToken( $code );
 
-            var_dump($result);exit;
+            var_dump($vk);exit;
             if(isset($result->user_id) && !empty($result->user_id)){
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result->user_id)->with('socNetwork','vk');
