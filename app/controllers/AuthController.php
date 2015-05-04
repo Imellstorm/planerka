@@ -101,11 +101,11 @@ class AuthController extends BaseController {
 
             // This was a callback request from facebook, get the token
             $result = $vk->requestAccessToken( $code );
-            if(isset($result['user_id']) && !empty($result['user_id'])){
+            if(isset($result->user_id) && !empty($result->user_id)){
                 if(!empty($create)){
-                    return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
+                    return Redirect::to('/')->with('socId',$result->user_id)->with('socNetwork','vk');
                 } else {
-                    if($this->socLogin('vk',$result['user_id'])){
+                    if($this->socLogin('vk',$result->user_id)){
                         return Redirect::to('/account');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');
