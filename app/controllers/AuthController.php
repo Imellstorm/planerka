@@ -100,7 +100,7 @@ class AuthController extends BaseController {
         if ( !empty( $code ) ) {
 
             // This was a callback request from facebook, get the token
-            $result = $vk->requestAccessToken( $code );
+            $result = json_decode($vk->requestAccessToken( $code ));
 
             var_dump($result);exit;
             if(isset($result->user_id) && !empty($result->user_id)){
