@@ -171,7 +171,7 @@ class AuthController extends BaseController {
     }
 
     private function socLogin($network,$id){
-        $user = User::where('socnet',$network)->where('socid',$id)->first();
+        $user = User::where('socnet',$network)->where('socid',$id)->where('email_verify',1)->first();
         if(!empty($user)){
             Auth::login($user);
             if (Auth::check()){
