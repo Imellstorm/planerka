@@ -323,6 +323,8 @@ $(document).ready(function() {
       password = $(modalCont).find('.password').val();
       password_confirmation = $(modalCont).find('.confirm_password').val();
       captcha_code = $(modalCont).find('.captcha_code').val();
+      socnet = $(modalCont).find('.socNet').val();
+      socid = $(modalCont).find('.socId').val();
 
       $(modalCont).find('.error').text('');
       $.ajax({
@@ -359,7 +361,9 @@ $(document).ready(function() {
           email: email,
           password: password,
           password_confirmation: password_confirmation,
-          role: $(this).attr('role')
+          role: $(this).attr('role'),
+          socnet: socnet,
+          socid : socid
         },
         success: function(ret){
           if(ret.success == 'success'){
@@ -409,6 +413,7 @@ $(document).ready(function() {
       closeSpeed: 400,
       afterClose: function() {
         $('.register-cont input').val('');
+        $('.social-message').text('');
         $('.error').html('');
         jQuery('#captcha').prop('src', '/assets/packs/securimage/securimage_show.php?sid=' + Math.random());
       },

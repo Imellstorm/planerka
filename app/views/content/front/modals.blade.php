@@ -7,13 +7,18 @@
         <div class="title">Регистрация на планерке</div>
 
         <div class="social-login">
-            <p>Войдите с помощью:</p>
-            <a href="/auth/sociallogin/facebook" class="facebook"></a>
-            <a href="#null" class="vk"></a>
-            <a href="#null" class="twitter"></a>
+            <p style="width:165px;margin-top:0">Зарегистируйтесь с помощью:</p>
+            <a href="/auth/loginfacebook/reg" class="facebook social"></a>
+            <a href="/auth/loginvk/reg" class="vk social"></a>
+            <a href="/auth/logintwitter/reg" class="twitter social"></a>
         </div>
 
         <form class="login">
+             <div class="form-group">
+                <input type="hidden" class="form-control socNet">
+                <input type="hidden" class="form-control socId">
+                <div class="social-message"></div>
+            </div>
             <div class="form-group">
                 <input type="text" class="form-control username" placeholder="Planerca.ru/Ник нэйм">
                 <div class="username error"></div>
@@ -55,9 +60,9 @@
 
         <div class="social-login">
             <p>Войдите с помощью:</p>
-            <a href="/auth/loginfacebook" class="facebook"></a>
-            <a href="/auth/loginvk" class="vk"></a>
-            <a href="/auth/logintwitter" class="twitter"></a>
+            <a href="/auth/loginfacebook" class="facebook social"></a>
+            <a href="/auth/loginvk" class="vk social"></a>
+            <a href="/auth/logintwitter" class="twitter social"></a>
         </div>
 
         {{ Form::open(array('url' =>'/auth', 'role' => 'form', 'class'=>'login')) }}

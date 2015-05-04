@@ -122,6 +122,13 @@
 
             @if(Session::has('token'))
                 $('#fancybox_reset_password_btn').trigger('click');
+            @endif
+
+            @if(Session::has('socId') && Session::has('socNetwork'))
+                $('#registration-button').trigger('click');
+                $('.socNet').val('{{ Session::get('socNetwork') }}');
+                $('.socId').val('{{ Session::get('socId') }}');
+                $('.social-message').text('Вы авторизировались в {{ Session::get('socNetwork') }}');
             @endif     
         });
     </script>
@@ -139,7 +146,7 @@
                         <div class="login">
                             <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
                             <div class="registration">
-                                <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox">Регистрация</a>
+                                <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox" id="registration-button">Регистрация</a>
                             </div>
                         </div>
 

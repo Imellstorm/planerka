@@ -96,6 +96,8 @@ class UserController extends BaseController {
 				return false;
 			}
 
+			$socNet = Input::get('socnet');
+			$socId = Input::get('socid');
 			$randomStr = str_random(40);
  
 	        $user->username   	= Input::get('username');
@@ -103,6 +105,11 @@ class UserController extends BaseController {
 	        $user->role_id    	= $role;
 	        $user->password   	= Hash::make(Input::get('password'));	       
 	        $user->email_verify	= $randomStr;
+
+	        if(!empty($socNet) && !empty($socId)){
+	        	$user->socnet = $socNet;
+	        	$user->socid  = $socId;
+	        }
 
 	        if($this->is_admin() && Input::get('balance')){
 				$user->balance = Input::get('balance');

@@ -65,13 +65,16 @@ class AuthController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
-
-            $message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
-
-            //Var_dump
-            //display whole array().
-            dd($result);
+            if(isset($result['id']) && !empty($result['id'])){
+                if(!empty($create)){
+                    return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','facebook');
+                } else {
+                    if($this->socLogin('facebook',$result['id'])){
+                        return Redirect::to('/account');
+                    }
+                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Facebook');
+                }
+            } 
 
         }
         // if not ask for permission first
@@ -97,8 +100,17 @@ class AuthController extends BaseController {
         if ( !empty( $code ) ) {
 
             // This was a callback request from facebook, get the token
-            $token = $vk->requestAccessToken( $code );
-            var_dump($token);
+            $result = $vk->requestAccessToken( $code );
+            if(isset($result['user_id']) && !empty($result['user_id'])){
+                if(!empty($create)){
+                    return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
+                } else {
+                    if($this->socLogin('vk',$result['user_id'])){
+                        return Redirect::to('/account');
+                    }
+                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');
+                }
+            } 
 
         }
         // if not ask for permission first
@@ -108,13 +120,13 @@ class AuthController extends BaseController {
         }
     }
 
-    public function getLogintwitter(){
+    public function getLogintwitter($create=''){
         // get data from input
         $token = Input::get( 'oauth_token' );
         $verify = Input::get( 'oauth_verifier' );
 
         // get twitter service
-        $tw = OAuth::consumer( 'twitter', URL::to('/').'/auth/logintwitter' );
+        $tw = OAuth::consumer( 'twitter', URL::to('/').'/auth/logintwitter/'.$create );
 
         // check if code is valid
 
@@ -126,14 +138,17 @@ class AuthController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $tw->request( 'account/verify_credentials.json' ), true );
-
-            $message = 'Your unique Twitter user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-            echo $message. "<br/>";
-
-            //Var_dump
-            //display whole array().
-            dd($result);
-
+            
+            if(isset($result['id']) && !empty($result['id'])){
+                if(!empty($create)){
+                    return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','twitter');
+                } else {
+                    if($this->socLogin('twitter',$result['id'])){
+                        return Redirect::to('/account');
+                    }
+                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Twitter');
+                }
+            }       
         }
         // if not ask for permission first
         else {
@@ -146,6 +161,15 @@ class AuthController extends BaseController {
             // return to twitter login url
             return Redirect::to( (string)$url );
         }
+    }
+
+    private function socLogin($network,$id){
+        $user = User::where('socnet',$network)->where('socid',$id)->first();
+        Auth::login($user);
+        if (Auth::check()){
+            return true;
+        }
+        return false;
     }
  
 }
