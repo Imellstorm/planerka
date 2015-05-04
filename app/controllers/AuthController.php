@@ -88,6 +88,7 @@ class AuthController extends BaseController {
     }
 
     public function getLoginvk($create=''){
+
         // get data from input
         $code = Input::get( 'code' );
 
@@ -103,8 +104,10 @@ class AuthController extends BaseController {
                 'client_id' => Config::get('oauth-4-laravel.consumers.vkontakte.client_id'),
                 'client_secret' => Config::get('oauth-4-laravel.consumers.vkontakte.client_secret'),
                 'code' => $code,
-                'redirect_uri' => 'vkontakte', URL::to('/').'/auth/loginvk/'.$create
+                'redirect_uri' => URL::to('/').'/auth/loginvk/'.$create
             );
+
+            var_dump('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))); exit;
 
             $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
