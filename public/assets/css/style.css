@@ -1161,7 +1161,7 @@ input.btn-main {
 }
 /* == MAIN CONTENT ========================> */
 #main {
-  min-height: 1000px;
+  /*min-height: 1000px;*/
 }
 /* == SEARCH RESULT =======> */
 .search-result {
