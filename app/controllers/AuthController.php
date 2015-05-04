@@ -53,7 +53,7 @@ class AuthController extends BaseController {
         $code = Input::get( 'code' );
 
         // get fb service
-        $fb = OAuth::consumer( 'facebook', URL::to('/').'/auth/loginfacebook' );
+        $fb = OAuth::consumer( 'facebook', URL::to('/').'/auth/loginfacebook/'.$create );
 
         // check if code is valid
 
@@ -66,7 +66,6 @@ class AuthController extends BaseController {
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
             if(isset($result['id']) && !empty($result['id'])){
-                var_dump($create); exit;
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','facebook');
                 } else {
@@ -93,7 +92,7 @@ class AuthController extends BaseController {
         $code = Input::get( 'code' );
 
         // get vk service
-        $vk = OAuth::consumer( 'vkontakte', URL::to('/').'/auth/loginvk' );
+        $vk = OAuth::consumer( 'vkontakte', URL::to('/').'/auth/loginvk/'.$create );
 
         // check if code is valid
 
