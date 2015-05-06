@@ -336,6 +336,7 @@ $(document).ready(function() {
       captcha_code = $(modalCont).find('.captcha_code').val();
       socnet = $(modalCont).find('.socNet').val();
       socid = $(modalCont).find('.socId').val();
+      socimage = $(modalCont).find('.socImage').val();
 
       $(modalCont).find('.error').text('');
       $.ajax({
@@ -374,7 +375,8 @@ $(document).ready(function() {
           password_confirmation: password_confirmation,
           role: $(this).attr('role'),
           socnet: socnet,
-          socid : socid
+          socid : socid,
+          socimage: socimage
         },
         success: function(ret){
           if(ret.success == 'success'){
@@ -395,8 +397,6 @@ $(document).ready(function() {
       $('.additional-roles').toggle();
       $.fancybox.update();
     });
-
-    
 
     $('body').on('click','.password_reset_submit',function(){
       var modalCont = $(this).parent().parent().parent();

@@ -98,6 +98,7 @@ class UserController extends BaseController {
 
 			$socNet = Input::get('socnet');
 			$socId = Input::get('socid');
+			$socImage = Input::get('socimage');
 			$randomStr = str_random(40);
  
 	        $user->username   	= Input::get('username');
@@ -109,6 +110,7 @@ class UserController extends BaseController {
 	        if(!empty($socNet) && !empty($socId)){
 	        	$user->socnet = $socNet;
 	        	$user->socid  = $socId;
+	        	$user->socimage  = $socImage;
 	        }
 
 	        if($this->is_admin() && Input::get('balance')){

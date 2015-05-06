@@ -109,16 +109,15 @@ class AuthController extends BaseController {
             $params = file_get_contents($graph_url);
             $param = json_decode($params);
             $result = $param->response[0];
-            var_dump($result); exit;
 
-            if(isset($result['uid']) && !empty($result['uid'])){
+            if(isset($result->uid) && !empty($result->uid)){
                 if(!empty($create)){
                     return Redirect::to('/')
-                    ->with('socId',$result['uid'])
+                    ->with('socId',$result->uid)
                     ->with('socNetwork','vk')
-                    ->with('socImage','vk');
+                    ->with('socImage',$result->photo_medium);
                 } else {
-                    if($this->socLogin('vk',$result['uid'])){
+                    if($this->socLogin('vk',$result->uid)){
                         return Redirect::to('/');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');

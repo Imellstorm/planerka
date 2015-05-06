@@ -132,6 +132,7 @@
                 $('#registration-button').trigger('click');
                 $('.socNet').val('{{ Session::get('socNetwork') }}');
                 $('.socId').val('{{ Session::get('socId') }}');
+                $('.socimage').val('{{ Session::get('socImage') }}');
                 $('.social-login').hide();
                 $('.social-message').text('Вы авторизировались в {{ Session::get('socNetwork') }}. Для продолжения регистрации заполните недостающие поля.');
             @endif     
@@ -172,7 +173,7 @@
                                     <li><a href="/account/settings">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <div class="avatar"><img src="https://graph.facebook.com/1392864781040177/picture?type=small" alt=""></div>
+                                <div class="avatar"><img src="/assets/img/user_icon.png" alt=""></div>
                             </div>
                             <a href="#null" class="download">Загрузить</a>
                         </div>
