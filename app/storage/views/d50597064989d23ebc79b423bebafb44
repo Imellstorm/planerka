@@ -172,7 +172,7 @@
                                     <li><a href="/account/settings">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <div class="avatar"><img src="/assets/img/user_icon.png" alt=""></div>
+                                <div class="avatar"><img src="https://graph.facebook.com/1392864781040177/picture?type=small" alt=""></div>
                             </div>
                             <a href="#null" class="download">Загрузить</a>
                         </div>

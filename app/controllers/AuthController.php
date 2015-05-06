@@ -58,10 +58,14 @@ class AuthController extends BaseController {
             $token = $fb->requestAccessToken( $code );
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
-            var_dump($result);exit;
+            //https://graph.facebook.com/1392864781040177/picture?type=large
+
             if(isset($result['id']) && !empty($result['id'])){
                 if(!empty($create)){
-                    return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','facebook');
+                    return Redirect::to('/')
+                    ->with('socId',$result['id'])
+                    ->with('socNetwork','facebook')
+                    ->with('socImage','https://graph.facebook.com/'.$result['id'].'/picture?type=large');
                 } else {
                     if($this->socLogin('facebook',$result['id'])){
                         return Redirect::to('/');
@@ -100,8 +104,13 @@ class AuthController extends BaseController {
                 'code' => $code,
                 'redirect_uri' => URL::to('/').'/auth/loginvk/'.$create
             );
-            $result = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
-            var_dump($result);exit;
+            $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+
+            $graph_url = "https://api.vk.com/method/users.get?access_token=".$token['access_token']."&uids=".$result['user_id']."&fields=first_name,last_name,country,city,photo_medium,photo_big,bdate,photo_rec,about,screen_name,contacts";
+            $params = file_get_contents($graph_url);
+            $param = json_decode($params);
+            var_dump($param); exit;
+
             if(isset($result['user_id']) && !empty($result['user_id'])){
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
@@ -139,11 +148,13 @@ class AuthController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $tw->request( 'account/verify_credentials.json' ), true );
-            var_dump($result);exit;
             
             if(isset($result['id']) && !empty($result['id'])){
                 if(!empty($create)){
-                    return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','twitter');
+                    return Redirect::to('/')
+                    ->with('socId',$result['id'])
+                    ->with('socNetwork','twitter')
+                    ->with('socImage',$result['profile_image_url']);
                 } else {
                     if($this->socLogin('twitter',$result['id'])){
                         return Redirect::to('/');
