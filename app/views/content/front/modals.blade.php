@@ -15,9 +15,9 @@
 
         <form class="login">
              <div class="form-group">
-                <input type="text" class="form-control socNet">
-                <input type="text" class="form-control socId">
-                <input type="text" class="form-control socImage">
+                <input type="hidden" class="form-control socNet">
+                <input type="hidden" class="form-control socId">
+                <input type="hidden" class="form-control socImage">
                 <div class="social-message"></div>
             </div>
             <div class="form-group">
