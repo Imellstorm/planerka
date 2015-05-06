@@ -106,7 +106,7 @@ class AuthController extends BaseController {
             );
             $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
-            $graph_url = "https://api.vk.com/method/users.get?access_token=".$token['access_token']."&uids=".$result['user_id']."&fields=first_name,last_name,country,city,photo_medium,photo_big,bdate,photo_rec,about,screen_name,contacts";
+            $graph_url = "https://api.vk.com/method/users.get?access_token=".$token['access_token']."&uids=".$token['user_id']."&fields=first_name,last_name,country,city,photo_medium,photo_big,bdate,photo_rec,about,screen_name,contacts";
             $params = file_get_contents($graph_url);
             $param = json_decode($params);
             var_dump($param); exit;
