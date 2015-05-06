@@ -56,9 +56,9 @@ class AuthController extends BaseController {
 
             // This was a callback request from facebook, get the token
             $token = $fb->requestAccessToken( $code );
-            var_dump($result);exit;
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
+            var_dump($result);exit;
             if(isset($result['id']) && !empty($result['id'])){
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result['id'])->with('socNetwork','facebook');
