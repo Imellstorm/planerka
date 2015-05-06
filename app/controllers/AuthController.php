@@ -105,17 +105,20 @@ class AuthController extends BaseController {
                 'redirect_uri' => URL::to('/').'/auth/loginvk/'.$create
             );
             $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
-
             $graph_url = "https://api.vk.com/method/users.get?access_token=".$token['access_token']."&uids=".$token['user_id']."&fields=first_name,last_name,country,city,photo_medium,photo_big,bdate,photo_rec,about,screen_name,contacts";
             $params = file_get_contents($graph_url);
             $param = json_decode($params);
-            var_dump($param); exit;
+            $result = $param->response[0];
+            var_dump($result); exit;
 
-            if(isset($result['user_id']) && !empty($result['user_id'])){
+            if(isset($result['uid']) && !empty($result['uid'])){
                 if(!empty($create)){
-                    return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
+                    return Redirect::to('/')
+                    ->with('socId',$result['uid'])
+                    ->with('socNetwork','vk')
+                    ->with('socImage','vk');
                 } else {
-                    if($this->socLogin('vk',$result['user_id'])){
+                    if($this->socLogin('vk',$result['uid'])){
                         return Redirect::to('/');
                     }
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');
