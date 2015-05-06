@@ -107,6 +107,7 @@ class AccountController extends BaseController {
 			$user->update($data);
 
 			Session::flash('message', 'Почта подтверждена. Спасибо!');
+			Auth::login($user);
 			return Redirect::to('/auth');
 		} else {
 			return Redirect::to('/auth')->withErrors(array('Код верификации email неверен'));
