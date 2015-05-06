@@ -1998,6 +1998,7 @@ input.btn-main {
 }
 .user-nav .menu-panel .avatar {
   margin-right: 5px;
+  margin-left: 10px;
 }
 .user-nav .menu-panel .avatar img {
   -webkit-border-radius: 3px;

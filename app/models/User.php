@@ -88,7 +88,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     	$field = $params['field'];
     	$search = $params['search'];
     	$sort_by = isset($table_fields[$sort])?$table_fields[$sort]:'id';  //set default sort
-    	isset($table_fields[$field])?$search_field=$table_fields[$field]:$search_field='users.id';
+    	isset($table_fields[$field])?$search_field='users.'.$table_fields[$field]:$search_field='users.id';
 
     	$users =  DB::table('users')
     					->leftjoin('roles', 'roles.id', '=', 'users.role_id')

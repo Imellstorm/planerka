@@ -172,7 +172,7 @@
                                     <li><a href="/account/settings">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <div class="avatar"><img src="/assets/img/avatar.jpg" alt=""></div>
+                                <div class="avatar"><img src="/assets/img/user_icon.png" alt=""></div>
                             </div>
                             <a href="#null" class="download">Загрузить</a>
                         </div>

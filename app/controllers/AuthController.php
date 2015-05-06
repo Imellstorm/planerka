@@ -56,7 +56,7 @@ class AuthController extends BaseController {
 
             // This was a callback request from facebook, get the token
             $token = $fb->requestAccessToken( $code );
-
+            var_dump($result);exit;
             // Send a request with it
             $result = json_decode( $fb->request( '/me' ), true );
             if(isset($result['id']) && !empty($result['id'])){
@@ -101,7 +101,7 @@ class AuthController extends BaseController {
                 'redirect_uri' => URL::to('/').'/auth/loginvk/'.$create
             );
             $result = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
-
+            var_dump($result);exit;
             if(isset($result['user_id']) && !empty($result['user_id'])){
                 if(!empty($create)){
                     return Redirect::to('/')->with('socId',$result['user_id'])->with('socNetwork','vk');
@@ -139,6 +139,7 @@ class AuthController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $tw->request( 'account/verify_credentials.json' ), true );
+            var_dump($result);exit;
             
             if(isset($result['id']) && !empty($result['id'])){
                 if(!empty($create)){
