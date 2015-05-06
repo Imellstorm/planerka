@@ -20,11 +20,7 @@ class AuthController extends BaseController {
         if (Auth::attempt(array('email' => $username, 'password' => $password)))
         {
             if(Auth::user()->email_verify == 1){
-                if(Auth::user()->role->id == 1){
-                    return Redirect::intended('admin/users');
-                }else{
-                    return Redirect::intended('/');
-                }
+                return Redirect::intended('/');
             } else {
                 return Redirect::back()
                 ->withErrors('Вы не можете зайти так как у вас не подтверждён email. Проверте вашу почту.');

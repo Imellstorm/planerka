@@ -59,8 +59,9 @@ class RoleController extends BaseController {
 		} else {
 			$model = new Role;
 
-			$model->type   	= Input::get('type');
-	        $model->name   	= Input::get('name');
+			$model->type   			= Input::get('type');
+	        $model->name   			= Input::get('name');
+	        $model->show_in_menu   	= Input::get('show_in_menu');
 
         	$model->save();
 		}
@@ -110,8 +111,9 @@ class RoleController extends BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		} else {
 			$data = array(
-				'type'      => Input::get('type'),
-		        'name'      => Input::get('name'),	        
+				'type'      		=> Input::get('type'),
+		        'name'      		=> Input::get('name'),
+		        'show_in_menu'      => Input::get('show_in_menu'),		        
 	        );	        
 
         	$role->update($data);

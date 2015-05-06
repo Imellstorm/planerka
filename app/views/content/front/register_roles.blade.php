@@ -1,6 +1,7 @@
 <div class="custom-modal" id="modal-reg-second" style="display:block;">
     <div class="title">Выберите тип вашего аккаунта</div>
-    <div class="account-tipes">
+
+    <div class="account-tipes main-roles">
         <div class="tipe role_main" role="2">
             <figure>
                 <a href="#null" class="rings"></a>
@@ -31,11 +32,27 @@
             </figure>
             <a href="#null">Я организатор<br> мероприятий</a>
         </div>
-        <div class="tipe role_other fancybox_ajax" href='/users/getotherroles' >
+        <div class="tipe role_other">
             <figure>
                 <a href="#null" class="other"></a>
             </figure>
             <a href="#null">Другое</a>
         </div>
-    </div>                      
+    </div> 
+
+    <div class="account-tipes additional-roles" style="display:none">
+        <div class="text-center role_other" style="padding-bottom:20px;cursor:pointer;">Предыдущие роли</div>
+        @if(!empty($otherRoles))
+            @foreach($otherRoles as $role)
+                <div class="tipe role_main" role="{{ $role->id }}">
+                    <figure>
+                        <a href="#null" class="rings"></a>
+                    </figure>
+                    <a href="#null">{{ $role->name }}</a>
+                </div>
+            @endforeach
+        @else
+            Другие роли отсутствуют
+        @endif
+    </div>                     
 </div>

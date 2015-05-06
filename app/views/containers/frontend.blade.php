@@ -158,15 +158,18 @@
                                 <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
                             </div>
                             <div class="status">PRO</div>
-                            <div class="user">
+                            <div class="user" id="show-user-menu">
                                 <div class="name">{{ Auth::user()->username }}</div>
-                                <a href="#null" id="show-user-menu"><img src="/assets/img/dropdown_icon.png" alt=""></a>
+                                <a href="#null"><img src="/assets/img/dropdown_icon.png" alt=""></a>
                                 <ul id="user-menu">
+                                    @if(Auth::user()->role->id==1)
+                                        <li><a href="/admin/users">Админпанель</a></li>
+                                    @endif
                                     <li><a href="/account/messages">Сообщения</a></li>
                                     <li><a href="/account/favorites">Избранное</a></li>
                                     <li><a href="/account/orders">Заказы / уведомления</a></li>
-                                    <li><a href="/account/profile">Профиль</a></li>
-                                    <li><a href="#null">Настройки</a></li>
+                                    <li><a href="/profile/photo">Профиль</a></li>
+                                    <li><a href="/account/settings">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
                                 <div class="avatar"><img src="/assets/img/avatar.jpg" alt=""></div>
@@ -260,6 +263,7 @@
                 <div class="col-md-12 top_menu">
                     <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
                     {{ $menu->top }}
+                    <img src="/assets/img/dropdown_icon.png" style="margin: -7px 0 0 30px;">
                     <script>           
                         $(".menu:first>li>a").width(function(i,val){
                             $(this).css('width',val-val*0.48);
@@ -289,17 +293,24 @@
     ============================= -->
     <footer id="footer">
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-12" style="margin-bottom:20px;">
+                    <p>Наши партнёры:</p>
+                    <div class="col-md-12">
+                        <a href="http://seaflats.ru"><img src="/assets/img/morekvartir.png"></a>
+                        <a href="http://openfrag.ru"><img src="/assets/img/openfrag.png"></a>
+                    </div>
+                </div>
                 <div class="col-md-8 col-sm-12">
                     <p>При использовании материалов  портала Planerka.ru ссылка на сайт первоисточник обязательна.</p>
                     <p>Copyright 2014 Planerka.ru Все права защищены</p>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="social">
-                        <a href="#null" class="vkontakte"></a>
-                        <a href="#null" class="odnoklasniki"></a>
-                        <a href="#null" class="twitter"></a>
-                        <a href="#null" class="facebook"></a>
+                        <a href="https://instagram.com/planercaru/" class="instagram"></a>
+                        <a href="http://vk.com/planercaru/" class="vkontakte"></a>
+                        <a href="#null" class="twitter" style="display:none"></a>
+                        <a href="#null" class="facebook" style="display:none"></a>
                     </div>
                 </div>
             </div>

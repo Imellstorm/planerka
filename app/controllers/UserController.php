@@ -65,8 +65,8 @@ class UserController extends BaseController {
 		if(!$this->checkCapcha()){
 			return Response::json(array('captcha'=>'Неверная капча'));
 		}
-
-		$view = View::make('content.front.register_roles')->render();
+		$otherRoles = Role::where('type','другое')->get();
+		$view = View::make('content.front.register_roles',compact('otherRoles'))->render();
 		return Response::json(array('success'=>'success','view'=>$view));
 	}
 
@@ -242,11 +242,4 @@ class UserController extends BaseController {
 		Session::flash('success', 'Настройки обновлены!');
 		return Redirect::back();
 	}
-
-	 public function getOtherRoles(){
-	 	if(Request::ajax()){
-	 		$otherRoles = Role::where('type','другое')->get();
-	 		return View::make('content.front.register_other_roles',compact('otherRoles'));
-	 	}
-	 }
 }

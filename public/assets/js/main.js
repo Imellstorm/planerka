@@ -17,10 +17,21 @@ $(document).ready(function() {
 	//USER MENU 
 	/*, .menu-panel .name*/
 	$('#show-user-menu').click(function(event) {
-
+    firstClick = true;
 		$('#user-menu').toggle();
 
 	});
+
+  $('body').on('click',function(event){
+    if($(event.target).closest("#show-user-menu").length) return;
+    $('#user-menu').hide();
+  });
+
+  $('body').on('click',function(event){
+    if($(event.target).closest(".top_menu>ul>li:last-child>a").length) return;
+    $('.menu ul').hide();
+  });
+
 
 
 
@@ -340,7 +351,7 @@ $(document).ready(function() {
         },
         success: function(ret){
           if(ret.success == 'success'){
-            $.fancybox(ret.view);
+              $.fancybox(ret.view);
             } else {
             $.each(ret, function(key,val) {               
               modalCont.find('.'+key+'.error').text(val);
@@ -378,6 +389,14 @@ $(document).ready(function() {
       $('.rules').toggle();
       $.fancybox.update();
     });
+
+    $('body').on('click','.role_other',function(){
+      $('.main-roles').toggle();
+      $('.additional-roles').toggle();
+      $.fancybox.update();
+    });
+
+    
 
     $('body').on('click','.password_reset_submit',function(){
       var modalCont = $(this).parent().parent().parent();

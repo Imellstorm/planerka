@@ -3,12 +3,12 @@
 class AccountController extends BaseController {
 
 	/**
-	 * Show Profile page
+	 * Show Settings page
 	 *
 	 * @return Response
 	 */
-	public function getProfile(){
-		return View::make('content.front.account.profile');
+	public function getSettings(){
+		return View::make('content.front.account.settings');
 	}
 
 	/**
@@ -113,99 +113,6 @@ class AccountController extends BaseController {
 		}
 	}
 
-
-	/**
-	 * Show Posts page
-	 *
-	 * @return Response
-	 */
-	public function getPosts(){
-		$table_fields = array(
-			'Название'				=> 'title',	
-			'Цена'					=> 'price',
-			'Город'					=> 'city_id',
-			'Создано'				=> 'created_at',
-		);
-		$model = new Post;
-		$params = array(
-			'sort' 		=> Input::get('sort'),
-	    	'order' 	=> Input::get('order'),
-	    	'field' 	=> Input::get('field'),
-	    	'search' 	=> Input::get('search'),
-    	);
-
-        $posts = $model->getPosts($table_fields,$params,Auth::User()->id);
-        $settings = Settings::first();
-
-        $postContent = View::make('content.front.account.posts_list',compact('posts','table_fields','settings'));
-		return View::make('content.front.account.cont')->nest('content','content.front.account.posts_menu', compact('postContent'));
-	}
-
-
-	/**
-	 * Show create post form
-	 *
-	 * @return Response
-	 */
-	public function createPost(){
-		$subscribe = $this->checkSubscribe();
-		if(!$subscribe){
-			$postContent = View::make('content.front.account.subscribe_expired');
-			return View::make('content.front.account.cont')->nest('content','content.front.account.posts_menu', compact('postContent'));
-		}
-
-		$regions = Region::lists('name','id');
-		$regions[0] = 'Выберите область';
-		ksort($regions);
-
-		$ownership = Ownership::lists('abr','id');
-		$ownership[0] = 'Выберите форму собственности';
-		ksort($ownership);
-
-		$nds = Nds::lists('abr','id');
-		$nds[0] = 'Выберите форму налогообложения';
-		ksort($nds);
-
-		$license = License::lists('abr','id');		
-
-		$postContent = View::make('content.front.account.post_form', compact('regions','ownership','license','nds'));
-		return View::make('content.front.account.cont')->nest('content','content.front.account.posts_menu', compact('postContent'));
-	}
-
-	/**
-	 * Show Post edit page
-	 *
-	 * @return Response
-	 */
-	public function editPost($id){
-		$model = new Post;
-		$post = $model->getPost($id);
-
-		if(empty($post)){
-			App::abort(404);
-		}
-		if(!$this->is_owner($post->user_id)){
-			return Redirect::to('/')->withErrors('У вас недостаочно прав!');
-		}
-
-		$regions = Region::lists('name','id');
-		$regions[0] = 'Выберите область';
-		ksort($regions);
-
-		$ownership = Ownership::lists('abr','id');
-		$ownership[0] = 'Выберите форму собственности';
-		ksort($ownership);
-
-		$nds = Nds::lists('abr','id');
-		$nds[0] = 'Выберите форму налогообложения';
-		ksort($nds);
-
-		$license = License::lists('abr','id');	
-
-		$postContent = View::make('content.front.account.post_form', compact('regions','post','ownership','license','nds'));
-		return View::make('content.front.account.cont')->nest('content','content.front.account.posts_menu', compact('postContent'));
-	}
-
 	/**
 	 * Show Messages inbox page
 	 *
@@ -273,16 +180,6 @@ class AccountController extends BaseController {
         	$model->where('id',$id)->update($data);
     	}        
 		return View::make('content.front.account.cont')->nest('content','content.front.account.message',compact('message'));
-	}
-
-	/**
-	 * Show Settings page
-	 *
-	 * @return Response
-	 */
-	public function getSettings(){
-		$getMail = Auth::User()->get_mail;
-		return View::make('content.front.account.cont')->nest('content','content.front.account.settings',compact('getMail'));
 	}
 
 	/**

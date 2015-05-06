@@ -24,6 +24,11 @@
             {{ Form::text('name', null, array('class' => 'form-control')) }}
         </div>
 
+        <div class='form-group'>         
+            {{ Form::checkbox('show_in_menu',1,!empty($role->show_in_menu)?'$role->show_in_menu':'',array('id' => 'show_in_menu')) }}
+            {{ Form::label('show_in_menu', 'Показывать в поиске') }}
+        </div>
+
         <div class='form-group'>
             {{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}
         </div> 

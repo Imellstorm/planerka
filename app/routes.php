@@ -18,12 +18,11 @@ Route::put('admin/users/update/{id}', 'UserController@putUpdate');
 
 //Route::post('/comments/ajaxupdate','CommentController@postAjaxupdate');
 
-Route::get('/users/getotherroles','UserController@getOtherRoles');
-
 //Route::get('registration','AccountController@getRegister');
 Route::get('account/verifyemail/{data}','AccountController@getVerifyemail');
 
 Route::controller('password', 'RemindersController');
+Route::controller('profile', 'ProfileController');
 
 //Route::controller('/cron', 'CronController');
 

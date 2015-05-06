@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 
-@section('title') {{ 'Профиль' }} @stop
+@section('title') {{ 'Настройки' }} @stop
 
 @section('main')
 
