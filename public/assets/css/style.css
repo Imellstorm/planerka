@@ -312,7 +312,7 @@ input.btn-main {
 /* == HEADER ========================> */
 #header .header-content {
   height: 610px;
-  padding-top: 60px;
+  padding-top: 10px;
 }
 #header .is-sticky .login {
   width: 1140px;

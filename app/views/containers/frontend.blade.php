@@ -184,7 +184,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="header-content">
+                    <div class="header-content" style="margin-top:{{ Auth::check()?'40px':'' }}">
                         @if(!Auth::check())
                             <div class="login">
                                 <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
