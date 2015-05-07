@@ -150,7 +150,7 @@ class AuthController extends BaseController {
 
             // Send a request with it
             $result = json_decode( $tw->request( 'account/verify_credentials.json' ), true );
-            
+                
             if(isset($result['id']) && !empty($result['id'])){
                 if(!empty($create)){
                     return Redirect::to('/')

@@ -41,7 +41,7 @@
     </div> 
 
     <div class="account-tipes additional-roles" style="display:none">
-        <div class="text-center role_other" style="padding-bottom:20px;cursor:pointer;">Предыдущие роли</div>
+        <div class="text-center role_other">Предыдущие роли</div>
         @if(!empty($otherRoles))
             @foreach($otherRoles as $role)
                 <div class="tipe role_main" role="{{ $role->id }}">

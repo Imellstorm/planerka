@@ -93,7 +93,7 @@
 
         {{ Form::open(array('url' =>'/password/remind', 'role' => 'form', 'class'=>'login')) }}
             <div class="form-group">
-                <input type="text" class="form-control email" name="email" placeholder="Электронная почта">
+                <input type="email" required class="form-control email" name="email" placeholder="Электронная почта">
             </div>
             <footer>
                 <input type="submit" style="margin:0 auto" class="btn-main rulesDone" value="Отправить">

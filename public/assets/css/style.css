@@ -3874,3 +3874,16 @@ form.project .checkbox span {
       background: url('/assets/img/instagram.png') !important;
       background-position: -1px !important;
     }
+    .role_other{
+      width: 185px;
+      background: #44b39b;
+      padding: 10px;
+      border-radius: 5px;
+      line-height: 20px;
+      cursor: pointer;
+      color: white;
+      margin: 0 auto 20px auto;
+    }
+    .role_other:hover{
+      color:black;
+    }

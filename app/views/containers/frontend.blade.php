@@ -173,7 +173,7 @@
                                     <li><a href="/account/settings">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <div class="avatar"><img src="/assets/img/user_icon.png" alt=""></div>
+                                <div class="avatar"><img src="{{ Auth::user()->socimage?Auth::user()->socimage:'/assets/img/user_icon.png' }}" alt="" style="width:48px;height:48px;"></div>
                             </div>
                             <a href="#null" class="download">Загрузить</a>
                         </div>
@@ -264,7 +264,7 @@
                 <div class="col-md-12 top_menu">
                     <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
                     {{ $menu->top }}
-                    <img src="/assets/img/dropdown_icon.png" style="margin: -7px 0 0 30px;">
+                    <img src="/assets/img/dropdown_icon.png" style="margin: -5px 0 0 30px;">
                     <script>           
                         $(".menu:first>li>a").width(function(i,val){
                             $(this).css('width',val-val*0.48);
@@ -308,8 +308,8 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="social">
-                        <a href="https://instagram.com/planercaru/" class="instagram"></a>
-                        <a href="http://vk.com/planercaru/" class="vkontakte"></a>
+                        <a href="https://instagram.com/planercaru" class="instagram"></a>
+                        <a href="http://vk.com/planercaru" class="vkontakte"></a>
                         <a href="#null" class="twitter" style="display:none"></a>
                         <a href="#null" class="facebook" style="display:none"></a>
                     </div>

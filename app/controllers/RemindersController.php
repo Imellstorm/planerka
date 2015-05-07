@@ -19,7 +19,7 @@ class RemindersController extends Controller {
     $mailSended = mail($email, 'Восстановление пароля', 'Для восстановления пароля на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/password/reset/'.$token);
     if($mailSended){
       $user->update(array('password_remind'=>$token));
-      return Redirect::back()->with('status', '<div style="color:green; width:200px; margin:20px 0 0 0px; text-align:center;">Интсрукция для восстановления пароля выслана не email</div>');
+      return Redirect::back()->with('status', '<div style="color:green; width:200px; margin:20px 0 0 0px; text-align:center;">Интструкция для восстановления пароля выслана не email</div>');
     }
     return Redirect::back()->with('status', '<div style="color:red; width:200px; margin:40px 0 0 0px; text-align:center;">Не удалось отправить почту</div>');  
   }
