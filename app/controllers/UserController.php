@@ -11,12 +11,12 @@ class UserController extends BaseController {
 		'address'	=> 'max:256',
 	);
 	protected $table_fields = array(
-			'Имя'		=> 'username',
-			'Email'		=> 'email',
-			'Создан'	=> 'created_at',
-			'Изменён'	=> 'updated_at',
+			'Имя'		=> 'users.username',
+			'Email'		=> 'users.email',
+			'Создан'	=> 'users.created_at',
+			'Изменён'	=> 'users.updated_at',
 			'Статус'	=> 'roles.name',
-			'Баланс'	=> 'balance',
+			'Баланс'	=> 'users.balance',
 		);	
 
 	/**

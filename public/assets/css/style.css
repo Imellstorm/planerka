@@ -72,7 +72,7 @@ ul {
   margin-top: 36px;
   display: block;
   height: 28px;
-  width: 225px;
+  width: 217px;
   background: url(../img/title_bg.png) no-repeat;
 }
 .btn-more {
@@ -3880,7 +3880,7 @@ form.project .checkbox span {
     }
     .instagram{
       background: url('/assets/img/instagram.png') !important;
-      background-position: -1px !important;
+      background-position: -2px !important;
     }
     .role_other{
       width: 185px;

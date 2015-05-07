@@ -414,3 +414,6 @@ border-color: #56A32F;
 .top_menu_right{
     float: right;
 }
+.mce-tinymce {
+    width: 100% !important;
+}
