@@ -95,24 +95,23 @@ class UserController extends BaseController {
 			} else {
 				return false;
 			}
+ 
+	        $user->username   	= Input::get('username');
+	        $user->email      	= Input::get('email');
+	        $user->role_id    	= $role;
+	        $user->password   	= Hash::make(Input::get('password'));
 
-			$socNet = Input::get('socnet');
-			$socId = Input::get('socid');
-			$socImage = Input::get('socimage');
-
-			if($this->is_admin()){
+	        if($this->is_admin()){
 				$randomStr = '1';
 			} else {
 				$randomStr = str_random(40);
 				mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
 			}
- 
-	        $user->username   	= Input::get('username');
-	        $user->email      	= Input::get('email');
-	        $user->role_id    	= $role;
-	        $user->password   	= Hash::make(Input::get('password'));	       
 	        $user->email_verify	= $randomStr;
 
+	        $socNet = Input::get('socnet');
+			$socId = Input::get('socid');
+			$socImage = Input::get('socimage');
 	        if(!empty($socNet) && !empty($socId)){
 	        	$user->socnet = $socNet;
 	        	$user->socid  = $socId;
