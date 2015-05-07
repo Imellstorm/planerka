@@ -22,13 +22,13 @@ class AuthController extends BaseController {
             if(Auth::user()->email_verify == 1){
                 return Redirect::intended('/');
             } else {
-                return Redirect::back()
-                ->withErrors('Вы не можете зайти так как у вас не подтверждён email. Проверте вашу почту.');
+                Auth::logout();
+                $view = View::make('content.front.messagebox',array('message'=>'Вы не можете зайти так как у вас не подтверждён email. <br>Проверте вашу почту.'))->render();
+                return Redirect::back()->with('message', $view);
             }
         }
-        return Redirect::back()
-            ->withInput()
-            ->withErrors('Неверный логин или пароль.');
+        $view = View::make('content.front.messagebox',array('message'=>'Неверный логин или пароль.'))->render();
+        return Redirect::back()->with('message', $view);
     }
  
     public function getLogin()

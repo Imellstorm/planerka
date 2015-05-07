@@ -14,14 +14,20 @@ class RemindersController extends Controller {
     $email = Input::get('email');
     $user = User::where('email',$email)->first();
     if(empty($user)){
-      return Redirect::back()->with('error', '<div style="color:red; width:150px; margin:40px 0 0 35px">Неверный email</div>');
+      $view = View::make('content.front.messagebox',array('message'=>'Неверный email'))->render();
+      return Redirect::back()->with('message', $view);
     }
+
     $mailSended = mail($email, 'Восстановление пароля', 'Для восстановления пароля на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/password/reset/'.$token);
+    
     if($mailSended){
       $user->update(array('password_remind'=>$token));
-      return Redirect::back()->with('status', '<div style="color:green; width:200px; margin:20px 0 0 0px; text-align:center;">Интструкция для восстановления пароля выслана не email</div>');
+      $message = 'Интструкция для восстановления пароля выслана не email';
+    } else {
+      $message = 'Не удалось отправить почту';
     }
-    return Redirect::back()->with('status', '<div style="color:red; width:200px; margin:40px 0 0 0px; text-align:center;">Не удалось отправить почту</div>');  
+    $view = View::make('content.front.messagebox',array('message'=>$message))->render();
+    return Redirect::back()->with('message', $view);
   }
 
   /**

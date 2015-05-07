@@ -112,16 +112,8 @@
         $(document).ready(function(){
             initialize();
 
-            <?php if (Session::has('status')): ?>
-                $.fancybox('<?php echo Session::get('status'); ?>');
-            <?php endif; ?>
-
             <?php if (Session::has('message')): ?>
                 $.fancybox('<?php echo Session::get('message'); ?>');
-            <?php endif; ?>
-
-            <?php if (Session::has('error')): ?>
-                $.fancybox('<?php echo Session::get('error'); ?>');
             <?php endif; ?>
 
             <?php if(Session::has('token')): ?>

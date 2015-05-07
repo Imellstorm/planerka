@@ -1,0 +1,1 @@
+<div class="message-modal"><div><div class="title">Внимание</div><div class="message-text">{{ $message }}</div></div>

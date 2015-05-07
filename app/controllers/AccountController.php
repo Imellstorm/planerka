@@ -90,7 +90,6 @@ class AccountController extends BaseController {
 
 			mail(Auth::User()->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );			
 		}
-		return Redirect::to('account/userinfo');
 	}
 
 	/**
@@ -106,11 +105,12 @@ class AccountController extends BaseController {
 			$data['email_verify'] = '1';
 			$user->update($data);
 
-			Session::flash('message', 'Почта подтверждена. Спасибо!');
 			Auth::login($user);
-			return Redirect::to('/auth');
+			$view = View::make('content.front.messagebox',array('message'=>'Почта подтверждена. Спасибо!'))->render();
+            return Redirect::to('/')->with('message', $view);
 		} else {
-			return Redirect::to('/auth')->withErrors(array('Код верификации email неверен'));
+			$view = View::make('content.front.messagebox',array('message'=>'Код верификации email неверен.'))->render();
+			return Redirect::to('/')->with('message', $view);
 		}
 	}
 

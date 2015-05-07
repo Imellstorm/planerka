@@ -112,16 +112,8 @@
         $(document).ready(function(){
             initialize();
 
-            @if (Session::has('status'))
-                $.fancybox('{{ Session::get('status') }}');
-            @endif
-
             @if (Session::has('message'))
                 $.fancybox('{{ Session::get('message') }}');
-            @endif
-
-            @if (Session::has('error'))
-                $.fancybox('{{ Session::get('error') }}');
             @endif
 
             @if(Session::has('token'))

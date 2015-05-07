@@ -3216,7 +3216,7 @@ form.account .btn-main {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-.custom-modal .title {
+.custom-modal .title, .message-modal .title {
   padding: 45px 0 36px 0;
   text-align: center;
   font-family: 'NeuronB', sans-serif;
@@ -3225,14 +3225,14 @@ form.account .btn-main {
   color: #454646;
   letter-spacing: 2px;
 }
-.custom-modal .title:before {
+.custom-modal .title:before, .message-modal .title:before {
   content: '';
   display: block;
   width: 100%;
   height: 46px;
   background: url(../img/modal_title_top_bg.png) no-repeat top center;
 }
-.custom-modal .title:after {
+.custom-modal .title:after, .message-modal .title:after {
   content: '';
   display: block;
   width: 100%;
@@ -3241,6 +3241,14 @@ form.account .btn-main {
 }
 .custom-modal label {
   margin: 0;
+}
+.message-modal{
+  width: 400px;
+}
+.message-modal .message-text {
+  text-align: center;
+  margin: 0 20px 20px 20px;
+  font-size: 16px;
 }
 .modal-order-form {
   overflow: hidden;

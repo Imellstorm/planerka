@@ -99,7 +99,13 @@ class UserController extends BaseController {
 			$socNet = Input::get('socnet');
 			$socId = Input::get('socid');
 			$socImage = Input::get('socimage');
-			$randomStr = str_random(40);
+
+			if($this->is_admin()){
+				$randomStr = '1';
+			} else {
+				$randomStr = str_random(40);
+				mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
+			}
  
 	        $user->username   	= Input::get('username');
 	        $user->email      	= Input::get('email');
@@ -120,13 +126,12 @@ class UserController extends BaseController {
         	$user->save();
 		}
 
-		mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
-
-		Session::flash('success', 'Пользователь создан! На ваш почтовый ящик выслано письмо с инструкцией по активации');
 		if(!Request::ajax()){
+			Session::flash('success', 'Пользователь создан!');
 			return Redirect::to('/admin/users');
 		} else{
-			return Response::json(array('success'=>'success','view'=>'<h4 class="text-center" style="margin-top:40px">Спасибо за регистрацию. Вам на почту отправлено письмо с активацией.</h4>'));
+			$view = View::make('content.front.messagebox',array('message'=>'Спасибо за регистрацию. Вам на почту отправлено письмо с активацией.'))->render();
+			return Response::json(array('success'=>'success','view'=>$view));
 		}
 	}
 
