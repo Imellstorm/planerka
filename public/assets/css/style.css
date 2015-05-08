@@ -2390,9 +2390,7 @@ input.btn-main {
 }
 .user-profile form.prof .btn-main {
   font-size: 18px!important;
-  position: absolute;
-  bottom: 35px;
-  left: 500px;
+  margin-left: 170px;
 }
 .user-profile form.prof .checkbox {
   margin-bottom: 25px;
@@ -3894,4 +3892,16 @@ form.project .checkbox span {
     }
     .role_other:hover{
       color:black;
+    }
+    #img_preview{
+      position: absolute;
+      width: 82px;
+      left: 177px;
+      top: 4px;
+    }
+    .delete_image{
+      position: absolute;
+      left: 265px;
+      top: 0px;
+      cursor: pointer;
     }

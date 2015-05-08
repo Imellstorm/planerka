@@ -9,4 +9,6 @@ class ProfileController extends BaseController {
 	public function getPhoto(){
 		return View::make('content.front.profile.photo');
 	}
+
+	
 }

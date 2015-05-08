@@ -77,4 +77,44 @@ class Common_helper {
             
         }
     }
+
+/**
+ * Save upploaded file
+ *
+ * @param  obj $files, string $type
+ * @return array
+ */
+    public static function fileUpload($file,$folder,$name) {
+        if(!empty($file)){
+            $validator = Validator::make(
+                array(
+                    'attachment' => $file,
+                    'extension'  => \Str::lower($file->getClientOriginalExtension()),
+                ),
+                array(
+                    'attachment' => 'required|max:1000',
+                    'extension'  => 'required|in:jpg,jpeg,bmp,png,gif',
+                )
+            ); 
+
+            if($validator->fails()){
+                return array('errors'=>$validator->messages());
+            }
+            $destinationPath = 'uploads/'.$folder.'/';
+            if(!is_dir($destinationPath)){
+                File::makeDirectory($destinationPath , 0775, true);
+            }
+            $filename = $name.'.'.$file->getClientOriginalExtension();
+            $uploadSuccess = $file->move($destinationPath, $filename);
+            if($uploadSuccess) {
+                 $fileUploaded = $destinationPath.$filename;
+            }else{
+                $fileUploadErrors = $filename;
+            }
+        }     
+        if(isset($fileUploadErrors)){
+            return array('errors'=>'File upload error');
+        }
+        return array('name'=>$filename, 'path'=>$fileUploaded);
+    }
 }

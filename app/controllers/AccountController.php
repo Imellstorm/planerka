@@ -26,7 +26,25 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getInfo(){
-		return View::make('content.front.account.info');
+		$monthes = array(
+		    1 => 'Января', 
+		    2 => 'Февраля', 
+		    3 => 'Марта', 
+		    4 => 'Апреля',
+		    5 => 'Мая', 
+		    6 => 'Июня', 
+		    7 => 'Июля', 
+		    8 => 'Августа',
+		    9 => 'Сентября', 
+		    10 => 'Октября', 
+		    11 => 'Ноября', 
+		    12 => 'Декабря'
+		);
+		$userinfo = Userinfo::where('user_id',Auth::user()->id)->first();
+		if(isset($userinfo->birthday) && !empty($userinfo->birthday)){
+			$userinfo->birthday = date('j',$userinfo->birthday).' '.$monthes[(date('n',$userinfo->birthday))].' '.date('Y',$userinfo->birthday);
+		}
+		return View::make('content.front.account.info',compact('userinfo','monthes'));
 	}
 
 	/**

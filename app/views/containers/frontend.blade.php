@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/media.css">
-    @section('styles')
+    @yield('styles')
 
 <!-- JS -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
@@ -36,7 +36,7 @@
     <script type="text/javascript" src="/assets/js/fancybox.js"></script>
     <script type="text/javascript" src="/assets/js/sticky.js"></script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
-    @section('scripts')
+    @yield('scripts')
     <script>
         var geocoder;
         if (navigator.geolocation) {
@@ -162,7 +162,7 @@
                                     <li><a href="/account/favorites">Избранное</a></li>
                                     <li><a href="/account/orders">Заказы / уведомления</a></li>
                                     <li><a href="/profile/photo">Профиль</a></li>
-                                    <li><a href="/account/settings">Настройки</a></li>
+                                    <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
                                 <div class="avatar"><img src="{{ Auth::user()->socimage?Auth::user()->socimage:'/assets/img/user_icon.png' }}" alt="" style="width:48px;height:48px;"></div>
@@ -266,9 +266,19 @@
             </div>
         </div>
     </nav>
-    @yield('main')
-    @include('content.front.modals')
 
+    @if ($errors->has())
+        @foreach ($errors->all() as $error)
+            <div class='bg-danger alert text-center'>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                {{ $error }}
+            </div>
+        @endforeach
+    @endif
+
+    @yield('main')
+
+    @include('content.front.modals')
 
 <!-- NAV FOOTER
     ============================= -->
