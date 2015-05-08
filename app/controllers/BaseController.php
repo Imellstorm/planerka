@@ -6,6 +6,10 @@ class BaseController extends Controller {
 		$this->getMenus();
 		$rules = Article::where('alias','rules')->first();
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
+		if(Auth::check()){
+			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			View::share('userInfo',$userInfo);
+		}
 		View::share('rules',$rules);
 		View::share('roles',$roles);
     }
