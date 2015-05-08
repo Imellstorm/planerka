@@ -97,7 +97,7 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('additional_email', 'Электронная почта') }}
-                                {{ Form::text('additional_email', null, array('class' => 'form-control')) }}
+                                {{ Form::text('additional_email', Auth::user()->email, array('class' => 'form-control')) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('site', 'Сайт') }}
