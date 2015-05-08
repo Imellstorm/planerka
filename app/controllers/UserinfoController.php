@@ -30,7 +30,7 @@ class UserinfoController extends BaseController {
 
 		if ($validator->fails())
 		{
-			return Redirect::back()->withErrors($validator);
+			return Redirect::back()->withErrors($validator)->withInput();;
 		} else {
 			$model = new Userinfo;
 			$city_departure = Input::get('city_departure');
