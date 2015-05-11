@@ -18,8 +18,8 @@
 						<div class="specif main">
 							<div class="title">Основная специализация</div>
 							<div class="form-group">
-								<?php if(isset($mainRole->role_id)) $rolesAdd=$roles; $rolesAdd[$mainRole->role_id]=$mainRole->name ?>
-	    						{{ Form::select('role[]',$rolesAdd,isset($mainRole->role_id)?$mainRole->role_id:'',array('class'=>'sel-green')); }}
+								<?php //if(isset($mainRole->role_id)) $rolesAdd=$roles; $rolesAdd[$mainRole->role_id]=$mainRole->name ?>
+	    						{{ Form::select('role[]',$roles,isset($mainRole->role_id)?$mainRole->role_id:'',array('class'=>'sel-green')); }}
 								<div class="comment">Выберите раздел и специализацию из каталога</div>
 							</div>
 							<div class="form-group">
@@ -39,8 +39,8 @@
 								<div class="specif main">
 									<div class="title">Дополнительная специализация</div>
 									<div class="form-group">
-										<?php $rolesAdd=$roles; $rolesAdd[$val->role_id]=$val->name ?>
-										{{ Form::select('role[]',$rolesAdd,$val->role_id,array('class'=>'sel-green')); }}
+										<?php //$rolesAdd=$roles; $rolesAdd[$val->role_id]=$val->name ?>
+										{{ Form::select('role[]',$roles,$val->role_id,array('class'=>'sel-green')); }}
 										<a href="#null" class="delate">Удалить</a>
 										<div class="comment">Выберите раздел и специализацию из каталога</div>
 									</div>
@@ -95,12 +95,12 @@
 			var i=0;
 			$('body').on('click','.add-specif',function(){
 				if(i < {{ $maxRoles-1 }}){		
-					var slctdElem = $(this).parent().find('option:selected').val();
-					$('.add-specif-block').find($('option[value='+slctdElem+']')).remove();
+					//var slctdElem = $(this).parent().find('option:selected').val();
+					//$('.add-specif-block').find($('option[value='+slctdElem+']')).remove();
+
 					// $.each($('option[value='+slctdElem+']:not(selected)'),function(key,val){
 					// 	$(this).remove();
 					// });
-
 
 					var html = $('.add-specif-block').html();		
 					$(this).parent().after(html);		
