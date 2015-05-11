@@ -167,7 +167,7 @@
                                 </ul>
                                 <?php
                                     if(isset($userInfo->avatar) && !empty($userInfo->avatar) ){
-                                        $avatar = $userInfo->avatar;
+                                        $avatar = '/'.$userInfo->avatar;
                                     } elseif(Auth::user()->socimage) {
                                         $avatar = Auth::user()->socimage;
                                     } else {

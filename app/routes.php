@@ -33,7 +33,6 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/users', 'UserController');
 	Route::controller('admin/articles', 'ArticleController');
 	Route::controller('admin/roles', 'RoleController');
-	Route::controller('admin/user_status', 'UserstatusController');
 	Route::controller('admin/settings', 'SettingsController');
 	Route::controller('admin/menus', 'MenuController');
 });
@@ -47,6 +46,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 Route::group(array('before' => 'auth'), function() {		
 	Route::controller('account','AccountController');
 	Route::controller('userinfo','UserinfoController');	
+	Route::controller('specializations','SpecializationsController');	
 });
 
 /*

@@ -2660,30 +2660,30 @@ input.btn-main {
   color: #3c3c3c;
   letter-spacing: 2px;
 }
-.specif form.specif .delate {
+.specif .delate {
   font-family: 'NeuronLight', sans-serif;
   font-size: 18px;
   color: #3c3c3c;
   margin-left: 20px;
 }
-.specif form.specif .comment {
+.specif .comment {
   font-family: 'NeuronLight', sans-serif;
   color: #a5a5a5;
   font-size: 18px;
   font-weight: 300;
   margin-top: 15px;
 }
-.specif form.specif .form-group {
+.specif .form-group {
   margin-bottom: 25px;
 }
-.specif form.specif label {
+.specif label {
   width: 160px;
   margin-top: 9px;
 }
-.specif form.specif input.form-control {
+.specif input.form-control {
   width: 210px;
 }
-.specif form.specif textarea {
+.specif textarea {
   display: inline-block;
   width: 490px;
   max-width: 700px;
@@ -2702,6 +2702,7 @@ input.btn-main {
   text-align: center;
   margin-left: 163px;
   margin-top: 25px;
+  cursor: pointer;
 }
 .specif .add-specif:before {
   content: '';
@@ -3904,4 +3905,14 @@ form.project .checkbox span {
       left: 265px;
       top: 0px;
       cursor: pointer;
+    }
+    .sel-green {
+      background: white;
+      border: solid 1px #d3d3d3;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    }
+    .sel-green:focus{
+      outline: none;
     }

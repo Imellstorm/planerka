@@ -338,6 +338,7 @@ $(document).ready(function() {
       socid = $(modalCont).find('.socId').val();
       socimage = $(modalCont).find('.socImage').val();
 
+
       $(modalCont).find('.error').text('');
       $.ajax({
         url: '/admin/users/validate',

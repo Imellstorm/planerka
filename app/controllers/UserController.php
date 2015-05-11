@@ -4,8 +4,9 @@ class UserController extends BaseController {
 
 	protected $rules = array(
 		'username'	=> 'required|max:256|unique:users,username',
-		'email'		=> 'required|email|unique:users,email|max:256',
-		'password'	=> 'required|same:password_confirmation|max:256',
+		//'alias'		=> 'required|max:256|unique:users,alias',
+		'email'		=> 'required|max:256|email|unique:users,email',
+		'password'	=> 'required|max:256|same:password_confirmation',
 		'phone'		=> 'alpha_dash|max:32',
 		'role'		=> 'max:9',
 		'address'	=> 'max:256',
@@ -48,8 +49,7 @@ class UserController extends BaseController {
 	public function getCreate()
 	{
 		$roles_dd = Role::lists('name','id');
-		$user_status = Userstatus::lists('name','id');
-		return View::make('content.admin.users.form',compact('roles_dd','user_status'));
+		return View::make('content.admin.users.form',compact('roles_dd'));
 	}
 
 	/**
@@ -97,6 +97,7 @@ class UserController extends BaseController {
 			}
  
 	        $user->username   	= Input::get('username');
+	        //$user->alias   		= Input::get('alias');
 	        $user->email      	= Input::get('email');
 	        $user->role_id    	= $role;
 	        $user->password   	= Hash::make(Input::get('password'));
@@ -154,7 +155,6 @@ class UserController extends BaseController {
 		$user = User::find($id);
 		if(!empty($user)){
 			$roles_dd = Role::lists('name','id');
-			$user_status = Userstatus::lists('name','id');
 			return View::make('content.admin.users.form', compact('user','roles_dd','user_status'));
 		} else {
 			App::abort(404);
