@@ -24,7 +24,10 @@ class SettingsController extends BaseController {
 			$model->privatemail = Input::get('privatemail');
 			$model->projectsmail= Input::get('projectsmail');
 			$model->save();
-		}	
+		}
+	    if(!$this->updatePassword()){
+    		return Redirect::back()->withErrors(array('oldpassword'=>'Неверный старый пароль'));
+    	};	
 		$view = View::make('content.front.messagebox',array('message'=>'Настройки сохранены!'))->render();
         return Redirect::back()->with('message', $view);
 	}
