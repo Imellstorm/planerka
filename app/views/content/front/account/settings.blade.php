@@ -10,53 +10,49 @@
             @include('content.front.account.menu_one')
             <div class="row">
                 <div class="col-sm-12">
-                    <form class="account">
+                    @if (empty($settings))
+                        {{ Form::open(array('role' => 'form', 'url' => '/settings/store', 'class'=>'account')) }}
+                    @else
+                        {{ Form::model($settings, array('role' => 'form', 'url' => '/settings/update/' . $settings->id, 'method' => 'PUT', 'class'=>'account')) }}
+                    @endif
                         <div class="form-group">
-                            <label for="old-pass">Старый пароль</label>
-                            <input type="text" class="form-control" id="old-pass">
+                            <label for="oldpass">Старый пароль</label>
+                            <input type="password" name="oldpass" class="form-control" id="oldpass">
                         </div>
                         <div class="form-group">
-                            <label for="new-pass">Новый пароль</label>
-                            <input type="text" class="form-control" id="new-pass">
+                            <label for="newpass">Новый пароль</label>
+                            <input type="password" name="newpass" class="form-control" id="newpass">
                         </div>
                         <div class="form-group">
-                            <label for="pass-conf">Подтвердите</label>
-                            <input type="text" class="form-control" id="pass-conf">
+                            <label for="passconf">Подтвердите</label>
+                            <input type="password" name="passconf" class="form-control" id="passconf">
                         </div>
                         <div class="form-group chbox">
                             <label for="">Рассылка</label>
                             <div class="cbeckbox-body">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1">
-                                    <label for="checkbox1">
-                                        Рассылка администрации
-                                    </label>
+                                    {{ Form::checkbox('adminmail', 1, null, array('id' => 'adminmail')) }}
+                                    {{ Form::label('adminmail', 'Рассылка администрации') }}
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox2">
-                                    <label for="checkbox2">
-                                        Подписка на комментарии к постам в блоге
-                                    </label>
+                                    {{ Form::checkbox('blogmail', 1, null, array('id' => 'blogmail')) }}
+                                    {{ Form::label('blogmail', 'Подписка на комментарии к постам в блоге') }}
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox3">
-                                    <label for="checkbox3">
-                                        Личные сообщения
-                                    </label>
+                                    {{ Form::checkbox('privatemail', 1, null, array('id' => 'privatemail')) }}
+                                    {{ Form::label('privatemail', 'Личные сообщения') }}
                                 </div>
                                 <div class="pro-box">
                                     <div class="checkbox">
-                                        <input type="checkbox" id="checkbox4">
-                                        <label for="checkbox4">
-                                            Рассылка новых подходящих проектов под вашу специализацию
-                                        </label>
+                                        {{ Form::checkbox('projectsmail', 1, null, array('id' => 'projectsmail')) }}
+                                        {{ Form::label('projectsmail', 'Рассылка новых подходящих проектов под вашу специализацию') }}
                                         <span>Только для <div class="status">PRO</div></span>
                                     </div>
                                 </div>  
                             </div>  
                         </div>
-                        <a href="#null" class="btn-main">Сохранить</a>
-                    </form>
+                        <input type="submit" class="btn-main" value="Сохранить">
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

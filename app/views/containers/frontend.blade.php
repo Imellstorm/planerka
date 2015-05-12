@@ -35,6 +35,7 @@
     <script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/assets/js/fancybox.js"></script>
     <script type="text/javascript" src="/assets/js/sticky.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
     @yield('scripts')
     <script>

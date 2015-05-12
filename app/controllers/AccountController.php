@@ -8,7 +8,8 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getSettings(){
-		return View::make('content.front.account.settings');
+		$settings = Usersettings::where('user_id',Auth::user()->id)->first();
+		return View::make('content.front.account.settings',compact('settings'));
 	}
 
 	/**
