@@ -4,7 +4,27 @@
 
 @section('main')
 <!-- MAIN CONTENT
-	============================= -->	
+	============================= -->
+	<div class="add-specif-block" style="display:none">
+		<div class="specif">
+			<div class="title">Дополнительная специализация</div>
+			<div class="form-group">
+				{{ Form::select('role[]',$roles,null,array('class'=>'sel-green')); }}
+				<a href="#null" class="delate">Удалить</a>
+				<div class="comment">Выберите раздел и специализацию из каталога</div>
+			</div>
+			<div class="form-group">
+				<label for="count-service">Стоимость услуги</label>
+				<input type="text" name="price[]" class="form-control price-input" placeholder="только цифры">
+			</div>
+			<div class="form-goup">
+				<label for="description">Что входит в стоимость</label>
+				<textarea name="description[]" class="form-control"></textarea>
+			</div>
+			<span class="add-specif">Добавить другую специализацию</span>
+		</div>
+	</div>
+
 	<div id="user-page">
 		<div class="container">
 			@include('content.front.account.menu_one')
@@ -18,7 +38,6 @@
 						<div class="specif main">
 							<div class="title">Основная специализация</div>
 							<div class="form-group">
-								<?php //if(isset($mainRole->role_id)) $rolesAdd=$roles; $rolesAdd[$mainRole->role_id]=$mainRole->name ?>
 	    						{{ Form::select('role[]',$roles,isset($mainRole->role_id)?$mainRole->role_id:'',array('class'=>'sel-green')); }}
 								<div class="comment">Выберите раздел и специализацию из каталога</div>
 							</div>
@@ -36,10 +55,9 @@
 						</div>
 						@if(isset($otheRoles) && !empty($otheRoles))
 							@foreach($otheRoles as $key=>$val)
-								<div class="specif main">
+								<div class="specif main key-{{ $key }}">
 									<div class="title">Дополнительная специализация</div>
 									<div class="form-group">
-										<?php //$rolesAdd=$roles; $rolesAdd[$val->role_id]=$val->name ?>
 										{{ Form::select('role[]',$roles,$val->role_id,array('class'=>'sel-green')); }}
 										<a href="#null" class="delate">Удалить</a>
 										<div class="comment">Выберите раздел и специализацию из каталога</div>
@@ -65,45 +83,44 @@
 				{{ Form::close() }}
 			</div>
 		</div>
-	</div>
-
-	<div class="add-specif-block" style="display:none">
-		<div class="specif">
-			<div class="title">Дополнительная специализация</div>
-			<div class="form-group">
-				{{ Form::select('role[]',$roles,null,array('class'=>'sel-green')); }}
-				<a href="#null" class="delate">Удалить</a>
-				<div class="comment">Выберите раздел и специализацию из каталога</div>
-			</div>
-			<div class="form-group">
-				<label for="count-service">Стоимость услуги</label>
-				<input type="text" name="price[]" class="form-control price-input" placeholder="только цифры">
-			</div>
-			<div class="form-goup">
-				<label for="description">Что входит в стоимость</label>
-				<textarea name="description[]" class="form-control"></textarea>
-			</div>
-			<span class="add-specif">Добавить другую специализацию</span>
-		</div>
 	</div>	
 @stop
 
 @section('scripts')
 	<script type="text/javascript">
+
 		$(document).ready(function(){
+
+			$('body').on('focus','.sel-green',function(){
+				oldElemVal = $(this).val();
+			});
+			$('body').on('change','.sel-green',function(){	
+				var selElem = $(this).find('option:selected');
+				var selElemVal = $(this).find('option:selected').val();
+				$('.sel-green option[value='+oldElemVal+']').prop('disabled', false);
+				$('.sel-green option[value='+selElemVal+']').not(selElem).prop('disabled', true);
+			});
+
+			$.each($('.specif.main'),function(k,v){
+				var selElem = $(this).find('option:selected');
+				var selElemVal = $(this).find('option:selected').val();
+				$('.sel-green option[value='+selElemVal+']').not(selElem).prop('disabled', true);
+			});
 
 			var i=0;
 			$('body').on('click','.add-specif',function(){
-				if(i < {{ $maxRoles-1 }}){		
-					//var slctdElem = $(this).parent().find('option:selected').val();
-					//$('.add-specif-block').find($('option[value='+slctdElem+']')).remove();
+				if(i < {{ $maxRoles }}){	
+					var selElem = $(this).parent().find('option:selected');
+					var selElemVal = $(this).parent().find('option:selected').val();
+					$('.sel-green option[value='+selElemVal+']').not(selElem).prop('disabled', true);
+				
+					var newSelElem = $('.add-specif-block').find('option:enabled:first');
+					var newSelElemVal = $('.add-specif-block').find('option:enabled:first').val();
+					$('.sel-green option[value='+newSelElemVal+']').not(newSelElem).prop('disabled', true);
 
-					// $.each($('option[value='+slctdElem+']:not(selected)'),function(key,val){
-					// 	$(this).remove();
-					// });
+					var html = $('.add-specif-block').html();
+					$(this).parent().after(html);
 
-					var html = $('.add-specif-block').html();		
-					$(this).parent().after(html);		
 					$(this).remove();
 					i++;
 				} else {
@@ -112,13 +129,16 @@
 			});
 
 			$('body').on('click','.delate',function(){
-				elem = $(this);
-				$.each($('.sel-green'),function(key,val){
-					var id = elem.parent().parent().find(':selected').val();
-					var name = elem.parent().parent().find(':selected').text();
-					$(this).append('<option value="'+id+'" selected="selected">'+name+'</option>');
-				});
-				elem.parent().parent().remove();
+				var selElem = $(this).parent().find('option:selected');
+				var selElemVal = $(this).parent().find('option:selected').val();
+				$('.sel-green option[value='+selElemVal+']').prop('disabled', false);
+
+				$(this).parent().parent().remove();
+				
+				$('.add-specif').remove();
+				$('.add-specif-block .specif').append('<span class="add-specif">Добавить другую специализацию</span>');
+				$('.specif').last().append('<span class="add-specif">Добавить другую специализацию</span>');
+
 				i--;
 			});
 

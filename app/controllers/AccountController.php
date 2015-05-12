@@ -20,15 +20,10 @@ class AccountController extends BaseController {
 		$roles = Role::lists('name','id');
 		unset($roles[1]);
 		unset($roles[2]);
-		$maxRoles = count($roles);
+
 		$mainRole = Specialization::leftjoin('roles','roles.id','=','specializations.role_id')->where('user_id',Auth::user()->id)->where('role_id',Auth::user()->role_id)->first();
 		$otheRoles = Specialization::leftjoin('roles','roles.id','=','specializations.role_id')->where('user_id',Auth::user()->id)->where('role_id','!=',Auth::user()->role_id)->get();
-		// if(count($otheRoles)){
-		// 	unset($roles[$mainRole->role_id]);
-		// 	foreach ($otheRoles as $key => $val) {
-		// 		unset($roles[$val->role_id]);
-		// 	}
-		// }
+		$maxRoles = count($roles)-(count($otheRoles)+1);
 
 		return View::make('content.front.account.specialization',compact('roles','maxRoles','mainRole','otheRoles','addRoles'));
 	}
