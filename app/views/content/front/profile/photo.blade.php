@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 
-@section('title') {{ 'Профиль' }} @stop
+@section('title') {{ 'Профиль|фото' }} @stop
 
 @section('main')
 
@@ -8,51 +8,79 @@
     ============================= -->   
     <div id="user-page">
         <div class="container">
+            @include('content.front.profile.menu')
             <div class="row">
                 <div class="col-sm-12">
-                    <ul class="inner-nav">
-                        <li><a href="#null" class="active">Фотографии</a></li>
-                        <li><a href="#null">Видео</a></li>
-                        <li><a href="#null">Информация</a></li>
-                        <li><a href="#null">Отзывы</a></li>
-                        <li><a href="#null">Календарь</a></li>
-                        <li class="last"><a href="#null" class="btn-main">Заказать</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="profile-info">
-                        <h3>Ведущий на свадьбу</h3>
-                        <span class="price">от 25 000</span>
-                        <p>Срочно нужен рыбный текст! рыба рыба кит. делаем стандартное окошко для ввода Срочно нужен рыбный текст! рыба рыба кит. делаем стандартное окошко для ввода Срочно нужен рыбный текст! рыба рыба кит. делаем стандартное окошко для ввода Срочно нужен рыбный текст! рыба рыба кит. делаем стандартное окошко для ввода</p>
-                    </div>
+                    @if(!empty($mainProf))
+                        <div class="profile-info">
+                            <h3>{{ $mainProf->name }}</h3>
+                            <span class="price">от {{ $mainProf->price }}</span>
+                            <p>{{ $mainProf->description }}</p>
+                        </div>
+                    @endif
                     <div class="profile-data">
                         <dl>
-                            <dt>Мобильний телефон</dt>
-                            <dd>+7 921 000 00 00</dd>
+                            @if(!empty($userinfo->phone))
+                                <dt>Мобильний телефон</dt>
+                                <dd>{{ $userinfo->phone }}</dd>
+                            @endif
 
-                            <dt>E-mail</dt>
-                            <dd>parfenov@planerka.ru</dd>
-
-                            <dt>Сайт</dt>
-                            <dd>parfenof.info</dd>
+                            @if(!empty($userinfo->additional_email))
+                                <dt>E-mail</dt>
+                                <dd>{{ $userinfo->additional_email }}</dd>
+                            @endif
+                                
+                            @if(!empty($userinfo->site))
+                                <dt>Сайт</dt>
+                                <dd>{{ $userinfo->site }}</dd>
+                            @endif    
 
                             <dt>Просмотр профиля</dt>
-                            <dd>20</dd>
+                            <dd>{{ $userinfo->enters_count }}</dd>
 
                             <dt>Лайков</dt>
-                            <dd>30</dd>
+                            <dd>{{ $userinfo->likes }}</dd>
 
                             <dt>Выполненных заказов</dt>
-                            <dd>12</dd>
+                            <dd>{{ $userinfo->finished_jobs }}</dd>
 
                             <dt>Регистрация на сайте</dt>
-                            <dd>1 год и 5 дней</dd>
+                            <dd>
+                                @if(!empty($date->years))
+                                    {{ $date->years }}  
+                                    <?php if($date->years == 1){
+                                        echo 'год';
+                                    } elseif($date->years < 5) {
+                                        echo 'годa';
+                                    } else {
+                                        echo 'лет';
+                                    }?>
+                                @endif
+                                @if(!empty($date->months))
+                                    {{ $date->months }}  
+                                    <?php if($date->months == 1){
+                                        echo 'месяц';
+                                    } elseif($date->months < 5) {
+                                        echo 'месяца';
+                                    } else {
+                                        echo 'месяцев';
+                                    }?>
+                                @endif
+                                @if(!empty($date->days))
+                                    {{ $date->days }}
+                                    <?php if($date->days == 1){
+                                        echo 'день';
+                                    } elseif($date->days < 5) {
+                                        echo 'дня';
+                                    } else {
+                                        echo 'дней';
+                                    }?>
+                                @endif
+                            </dd>
                         </dl>
                         <footer>
-                            <p>Выезжаю в другой город</p>
-                            <p>Выезжаю за рубеж</p>
+                            <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
+                            <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
                         </footer>
                     </div>
                     <div class="profile-albums">
@@ -72,6 +100,16 @@
                             </ul>
                         </div>
                     </div>
+                    @if(!empty($otherProf))
+                        @foreach($otherProf as $key=>$val)
+                            <div class="profile-info">
+                                <h3>{{ $val->name }}</h3>
+                                <span class="price">от {{ $val->price }}</span>
+                                <p>{{ $val->description }}</p>
+                            </div>
+                        @endforeach
+                    @endif
+                    <div style="clear:both"></div>
                     <div class="add_album">
                         <a href="#null"></a>
                         <p>Создать новый альбом</p>

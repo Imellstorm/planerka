@@ -19,7 +19,9 @@ class AccountController extends BaseController {
 	 */
 	public function getSpecialization(){
 		$roles = Role::lists('name','id');
-		unset($roles[1]);
+		if(!$this->is_admin()){
+			unset($roles[1]);
+		}	
 		unset($roles[2]);
 
 		$mainRole = Specialization::leftjoin('roles','roles.id','=','specializations.role_id')->where('user_id',Auth::user()->id)->where('role_id',Auth::user()->role_id)->first();

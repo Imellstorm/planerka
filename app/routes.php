@@ -19,7 +19,7 @@ Route::put('admin/users/update/{id}', 'UserController@putUpdate');
 Route::get('account/verifyemail/{data}','AccountController@getVerifyemail');
 
 Route::controller('password', 'RemindersController');
-Route::controller('profile', 'ProfileController');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +56,5 @@ Route::group(array('before' => 'auth'), function() {
 |--------------------------------------------------------------------------
 */
 Route::get('/page/{alias}', 'FrontController@page');
+Route::controller('/{useralias}', 'ProfileController');
 Route::controller('/', 'FrontController');

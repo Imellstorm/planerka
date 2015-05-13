@@ -105,7 +105,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
-                                    {{ Form::checkbox('country_departure', 1, isset($userinfo->city_departure)?$userinfo->city_departure:0,array('id'=>'checkbox6')); }}
+                                    {{ Form::checkbox('city_departure', 1, isset($userinfo->city_departure)?$userinfo->city_departure:0,array('id'=>'checkbox6')); }}
                                     <label for="checkbox6">
                                         Могу выезжать в другой город
                                     </label>

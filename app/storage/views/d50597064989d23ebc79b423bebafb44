@@ -35,7 +35,6 @@
     <script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/assets/js/fancybox.js"></script>
     <script type="text/javascript" src="/assets/js/sticky.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="/assets/js/main.js"></script>
     <?php echo $__env->yieldContent('scripts'); ?>
     <script>
@@ -162,7 +161,7 @@
                                     <li><a href="/account/messages">Сообщения</a></li>
                                     <li><a href="/account/favorites">Избранное</a></li>
                                     <li><a href="/account/orders">Заказы / уведомления</a></li>
-                                    <li><a href="/profile/photo">Профиль</a></li>
+                                    <li><a href="/<?php echo Auth::user()->alias; ?>/photo">Профиль</a></li>
                                     <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
