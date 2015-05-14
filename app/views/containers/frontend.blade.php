@@ -287,7 +287,9 @@
 
     @yield('main')
 
-    @include('content.front.modals')
+    @if(!Auth::check())
+        @include('content.front.modals')
+    @endif
 
 <!-- NAV FOOTER
     ============================= -->

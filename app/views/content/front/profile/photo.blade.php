@@ -83,23 +83,31 @@
                             <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
                         </footer>
                     </div>
-                    <div class="profile-albums">
-                        <div class="album">
-                            <div class="overflow"></div>
-                            <a href="#null"><img src="/assets/img/album.png" alt=""></a>
-                            <h4><a href="#null">Необычная свадьба <br>Саши и Миши</a></h4>
-                            <p>25 фото</p>
+                    @if(!empty($albums))
+                        <div class="profile-albums">
+                            @foreach($albums as $album)
+                                <div class="album">
+                                    <a href="/{{ $user->alias }}/album/{{ $album->id }}" class="overflow" style="backgrount:grey">
+                                        @if(!empty($album->image))
+                                            <img src="{{ $album->image }}" alt="">
+                                        @endif
+                                    </a>
+                                    <h4><a href="#null">{{ $album->name }}</a></h4>
+                                    <p>25 фото</p>
+                                </div>
+                                <div class="photos">
+                                    <ul>
+                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
+                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
+                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
+                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
+                                        <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li>
+                                    </ul>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="photos">
-                            <ul>
-                                <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endif
+
                     @if(!empty($otherProf))
                         @foreach($otherProf as $key=>$val)
                             <div class="profile-info">
@@ -109,14 +117,40 @@
                             </div>
                         @endforeach
                     @endif
-                    <div style="clear:both"></div>
+
                     <div class="add_album">
-                        <a href="#null"></a>
+                        <a href="#create-album" class="fancybox"></a>
                         <p>Создать новый альбом</p>
                         <span>+</span>
+                    </div>
+
+                    <div class="custom-modal" id="create-album" style="">
+                        <div class="title">Создать альбом</div>
+                        {{ Form::open(array('role' => 'form', 'url' => '/album/store', 'method' => 'post',)) }}
+                            <div class="form-group">
+                                <label for="">Название</label>
+                                <input required type="text" name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Описание</label>
+                                <textarea name="description" class="form-control"></textarea>
+                            </div>
+                            <input type="submit" class="btn-main" value="Создать альбом">
+                        {{ Form::close() }}                     
                     </div>  
                 </div>
             </div>
         </div>
-    </div>  
+    </div> 
+@stop
+
+@section('styles')
+<style type="text/css">
+.fancybox-wrap {
+  top: 50px !important;
+}
+#header .user-nav .logo {
+  margin-top: 6px;
+}
+</style>
 @stop

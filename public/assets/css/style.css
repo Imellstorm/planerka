@@ -1119,7 +1119,7 @@ input.btn-main {
 .nav-footer ul li a {
   font-family: 'NeuronB', sans-serif;
   font-size: 19px;
-  line-height: 24px;
+  line-height: 65px;
   color: #372f2b;
 }
 /* == FOOTER ========================> */
@@ -3919,4 +3919,36 @@ form.project .checkbox span {
     }
     .sel-green:focus{
       outline: none;
+    }
+    .dz-default.dz-message {
+      padding: 20px;
+      border: dashed lightgrey;
+    }
+    .dz-preview{
+      position: relative;
+      float: left;
+      margin: 10px;
+    }
+    .dz-success-mark path{
+      fill:green;
+    }
+    .dz-error-mark,.dz-success-mark {
+      position: absolute;
+      top: 112px;
+    }
+    .dz-error-mark path{
+      fill:red;
+    }
+    .dz-success-mark svg, .dz-error-mark svg{
+      width: 35px;
+    }
+    .dz-details{
+      margin-left: 55px;
+    }
+    .dz-error-message{
+      display: none;
+    }
+    .dz-success-mark, .dz-error-mark{
+      display: none;
+      margin-left: 10px;
     }

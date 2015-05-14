@@ -287,7 +287,9 @@
 
     <?php echo $__env->yieldContent('main'); ?>
 
-    <?php echo $__env->make('content.front.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php if(!Auth::check()): ?>
+        <?php echo $__env->make('content.front.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php endif; ?>
 
 <!-- NAV FOOTER
     ============================= -->
