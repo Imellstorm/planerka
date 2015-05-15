@@ -14,27 +14,66 @@ class AlbumsController extends BaseController {
 	 */
 	public function getShow($useralias,$id)
 	{
-		$album = Album::find($id);
-		$userinfo = Userinfo::where('user_id',Auth::user()->id)->first();
+		$user = User::where('alias',$useralias)->first();
+		$userinfo = Userinfo::where('user_id',$user->id)->first();
+		$images = Image::where('album_id',$id)->get();
+		$album = Album::where('user_id',$user->id)->where('id',$id)->first();
 		if(!empty($album)){	
-			return View::make('content.front.profile.album', compact('album','userinfo','useralias'));
+			return View::make('content.front.profile.album', compact('album','images','user','userinfo'));
 		} else {
 			App::abort(404);
 		}
 	}
 
-	public function postUploadimage(){
+	public function postUploadimage($albumId){
 		$file = Input::file('file');
-	    //$extension = File::extension($file->getClientOriginalName());
+		if(!empty($file)){
+	   		$dimensions = getimagesize($file);
+	   		if($dimensions[0]<600 && $dimensions[1]<600){
+	   			return Response::json('Размер изображения слишком мал', 400);
+	   		}
+	   	}
+	    $image = Common_helper::fileUpload(Input::file('file'),'images/'.Auth::user()->alias);
+	    if( isset($image['errors']) ) {
+	    	return Response::json($image['errors'], 400);
+        }
+       	$thumb_big = 'uploads/images/'.Auth::user()->alias.'/thumb_big_'.$image['name'];
+        Common_helper::getThumb($image['path'],$thumb_big,600,400);
 
-	    $upload_success = Input::file('file')->move('uploads', $file->getClientOriginalName());
-	    if( $upload_success ) {
-        	return Response::json('success', 200);
-        } else {
-        	return Response::json('error', 400);
-       	} 
+        $thumb_small = 'uploads/images/'.Auth::user()->alias.'/thumb_small_'.$image['name'];
+        Common_helper::getThumb($image['path'],$thumb_small,200,200);
+
+    	$model = new Image;
+    	$model->user_id 	= Auth::user()->id;
+    	$model->album_id 	= $albumId;
+    	$model->name 		= $image['name'];
+    	$model->path 		= $image['path'];
+    	$model->thumb_big 	= $thumb_big;
+    	$model->thumb_small = $thumb_small;
+    	$model->save();
+
+    	return Response::json('success', 200);
 	}
 
+	public function getSetalbumcover($albumId,$imageId){
+		$album = Album::find($albumId);
+		$image = Image::where('id',$imageId)->where('album_id',$albumId)->first();
+		if(empty($album) || empty($image)){
+			App::abort(404);
+		}
+		$album->update(array('image'=>$image->thumb_small));
+		return Redirect::back();
+	}
+
+	public function getAsd($albumId,$imageId){
+		exit('123');
+		$image = Image::find($imageId);
+		// if(empty($image)){
+		// 	App::abort(404);
+		// }
+		$image->delete();
+		return Redirect::back();
+	}
 
 	/**
 	 * Store a newly created resource in storage.

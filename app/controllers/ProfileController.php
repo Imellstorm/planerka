@@ -32,6 +32,11 @@ class ProfileController extends BaseController {
 		$date->days = $diff->format('%d');
 
 		$albums = Album::where('user_id',$this->user->id)->get();
+		if(!empty($albums)){
+			foreach ($albums as $key => $val) {
+				$albums[$key]->images = Image::where('album_id',$val->id)->get();
+			}
+		}
 
 		if(!empty($userinfo)){
 			echo '<fix style="display:none"></fix>'; // фикс странного бага с удвоением инкримента

@@ -89,20 +89,21 @@
                                 <div class="album">
                                     <a href="/{{ $user->alias }}/album/{{ $album->id }}" class="overflow" style="backgrount:grey">
                                         @if(!empty($album->image))
-                                            <img src="{{ $album->image }}" alt="">
+                                            <img src="/{{ $album->image?$album->image:'' }}" alt="">
                                         @endif
                                     </a>
                                     <h4><a href="#null">{{ $album->name }}</a></h4>
                                     <p>25 фото</p>
                                 </div>
                                 <div class="photos">
-                                    <ul>
-                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                        <li><a href="#null"><img src="/assets/img/photo.png" alt=""></a></li>
-                                        <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li>
-                                    </ul>
+                                    @if(count($album->images))
+                                        <ul>
+                                            @foreach($album->images as $key=>$image)
+                                                <li style="display:{{ $key<4?'block':'none' }}"><a href="#null"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
+                                            @endforeach
+                                            <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li>
+                                        </ul>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>

@@ -2241,7 +2241,7 @@ input.btn-main {
   margin-bottom: 0;
 }
 .profile-albums .album {
-  height: 280px;
+  height: 260px;
   width: 260px;
   display: inline-block;
   margin-right: 25px;
@@ -2251,6 +2251,7 @@ input.btn-main {
   border-radius: 3px;
   overflow: hidden;
   position: relative;
+  background: lightgrey;
 }
 .profile-albums .album .overflow {
   width: 100%;
@@ -2265,6 +2266,9 @@ input.btn-main {
   font-weight: 700;
   margin: 0;
   color: #fff;
+}
+.album img{
+  width: 100%;
 }
 .profile-albums .album a {
   color: #fff;
@@ -2296,7 +2300,7 @@ input.btn-main {
 }
 .profile-albums .photos .add_more {
   width: 200px;
-  height: 216px;
+  height: 200px;
   background: #e9e9eb;
 }
 .profile-albums .photos .add_more a {
@@ -3928,11 +3932,12 @@ form.project .checkbox span {
       position: relative;
       float: left;
       margin: 10px;
+      max-width: 125px;
     }
     .dz-success-mark path{
       fill:green;
     }
-    .dz-error-mark,.dz-success-mark {
+    .dz-error-mark, .dz-success-mark {
       position: absolute;
       top: 112px;
     }
@@ -3942,13 +3947,35 @@ form.project .checkbox span {
     .dz-success-mark svg, .dz-error-mark svg{
       width: 35px;
     }
-    .dz-details{
-      margin-left: 55px;
-    }
     .dz-error-message{
-      display: none;
+      color: red;
+      /*display: none;*/
     }
     .dz-success-mark, .dz-error-mark{
       display: none;
-      margin-left: 10px;
+    }
+    .dz-progress {
+      position: absolute;
+      top: 55px;
+      left: 15px;
+      height: 20px;
+      width: 90px;
+    }
+    .dz-upload { 
+        display: block; 
+        background-color: rgb(163, 255, 171);
+        height: 10px;
+    }
+    .dz-filename, .dz-size, .dz-image, .dz-error-message{
+      text-align: center;
+    }
+    .delete-image{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      border-radius: 40px;
+      background: white;
+      padding: 4px 6px;
+      color: #44B39B;
     }

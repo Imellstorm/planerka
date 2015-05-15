@@ -165,16 +165,7 @@
                                     <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <?php
-                                    if(isset($userInfo->avatar) && !empty($userInfo->avatar) ){
-                                        $avatar = '/'.$userInfo->avatar;
-                                    } elseif(Auth::user()->socimage) {
-                                        $avatar = Auth::user()->socimage;
-                                    } else {
-                                        $avatar = '/assets/img/user_icon.png';
-                                    }
-                                ?>
-                                <div class="avatar"><img src="{{ $avatar }}" alt="" style="width:48px;height:48px;"></div>
+                                <div class="avatar"><img src="{{ Common_helper::getUserAvatar(Auth::user()->id) }}" alt="" style="width:48px;height:48px;"></div>
                             </div>
                             <a href="#null" class="download">Загрузить</a>
                         </div>

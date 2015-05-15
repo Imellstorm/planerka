@@ -7,93 +7,48 @@
 <div id="album">
 	<div class="container">
 		<div class="row photos">
-			<div class="col-md-7">
-				<div class="img-wrapp">
-					<a href="#null"><img src="/assets/img/album/01.jpg" alt=""></a>
-					<div class="cont-box">
-						<div class="like">
-							Нравиться: 15
+			@if(!empty($images))
+				<?php $imgCount = count($images); ?>
+				<div class="col-md-7">
+					@foreach($images as $key=>$image)
+						@if($key>=$imgCount/2)
+							</div>
+							<div class="col-md-5">
+						@endif
+						<div class="img-wrapp">
+							<a href="#null">
+								<img src="/{{ $image->thumb_big }}" alt="">
+							</a>
+							<a href="/image/delete/{{ $image->id }}" class="fa fa-times delete-image"></a>
+							<div class="cont-box">
+								<div class="like">
+									Нравиться: 15
+								</div>
+								<div class="set">
+									<h4>Установить</h4>
+									<a href="/album/setalbumcover/{{ $album->id.'/'.$image->id }}">обложкой альбома</a>
+									<a href="#null">баннером профиля</a>
+								</div>
+								<div class="share">
+									<h4>Поделиться</h4>
+									<a href="#null" class="facebook"></a>
+									<a href="#null" class="vk"></a>
+									<a href="#null" class="twitter"></a>
+								</div>
+							</div>
 						</div>
-						<div class="set">
-							<h4>Установить</h4>
-							<a href="#null">обложкой альбома</a>
-							<a href="#null">баннером профиля</a>
-						</div>
-						<div class="share">
-							<h4>Поделиться</h4>
-							<a href="#null" class="facebook"></a>
-							<a href="#null" class="vk"></a>
-							<a href="#null" class="twitter"></a>
-						</div>
-					</div>
+					@endforeach
 				</div>
-				<div class="img-wrapp">
-					<a href="#null"><img src="/assets/img/album/05.jpg" alt=""></a>
-					<div class="cont-box">
-						<div class="like">
-							Нравиться: 15
-						</div>
-						<div class="set">
-							<h4>Установить</h4>
-							<a href="#null">обложкой альбома</a>
-							<a href="#null">бфаннером профиля</a>
-						</div>
-						<div class="share">
-							<h4>Поделиться</h4>
-							<a href="#null" class="facebook"></a>
-							<a href="#null" class="vk"></a>
-							<a href="#null" class="twitter"></a>
-						</div>
-					</div>
-				</div>	
-			</div>
-			<div class="col-md-5">
-				<div class="img-wrapp">
-					<a href="#null"><img src="/assets/img/album/03.jpg" alt=""></a>
-					<div class="cont-box">
-						<div class="like">
-							Нравиться: 15
-						</div>
-						<div class="set">
-							<h4>Установить</h4>
-							<a href="#null">обложкой альбома</a>
-							<a href="#null">бфаннером профиля</a>
-						</div>
-						<div class="share">
-							<h4>Поделиться</h4>
-							<a href="#null" class="facebook"></a>
-							<a href="#null" class="vk"></a>
-							<a href="#null" class="twitter"></a>
-						</div>
-					</div>
-				</div>	
-				<div class="img-wrapp">	
-					<a href="#null"><img src="/assets/img/album/04.jpg" alt=""></a>
-					<div class="cont-box">
-						<div class="like">
-							Нравиться: 15
-						</div>
-						<div class="set">
-							<h4>Установить</h4>
-							<a href="#null">обложкой альбома</a>
-							<a href="#null">бфаннером профиля</a>
-						</div>
-						<div class="share">
-							<h4>Поделиться</h4>
-							<a href="#null" class="facebook"></a>
-							<a href="#null" class="vk"></a>
-							<a href="#null" class="twitter"></a>
-						</div>
-					</div>
-				</div>
-			</div>
+			@endif
 		</div>
 		<div class="row">
 			<div class="col-sm-12 album-footer">
 				<div class="user-info">
-					<a href="#null" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
+					<a href="#null" class="avatar">
+						<img src="{{ Common_helper::getUserAvatar($user->id) }}" alt="">
+					</a>
 					<div class="name">
-						<a href="#null">{{ Auth::user()->username }}</a>
+						<a href="#null">{{ $userinfo->name.' '.$userinfo->surname }}</a>
 						<span class="online"></span>
 						<span class="status">PRO</span>
 					</div>
@@ -101,7 +56,7 @@
 					<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 				</div>
 				<div class="user-btns">
-					<a href="/{{ $useralias }}/photo" class="btn-gray">Обратно в профиль</a>
+					<a href="/{{ $user->alias }}/photo" class="btn-gray">Обратно в профиль</a>
 					<a href="#null" class="btn-purple">Написать сообщение</a>
 				</div>
 				<div class="album-btns">
@@ -118,6 +73,8 @@
 			  </div>
 			</form>
 			<footer style="clear:both">
+				<p style="font-size:12px">Не менее 600px по большей стороне. Оптимельное 2400px
+				<br>Поддерживыемые расширения: Jpeg, Jpg, Png</p>
 				<p>Ваш лимит: <span>20 фото в неделю</span></p>
 				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
 			</footer>						
@@ -132,15 +89,16 @@
 	$(document).ready(function(){
 		Dropzone.autoDiscover = false;
 		var myDropzone = new Dropzone(".dropzone", { 
-			url: "/album/uploadimage",
+			url: "/album/uploadimage/{{ $album->id }}",
+			acceptedFiles: ".png, .jpg, .jpeg",
 			dictDefaultMessage: 'Перетащите картинки в эту область'
 		});
 		myDropzone.on('success',function(file,message){
-			$('.dz-success-mark').show();
+			$('.dz-upload').fadeOut('normal');
 			$.fancybox.update();	
 		})
 		myDropzone.on('error',function(file,message){
-			$('.dz-error-mark').show();
+			$('.dz-upload').fadeOut('normal');
 			$.fancybox.update();	
 		})
 	})

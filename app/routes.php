@@ -19,7 +19,6 @@ Route::get('account/verifyemail/{data}','AccountController@getVerifyemail');
 Route::controller('password', 'RemindersController');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | For admin
@@ -48,6 +47,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('specializations','SpecializationsController');
 	Route::controller('settings','SettingsController');	
 	Route::controller('album','AlbumsController');
+	Route::controller('image','ImageController');
 });
 
 /*

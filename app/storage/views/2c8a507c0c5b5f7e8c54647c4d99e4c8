@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>404 - запрошенная Вами страница не найдена</title>
-		<link href="<?php echo asset('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
+		<link href="<?php echo asset('assets/css/bootstrap.css'); ?>" rel="stylesheet">
 	</head>
 	<body>
 		<div class="container">
