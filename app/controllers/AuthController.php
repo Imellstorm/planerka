@@ -67,7 +67,8 @@ class AuthController extends BaseController {
                     ->with('socNetwork','facebook')
                     ->with('socImage','https://graph.facebook.com/'.$result['id'].'/picture?type=large');
                 } else {
-                    if($this->socLogin('facebook',$result['id'])){
+                    $result = $this->socLogin('facebook',$result->uid);
+                    if(isset($result['success'])){
                         return Redirect::to('/');
                     }
                     $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Facebook.'))->render();
@@ -117,10 +118,11 @@ class AuthController extends BaseController {
                     ->with('socNetwork','vk')
                     ->with('socImage',$result->photo_medium);
                 } else {
-                    if($this->socLogin('vk',$result->uid)){
+                    $result = $this->socLogin('vk',$result->uid);
+                    if(isset($result['success'])){
                         return Redirect::to('/');
                     }
-                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через VKontakte.'))->render();
+                    $view = View::make('content.front.messagebox',array('message'=>$result['error']))->render();
                     return Redirect::to('/')->with('message', $view);
                 }
             } 
@@ -159,7 +161,8 @@ class AuthController extends BaseController {
                     ->with('socNetwork','twitter')
                     ->with('socImage',$result['profile_image_url']);
                 } else {
-                    if($this->socLogin('twitter',$result['id'])){
+                    $result = $this->socLogin('twitter',$result->uid);
+                    if(isset($result['success'])){
                         return Redirect::to('/');
                     }
                     $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Twitter.'))->render();
@@ -181,14 +184,17 @@ class AuthController extends BaseController {
     }
 
     private function socLogin($network,$id){
-        $user = User::where('socnet',$network)->where('socid',$id)->where('email_verify',1)->first();
+        $user = User::where('socnet',$network)->where('socid',$id)->first();
         if(!empty($user)){
+            if($user->email_verify!=1){
+                 return array('error'=>'Вы не можете войти до тех пор пока не подтвердите почту. Проверте ваш Email.');
+            }
             Auth::login($user);
             if (Auth::check()){
-                return true;
+                return array('success'=>true);
             }
         }
-        return false;
+        return array('error'=>'Вы не можете войти с через '.$network);
     }
  
 }
