@@ -109,7 +109,6 @@ class AuthController extends BaseController {
             $params = file_get_contents($graph_url);
             $param = json_decode($params);
             $result = $param->response[0];
-
             if(isset($result->uid) && !empty($result->uid)){
                 if(!empty($create)){
                     return Redirect::to('/')
@@ -120,7 +119,8 @@ class AuthController extends BaseController {
                     if($this->socLogin('vk',$result->uid)){
                         return Redirect::to('/');
                     }
-                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через VKontakte');
+                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Twitter.'))->render();
+                    return Redirect::to('/')->with('message', $view);
                 }
             } 
 
@@ -161,6 +161,7 @@ class AuthController extends BaseController {
                     if($this->socLogin('twitter',$result['id'])){
                         return Redirect::to('/');
                     }
+
                     return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Twitter');
                 }
             }       
