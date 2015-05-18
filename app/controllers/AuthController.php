@@ -70,7 +70,8 @@ class AuthController extends BaseController {
                     if($this->socLogin('facebook',$result['id'])){
                         return Redirect::to('/');
                     }
-                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Facebook');
+                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Facebook.'))->render();
+                    return Redirect::to('/')->with('message', $view);
                 }
             } 
 
@@ -119,7 +120,7 @@ class AuthController extends BaseController {
                     if($this->socLogin('vk',$result->uid)){
                         return Redirect::to('/');
                     }
-                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Twitter.'))->render();
+                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через VKontakte.'))->render();
                     return Redirect::to('/')->with('message', $view);
                 }
             } 
@@ -161,8 +162,8 @@ class AuthController extends BaseController {
                     if($this->socLogin('twitter',$result['id'])){
                         return Redirect::to('/');
                     }
-
-                    return Redirect::to('/')->with('error','Вы не смогли авторизироваться через Twitter');
+                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Twitter.'))->render();
+                    return Redirect::to('/')->with('message', $view);
                 }
             }       
         }
