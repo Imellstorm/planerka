@@ -67,11 +67,11 @@ class AuthController extends BaseController {
                     ->with('socNetwork','facebook')
                     ->with('socImage','https://graph.facebook.com/'.$result['id'].'/picture?type=large');
                 } else {
-                    $result = $this->socLogin('facebook',$result->uid);
+                    $result = $this->socLogin('facebook',$result['id']);
                     if(isset($result['success'])){
                         return Redirect::to('/');
                     }
-                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Facebook.'))->render();
+                    $view = View::make('content.front.messagebox',array('message'=>$result['error']))->render();
                     return Redirect::to('/')->with('message', $view);
                 }
             } 
@@ -161,11 +161,11 @@ class AuthController extends BaseController {
                     ->with('socNetwork','twitter')
                     ->with('socImage',$result['profile_image_url']);
                 } else {
-                    $result = $this->socLogin('twitter',$result->uid);
+                    $result = $this->socLogin('twitter',$result['id']);
                     if(isset($result['success'])){
                         return Redirect::to('/');
                     }
-                    $view = View::make('content.front.messagebox',array('message'=>'Вы не смогли зайти через Twitter.'))->render();
+                    $view = View::make('content.front.messagebox',array('message'=>$result['error']))->render();
                     return Redirect::to('/')->with('message', $view);
                 }
             }       
@@ -187,14 +187,14 @@ class AuthController extends BaseController {
         $user = User::where('socnet',$network)->where('socid',$id)->first();
         if(!empty($user)){
             if($user->email_verify!=1){
-                 return array('error'=>'Вы не можете войти до тех пор пока не подтвердите почту. Проверте ваш Email.');
+                 return array('error'=>'Вы не можете войти до тех пор пока не подтвердите почту. Проверьте ваш Email.');
             }
             Auth::login($user);
             if (Auth::check()){
                 return array('success'=>true);
             }
         }
-        return array('error'=>'Вы не можете войти с через '.$network);
+        return array('error'=>'Вы не можете войти с помощбю '.$network);
     }
  
 }
