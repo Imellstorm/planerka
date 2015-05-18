@@ -229,6 +229,8 @@ class UserController extends BaseController {
 	 */
 	public function deleteDestroy($id)
 	{
+		Usersettings::where('user_id',$id)->delete();
+		Userinfo::where('user_id',$id)->delete();
 		User::destroy($id);
 		Session::flash('success', 'Пользователь удалён!');
 		return Redirect::to('admin/users');

@@ -40,17 +40,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="user-profile">
-                        @if (empty($userinfo))
+                        @if (empty($userInfo))
                             {{ Form::open(array('role' => 'form', 'url' => '/userinfo/store', 'class'=>'prof','files'=> true)) }}
                         @else
-                            {{ Form::model($userinfo, array('role' => 'form', 'url' => '/userinfo/update/' . $userinfo->id, 'method' => 'PUT', 'class'=>'prof','files'=> true)) }}
+                            {{ Form::model($userInfo, array('role' => 'form', 'url' => '/userinfo/update/' . $userInfo->id, 'method' => 'PUT', 'class'=>'prof','files'=> true)) }}
                         @endif
 
                             <div class="form-group">
                                 <label for="">Аватар</label>
-                                <img id="img_preview" src="{{ !empty($userinfo->avatar)?'/'.$userinfo->avatar:'' }}" style="display:{{ !empty($userinfo->avatar)?'block':'none' }}" alt="your image" />
-                                <i class="fa fa-times delete_image pull-right" title="Delete" style="display:{{ !empty($userinfo->avatar)?'block':'none' }}"></i>
-                                <input type="hidden" class="image-exist" name="imageexist" value="{{ !empty($userinfo->avatar)?1:0 }}">
+                                <img id="img_preview" src="{{ !empty($userInfo->avatar)?'/'.$userInfo->avatar:'' }}" style="display:{{ !empty($userInfo->avatar)?'block':'none' }}" alt="your image" />
+                                <i class="fa fa-times delete_image pull-right" title="Delete" style="display:{{ !empty($userInfo->avatar)?'block':'none' }}"></i>
+                                <input type="hidden" class="image-exist" name="imageexist" value="{{ !empty($userInfo->avatar)?1:0 }}">
                                 <div class="avatar">
                                     {{ Form::file('userfile', array('id' => 'imgInp')) }}
                                 </div>
@@ -70,18 +70,18 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('birthday', 'Дата рождения') }}
-                                {{ Form::text('birthday',isset($userinfo->birthday)&&!empty($userinfo->birthday)?$userinfo->birthday:'', array('class' => 'form-control','id'=>'prof-birth')) }}
+                                {{ Form::text('birthday',isset($userInfo->birthday)&&!empty($userInfo->birthday)?Common_helper::translateDate($userInfo->birthday):'', array('class' => 'form-control','id'=>'prof-birth')) }}
                             </div>
                             <div class="form-group sex">
                                 <label for="radio">Пол</label>
                                 <div class="radio">
-                                    {{ Form::radio('gender','male',isset($userinfo->gender)?$userinfo->gender:1, array('id' => 'radio1')) }}
+                                    {{ Form::radio('gender','male',isset($userInfo->gender)?$userInfo->gender:1, array('id' => 'radio1')) }}
                                     <label for="radio1">
                                         <p>М</p>
                                     </label>
                                 </div>
                                 <div class="radio">
-                                    {{ Form::radio('gender','female',isset($userinfo->gender)?$userinfo->gender:0, array('id' => 'radio2')) }}
+                                    {{ Form::radio('gender','female',isset($userInfo->gender)?$userInfo->gender:0, array('id' => 'radio2')) }}
                                     <label for="radio2">
                                         <p>Ж</p>
                                     </label>
@@ -105,13 +105,13 @@
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
-                                    {{ Form::checkbox('city_departure', 1, isset($userinfo->city_departure)?$userinfo->city_departure:0,array('id'=>'checkbox6')); }}
+                                    {{ Form::checkbox('city_departure', 1, isset($userInfo->city_departure)?$userInfo->city_departure:0,array('id'=>'checkbox6')); }}
                                     <label for="checkbox6">
                                         Могу выезжать в другой город
                                     </label>
                                 </div>
                                 <div class="checkbox">
-                                    {{ Form::checkbox('country_departure', 1, isset($userinfo->country_departure)?$userinfo->country_departure:0,array('id'=>'checkbox7')); }}
+                                    {{ Form::checkbox('country_departure', 1, isset($userInfo->country_departure)?$userInfo->country_departure:0,array('id'=>'checkbox7')); }}
                                     <label for="checkbox7">
                                         Могу выезжать за рубеж
                                     </label>

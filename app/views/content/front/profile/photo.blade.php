@@ -91,17 +91,19 @@
                                         @if(!empty($album->image))
                                             <img src="/{{ $album->image?$album->image:'' }}" alt="">
                                         @endif
+                                        <div class="album-header">
+                                            <h4>{{ $album->name }}</a></h4>
+                                            <p>{{ $album->imgcount }} фото</p>
+                                        </div>
                                     </a>
-                                    <h4><a href="#null">{{ $album->name }}</a></h4>
-                                    <p>25 фото</p>
                                 </div>
                                 <div class="photos">
                                     @if(count($album->images))
-                                        <ul>
+                                        <ul class="carusel">
                                             @foreach($album->images as $key=>$image)
-                                                <li style="display:{{ $key<4?'block':'none' }}"><a href="#null"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
+                                                <li><a href="#null"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
                                             @endforeach
-                                            <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li>
+                                            <!-- <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li> -->
                                         </ul>
                                     @endif
                                 </div>
@@ -118,12 +120,13 @@
                             </div>
                         @endforeach
                     @endif
-
-                    <div class="add_album">
-                        <a href="#create-album" class="fancybox"></a>
-                        <p>Создать новый альбом</p>
-                        <span>+</span>
-                    </div>
+                    @if(Auth::check() && Auth::user()->id==$user->id)
+                        <div class="add_album">
+                            <a href="#create-album" class="fancybox"></a>
+                            <p>Создать новый альбом</p>
+                            <span>+</span>
+                        </div>
+                    @endif
 
                     <div class="custom-modal" id="create-album" style="">
                         <div class="title">Создать альбом</div>
@@ -145,13 +148,17 @@
     </div> 
 @stop
 
-@section('styles')
-<style type="text/css">
-.fancybox-wrap {
-  top: 50px !important;
-}
-#header .user-nav .logo {
-  margin-top: 6px;
-}
-</style>
+@section('scripts')
+<script type="text/javascript" src="/assets/packs/slick/slick.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.carusel').slick({
+          infinite: true,
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          prevArrow: '<span class="slick-arrow slick-next fa fa-chevron-left"></span>',
+          nextArrow: '<span class="slick-arrow slick-prev fa fa-chevron-right"></span>',
+        });
+    })
+</script>
 @stop

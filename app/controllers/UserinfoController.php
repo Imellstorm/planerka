@@ -50,7 +50,7 @@ class UserinfoController extends BaseController {
 	        $model->country_departure   = empty($country_departure)?0:1;
 
 	        if(Input::hasFile('userfile')) {
-				$image = Common_helper::fileUpload(Input::file('userfile'),'images','test');
+				$image = Common_helper::fileUpload(Input::file('userfile'),'images/'.Auth::user()->alias,'avatar');
 				if(isset($image['path']) && !empty($image['path'])){
 					$model->avatar = $image['path'];
 				}
@@ -100,7 +100,7 @@ class UserinfoController extends BaseController {
 	        );
 
 	        if(Input::hasFile('userfile')) {
-				$image = Common_helper::fileUpload(Input::file('userfile'),'images','test');
+				$image = Common_helper::fileUpload(Input::file('userfile'),'images/'.Auth::user()->alias,'avatar');
 				if(isset($image['path']) && !empty($image['path'])){
 					$data['avatar'] = $image['path'];
 				}

@@ -1869,15 +1869,15 @@ input.btn-main {
 }
 /* == USER PAGES ========================> */
 /* == USER HEAD ========> */
-#user-header {
-  min-height: 670px;
+#header {
+  min-height: 600px;
 }
-#user-header .price {
+#header .price {
   margin-top: 35px;
   margin-bottom: 45px;
   overflow: hidden;
 }
-#user-header .price li {
+#header .price li {
   float: left;
   color: #fff;
   font-family: 'NeuronLight', sans-serif;
@@ -1888,21 +1888,21 @@ input.btn-main {
   line-height: 30px;
   background: rgba(195, 193, 193, 0.8);
 }
-#user-header .msg {
+#header .msg {
   font-family: 'NeuronLight', sans-serif;
   font-size: 16px;
   color: #fff;
   line-height: 22px;
-  min-height: 120px;
+  /*min-height: 120px;*/
   margin-bottom: 20px;
   overflow: hidden;
 }
-#user-header .star {
+#header .star {
   float: left;
   margin-right: 40px;
   line-height: 34px;
 }
-#user-header .btn-main {
+#header .btn-main {
   float: left;
 }
 .user-nav {
@@ -2261,7 +2261,7 @@ input.btn-main {
 }
 .profile-albums .album h4 {
   position: absolute;
-  bottom: 50px;
+  bottom: 70px;
   left: 30px;
   font-weight: 700;
   margin: 0;
@@ -3978,4 +3978,30 @@ form.project .checkbox span {
       background: white;
       padding: 4px 6px;
       color: #44B39B;
+    }
+    .like{
+      cursor: pointer;
+    }
+    .album-header{
+      background: rgba(0,0,0,0.4);
+      height: 90px;
+      width: 100%;
+      position: absolute;
+      top: 170px;
+    }
+    .slick-arrow{
+      position: absolute;
+      height: 200px;
+      padding-top: 95px;
+      cursor: pointer;
+      color: #44B39B;
+    }
+    .photos .slick-next {
+      left: 0px;
+    }
+    .photos .slick-prev {
+      right: 0px;
+    }
+    .slick-list{
+      margin-left: 25px;
     }

@@ -136,7 +136,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url(/assets/img/body_bg.png) no-repeat top center;   background-color: #726E68;">
+    <header id="header" style="background: url({{ isset($userInfo)&&!empty($userInfo)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}) no-repeat top center;   background-color: #726E68;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
@@ -176,6 +176,35 @@
     @endif
         <div class="container">
             <div class="row">
+                @if(isset($userInfo)&&!empty($userInfo))
+                    <div class="col-sm-5" style="margin:100px 0 20px 0">
+                        <div class="pers-info">
+                            <div class="avatar"><img src="{{ Common_helper::getUserAvatar($userInfo->user_id) }}" alt=""></div>
+                            <div class="top-cont">
+                                <div class="name">{{ $userInfo->name.' '.$userInfo->surname }}</div>
+                                <div class="online"></div>
+                                <div class="status">PRO</div>
+                            </div>
+                            <div class="bott-cont">
+                                <div class="place">{{ $userInfo->city }}</div>
+                                <div class="order-count">Выполнено заказов:&nbsp;&nbsp; 22</div>
+                                <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
+                            </div>
+                        </div>
+                        @if(!empty($userInfo->profs))
+                            <ul class="price">
+                                @foreach($userInfo->profs as $prof)
+                                    <li>{{ $prof->name }} от {{ $prof->price }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        <div class="msg">
+                            {{ $userInfo->biography }}
+                        </div>
+                        <div class="star"><img src="/assets/img/star.png" alt=""></div>
+                        <a href="#null" class="btn-main">Отправить сообщение</a>
+                    </div>
+                @else
                 <div class="col-sm-12">
                     <div class="header-content" style="padding-top:{{ Auth::check()?'60px':'' }}">
                         @if(!Auth::check())
@@ -238,12 +267,16 @@
                         </div>
 
                         <div class="author-photo">
-                            Автор Фото: <a href="#null">Светлана Огневич</a>
+                            @if(isset($cover)&&!empty($cover->author))
+                                Автор Фото: <a href="#null">{{ isset($cover)&&!empty($cover->author)?$cover->author:'' }}</a>
+                            @endif
                         </div>
-                        
-                        <a href="#null" class="add_post">Добавить мероприятие</a>
+                        @if(Auth::check() && Auth::user()->role_id == 2)
+                            <a href="#null" class="add_post">Добавить мероприятие</a>
+                        @endif
                     </div>  
                 </div>
+                @endif
             </div>
         </div>
     </header>

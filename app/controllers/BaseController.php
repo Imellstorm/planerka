@@ -14,6 +14,20 @@ class BaseController extends Controller {
 		View::share('roles',$roles);
     }
 
+    public function getUserinfo($userId=''){
+    	if(empty($userId)){
+			$userId = Auth::user()->id;
+    	}
+    	$userInfo = Userinfo::select('user_info.*','users.alias')
+	    	->leftjoin('users','users.id','=','user_info.user_id')
+	    	->where('user_info.user_id',$userId)
+	    	->first();
+	    if(!empty($userInfo)){
+	    	$userInfo->profs = Specialization::leftjoin('roles','roles.id','=','specializations.role_id')->where('specializations.user_id',$userInfo->user_id)->get();
+		}
+		View::share('userInfo',$userInfo);
+    }
+
     private function getMenus(){
 		$result = Menu::all();
 		$menus = new stdClass();

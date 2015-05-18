@@ -9,6 +9,7 @@ class ProfileController extends BaseController {
 		if(empty($this->user)){
 			App::abort(404);
 		}
+		$this->getUserinfo($this->user->id);
 		View::share('user',$this->user);
     }
 
@@ -31,7 +32,7 @@ class ProfileController extends BaseController {
 		$date->months = $diff->format('%m');
 		$date->days = $diff->format('%d');
 
-		$albums = Album::where('user_id',$this->user->id)->get();
+		$albums = Album::select('albums.*',DB::raw('count('.DB::getTablePrefix().'images.id) as imgcount'))->leftjoin('images','images.album_id','=','albums.id')->where('albums.user_id',$this->user->id)->groupby('albums.id')->get();
 		if(!empty($albums)){
 			foreach ($albums as $key => $val) {
 				$albums[$key]->images = Image::where('album_id',$val->id)->get();
@@ -39,7 +40,7 @@ class ProfileController extends BaseController {
 		}
 
 		if(!empty($userinfo)){
-			echo '<fix style="display:none"></fix>'; // фикс странного бага с удвоением инкримента
+			//echo '<fix style="display:none"></fix>'; // фикс странного бага с удвоением инкримента
 			$userinfo->increment('enters_count');
 		}
 		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','date','albums'));
