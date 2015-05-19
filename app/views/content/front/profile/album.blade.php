@@ -3,7 +3,7 @@
 @section('title') {{ 'Альбом '.$album->name }} @stop
 
 @section('main')
-
+<meta property="og:image" content="{{ URL::to('/').'/'.$album->image }}" />
 <div id="album">
 	<div class="container">
 		<div class="row photos">
@@ -148,7 +148,7 @@
 	        url += '&st._surl='    + encodeURIComponent(purl);
 	        Share.popup(url);
 	    },
-	    facebook: function(purl, ptitle, pimg, text) {
+	    facebook: function(purl, ptitle, pimg, text) {     //удалять кэш https://developers.facebook.com/tools/debug/og/object/
 	        url  = 'http://www.facebook.com/sharer.php?s=100';
 	        // url += '&p[title]='     + encodeURIComponent(ptitle);
 	        // url += '&p[summary]='   + encodeURIComponent(text);
