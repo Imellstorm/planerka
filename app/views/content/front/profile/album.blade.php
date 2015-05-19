@@ -37,7 +37,7 @@
 								@endif
 								<div class="share">
 									<h4>Поделиться</h4>
-									<a class="vk" onclick="Share.vkontakte('planerka.appteka.cc','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
+									<a class="vk" onclick="Share.vkontakte('{{ URL::to('/') }}','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
 									<a class="facebook" onclick="Share.facebook('URL','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
 									<a class="twitter" onclick="Share.twitter('URL','TITLE')"></a>
 								</div>
@@ -135,10 +135,10 @@
 	Share = {
 	    vkontakte: function(purl, ptitle, pimg, text) {
 	        url  = 'http://vkontakte.ru/share.php?';
-	        url += 'url='          + encodeURIComponent(purl);
+	        url += 'url='          + purl;
 	        url += '&title='       + encodeURIComponent(ptitle);
 	        url += '&description=' + encodeURIComponent(text);
-	        url += '&image='       + encodeURIComponent(pimg);
+	        url += '&image='       + pimg;
 	        url += '&noparse=true';
 	        Share.popup(url);
 	    },
