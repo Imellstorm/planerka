@@ -37,10 +37,9 @@
 								@endif
 								<div class="share">
 									<h4>Поделиться</h4>
-								<!-- 	<a class="vk" onclick="Share.vkontakte('planerka.appteka.cc','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
+									<a class="vk" onclick="Share.vkontakte('planerka.appteka.cc','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
 									<a class="facebook" onclick="Share.facebook('URL','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
-									<a class="twitter" onclick="Share.twitter('URL','TITLE')"></a> -->
-									<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter" data-yashareTheme="counter"></div>
+									<a class="twitter" onclick="Share.twitter('URL','TITLE')"></a>
 								</div>
 							</div>
 						</div>
