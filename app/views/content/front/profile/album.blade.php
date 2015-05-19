@@ -37,8 +37,8 @@
 								@endif
 								<div class="share">
 									<h4>Поделиться</h4>
-									<a class="vk" onclick="Share.vkontakte('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_big }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
-									<a class="facebook" onclick="Share.facebook('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_big }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
+									<a class="vk" onclick="Share.vkontakte('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_small }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
+									<a class="facebook" onclick="Share.facebook('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_small }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
 									<a class="twitter" onclick="Share.twitter('{{ URL::current() }}','Авторское фото {{ $userInfo->name.' '.$userInfo->surname }}')"></a>
 								</div>
 							</div>
