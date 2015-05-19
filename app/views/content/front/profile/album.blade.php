@@ -15,7 +15,7 @@
 							<div class="col-md-5">
 						@endif
 						<div class="img-wrapp">
-							<a href="#null">
+							<a href="/{{ $image->path }}" rel="gallery1" class="fancybox" >
 								<img src="/{{ $image->thumb_big }}" alt="">
 							</a>
 							@if(Auth::check() && Auth::user()->id==$image->user_id)

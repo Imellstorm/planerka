@@ -101,7 +101,7 @@
                                     @if(count($album->images))
                                         <ul class="carusel">
                                             @foreach($album->images as $key=>$image)
-                                                <li><a href="#null"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
+                                                <li><a href="/{{ $user->alias }}/album/{{ $album->id }}"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
                                             @endforeach
                                             <!-- <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li> -->
                                         </ul>
