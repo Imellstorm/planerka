@@ -152,7 +152,7 @@
 	        url  = 'http://www.facebook.com/sharer.php?src=sp&version=2';
 	        //url += '&p[title]='     + encodeURIComponent(ptitle);
 	        //url += '&p[summary]='   + encodeURIComponent(text);
-	        //url += '&p[url]='       + encodeURIComponent(purl);
+	        url += '&p[url]='       + encodeURIComponent(purl);
 	        url += '&p[images][0]=' + encodeURIComponent(pimg);
 	       	//url += '&picture=' + encodeURIComponent(pimg);
 	        Share.popup(url);
