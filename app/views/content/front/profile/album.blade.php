@@ -149,7 +149,7 @@
 	    },
 	    facebook: function(purl, ptitle, pimg, text) {     //удалять кэш https://developers.facebook.com/tools/debug/og/object/
 	        url  = 'http://www.facebook.com/sharer.php?s=100';
-	        url += '&p[title]='     + eptitle;
+	        url += '&p[title]='     + ptitle;
 	        url += '&p[summary]='   + text;
 	        url += '&p[url]='       + purl;
 	        url += '&p[images][0]=' + pimg;
