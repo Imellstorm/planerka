@@ -153,7 +153,7 @@
 	        //url += '&p[title]='     + encodeURIComponent(ptitle);
 	        //url += '&p[summary]='   + encodeURIComponent(text);
 	        url += '&p[url]='       + encodeURIComponent(purl);
-	        url += '&p[images][0]=' + encodeURIComponent(pimg);
+	        // url += '&p[images][0]=' + encodeURIComponent(pimg);
 	       	//url += '&picture=' + encodeURIComponent(pimg);
 	        Share.popup(url);
 	    },
