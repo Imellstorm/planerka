@@ -3,7 +3,7 @@
 <head>
 
 <title><?php echo $__env->yieldContent('title'); ?></title>
-    <meta property="og:image" content="<?php echo URL::to('/'); ?>/assets/img/user-logo.png" />
+    <meta property="og:image" content="<?php echo urlencode(URL::to('/').'/assets/img/user-logo.png'); ?>" />
 
 <!-- Meta -->
     <meta charset="UTF-8">

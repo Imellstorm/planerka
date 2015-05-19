@@ -3,7 +3,6 @@
 @section('title') {{ 'Альбом '.$album->name }} @stop
 
 @section('main')
-<meta property="og:image" content="{{ URL::to('/').'/'.$album->image }}" />
 <div id="album">
 	<div class="container">
 		<div class="row photos">
