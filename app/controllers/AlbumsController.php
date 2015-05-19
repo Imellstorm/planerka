@@ -4,7 +4,12 @@ class AlbumsController extends BaseController {
 
 	public function __construct(){
 		parent::__construct();
-		$this->getUserinfo();
+		$alias = Route::current()->getParameter('useralias');
+		$this->user = User::where('alias',$alias)->first();
+		if(empty($this->user)){
+			App::abort(404);
+		}
+		$this->getUserinfo($this->user->id);
 	}
 
 
