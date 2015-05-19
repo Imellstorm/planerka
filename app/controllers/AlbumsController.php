@@ -4,12 +4,6 @@ class AlbumsController extends BaseController {
 
 	public function __construct(){
 		parent::__construct();
-		$alias = Route::current()->getParameter('useralias');
-		$this->user = User::where('alias',$alias)->first();
-		if(empty($this->user)){
-			App::abort(404);
-		}
-		$this->getUserinfo($this->user->id);
 	}
 
 
@@ -26,6 +20,10 @@ class AlbumsController extends BaseController {
 	public function getShow($useralias,$id)
 	{
 		$user = User::where('alias',$useralias)->first();
+		if(empty($user)){
+			App::abort(404);
+		}
+		$this->getUserinfo($user->id);
 		$images = Image::select('images.*',DB::raw('count('.DB::getTablePrefix().'image_likes.id) as likes'))
 					->leftjoin('image_likes','image_likes.image_id','=','images.id')
 					->where('album_id',$id)
