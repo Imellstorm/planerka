@@ -3,7 +3,7 @@
 <head>
 
 <title>@yield('title')</title>
-    <meta property="og:image" content="{{ urlencode(URL::to('/').'/assets/img/user-logo.png') }}" />
+    <meta property="og:image" content="{{ URL::to('/').'/assets/img/user-logo.png' }}" />
 
 <!-- Meta -->
     <meta charset="UTF-8">
