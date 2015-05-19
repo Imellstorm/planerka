@@ -37,9 +37,9 @@
 								@endif
 								<div class="share">
 									<h4>Поделиться</h4>
-									<a class="vk" onclick="Share.vkontakte('{{ URL::to('/') }}','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
-									<a class="facebook" onclick="Share.facebook('URL','TITLE','{{ URL::to('/').'/'.$image->thumb_big }}','DESC')"></a>
-									<a class="twitter" onclick="Share.twitter('URL','TITLE')"></a>
+									<a class="vk" onclick="Share.vkontakte('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_big }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
+									<a class="facebook" onclick="Share.facebook('{{ URL::current() }}','Авторское фото','{{ URL::to('/').'/'.$image->thumb_big }}','{{ $userInfo->name.' '.$userInfo->surname }}')"></a>
+									<a class="twitter" onclick="Share.twitter('{{ URL::current() }}','Авторское фото {{ $userInfo->name.' '.$userInfo->surname }}')"></a>
 								</div>
 							</div>
 						</div>
@@ -150,10 +150,10 @@
 	    },
 	    facebook: function(purl, ptitle, pimg, text) {
 	        url  = 'http://www.facebook.com/sharer.php?s=100';
-	        url += '&p[title]='     + encodeURIComponent(ptitle);
+	        url += '&p[title]='     + ptitle;
 	        url += '&p[summary]='   + encodeURIComponent(text);
 	        url += '&p[url]='       + encodeURIComponent(purl);
-	        url += '&p[images][0]=' + encodeURIComponent(pimg);
+	        url += '&p[images][0]=' + pimg;
 	        Share.popup(url);
 	    },
 	    twitter: function(purl, ptitle) {
