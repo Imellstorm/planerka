@@ -137,7 +137,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url({{ isset($userInfo)&&!empty($userInfo)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}) no-repeat top center;   background-color: #726E68;">
+    <header id="header" style="background: url('{{ isset($userInfo)&&!empty($userInfo)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
