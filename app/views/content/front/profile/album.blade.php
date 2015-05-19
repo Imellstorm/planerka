@@ -149,10 +149,10 @@
 	    },
 	    facebook: function(purl, ptitle, pimg, text) {     //удалять кэш https://developers.facebook.com/tools/debug/og/object/
 	        url  = 'http://www.facebook.com/sharer.php?s=100';
-	        // url += '&p[title]='     + encodeURIComponent(ptitle);
-	        // url += '&p[summary]='   + encodeURIComponent(text);
-	        url += '&p[url]='       + encodeURIComponent(purl);
-	        //url += '&p[images][0]=' + encodeURIComponent(pimg);
+	        url += '&p[title]='     + eptitle;
+	        url += '&p[summary]='   + text;
+	        url += '&p[url]='       + purl;
+	        url += '&p[images][0]=' + pimg;
 	        Share.popup(url);
 	    },
 	    twitter: function(purl, ptitle) {
