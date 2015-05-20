@@ -62,7 +62,9 @@
 								<source src="/{{ $item->path }}" type="video/mp4">
 								Ваш браузер не поддерживает HTML5 видео.
 							</video>
-							<a href="/video/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="top:5px;right:0px;"></a>
+							@if($userInfo->user_id == Auth::user()->id)
+								<a href="/video/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="top:5px;right:0px;"></a>
+							@endif	
 						</div>
 	            	@endforeach
             	</div>
