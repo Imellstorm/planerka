@@ -50,46 +50,44 @@
 	    });
 	});
 </script>
-    <div id="user-page">
-        <div class="container">
-            @include('content.front.profile.menu')
-            @if(!empty($video))
+    <div class="container">
+        @include('content.front.profile.menu')
+        @if(!empty($video))
+        	<div class="row" style="margin-top:20px">
+            	@foreach($video as $item)
+            		<div class="col-md-6">
+            			<div>Загружено: {{ $item->created_at }}</div>
+						<video width="100%" controls>
+							<source src="/{{ $item->path }}" type="video/mp4">
+							Ваш браузер не поддерживает HTML5 видео.
+						</video>
+						@if($userInfo->user_id == Auth::user()->id)
+							<a href="/video/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="top:5px;right:0px;"></a>
+						@endif	
+					</div>
+            	@endforeach
+        	</div>
+        @endif
+        @if(Auth::check() && $userInfo->user_id == Auth::user()->id)
+            {{ Form::open(array('role' => 'form', 'url' => '/video/store', 'files' => true)) }}
             	<div class="row" style="margin-top:20px">
-	            	@foreach($video as $item)
-	            		<div class="col-md-6">
-	            			<div>Загружено: {{ $item->created_at }}</div>
-							<video width="100%" controls>
-								<source src="/{{ $item->path }}" type="video/mp4">
-								Ваш браузер не поддерживает HTML5 видео.
-							</video>
-							@if($userInfo->user_id == Auth::user()->id)
-								<a href="/video/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="top:5px;right:0px;"></a>
-							@endif	
-						</div>
-	            	@endforeach
-            	</div>
-            @endif
-            @if($userInfo->user_id == Auth::user()->id)
-	            {{ Form::open(array('role' => 'form', 'url' => '/video/store', 'files' => true)) }}
-	            	<div class="row" style="margin-top:20px">
-			            <div class="form-group col-md-6">
-				            <h4 style="margin-bottom:10px">Выберите видео файл</h4>
-				            <div class="input-group">
-				                <span class="input-group-btn">
-				                    <span class="btn btn-success btn-file">
-				                        Выбрать&hellip; <input type="file" name="video" multiple>
-				                    </span>
-				                </span>
-				                <input type="text" class="form-control" style="height:35px; line-height:20px" readonly>
-				            </div>
-				            <span class="help-block">
-				                Загружайте видео в формате mp4. Максимальный размер файла {{ ini_get('upload_max_filesize') }}
-				            </span>
-				        </div>
-			    	</div>
-	            	{{ Form::submit('Сохранить', array('class' => 'btn-main')) }}
-	            {{ Form::close() }}
-            @endif
-        </div>
+		            <div class="form-group col-md-6">
+			            <h4 style="margin-bottom:10px">Выберите видео файл</h4>
+			            <div class="input-group">
+			                <span class="input-group-btn">
+			                    <span class="btn btn-success btn-file">
+			                        Выбрать&hellip; <input type="file" name="video" multiple>
+			                    </span>
+			                </span>
+			                <input type="text" class="form-control" style="height:35px; line-height:20px" readonly>
+			            </div>
+			            <span class="help-block">
+			                Загружайте видео в формате mp4. Максимальный размер файла {{ ini_get('upload_max_filesize') }}
+			            </span>
+			        </div>
+		    	</div>
+            	{{ Form::submit('Сохранить', array('class' => 'btn-main')) }}
+            {{ Form::close() }}
+        @endif
     </div>
 @stop
