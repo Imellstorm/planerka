@@ -58,8 +58,12 @@ class ImageController extends BaseController {
 	 */
 	public function getDelete($id)
 	{
-		Image::destroy($id);
-		return Redirect::back();
+		$model = Image::find($id);
+		if(!empty($model) && $this->is_owner($model->user_id)){
+			Image::destroy($model->id);
+			return Redirect::back();
+		}
+		return Redirect::back()->withErrors(array('Вы не можете удалить это видео!'));
 	}
 
 }

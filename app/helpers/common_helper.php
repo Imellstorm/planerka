@@ -84,7 +84,7 @@ class Common_helper {
  * @param  obj $files, string $type
  * @return array
  */
-    public static function fileUpload($file,$folder,$name='') {
+    public static function fileUpload($file,$folder,$name='',$maxFilesize='3000',$extensions='jpg,jpeg,bmp,png,gif') {
         if(!empty($file)){
             $validator = Validator::make(
                 array(
@@ -92,8 +92,8 @@ class Common_helper {
                     'extension'  => \Str::lower($file->getClientOriginalExtension()),
                 ),
                 array(
-                    'attachment' => 'required|max:3000',
-                    'extension'  => 'required|in:jpg,jpeg,bmp,png,gif',
+                    'attachment' => 'required|max:'.$maxFilesize,
+                    'extension'  => 'required|in:'.$extensions,
                 )
             ); 
 

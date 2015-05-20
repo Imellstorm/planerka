@@ -52,7 +52,8 @@ class ProfileController extends BaseController {
 	 * @return Response
 	 */
 	public function getVideo(){
-		return View::make('content.front.profile.video');
+		$video = Video::where('user_id',$this->user->id)->get();
+		return View::make('content.front.profile.video',compact('video'));
 	}
 
 	/**

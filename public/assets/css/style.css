@@ -2174,9 +2174,10 @@ input.btn-main {
 }
 /* == USER PROFILE ========> */
 .profile-info {
-  margin-top: 30px;
+  margin: 30px 20px 20px 0;
   width: 660px;
   float: left;
+  border-bottom: solid 1px #44B39B;
 }
 .profile-info h3 {
   margin: 0;
@@ -3978,6 +3979,7 @@ form.project .checkbox span {
       background: white;
       padding: 4px 6px;
       color: #44B39B;
+      border: solid 1px#44B39B;
     }
     .like{
       cursor: pointer;
