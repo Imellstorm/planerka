@@ -49,6 +49,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('album','AlbumsController');
 	Route::controller('image','ImageController');
 	Route::controller('video','VideoController');
+	Route::controller('calendar','CalendarController');
 });
 
 /*

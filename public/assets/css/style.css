@@ -2559,7 +2559,7 @@ input.btn-main {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  display: inline-block;
+  /*display: inline-block;*/
   vertical-align: top;
 }
 .calendar .ui-datepicker {
@@ -2637,17 +2637,33 @@ input.btn-main {
   font-family: 'Open Sans', sans-serif;
 }
 .calendar .ui-datepicker-calendar .ui-state-default {
-  background: #f7f7f7;
+  /*background: #f7f7f7;*/
 }
 .calendar .ui-datepicker-calendar .ui-state-hover {
   background: #44b39b;
 }
-.calendar .ui-datepicker-calendar .ui-state-active {
+.calendar .ui-datepicker-calendar .ui-state-active, /*.ui-state-highlight*/ {
   background: #44b39b;
   color: #fff;
   position: relative;
   font-weight: 700;
 }
+.ui-datepicker-calendar td{
+  background: #f7f7f7;
+}
+.ui-datepicker-calendar td.ui-state-disabled{
+  background: none;
+}
+.ui-datepicker-calendar .ui-state-default{
+  background: none;
+}
+.ui-datepicker-calendar td.ui-state-highlight{
+  background: #ec7575;
+}
+.ui-state-highlight.ui-datepicker-current-day{
+  background: none;
+}
+
 .calendar .ui-datepicker-unselectable .ui-state-default {
   background: #fff;
   color: #b4b3b3;
