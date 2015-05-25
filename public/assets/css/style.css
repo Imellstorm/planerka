@@ -2651,9 +2651,9 @@ input.btn-main {
 .ui-datepicker-calendar td{
   background: #f7f7f7;
 }
-.ui-datepicker-calendar td.ui-state-disabled{
+/*.ui-datepicker-calendar td.ui-state-disabled{
   background: none;
-}
+}*/
 .ui-datepicker-calendar .ui-state-default{
   background: none;
 }
@@ -3805,7 +3805,7 @@ form.project .checkbox {
   margin-left: 19px;
 }
 form.project .checkbox label {
-  width: 10px;
+  width: 150px;
   margin-right: 0;
 }
 form.project .checkbox .status {
@@ -3847,7 +3847,7 @@ form.project .checkbox span {
 }
 #new-project .btn-main,
 #modal-filter .btn-main {
-  margin-left: 40px;
+  margin: 20px 0 0 120px;
   display: inline-block;
 }
 #modal-filter .checkbox {
@@ -4022,4 +4022,10 @@ form.project .checkbox span {
     }
     .slick-list{
       margin-left: 25px;
+    }
+    .project-checkbox:before{
+      margin-top: 6px;
+    }
+    .project-checkbox:after{
+      margin-top: 6px;    }
     }

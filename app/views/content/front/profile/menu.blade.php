@@ -7,7 +7,7 @@
             @if(Auth::check() && Auth::user()->role_id!=2)
                 <li><a href="/{{ $user->alias }}/calendar" class="{{ Request::segment(2)=='calendar'?'active':'' }}">Календарь</a></li>
             @endif
-            @if(Auth::check() && Auth::user()->role_id==2)
+            @if(Auth::check() && Auth::user()->role_id==2 && $userInfo->role_id!=2)
             	<li class="last"><a href="#null" class="btn-main">Заказать</a></li>
             @endif
         </ul>

@@ -218,7 +218,7 @@ class Common_helper {
          * Alternatively, you can save the image in file-system or database
          */
 
-        imagejpeg($desired_gdim,$save_path);
+        return imagejpeg($desired_gdim,$save_path);
     }
 
     /**
@@ -259,4 +259,21 @@ class Common_helper {
         $result = date('j',$date).' '.$monthes[(date('n',$date))].' '.date('Y',$date);
         return $result;
     }
+
+    public static function generateAlias($text){
+        if(!empty($text)){
+            $text = mb_strtolower($text);
+            $transl = array(
+                'а'=> 'a', 'б'=> 'b', 'в'=> 'v', 'г'=> 'g', 'д'=> 'd', 'е'=> 'e', 'ё'=> 'e', 'ж'=> 'zh', 
+                'з'=> 'z', 'и'=> 'i', 'й'=> 'j', 'к'=> 'k', 'л'=> 'l', 'м'=> 'm', 'н'=> 'n', ' '=>'_',
+                'о'=> 'o', 'п'=> 'p', 'р'=> 'r', 'с'=> 's', 'т'=> 't', 'у'=> 'u', 'ф'=> 'f', 'х'=> 'h',
+                'ц'=> 'c', 'ч'=> 'ch', 'ш'=> 'sh', 'щ'=> 'sh','ъ'=> '', 'ы'=> 'y', 'ь'=> '', 'э'=> 'e', 'ю'=> 'yu', 'я'=> 'ya',
+                'і'=> 'i', 'є'=> 'e',
+            );
+            $text = strtr($text,$transl);
+            $text = preg_replace('~[^-a-z0-9_]+~u', '', $text);
+            return $text;
+        }
+    }
+
 }

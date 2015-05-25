@@ -18,7 +18,7 @@ class BaseController extends Controller {
     	if(empty($userId)){
 			$userId = Auth::user()->id;
     	}
-    	$userInfo = Userinfo::select('user_info.*','users.alias')
+    	$userInfo = Userinfo::select('user_info.*','users.alias','users.role_id')
 	    	->leftjoin('users','users.id','=','user_info.user_id')
 	    	->where('user_info.user_id',$userId)
 	    	->first();

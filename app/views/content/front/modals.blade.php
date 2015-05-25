@@ -23,6 +23,7 @@
             <div class="form-group">
                 <input type="text" class="form-control username" placeholder="Planerca.ru/Ник нэйм">
                 <div class="username error"></div>
+                <div class="alias error"></div>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control email" placeholder="Электронная почта">

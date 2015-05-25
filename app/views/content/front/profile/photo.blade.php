@@ -9,7 +9,7 @@
     <div id="user-page">
         <div class="container">
             @include('content.front.profile.menu')
-            <div class="row">
+            <div class="row" style="margin-top:20px">
                 <div class="col-sm-12">
                     @if(!empty($mainProf))
                         <div class="profile-info">
@@ -41,8 +41,10 @@
                             <dt>Лайков</dt>
                             <dd>{{ $userinfo->likes }}</dd>
 
-                            <dt>Выполненных заказов</dt>
-                            <dd>{{ $userinfo->finished_jobs }}</dd>
+                            @if($userInfo->role_id!=2)
+                                <dt>Выполненных заказов</dt>
+                                <dd>{{ $userinfo->finished_jobs }}</dd>
+                            @endif
 
                             <dt>Регистрация на сайте</dt>
                             <dd>
@@ -75,13 +77,17 @@
                                     } else {
                                         echo 'дней';
                                     }?>
+                                @else
+                                    Сегодня
                                 @endif
                             </dd>
                         </dl>
-                        <footer>
-                            <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
-                            <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
-                        </footer>
+                        @if($userInfo->role_id!=2)
+                            <footer>
+                                <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
+                                <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
+                            </footer>
+                        @endif
                     </div>
                     @if(!empty($albums))
                         <div class="profile-albums">

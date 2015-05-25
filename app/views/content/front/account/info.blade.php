@@ -103,20 +103,22 @@
                                 {{ Form::label('site', 'Сайт') }}
                                 {{ Form::text('site', null, array('class' => 'form-control')) }}
                             </div>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    {{ Form::checkbox('city_departure', 1, isset($userInfo->city_departure)?$userInfo->city_departure:0,array('id'=>'checkbox6')); }}
-                                    <label for="checkbox6">
-                                        Могу выезжать в другой город
-                                    </label>
+                            @if(Auth::user()->role_id!=2)
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        {{ Form::checkbox('city_departure', 1, isset($userInfo->city_departure)?$userInfo->city_departure:0,array('id'=>'checkbox6')); }}
+                                        <label for="checkbox6">
+                                            Могу выезжать в другой город
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        {{ Form::checkbox('country_departure', 1, isset($userInfo->country_departure)?$userInfo->country_departure:0,array('id'=>'checkbox7')); }}
+                                        <label for="checkbox7">
+                                            Могу выезжать за рубеж
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="checkbox">
-                                    {{ Form::checkbox('country_departure', 1, isset($userInfo->country_departure)?$userInfo->country_departure:0,array('id'=>'checkbox7')); }}
-                                    <label for="checkbox7">
-                                        Могу выезжать за рубеж
-                                    </label>
-                                </div>
-                            </div>
+                            @endif
                             <div class="form-group">
                                 <input type="submit" class="btn-main" value="Сохранить">
                             </div>

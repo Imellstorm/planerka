@@ -50,6 +50,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('image','ImageController');
 	Route::controller('video','VideoController');
 	Route::controller('calendar','CalendarController');
+	Route::controller('project','ProjectController');
 });
 
 /*

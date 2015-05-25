@@ -137,7 +137,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url('{{ isset($userInfo)&&!empty($userInfo)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68;">
+    <header id="header" style="background: url('{{ isset($userInfo)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
@@ -168,7 +168,7 @@
                                 </ul>
                                 <div class="avatar"><img src="{{ Common_helper::getUserAvatar(Auth::user()->id) }}" alt="" style="width:48px;height:48px;"></div>
                             </div>
-                            <a href="#null" class="download">Загрузить</a>
+                            <!-- <a href="#null" class="download">Загрузить</a> -->
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
     @endif
         <div class="container">
             <div class="row">
-                @if(isset($userInfo)&&!empty($userInfo))
+                @if(Auth::check()&&Auth::user()->role_id!=2&&isset($userInfo)&&!empty($userInfo))
                     <div class="col-sm-5" style="margin:100px 0 20px 0">
                         <div class="pers-info">
                             <div class="avatar"><img src="{{ Common_helper::getUserAvatar($userInfo->user_id) }}" alt=""></div>
@@ -273,7 +273,7 @@
                             @endif
                         </div>
                         @if(Auth::check() && Auth::user()->role_id == 2)
-                            <a href="#null" class="add_post">Добавить мероприятие</a>
+                            <a href="/project/createform" class="add_post fancybox_ajax">Добавить мероприятие</a>
                         @endif
                     </div>  
                 </div>

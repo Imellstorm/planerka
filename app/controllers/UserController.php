@@ -3,8 +3,8 @@
 class UserController extends BaseController {
 
 	protected $rules = array(
-		'username'	=> 'required|max:256|unique:users,username',
-		//'alias'		=> 'required|max:256|unique:users,alias',
+		'username'	=> 'required|max:256|unique:users,username|alpha_dash',
+		'alias'		=> 'required|max:256|unique:users,alias',
 		'email'		=> 'required|max:256|email|unique:users,email',
 		'password'	=> 'required|max:256|same:password_confirmation',
 		'phone'		=> 'alpha_dash|max:32',
@@ -58,7 +58,10 @@ class UserController extends BaseController {
 	 * @return Response
 	 */
 	public function postValidate(){
-		$validator = Validator::make(Input::all(), $this->rules);
+		$inputData = Input::all();
+		$inputData['alias'] = Common_helper::generateAlias($inputData['username']);
+
+		$validator = Validator::make($inputData, $this->rules);
 		if ($validator->fails()){
 			return Response::json($validator->messages());
 		}
@@ -77,7 +80,10 @@ class UserController extends BaseController {
 	 */
 	public function postStore()
 	{
-		$validator = Validator::make(Input::all(), $this->rules);
+		$inputData = Input::all();
+		$inputData['alias'] = Common_helper::generateAlias($inputData['username']);
+
+		$validator = Validator::make($inputData, $this->rules);
 
 		if ($validator->fails())
 		{
@@ -89,18 +95,18 @@ class UserController extends BaseController {
 		} else {	
 
 			$user = new User;
-			$rawRole = Input::get('role');
+			$rawRole = $inputData['role'];
 			if(!$this->is_admin() && $rawRole!=1 || $this->is_admin()){
 				$role = $rawRole;
 			} else {
 				return false;
 			}
  
-	        $user->username   	= Input::get('username');
-	        //$user->alias   		= Input::get('alias');
-	        $user->email      	= Input::get('email');
+	        $user->username   	= $inputData['username'];
+	        $user->alias   		= $inputData['alias'];
+	        $user->email      	= $inputData['email'];
 	        $user->role_id    	= $role;
-	        $user->password   	= Hash::make(Input::get('password'));
+	        $user->password   	= Hash::make($inputData['password']);
 
 	        if($this->is_admin()){
 				$randomStr = '1';
@@ -110,20 +116,24 @@ class UserController extends BaseController {
 			}
 	        $user->email_verify	= $randomStr;
 
-	        $socNet = Input::get('socnet');
-			$socId = Input::get('socid');
-			$socImage = Input::get('socimage');
+	        $socNet = $inputData['socnet'];
+			$socId = $inputData['socid'];
+			$socImage = $inputData['socimage'];
 	        if(!empty($socNet) && !empty($socId)){
 	        	$user->socnet = $socNet;
 	        	$user->socid  = $socId;
 	        	$user->socimage  = $socImage;
 	        }
 
-	        if($this->is_admin() && Input::get('balance')){
-				$user->balance = Input::get('balance');
+	        if($this->is_admin() && $inputData['balance']){
+				$user->balance = $inputData['balance'];
 			}
 
         	$user->save();
+
+        	$userInfo = new Userinfo;
+        	$userInfo->user_id = $user->id;
+        	$userInfo->save();
 		}
 
 		if(!Request::ajax()){
@@ -173,12 +183,20 @@ class UserController extends BaseController {
 			return Redirect::to('/')->withErrors('У вас нет прав для данного действия!');
 		}
 
-		$user = User::findOrFail($id);
+		$user = User::find($id);
+		if(empty($user)){
+			App::abort(404);
+		}
 		
 		$this->rules['email'] = 'required|email|max:256|unique:users,email,'.$id;
 		$this->rules['username'] = 'required|max:256|unique:users,username,'.$id;
+		$this->rules['alias'] = 'required|max:256|unique:users,alias,'.$id;
 		$this->rules['password'] = 'max:256|same:password_confirmation';
-		$validator = Validator::make($data = Input::all(), $this->rules);
+
+		$inputData = Input::all();
+		$inputData['alias'] = Common_helper::generateAlias($user->username);
+
+		$validator = Validator::make($inputData, $this->rules);
 
 		if ($validator->fails())
 		{
@@ -186,7 +204,8 @@ class UserController extends BaseController {
 		} else {
 			$data = array(
 		        'username'  	=> Input::get('username'),
-		        'email'     	=> Input::get('email'),		        
+		        'email'     	=> Input::get('email'),	
+		        'alias'			=> $inputData['alias'],	        
 	        );	        
 	        if(Input::get('password')){
 	        	$data['password'] = Hash::make(Input::get('password'));
@@ -204,11 +223,11 @@ class UserController extends BaseController {
 				$data['status'] = Input::get('status');
 			}
 
-			if(!$this->is_admin() && $user->email!=Input::get('email')){
-				$randomStr = str_random(40);
-				mail($data['email'], 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
-				$data['email_verify'] = $randomStr;
-			}
+			// if(!$this->is_admin() && $user->email!=Input::get('email')){
+			// 	$randomStr = str_random(40);
+			// 	mail($data['email'], 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
+			// 	$data['email_verify'] = $randomStr;
+			// }
 
         	$user->update($data);
 		}

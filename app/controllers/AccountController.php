@@ -23,6 +23,9 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getSpecialization(){
+		if(Auth::user()->role_id==2){
+			App::abort(404);
+		}
 		$roles = Role::lists('name','id');
 		if(!$this->is_admin()){
 			unset($roles[1]);

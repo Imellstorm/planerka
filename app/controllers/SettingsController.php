@@ -19,10 +19,10 @@ class SettingsController extends BaseController {
 		} else {
 			$model = new Usersettings;
 			$model->user_id		= Auth::user()->id;
-			$model->adminmail 	= Input::get('adminmail');
-			$model->blogmail 	= Input::get('blogmail');
-			$model->privatemail = Input::get('privatemail');
-			$model->projectsmail= Input::get('projectsmail');
+			$model->adminmail 	= Input::get('adminmail')?Input::get('adminmail'):'';
+			$model->blogmail 	= Input::get('blogmail')?Input::get('blogmail'):'';
+			$model->privatemail = Input::get('privatemail')?Input::get('privatemail'):'';
+			$model->projectsmail= Input::get('projectsmail')?Input::get('projectsmail'):'';
 			$model->save();
 		}
 	    if(!$this->updatePassword()){

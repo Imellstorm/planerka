@@ -42,13 +42,15 @@
                                     {{ Form::checkbox('privatemail', 1, null, array('id' => 'privatemail')) }}
                                     {{ Form::label('privatemail', 'Личные сообщения') }}
                                 </div>
-                                <div class="pro-box">
-                                    <div class="checkbox">
-                                        {{ Form::checkbox('projectsmail', 1, null, array('id' => 'projectsmail')) }}
-                                        {{ Form::label('projectsmail', 'Рассылка новых подходящих проектов под вашу специализацию') }}
-                                        <span>Только для <div class="status">PRO</div></span>
+                                @if(Auth::user()->role_id!=2)
+                                    <div class="pro-box">
+                                        <div class="checkbox">
+                                            {{ Form::checkbox('projectsmail', 1, null, array('id' => 'projectsmail')) }}
+                                            {{ Form::label('projectsmail', 'Рассылка новых подходящих проектов под вашу специализацию') }}
+                                            <span>Только для <div class="status">PRO</div></span>
+                                        </div>
                                     </div>
-                                </div>  
+                                @endif
                             </div>  
                         </div>
                         <input type="submit" class="btn-main" value="Сохранить">
