@@ -51,6 +51,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('video','VideoController');
 	Route::controller('calendar','CalendarController');
 	Route::controller('project','ProjectController');
+	Route::controller('projectmessages', 'ProjectmessagesController');
 });
 
 /*

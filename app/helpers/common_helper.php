@@ -276,4 +276,49 @@ class Common_helper {
         }
     }
 
+    public static function getPastTime($extDate){
+        $startTime = new Datetime($extDate);
+        $endTime = new DateTime();   
+        $diff = $endTime->diff($startTime);
+        $date = new stdClass;
+        $date->years = $diff->format('%y');
+        $date->months = $diff->format('%m');
+        $date->days = $diff->format('%d');
+
+        $res = '';
+        if(!empty($date->years)){
+            $res.= $date->years; 
+            if($date->years == 1){
+                $res.= ' год ';
+            } elseif($date->years < 5) {
+                $res.= ' годa ';
+            } else {
+                $res.= ' лет ';
+            }
+        }
+        if(!empty($date->months)){
+            $res.= $date->months;  
+            if($date->months == 1){
+                 $res.= ' месяц ';
+            } elseif($date->months < 5) {
+                 $res.= ' есяца ';
+            } else {
+                 $res.= ' месяцев ';
+            }
+        }
+        if(!empty($date->days)){
+            $res.= $date->days;
+            if($date->days == 1){
+                $res.= ' день ';
+            } elseif($date->days < 5) {
+                $res.= ' дня ';
+            } else {
+                $res.= ' дней ';
+            }
+        } else {
+            $res = 'Сегодня';
+        }
+        return $res;
+    }
+
 }

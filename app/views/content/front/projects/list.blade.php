@@ -1,0 +1,57 @@
+@extends('containers.frontend')
+
+@section('title') {{ 'Мероприятия' }} @stop
+
+@section('main')
+	<div id="main">
+		<div class="project-list">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 section-title decor">
+						Лента проэктов
+					</div>
+				</div>
+				@if(Auth::check() && Auth::user()->role_id!=2)
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="no-pro-msg">
+								Осталось ответов на проекты: <span>3</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
+							</div>
+						</div>
+					</div>
+				@endif
+				@if(count($projects))
+					<div class="row">
+						<div class="col-sm-12">
+							@foreach($projects as $project)
+								<div class="single-proj">
+									<header>
+										<div class="title">
+											<a href="/project/singl/{{ $project->id }}">{{ $project->title }}</a>
+										</div>
+										<div class="price">{{ $project->budget }} руб.</div>
+									</header>
+									<div class="text">
+										{{ $project->description }}
+									</div>
+									<ul class="meta-list">
+										@if($project->pro_only)
+											<li><span class="only-pro">Только для PRO</span></li>
+										@endif
+										<li>Создан: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
+										<li>Ответов: <span>321</span></li>
+									</ul>
+								</div>
+							@endforeach
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							{{ $projects->links() }}
+						</div>
+					</div>
+				@endif
+			</div>
+		</div>
+	</div>
+@stop	

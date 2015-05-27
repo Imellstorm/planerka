@@ -12,6 +12,13 @@ input.form-control, input {
 textarea {
   outline: none;
 }
+.pagination .active span, .pagination .active span:hover{
+  background: #44B39B; 
+  border:solid 1px #44B39B;
+}
+.pagination li a{
+  color: #44B39B; 
+}
 .checkbox label::before {
   height: 21px;
   width: 21px;
@@ -30,6 +37,14 @@ textarea {
 }
 .checkbox label {
   padding-left: 12px;
+}
+.album-load img{
+  float:left;
+  width: 180px;
+  height: 180px;
+  border: solid 8px white;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 .status {
   width: 34px;
@@ -155,7 +170,7 @@ input.btn-main {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-.pagination {
+/*.pagination {
   margin: 10px 0 -10px;
 }
 .pagination a {
@@ -200,7 +215,7 @@ input.btn-main {
 .pagination .next {
   margin-right: 0;
   border-right: 1px solid #d1d0d5;
-}
+}*/
 .inner-nav {
   list-style: none;
   margin: 0;
@@ -1312,6 +1327,7 @@ input.btn-main {
   float: left;
   margin-left: 20px;
   max-width: 750px;
+  min-width: 650px;
 }
 .notification .notif-content .order-body header {
   overflow: hidden;
@@ -1327,7 +1343,7 @@ input.btn-main {
   max-width: 530px;
 }
 .notification .notif-content .order-body .price {
-  float: left;
+  float: right;
   font-family: 'NeuronItalic', sans-serif;
   color: #44b39b;
   font-size: 28px;
@@ -1783,10 +1799,9 @@ input.btn-main {
   margin-top: 60px;
 }
 .project .proj-answ .album-load .album-input {
-  margin-right: 30px;
   height: 180px;
   line-height: 180px;
-  width: 166px;
+  width: 180px;
   border: 8px solid #FFF;
   display: inline-block;
   text-align: center;
@@ -1849,7 +1864,7 @@ input.btn-main {
   overflow: hidden;
 }
 .proj-prop .prop-body .portf img {
-  width: 146px;
+  width: 156px;
   height: 156px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3884,148 +3899,154 @@ form.project .checkbox span {
   border-radius: 4px;
   margin-top: 3px;
 }
-  .ui-autocomplete li{
-    position: relative;
-  }
-    .ui-autocomplete li a{
-      display: block;
-      padding: 3px 20px;
-      clear: both;
-      font-weight: normal;
-      line-height: 1.42857143;
-      color: #333;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .ui-autocomplete li a:hover, .ui-autocomplete .ui-state-focus{
-      color: #262626;
-      text-decoration: none;
-      background-color: #f5f5f5;
-    }
-    .instagram{
-      background: url('/assets/img/instagram.png') !important;
-      background-position: -2px !important;
-    }
-    .role_other{
-      width: 185px;
-      background: #44b39b;
-      padding: 10px;
-      border-radius: 5px;
-      line-height: 20px;
-      cursor: pointer;
-      color: white;
-      margin: 0 auto 20px auto;
-    }
-    .role_other:hover{
-      color:black;
-    }
-    #img_preview{
-      position: absolute;
-      width: 82px;
-      left: 177px;
-      top: 4px;
-    }
-    .delete_image{
-      position: absolute;
-      left: 265px;
-      top: 0px;
-      cursor: pointer;
-    }
-    .sel-green {
-      background: white;
-      border: solid 1px #d3d3d3;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    }
-    .sel-green:focus{
-      outline: none;
-    }
-    .dz-default.dz-message {
-      padding: 20px;
-      border: dashed lightgrey;
-    }
-    .dz-preview{
-      position: relative;
-      float: left;
-      margin: 10px;
-      max-width: 125px;
-    }
-    .dz-success-mark path{
-      fill:green;
-    }
-    .dz-error-mark, .dz-success-mark {
-      position: absolute;
-      top: 112px;
-    }
-    .dz-error-mark path{
-      fill:red;
-    }
-    .dz-success-mark svg, .dz-error-mark svg{
-      width: 35px;
-    }
-    .dz-error-message{
-      color: red;
-      /*display: none;*/
-    }
-    .dz-success-mark, .dz-error-mark{
-      display: none;
-    }
-    .dz-progress {
-      position: absolute;
-      top: 55px;
-      left: 15px;
-      height: 20px;
-      width: 90px;
-    }
-    .dz-upload { 
-        display: block; 
-        background-color: rgb(163, 255, 171);
-        height: 10px;
-    }
-    .dz-filename, .dz-size, .dz-image, .dz-error-message{
-      text-align: center;
-    }
-    .delete-image{
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
-      border-radius: 40px;
-      background: white;
-      padding: 4px 6px;
-      color: #44B39B;
-      border: solid 1px#44B39B;
-    }
-    .like{
-      cursor: pointer;
-    }
-    .album-header{
-      background: rgba(0,0,0,0.4);
-      height: 90px;
-      width: 100%;
-      position: absolute;
-      top: 170px;
-    }
-    .slick-arrow{
-      position: absolute;
-      height: 200px;
-      padding-top: 95px;
-      cursor: pointer;
-      color: #44B39B;
-    }
-    .photos .slick-next {
-      left: 0px;
-    }
-    .photos .slick-prev {
-      right: 0px;
-    }
-    .slick-list{
-      margin-left: 25px;
-    }
-    .project-checkbox:before{
-      margin-top: 6px;
-    }
-    .project-checkbox:after{
-      margin-top: 6px;    }
-    }
+.ui-autocomplete li{
+  position: relative;
+}
+.ui-autocomplete li a{
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ui-autocomplete li a:hover, .ui-autocomplete .ui-state-focus{
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.instagram{
+  background: url('/assets/img/instagram.png') !important;
+  background-position: -2px !important;
+}
+.role_other{
+  width: 185px;
+  background: #44b39b;
+  padding: 10px;
+  border-radius: 5px;
+  line-height: 20px;
+  cursor: pointer;
+  color: white;
+  margin: 0 auto 20px auto;
+}
+.role_other:hover{
+  color:black;
+}
+#img_preview{
+  position: absolute;
+  width: 82px;
+  left: 177px;
+  top: 4px;
+}
+.delete_image{
+  position: absolute;
+  left: 265px;
+  top: 0px;
+  cursor: pointer;
+}
+.sel-green {
+  background: white;
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+.sel-green:focus{
+  outline: none;
+}
+.dz-default.dz-message {
+  padding: 20px;
+  border: dashed lightgrey;
+}
+.dz-preview{
+  position: relative;
+  float: left;
+  margin: 10px;
+  max-width: 125px;
+}
+.dz-success-mark path{
+  fill:green;
+}
+.dz-error-mark, .dz-success-mark {
+  position: absolute;
+  top: 112px;
+}
+.dz-error-mark path{
+  fill:red;
+}
+.dz-success-mark svg, .dz-error-mark svg{
+  width: 35px;
+}
+.dz-error-message{
+  color: red;
+  /*display: none;*/
+}
+.dz-success-mark, .dz-error-mark{
+  display: none;
+}
+.dz-progress {
+  position: absolute;
+  top: 55px;
+  left: 15px;
+  height: 20px;
+  width: 90px;
+}
+.dz-upload { 
+    display: block; 
+    background-color: rgb(163, 255, 171);
+    height: 10px;
+}
+.dz-filename, .dz-size, .dz-image, .dz-error-message{
+  text-align: center;
+}
+.delete-image{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  border-radius: 40px;
+  background: white;
+  padding: 4px 6px;
+  color: #44B39B;
+  border: solid 1px#44B39B;
+}
+.like{
+  cursor: pointer;
+}
+.album-header{
+  background: rgba(0,0,0,0.4);
+  height: 90px;
+  width: 100%;
+  position: absolute;
+  top: 170px;
+}
+.slick-arrow{
+  position: absolute;
+  height: 200px;
+  padding-top: 95px;
+  cursor: pointer;
+  color: #44B39B;
+}
+.photos .slick-next {
+  left: 0px;
+}
+.photos .slick-prev {
+  right: 0px;
+}
+.slick-list{
+  margin-left: 25px;
+}
+.project-checkbox:before{
+  margin-top: 6px;
+}
+.project-checkbox:after{
+  margin-top: 6px;
+}
+.wite_badge {
+  padding: 5px 10px;
+  background: white;
+  margin: 5px 10px 0 0;
+  float: left;
+}

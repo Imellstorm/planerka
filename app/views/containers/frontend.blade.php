@@ -146,7 +146,7 @@
                         <div class="logo"><a href="/"><img src="/assets/img/user-logo.png" alt=""></a></div>
                         
                         <div class="menu-panel">
-                            <div class="list"><a href="#null"><img src="/assets/img/paper.png" alt=""></a></div>
+                            <div class="list"><a href="/project/list"><img src="/assets/img/paper.png" alt=""></a></div>
                             <div class="mail"><a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a><span>1</span></div>
                             <div class="count">
                                 <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
@@ -161,7 +161,7 @@
                                     @endif
                                     <li><a href="/account/messages">Сообщения</a></li>
                                     <li><a href="/account/favorites">Избранное</a></li>
-                                    <li><a href="/account/orders">Заказы / уведомления</a></li>
+                                    <li><a href="/account/projects">Заказы / уведомления</a></li>
                                     <li><a href="/{{ Auth::user()->alias }}/photo">Профиль</a></li>
                                     <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
@@ -273,7 +273,7 @@
                             @endif
                         </div>
                         @if(Auth::check() && Auth::user()->role_id == 2)
-                            <a href="/project/createform" class="add_post fancybox_ajax">Добавить мероприятие</a>
+                            <a href="/project/create" class="add_post fancybox_ajax">Добавить мероприятие</a>
                         @endif
                     </div>  
                 </div>

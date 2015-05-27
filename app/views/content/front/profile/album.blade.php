@@ -22,7 +22,7 @@
 								<a href="/image/delete/{{ $image->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;"></a>
 							@endif
 							<div class="cont-box">
-								@if(Auth::check() && Auth::user()->id==$image->user_id)
+								@if(Auth::check())
 									<div class="like" imageid="{{ $image->id }}">
 										Нравиться: <span class="likes-count">{{ $image->likes?$image->likes:'0' }}</span>
 									</div>

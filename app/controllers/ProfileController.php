@@ -24,14 +24,6 @@ class ProfileController extends BaseController {
 		$userinfo = Userinfo::where('user_id',$this->user->id)->first();
 		$user = $this->user;
 
-		$startTime = new Datetime($this->user->created_at);
-		$endTime = new DateTime();	 
-		$diff = $endTime->diff($startTime);
-		$date = new stdClass;
-		$date->years = $diff->format('%y');
-		$date->months = $diff->format('%m');
-		$date->days = $diff->format('%d');
-
 		$albums = Album::select('albums.*',DB::raw('count('.DB::getTablePrefix().'images.id) as imgcount'))->leftjoin('images','images.album_id','=','albums.id')->where('albums.user_id',$this->user->id)->groupby('albums.id')->get();
 		if(!empty($albums)){
 			foreach ($albums as $key => $val) {
@@ -43,7 +35,7 @@ class ProfileController extends BaseController {
 			//echo '<fix style="display:none"></fix>'; // фикс странного бага с удвоением инкримента
 			$userinfo->increment('enters_count');
 		}
-		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','date','albums'));
+		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));
 	}
 
 	/**

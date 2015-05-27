@@ -48,38 +48,7 @@
 
                             <dt>Регистрация на сайте</dt>
                             <dd>
-                                @if(!empty($date->years))
-                                    {{ $date->years }}  
-                                    <?php if($date->years == 1){
-                                        echo 'год';
-                                    } elseif($date->years < 5) {
-                                        echo 'годa';
-                                    } else {
-                                        echo 'лет';
-                                    }?>
-                                @endif
-                                @if(!empty($date->months))
-                                    {{ $date->months }}  
-                                    <?php if($date->months == 1){
-                                        echo 'месяц';
-                                    } elseif($date->months < 5) {
-                                        echo 'месяца';
-                                    } else {
-                                        echo 'месяцев';
-                                    }?>
-                                @endif
-                                @if(!empty($date->days))
-                                    {{ $date->days }}
-                                    <?php if($date->days == 1){
-                                        echo 'день';
-                                    } elseif($date->days < 5) {
-                                        echo 'дня';
-                                    } else {
-                                        echo 'дней';
-                                    }?>
-                                @else
-                                    Сегодня
-                                @endif
+                                {{ Common_helper::getPastTime($user->created_at) }}
                             </dd>
                         </dl>
                         @if($userInfo->role_id!=2)

@@ -6,10 +6,14 @@ class AlbumsController extends BaseController {
 		parent::__construct();
 	}
 
-
 	protected $rules = array(
 		'name'	=> 'required|max:256',
 	);
+
+	public function getList(){
+		$albums = Album::where('user_id',Auth::user()->id)->get();
+		return View::make('content.front.profile.albumslist', compact('albums'));
+	}
 
 	/**
 	 * Display the specified resource.
