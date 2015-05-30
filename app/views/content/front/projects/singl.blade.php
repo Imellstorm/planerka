@@ -132,6 +132,7 @@
 						<div class="proj-prop" style="margin:0;padding:0;border-bottom:none">
 							<div class="order-review" style="border:none">
 								@foreach($usersToProject as $key=>$performer)
+								<?php var_dump($performer); exit; ?>
 									<div style="border-bottom:solid 1px #44B39B">
 										<div class="user-info" style="padding-top:20px;">
 											<a href="/{{ $performer->alias }}/photo" class="avatar"><img src="{{ Common_helper::getUserAvatar($performer->user_id) }}" alt=""></a>
