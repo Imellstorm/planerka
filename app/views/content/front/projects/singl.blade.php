@@ -166,7 +166,6 @@
 											<footer>
 												<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>
 												@if($project->closed!=1)
-												<?php var_dump($performer->status); var_dump($existPerformer) ?>
 													@if($performer->status==1 && empty($existPerformer))
 														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/2" class="btn-main">Выбрать исполнителем</a>
 														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/4" class="btn-purple">Отказать</a>
