@@ -83,7 +83,7 @@
                     <div class="votes">
                         <div class="title">Актуальный опрос</div>
                         <div class="question"><?php echo $vote->question; ?></div>
-                        <?php if(Auth::user()->voted==1): ?>
+                        <?php if(Auth::check() && Auth::user()->voted==1): ?>
                             <?php foreach($answers as $answer): ?>
                                 <div style="margin:5px 0">
                                     <?php echo $answer->text; ?> - <?php echo $answer->click_count; ?> 
