@@ -37,7 +37,14 @@ class ProjectmessagesController extends BaseController {
 			$userstoproject->project_id = $projectId;
 			$userstoproject->status 	= 1;
 			$userstoproject->save();
-		}	
+		}
+
+		$notify = new Notifications;
+		$notify->from_user = Auth::user()->id;
+		$notify->to_user = $model->to_user;
+		$notify->text = 'У вас новое сообщение в проекте';
+		$notify->link = Auth::user()->role_id==2?'project/singl/'.$projectId:'project/usermassages/'.$model->from_user.'/'.$projectId;
+		$notify->save();	
 
 		return Redirect::back();
 	}

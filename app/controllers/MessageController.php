@@ -20,11 +20,7 @@ class MessageController extends BaseController {
 	 * @return Response
 	 */
 	public function getCreate($userId='')
-	{
-		$lang = Cookie::get('lang');
-		if(!empty($lang)){
-			App::setLocale($lang);
-		}			
+	{			
 		$user = User::find($userId);
 		if(empty($user)){
 			App::abort(404);
@@ -61,6 +57,13 @@ class MessageController extends BaseController {
 
         	$message->save();
 		}
+
+		$notify = new Notifications;
+		$notify->from_user = Auth::user()->id;
+		$notify->to_user = $message->to;
+		$notify->text = 'У вас новое личное сообщение';
+		$notify->link = 'account/messages';
+		$notify->save();
 
 		Session::flash('success', 'Сообщение отправлено!');
 		return Redirect::back();

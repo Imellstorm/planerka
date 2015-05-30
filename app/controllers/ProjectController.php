@@ -25,10 +25,14 @@ class ProjectController extends BaseController {
 			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages'));
 		}
 
-		$usersToProject = Userstoproject::leftjoin('user_info','user_info.user_id','=','users_to_project.user_id')
+		$usersToProject = Userstoproject::select('user_info.*','users_to_project.*','users_to_project.id as users_to_project_id','users.*')
+				->leftjoin('user_info','user_info.user_id','=','users_to_project.user_id')
 				->leftjoin('users','users.id','=','users_to_project.user_id')
 				->where('users_to_project.project_id',$id)
 				->paginate(20);
+
+		$existReview = Review::where('from_user',Auth::user()->id)->where('project_id',$project->project_id)->first();
+		$existPerformer = Userstoproject::where('users_to_project.project_id',$id)->where('status',2)->orWhere('status',3)->first();
 
 		if(!empty($usersToProject)){
 			foreach ($usersToProject as $key => $val) {
@@ -43,7 +47,7 @@ class ProjectController extends BaseController {
 				}
 			}
 		}
-		return View::make('content.front.projects.singl',compact('project','usersToProject'));
+		return View::make('content.front.projects.singl',compact('project','usersToProject','existPerformer','existReview'));
 	}
 
 	public function getUsermassages($userId='',$projectId=''){
@@ -110,5 +114,68 @@ class ProjectController extends BaseController {
 		}
 		$view = View::make('content.front.messagebox',array('message'=>'Мероприятие добавлено!'))->render();
         return Redirect::back()->with('message', $view);
+	}
+
+	public function getChangestatus($id='',$status=''){
+		if(empty($id) || empty($status) || $status==1){
+			App::abort(404);
+		}
+		$usersToProject = Userstoproject::find($id);
+		if(empty($usersToProject)){
+			App::abort(404);
+		}
+		$project = Project::find($usersToProject->project_id);
+		if(empty($project)){
+			App::abort(404);
+		}
+		$currentUser = Auth::user();
+		$text = '';
+
+		//для автора проекта
+		if($status==2 && $project->user_id == $currentUser->id){
+			$usersToProject->update(array('status'=>2)); //исполнитель принят
+			$text = 'Ваше участие в проекте подтверждено';
+			$userId = $usersToProject->user_id;
+		}
+		if($status==4 && $project->user_id == $currentUser->id){
+			$usersToProject->update(array('status'=>4)); //исполнитель не принят
+			$text = 'Вам отказали в участии в проекте';
+			$userId = $usersToProject->user_id;
+		}
+
+		//для подписавшегося исполнителя
+		if($status==3 && $usersToProject->user_id == $currentUser->id){
+			$usersToProject->update(array('status'=>3)); //подтвердил участие в проекте
+			$text = 'Получено согласие на участие в проекте';
+			$userId = $project->user_id;
+		}
+		if($status==5 && $usersToProject->user_id == $currentUser->id){
+			$usersToProject->delete();					//отказался от проекта
+			Projectmessages::where('project_id',$usersToProject->project_id)
+							->where('to_user',$currentUser->id)
+							->orWhere('from_user',$currentUser->id)
+							->delete(); 
+			$text = 'Отказ от проекта';
+			$userId = $project->user_id;
+		}
+		if($status==6 && ($usersToProject->user_id == $currentUser->id || $project->user_id == $currentUser->id)){
+			$usersToProject->update(array('status'=>6)); //подтвердил участие в проекте
+			$text = 'Проект завершен';
+			if($usersToProject->user_id == $currentUser->id){
+				$userId = $project->user_id;
+			} else {
+				$userId = $usersToProject->user_id;
+			}
+			$project->update(array('closed'=>1));
+		}
+
+		$notify = new Notifications;
+		$notify->from_user = Auth::user()->id;
+		$notify->to_user = $userId;
+		$notify->text = $text;
+		$notify->link = 'project/singl/'.$project->id;
+		$notify->save();
+
+		return Redirect::back();
 	}
 }

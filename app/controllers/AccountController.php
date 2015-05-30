@@ -69,7 +69,12 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getNotifications(){
-		return View::make('content.front.account.notifications');
+		$notifications = Notifications::select('users.alias','user_info.*','notifications.*')
+		->leftjoin('user_info','user_info.user_id','=','notifications.from_user')
+		->leftjoin('users','users.id','=','notifications.to_user')
+		->orderBy('notifications.id','DESC')
+		->paginate(20);
+		return View::make('content.front.account.notifications',compact('notifications'));
 	}
 
 	/**
@@ -78,7 +83,9 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getMessages(){
-		return View::make('content.front.account.messages');
+		$model = new Message;
+		$messages = $model->getUserMessages(Auth::user()->id);
+		return View::make('content.front.account.messages',compact('messages'));
 	}
 
 	/**

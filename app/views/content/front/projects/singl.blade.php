@@ -18,8 +18,6 @@
 			$.fancybox.close();
 		})
 
-
-
 		$('body').on('keydown','.price-input',function (e) {
 	        // Allow: backspace, delete, tab, escape, enter and .
 	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -167,8 +165,19 @@
 											</div>
 											<footer>
 												<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>
-												<a href="#null" class="btn-main">Выбрать исполнителем</a>
-												<a href="#null" class="btn-purple">Отказать</a>
+												@if($project->closed!=1)
+													@if($performer->status==1 && empty($existPerformer))
+														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/2" class="btn-main">Выбрать исполнителем</a>
+														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/4" class="btn-purple">Отказать</a>
+													@endif
+													@if($performer->status==3)
+														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/6" class="btn-main">Завершить проект</a>
+													@endif
+												@else
+													@if($performer->status==6 && empty($existReview))
+														<a href="/review/form/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main fancybox_ajax">Оставить отзыв</a>
+													@endif
+												@endif
 											</footer>
 										@endif
 									</div>

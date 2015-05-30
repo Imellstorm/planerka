@@ -10,31 +10,37 @@
 		<div class="notification">
 			<div class="container">
 				@include('content.front.account.menu_two')
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="notif-content">
-							<a href="#null" class="view-all">Прочитать все сообщения</a>
-							
-							<div class="single-msg">
-								<div class="user-info">
-									<a href="#null" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
-									<div class="name">
-										<a href="#null">Сергей Боровой</a>
-										<span class="online"></span>
-										<span class="status">PRO</span>
+				@if(count($messages))
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="notif-content">
+								<!-- <a href="#null" class="view-all">Прочитать все сообщения</a> -->
+								@foreach($messages as $message)
+									<div class="single-msg" style="border:none">
+										<div class="user-info">
+											<a href="/{{ $message->alias }}/photo" class="avatar"><img src="{{ Common_helper::getUserAvatar($message->from) }}" alt=""></a>
+											<div class="name">
+												<a href="/{{ $message->alias }}/photo">{{ $message->name }} {{ $message->surname }}</a>
+												<span class="online"></span>
+												@if(!empty($message->pro))
+													<span class="status">PRO</span>
+												@endif
+											</div>
+											<span class="place">{{ $message->city }}</span>
+											<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+										</div>
+										<div class="msg-cont">
+											<div class="time">{{ $message->created_at }}</div>
+											<div class="text-msg">{{ $message->text }}</div>
+											<a href="/message/create/{{ $message->from }}" class="reply fancybox_ajax">Ответить</a>
+										</div>
 									</div>
-									<span class="place">Москва</span>
-									<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
-								</div>
-								<div class="msg-cont">
-									<div class="time">10 минут назад</div>
-									<div class="text-msg">В связи с отсутствием Сереги и Вани нужно перенести тренировку с понедельника на среду.</div>
-									<a href="#null" class="reply">Ответить</a>
-								</div>
-							</div>	
+								@endforeach	
+							</div>
+							{{ $messages->links() }}
 						</div>
 					</div>
-				</div>
+				@endif
 			</div>
 		</div>	
 	</div>	

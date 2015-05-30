@@ -80,38 +80,34 @@
                 </ul>
             </div>
             <div class="sidebar col-md-4">
-                <div class="votes">
-                    <div class="title">Актуальный опрос</div>
-                    <div class="question">Обязательно ли сейчас иметь свидетелей на свадьбе ?</div>
-                    <form>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio1" value="option1">
-                          <label for="radio1">
-                              Думаю, что обязательно должны присутствовать
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio2" value="option2">
-                          <label for="radio2">
-                              Это должны решать молодожены, если не хотят, то и не нужно
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio3" value="option3">
-                          <label for="radio3">
-                              Не принципиально, главное, что бы молодые радовались
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio4" value="option4">
-                          <label for="radio4">
-                              Нет, не обязан никто присутствовать. Вышли из моды уже эти времена.
-                          </label>
-                      </div>
-
-                      <a href="#" class="btn-confirm">Ответить</a>
-                    </form>
-                </div>
+                @if(!empty($vote->question) && !empty($answers))
+                    <div class="votes">
+                        <div class="title">Актуальный опрос</div>
+                        <div class="question">{{ $vote->question }}</div>
+                        @if(Auth::user()->voted==1)
+                            @foreach($answers as $answer)
+                                <div style="margin:5px 0">
+                                    {{ $answer->text }} - {{ $answer->click_count }} 
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                </div>
+                            @endforeach
+                        @else
+                            {{ Form::open(array('role' => 'form', 'url' => '/vote/proccess')) }}
+                                <?php $i=1 ?>
+                                @foreach($answers as $answer)
+                                    <div class="radio">
+                                        <input type="radio" name="answer" id="radio{{$i}}" value="{{ $answer->id }}" {{ $i==1?'checked':'' }}>
+                                        <label for="radio{{$i}}">
+                                           {{ $answer->text }}
+                                        </label>
+                                    </div>
+                                    <?php $i++ ?>
+                                @endforeach
+                                <input type="submit" class="btn-confirm" style="background:#44B39B" value="Ответить">
+                            {{ Form::close() }}
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>

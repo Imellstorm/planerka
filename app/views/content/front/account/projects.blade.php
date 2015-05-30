@@ -18,9 +18,9 @@
 									<div class="single-order">
 										@if(Auth::user()->role_id!=2)
 											<div class="user-info">
-												<a href="#null" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
+												<a href="/{{ $project->alias }}/photo" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
 												<div class="name">
-													<a href="#null">{{ $project->name }} {{ $project->surname }}</a>
+													<a href="/{{ $project->alias }}/photo">{{ $project->name }} {{ $project->surname }}</a>
 													<span class="online"></span>
 													@if($project->pro)
 														<span class="status">PRO</span>
@@ -31,19 +31,53 @@
 										@endif
 										<div class="order-body">
 											<header>
-												<div class="title">{{ $project->title }}</div>
+												<div class="title"><a href="/project/singl/{{ $project->id }}" style="color:#44B39B">{{ $project->title }}</a></div>
 												<div class="price">{{ $project->budget }} руб.</div>
 											</header>
 											<div class="text">{{ $project->description }}</div>
 											<ul class="meta-list">
 												<li>Добавлен: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
 												<li>Город: <span>{{ $project->city }}</span></li>
-												<li>Статус: <span>Не принят</span></li>
+												@if(Auth::user()->role_id!=2)
+													<li>Статус: 
+														<span>
+															<?php switch ($project->status) {
+																case 2:
+																	echo 'Вы выбраны в качестве исполнителя';
+																	break;
+																case 3:
+																	echo 'Заказ принят';
+																	break;
+																case 4:
+																	echo 'Вам отказали';
+																	break;
+																case 6:
+																	echo 'Проект закрыт';
+																	break;
+																																			
+																default:
+																	echo 'Вы подписались на проект';
+																	break;
+															}?>
+														</span>
+													</li>
+												@endif
 											</ul>
 											@if(Auth::user()->role_id!=2)
-												<a href="#null" class="btn-purple">Обсудить условия</a>
-												<a href="#null" class="btn-main">Принять заказ</a>
-												<a href="#null" class="btn-disable">Отказаться от заказа</a>
+												@if($project->status!=6)
+													<a href="/project/singl/{{ $project->id }}" class="btn-purple">Обсудить условия</a>
+												@elseif(empty($project->review))
+													<a href="/review/form/{{ $project->user_id }}/{{ $project->id }}" class="btn-purple fancybox_ajax">Оставить отзыв</a>
+												@endif
+												@if($project->status==2)
+													<a href="/project/changestatus/{{ $project->users_to_project_id }}/3" class="btn-main">Принять заказ</a>
+												@endif
+												@if($project->status==1 || $project->status==2)
+													<a href="/project/changestatus/{{ $project->users_to_project_id }}/5" class="btn-disable">Отказаться от заказа</a>
+												@endif
+												@if($project->status==3)
+													<a href="/project/changestatus/{{ $project->users_to_project_id }}/6" class="btn-main">Завершить проект</a>
+												@endif
 											@endif
 										</div>
 									</div>

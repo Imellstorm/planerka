@@ -79,38 +79,34 @@
                 </ul>
             </div>
             <div class="sidebar col-md-4">
-                <div class="votes">
-                    <div class="title">Актуальный опрос</div>
-                    <div class="question">Обязательно ли сейчас иметь свидетелей на свадьбе ?</div>
-                    <form>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio1" value="option1">
-                          <label for="radio1">
-                              Думаю, что обязательно должны присутствовать
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio2" value="option2">
-                          <label for="radio2">
-                              Это должны решать молодожены, если не хотят, то и не нужно
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio3" value="option3">
-                          <label for="radio3">
-                              Не принципиально, главное, что бы молодые радовались
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <input type="radio" name="radio" id="radio4" value="option4">
-                          <label for="radio4">
-                              Нет, не обязан никто присутствовать. Вышли из моды уже эти времена.
-                          </label>
-                      </div>
-
-                      <a href="#" class="btn-confirm">Ответить</a>
-                    </form>
-                </div>
+                <?php if(!empty($vote->question) && !empty($answers)): ?>
+                    <div class="votes">
+                        <div class="title">Актуальный опрос</div>
+                        <div class="question"><?php echo $vote->question; ?></div>
+                        <?php if(Auth::user()->voted==1): ?>
+                            <?php foreach($answers as $answer): ?>
+                                <div style="margin:5px 0">
+                                    <?php echo $answer->text; ?> - <?php echo $answer->click_count; ?> 
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <?php echo Form::open(array('role' => 'form', 'url' => '/vote/proccess')); ?>
+                                <?php $i=1 ?>
+                                <?php foreach($answers as $answer): ?>
+                                    <div class="radio">
+                                        <input type="radio" name="answer" id="radio<?php echo $i; ?>" value="<?php echo $answer->id; ?>" <?php echo $i==1?'checked':''; ?>>
+                                        <label for="radio<?php echo $i; ?>">
+                                           <?php echo $answer->text; ?>
+                                        </label>
+                                    </div>
+                                    <?php $i++ ?>
+                                <?php endforeach; ?>
+                                <input type="submit" class="btn-confirm" style="background:#44B39B" value="Ответить">
+                            <?php echo Form::close(); ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

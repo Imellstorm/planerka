@@ -10,6 +10,7 @@ class ProfileController extends BaseController {
 			App::abort(404);
 		}
 		$this->getUserinfo($this->user->id);
+		View::share('profile',true);
 		View::share('user',$this->user);
     }
 
@@ -54,7 +55,11 @@ class ProfileController extends BaseController {
 	 * @return Response
 	 */
 	public function getReviews(){
-		return View::make('content.front.profile.reviews');
+		$reviews = Review::select('users.alias','user_info.*','reviews.*')
+		->leftjoin('user_info','user_info.user_id','=','reviews.from_user')
+		->leftjoin('users','users.id','=','reviews.from_user')
+		->where('to_user',$this->user->id)->get();
+		return View::make('content.front.profile.reviews',compact('reviews'));
 	}
 
 	/**

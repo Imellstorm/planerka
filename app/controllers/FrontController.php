@@ -7,7 +7,9 @@ class FrontController extends BaseController {
 		if(Input::get('search')){
 			return View::make('content.front.search');
 		}
-		return View::make('content.front.index');
+		$vote = Vote::first();
+		$answers = Voteanswer::all();
+		return View::make('content.front.index',compact('vote','answers'));
 	}
 
 	public function page($alias){

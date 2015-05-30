@@ -44,7 +44,19 @@ class ImageController extends BaseController {
 			$model->user_id = Auth::user()->id;
 			$model->image_id = $imageId;
 			$model->save();
-			return Response::json('success');
+
+			$image = Image::leftjoin('users','users.id','=','images.user_id')->where('images.id',$imageId)->first();
+			if(!empty($image)){
+				$notify = new Notifications;
+				$notify->from_user = Auth::user()->id;
+				$notify->to_user = $image->user_id;
+				$notify->text = 'Вашу фотографию оценили';
+				$notify->link = $image->alias.'/album/'.$image->album_id;
+				$notify->image = $image->thumb_small;
+				$notify->save();	
+
+				return Response::json('success');
+			}
 		}
 		return Response::json('error');
 	}

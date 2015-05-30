@@ -33,6 +33,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/roles', 'RoleController');
 	Route::controller('admin/settings', 'SettingsController');
 	Route::controller('admin/menus', 'MenuController');
+	Route::controller('admin/vote', 'VoteController');
 });
 
 /*
@@ -52,6 +53,9 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('calendar','CalendarController');
 	Route::controller('project','ProjectController');
 	Route::controller('projectmessages', 'ProjectmessagesController');
+	Route::controller('message', 'MessageController');
+	Route::controller('review', 'ReviewController');
+	Route::post('vote/proccess', 'VoteController@postProccess');
 });
 
 /*

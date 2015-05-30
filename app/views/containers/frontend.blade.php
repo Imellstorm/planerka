@@ -147,7 +147,10 @@
                         
                         <div class="menu-panel">
                             <div class="list"><a href="/project/list"><img src="/assets/img/paper.png" alt=""></a></div>
-                            <div class="mail"><a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a><span>1</span></div>
+                            <div class="mail">
+                                <a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a>
+                                <!-- <span>1</span> -->
+                            </div>
                             <div class="count">
                                 <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
                             </div>
@@ -177,7 +180,7 @@
     @endif
         <div class="container">
             <div class="row">
-                @if(Auth::check()&&Auth::user()->role_id!=2&&isset($userInfo)&&!empty($userInfo))
+                @if(isset($profile))
                     <div class="col-sm-5" style="margin:100px 0 20px 0">
                         <div class="pers-info">
                             <div class="avatar"><img src="{{ Common_helper::getUserAvatar($userInfo->user_id) }}" alt=""></div>
@@ -203,7 +206,9 @@
                             {{ $userInfo->biography }}
                         </div>
                         <div class="star"><img src="/assets/img/star.png" alt=""></div>
-                        <a href="#null" class="btn-main">Отправить сообщение</a>
+                        @if(Auth::check() && $userInfo->user_id!=Auth::user()->id)
+                            <a href="/message/create/{{ $userInfo->user_id }}" class="btn-main fancybox_ajax">Отправить сообщение</a>
+                        @endif
                     </div>
                 @else
                 <div class="col-sm-12">

@@ -4,7 +4,9 @@
 
 @section('main')
 	<div class="container">
-		@include('content.front.projects.chatform')
+		@if(empty($project->closed))
+			@include('content.front.projects.chatform')
+		@endif
 		@if(count($messages))
 			<div class="order-review" style="border:none">
 				<div class="chat">

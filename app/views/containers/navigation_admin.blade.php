@@ -24,7 +24,8 @@
                     <li class="{{ Request::segment(2)=='articles'?'active':'' }}">{{ link_to('admin/roles','Типы пользователей') }}</li>  
                   </ul>
                 </li>
-                <li class="{{ Request::segment(2)=='menus'?'active':'' }}">{{ link_to('admin/menus','Меню') }}</li>        
+                <li class="{{ Request::segment(2)=='menus'?'active':'' }}">{{ link_to('admin/menus','Меню') }}</li>
+                <li class="{{ Request::segment(2)=='vote'?'active':'' }}">{{ link_to('admin/vote','Опрос') }}</li>           
                 <!-- <li class="{{ Request::segment(2)=='settings'?'active':'' }}">{{ link_to('admin/settings/edit','Настройки') }}</li>                                -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
