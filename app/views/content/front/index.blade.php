@@ -84,7 +84,7 @@
                     <div class="votes">
                         <div class="title">Актуальный опрос</div>
                         <div class="question">{{ $vote->question }}</div>
-                        @if(Auth::user()->voted==1)
+                        @if(Auth::check() && Auth::user()->voted==1)
                             @foreach($answers as $answer)
                                 <div style="margin:5px 0">
                                     {{ $answer->text }} - {{ $answer->click_count }} 
