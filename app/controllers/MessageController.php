@@ -24,8 +24,14 @@ class MessageController extends BaseController {
 		$user = User::find($userId);
 		if(empty($user)){
 			App::abort(404);
-		}	
-		return View::make('content.front.messages.form',compact('user'));
+		}
+		$messages = Message::leftjoin('user_info','user_info.user_id','=','messages.from')
+							->where('from',Auth::user()->id)
+							->where('to',$userId)
+							->orWhere('to',Auth::user()->id)
+							->where('from',$userId)
+							->get();	
+		return View::make('content.front.messages.form',compact('user','messages'));
 	}
 
 

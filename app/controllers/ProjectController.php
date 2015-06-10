@@ -22,6 +22,7 @@ class ProjectController extends BaseController {
 			$projectAssign = Userstoproject::where('user_id',Auth::user()->id)->where('project_id',$id)->first();
 			$model = new Projectmessages;
 			$projectMessages = $model->getProjectMessagesByUser($id,Auth::user()->id);
+			$model->where('to_user',Auth::user()->id)->where('project_id',$id)->update(array('readed'=>1));
 			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages'));
 		}
 
@@ -32,7 +33,7 @@ class ProjectController extends BaseController {
 				->paginate(20);
 
 		$existReview = Review::where('from_user',Auth::user()->id)->where('project_id',$project->project_id)->first();
-		$existPerformer = Userstoproject::where('users_to_project.project_id',$id)->where('status',2)->orWhere('status',3)->first();
+		$existPerformer = Userstoproject::where('users_to_project.project_id',$id)->where('status','>',2)->first();
 
 		if(!empty($usersToProject)){
 			foreach ($usersToProject as $key => $val) {
@@ -60,6 +61,7 @@ class ProjectController extends BaseController {
 		}
 		$model = new Projectmessages;
 		$messages = $model->getProjectMessagesByUser($projectId,$userId);	
+		$model->where('to_user',Auth::user()->id)->where('project_id',$projectId)->update(array('readed'=>1));
 		return View::make('content.front.projects.usermassages',compact('messages','project','userId'));
 	}
 
@@ -177,5 +179,13 @@ class ProjectController extends BaseController {
 		$notify->save();
 
 		return Redirect::back();
+	}
+
+	public function getInviteperformer($userId=''){
+		if(empty($userId)){
+			App::abort(404);
+		}
+		$projects = Project::where('user_id',Auth::user()->id)->lists('title','id');
+		return View::make('content.front.projects.inviteperformer',compact('userId','projects'));
 	}
 }

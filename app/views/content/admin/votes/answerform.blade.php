@@ -1,0 +1,1 @@
+<div class="form-group answer text-center"><span type="button" class="fa fa-minus-circle del_answer"></span><label>Текст ответа</label><textarea name="answers[]" class="form-control">{{ isset($answer->text)?$answer->text:'' }}</textarea></div>

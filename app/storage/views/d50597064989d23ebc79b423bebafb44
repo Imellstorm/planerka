@@ -50,7 +50,7 @@
             codeLatLng(lat, lng)
         }
         function errorFunction(){
-          alert("Geocoder failed");
+          //alert("Geocoder failed");
         }
         function initialize() {
             geocoder = new google.maps.Geocoder();
@@ -146,10 +146,17 @@
                         <div class="logo"><a href="/"><img src="/assets/img/user-logo.png" alt=""></a></div>
                         
                         <div class="menu-panel">
-                            <div class="list"><a href="/project/list"><img src="/assets/img/paper.png" alt=""></a></div>
+                            <div class="list">
+                                <a href="/project/list"><img src="/assets/img/paper.png" alt=""></a>
+                                <?php if(!empty($newProjectMessages)): ?>
+                                    <span><?php echo $newProjectMessages; ?></span>
+                                <?php endif; ?>
+                            </div>
                             <div class="mail">
                                 <a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a>
-                                <!-- <span>1</span> -->
+                                <?php if(!empty($newMessages)): ?>
+                                    <span><?php echo $newMessages; ?></span>
+                                <?php endif; ?>
                             </div>
                             <div class="count">
                                 <a href="/account/shop"><?php echo Auth::user()->balance; ?> руб.</a>
@@ -165,7 +172,7 @@
                                     <li><a href="/account/messages">Сообщения</a></li>
                                     <li><a href="/account/favorites">Избранное</a></li>
                                     <li><a href="/account/projects">Заказы / уведомления</a></li>
-                                    <li><a href="/<?php echo Auth::user()->alias; ?>/photo">Профиль</a></li>
+                                    <li><a href="/<?php echo Auth::user()->alias; ?>">Профиль</a></li>
                                     <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>

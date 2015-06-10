@@ -22,8 +22,8 @@ $(document).ready(function(){
 	});
 </script>
 
-<div class="custom-modal" id="new-project" style="display:block">
-	<div class="title">Создать проэкт</div>
+<div class="custom-modal" id="new-project" style="display:block;">
+	<div class="title" style="padding:10px 0 ">Создать проэкт</div>
 	{{ Form::open(array('role' => 'form', 'url' => '/project/store', 'class'=>'project','files'=> true)) }}
 
 		<div class="form-group">
@@ -72,7 +72,7 @@ $(document).ready(function(){
 			
 			<input type="file" name="image" style="position:relative; top:15px;">
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="padding-top: 10px;">
 			<input type="submit" class="btn-main" value="Опубликовать">
 		</div>
 	{{ Form::close() }}

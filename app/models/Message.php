@@ -4,14 +4,40 @@ class Message extends \Eloquent {
 	protected $table = 'messages';
     protected $fillable = array('from_del', 'to_del');
 
-    public function getUserMessages($userId){
+    public function getUserMessages($currentUserId,$userId){
         $result = DB::table($this->table)
                     ->select('user_info.*','users.alias',$this->table.'.*')
                     ->leftjoin('user_info','user_info.user_id','=',$this->table.'.from')
                     ->leftjoin('users','users.id','=',$this->table.'.from')
-                    ->where('to',$userId)   
+                    ->where('from',$currentUserId)
+                    ->where('to',$userId)  
+                    ->orWhere('from',$userId)
+                    ->where('to',$currentUserId)
+                    ->orderBy($this->table.'.id','DESC')
                     ->paginate(20);
         return $result;
+    }
+
+    public function getUserDialogs($userId){
+        $result = DB::table($this->table)
+                    ->select('user_info.*','users.alias',$this->table.'.*')
+                    ->leftjoin('user_info','user_info.user_id','=',$this->table.'.from')
+                    ->leftjoin('users','users.id','=',$this->table.'.from')
+                    ->where('to',$userId)  
+                    ->orWhere('from',$userId)
+                    ->orderBy($this->table.'.id','DESC')
+                    ->get();
+
+        foreach($result as $key=>$val){
+            if($val->to==$userId){
+                $val->userdialog = $val->from_name;
+                $dialogs[$val->from][]=$val;
+            } else {
+                $val->userdialog = $val->to_name;
+                $dialogs[$val->to][]=$val;
+            }
+        }
+        return $dialogs;
     }
 
 	public function getMessagesInbox($table_fields,$params,$id){        

@@ -3,8 +3,7 @@
 class VoteController extends BaseController {
 
 	protected $table_fields = array(
-			'Ответ'				=> 'text',
-			'Проголосовало'		=> 'click_count',
+			'Вопрос'			=> 'question',
 			'Создано'			=> 'created_at',
 			'Обновлено'			=> 'updated_at',
 		);	
@@ -16,7 +15,7 @@ class VoteController extends BaseController {
 	*/
 	public function getIndex()
 	{
-		$model = new Voteanswer;
+		$model = new Vote;
 		$params = array(
 			'sort' 		=> Input::get('sort'),
 	    	'order' 	=> Input::get('order'),
@@ -25,10 +24,9 @@ class VoteController extends BaseController {
     	);
 		$table_fields = $this->table_fields;
 
-		$vote = Vote::first();
-        $answers = $model->getAnswers($table_fields,$params);
+        $votes = $model->getVotes($table_fields,$params);
 
-		return View::make('content.admin.votes.index', compact('answers','vote','table_fields'));
+		return View::make('content.admin.votes.index', compact('votes','table_fields'));
 	}
 
 	/**
@@ -41,29 +39,6 @@ class VoteController extends BaseController {
 		return View::make('content.admin.votes.form');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function postStorequestion()
-	{
-		$rules = array('question' => 'required');
-		$validator = Validator::make(Input::all(),$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		} else {
-			$model = new Vote;
-	        $model->question = Input::get('question');
-        	$model->save();
-		}
-
-		Session::flash('success', 'Опрос создан!');
-		return Redirect::to('/admin/vote');
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -72,38 +47,30 @@ class VoteController extends BaseController {
 	 */
 	public function postStore()
 	{
-		$rules = array('text' => 'required');
+		$rules = array('question' => 'required');
 		$validator = Validator::make(Input::all(),$rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()){
 			return Redirect::back()->withErrors($validator)->withInput();
 		} else {
-			$model = new Voteanswer;
-	        $model->text   	= Input::get('text');
+			$model = new Vote;
+	        $model->question = Input::get('question');
         	$model->save();
 		}
 
-		Session::flash('success', 'Ответ создан!');
+		$answers = Input::get('answers');
+		if(count($answers)){
+			foreach ($answers as $key => $val) {
+				$answersdata[] = array('text'=>$val,'vote_id'=>$model->id);
+			}
+			$answermodel = new Voteanswer;
+			$answermodel->insert($answersdata);
+		}
+
+		Session::flash('success', 'Опрос создан!');
 		return Redirect::to('/admin/vote');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function getShow($id)
-	{
-		$article = article::find($id);
-
-		if(!empty($article)){	
-			return View::make('articles::admin.form', compact('article'));
-		} else {
-			App::abort(404);
-		}
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -113,44 +80,15 @@ class VoteController extends BaseController {
 	 */
 	public function getEdit($id)
 	{
-		$answer = Voteanswer::find($id);
-		if(!empty($answer)){
-			return View::make('content.admin.votes.form', compact('answer'));
-		} else {
-			App::abort(404);
-		}
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function putUpdatequestion($id)
-	{
 		$vote = Vote::find($id);
-		if(empty($vote)){
+		if(!empty($vote)){
+			$answers = Voteanswer::where('vote_id',$id)->get();
+			return View::make('content.admin.votes.form', compact('vote','answers'));
+		} else {
 			App::abort(404);
 		}
-		
-		$rules = array('question' => 'required');
-		$validator = Validator::make($data = Input::all(), $rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		} else {
-			$data = array(
-		        'question'  => Input::get('question'),
-	        );	        
-
-        	$vote->update($data);
-		}
-		Session::flash('success', 'Данные опроса обновлены!');
-
-		return Redirect::to('admin/vote');
 	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -160,26 +98,33 @@ class VoteController extends BaseController {
 	 */
 	public function putUpdate($id)
 	{
-		$answer = Voteanswer::find($id);
-		if(empty($answer)){
+		$vote = Vote::find($id);
+		if(empty($vote)){
 			App::abort(404);
 		}
 		
-		$rules = array('text' => 'required');
+		$rules = array('question' => 'required');
 		$validator = Validator::make($data = Input::all(), $rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()){
 			return Redirect::back()->withErrors($validator)->withInput();
 		} else {
 			$data = array(
-		        'text'  => Input::get('text'),
+		        'question'  => Input::get('question'),
 	        );	        
+        	$vote->update($data);
 
-        	$answer->update($data);
+        	$answers = Input::get('answers');
+        	$answermodel = new Voteanswer;
+        	$answermodel->where('vote_id',$id)->delete();
+			if(count($answers)){
+				foreach ($answers as $key => $val) {
+					$answersdata[] = array('text'=>$val,'vote_id'=>$id);
+				}
+				$answermodel->insert($answersdata);
+			}
 		}
-		Session::flash('success', 'Данные ответа обновлены!');
-
+		Session::flash('success', 'Данные опроса обновлены!');
 		return Redirect::to('admin/vote');
 	}
 
@@ -191,25 +136,39 @@ class VoteController extends BaseController {
 	 */
 	public function deleteDestroy($id)
 	{
-		Voteanswer::destroy($id);
-		Session::flash('success', 'Ответ удален!');
+		Vote::destroy($id);
+		Session::flash('success', 'Опрос удален!');
 		return Redirect::to('admin/vote');
 	}
 
 	public function postProccess(){
 		$answerId = Input::get('answer');
-		$user = User::find(Auth::user()->id);
-
-		if(empty($user->voted)){
-			$answer = Voteanswer::find($answerId);
-			if(empty($answer)){
-				App::abort(404);
-			}
+		$answer = Voteanswer::find($answerId);
+		if(empty($answer)){
+			App::abort(404);
+		}
+		$votedUser = Votedusers::where('user_id',Auth::user()->id)->where('vote_id',$answer->vote_id)->first();
+		if(empty($votedUser)){
 			$answer->update(array('click_count'=>$answer->click_count+1));
-			$user->update(array('voted'=>1));
+			$model = new Votedusers;
+			$model->user_id = Auth::user()->id;
+			$model->vote_id = $answer->vote_id;
+			$model->save;
 		} else {
 			return Redirect::back()->withErrors(array('Вы уже голосовали'));
 		}
+		return Redirect::back();
+	}
+
+	public function getActivate($id=''){
+		$vote = Vote::find($id);
+		if(!Auth::check() || Auth::user()->role_id!=1 || empty($vote)){
+			App:abort(404);
+		}
+
+		$model = new Vote;
+		$model->update(array('active'=>0));
+		$vote->update(array('active'=>1));
 		return Redirect::back();
 	}
 }

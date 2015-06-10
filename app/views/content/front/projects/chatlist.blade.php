@@ -12,4 +12,5 @@
 			Срок {{ $message->term }}
 		</div>
 	@endif
+	<div style="clear:both"></div>
 </div>

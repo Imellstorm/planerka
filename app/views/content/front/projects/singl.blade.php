@@ -102,6 +102,7 @@
 	            							{{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:150px','required')) }}
 										</div>
 										{{ Form::hidden('project_id', $project->project_id) }}
+										{{ Form::hidden('to_user', $project->user_id) }}
 
 										<label for="" class="pull-left">Прикрепить альбомы</label>
 										<div class="form-group album-load" style="margin-left:140px">
@@ -164,6 +165,9 @@
 												@endif
 											</div>
 											<footer>
+												@if(!empty($newProjectMessages))
+				                                    <div class="new_mess_badge">Есть новые сообщения</div>
+				                                @endif
 												<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>
 												@if($project->closed!=1)
 													@if($performer->status==1 && empty($existPerformer))

@@ -84,11 +84,16 @@
                     <div class="votes">
                         <div class="title">Актуальный опрос</div>
                         <div class="question">{{ $vote->question }}</div>
-                        @if(Auth::check() && Auth::user()->voted==1)
+                        @if(Auth::check() && !empty($userVoted))
                             @foreach($answers as $answer)
-                                <div style="margin:5px 0">
-                                    {{ $answer->text }} - {{ $answer->click_count }} 
-                                    <i class="fa fa-thumbs-o-up"></i>
+                                <div style="margin:10px 0">
+                                    <div class="pull-left">
+                                        {{ $answer->text }} 
+                                    </div>
+                                    <div class="pull-right">{{ $answer->click_count }} 
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                    </div>
+                                    <div style="clear:both"></div>
                                 </div>
                             @endforeach
                         @else

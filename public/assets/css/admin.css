@@ -417,3 +417,20 @@ border-color: #56A32F;
 .mce-tinymce {
     width: 100% !important;
 }
+.vote_form_cont{
+    margin: 0 20px;
+}
+.vote_form_cont textarea{
+    height:100px;
+}
+.answer textarea{
+    height: 50px;
+}
+.del_answer{
+    cursor: pointer;
+    font-size:18px;
+    margin: 3px 5px 0 0;
+}
+input, select{
+    outline: none;
+}

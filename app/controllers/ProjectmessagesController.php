@@ -5,12 +5,13 @@ class ProjectmessagesController extends BaseController {
 	protected $rules = array(
 		'text'				=> 'required',
 		'term'				=> 'max:256',
-		'albums'			=> 'max:256'
+		'albums'			=> 'max:256',
+		'to_user'			=> 'required',
+		'project_id'		=> 'required',
 	);
 
 	public function postStore(){
 		$validator = Validator::make(Input::all(), $this->rules);
-
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
@@ -31,11 +32,11 @@ class ProjectmessagesController extends BaseController {
 		}
 
 		$projectAssign = Userstoproject::where('project_id',$projectId)->where('user_id',Auth::user()->id)->first();
-		if(Auth::user()->role_id!=2 && empty($projectAssign))	{
+		if(empty($projectAssign))	{
 			$userstoproject = new Userstoproject;
-			$userstoproject->user_id 	= Auth::user()->id;
+			$userstoproject->user_id 	= Auth::user()->role_id!=2?Auth::user()->id:$model->to_user;
 			$userstoproject->project_id = $projectId;
-			$userstoproject->status 	= 1;
+			$userstoproject->status 	= Auth::user()->role_id!=2?1:2;
 			$userstoproject->save();
 		}
 

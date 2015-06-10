@@ -7,6 +7,8 @@
 		{{ Form::hidden('project_id', $project->project_id) }}
 		@if(isset($userId) && !empty($userId))
 			{{ Form::hidden('to_user', $userId) }}
+		@else
+			{{ Form::hidden('to_user', $project->user_id) }}
 		@endif
 		<!-- <div class="add-file">
 		    <div class="file-title">Добавить файл</div>

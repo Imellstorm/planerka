@@ -5,7 +5,7 @@ body {
   color: #373737;
 }
 
-input.form-control, input {
+  input, select {
   outline: none;
 }
 
@@ -1955,6 +1955,7 @@ input.btn-main {
 }
 .user-nav .menu-panel .list {
   margin-right: 0px;
+  position: relative;
 }
   .user-nav .menu-panel .list a{
     display: inline-block;
@@ -1976,7 +1977,7 @@ input.btn-main {
   .user-nav .menu-panel .mail a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .mail span {
+.user-nav .menu-panel .mail span, .user-nav .menu-panel .list span {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -3780,7 +3781,7 @@ form.account .btn-main {
 
 
 #new-project, #modal-filter {
-  padding: 0 60px 60px 60px;
+  padding: 0 60px;
 }
 form.project {
   padding-top: 0!important;
@@ -4050,4 +4051,18 @@ form.project .checkbox span {
   background: white;
   margin: 5px 10px 0 0;
   float: left;
+}
+#new-project .form-group{
+    margin-bottom: 15px;
+}
+.hover_green:hover{
+  color:#44B39B !important;
+}
+.new_mess_badge{
+  background:#685E85;
+  color:white;
+  margin-bottom:10px;
+  padding:2px 5px;
+  width:165px;
+  border-radius: 3px;
 }

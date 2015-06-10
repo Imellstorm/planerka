@@ -18,9 +18,9 @@
 									<div class="single-order">
 										@if(Auth::user()->role_id!=2)
 											<div class="user-info">
-												<a href="/{{ $project->alias }}/photo" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
+												<a href="/{{ $project->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
 												<div class="name">
-													<a href="/{{ $project->alias }}/photo">{{ $project->name }} {{ $project->surname }}</a>
+													<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
 													<span class="online"></span>
 													@if($project->pro)
 														<span class="status">PRO</span>

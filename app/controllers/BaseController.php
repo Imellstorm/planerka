@@ -8,6 +8,10 @@ class BaseController extends Controller {
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
 		if(Auth::check()){
 			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
+			$newProjectMessages = Projectmessages::where('to_user',Auth::user()->id)->where('readed',0)->get();
+			View::share('newProjectMessages',count($newProjectMessages));
+			View::share('newMessages',count($newMessages));
 			View::share('userInfo',$userInfo);
 		}
 		View::share('rules',$rules);

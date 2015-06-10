@@ -365,6 +365,8 @@ $(document).ready(function() {
     });
 
     $('body').on('click','.role_main',function(){
+      $(this).parent().hide();
+      $('.loading').show();
       $.ajax({
         url: '/admin/users/store',
         type: 'post',

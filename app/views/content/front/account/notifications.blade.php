@@ -17,9 +17,9 @@
 								@foreach($notifications as $noty)						
 									<div class="single-notif">
 										<div class="user-info">
-											<a href="/{{ $noty->alias }}/photo" class="avatar"><img src="{{ Common_helper::getUserAvatar($noty->from_user) }}" alt=""></a>
+											<a href="/{{ $noty->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($noty->from_user) }}" alt=""></a>
 											<div class="name">
-												<a href="/{{ $noty->alias }}/photo">{{ $noty->name }} {{ $noty->surname }}</a>
+												<a href="/{{ $noty->alias }}">{{ $noty->name }} {{ $noty->surname }}</a>
 												<span class="online"></span>
 												@if(!empty($noty->pro))
 													<span class="status">PRO</span>

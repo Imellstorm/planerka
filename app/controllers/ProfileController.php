@@ -19,7 +19,7 @@ class ProfileController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getPhoto(){
+	public function getIndex(){
 		$mainProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('role_id',$this->user->role_id)->where('user_id',$this->user->id)->first();
 		$otherProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('user_id',$this->user->id)->where('role_id','!=',$this->user->role_id)->get();
 		$userinfo = Userinfo::where('user_id',$this->user->id)->first();

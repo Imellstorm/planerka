@@ -8,11 +8,11 @@
 		<div class="row photos">
 			@if(!empty($images))
 				<?php $imgCount = count($images); ?>
-				<div class="col-md-7">
+				<div class="col-md-4">
 					@foreach($images as $key=>$image)
-						@if($key>=$imgCount/2)
+						@if($key>=$imgCount/3)
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-4">
 						@endif
 						<div class="img-wrapp">
 							<a href="/{{ $image->path }}" rel="gallery1" class="fancybox" >
@@ -30,8 +30,8 @@
 								@if(Auth::check() && Auth::user()->id==$image->user_id)
 									<div class="set">
 										<h4>Установить</h4>
-										<a href="/album/setalbumcover/{{ $album->id.'/'.$image->id }}">обложкой альбома</a>
-										<a href="/album/setprofilecover/{{ $image->id }}">баннером профиля</a>
+										<a href="/album/setalbumcover/{{ $album->id.'/'.$image->id }}" class="hover_green">обложкой альбома</a>
+										<a href="/album/setprofilecover/{{ $image->id }}" class="hover_green">баннером профиля</a>
 									</div>
 								@endif
 								<div class="share">
@@ -61,7 +61,7 @@
 					<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 				</div>				
 				<div class="user-btns">
-					<a href="/{{ $user->alias }}/photo" class="btn-gray">Обратно в профиль</a>
+					<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>
 					@if(Auth::check() && Auth::user()->id!=$user->id)
 						<a href="#null" class="btn-purple">Написать сообщение</a>
 					@endif
@@ -86,7 +86,10 @@
 				<br>Поддерживыемые расширения: Jpeg, Jpg, Png</p>
 				<p>Ваш лимит: <span>20 фото в неделю</span></p>
 				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
-			</footer>						
+			</footer>
+			<div style="margin-top:20px">
+				<a href="/{{ $user->alias }}/album/{{ $album->id }}" class="btn-main" style="margin:0 auto">ПРОДОЛЖИТЬ</a>
+			</div>						
 		</div>
 	</div>
 </div>	

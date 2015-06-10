@@ -71,7 +71,7 @@ class AccountController extends BaseController {
 	public function getNotifications(){
 		$notifications = Notifications::select('users.alias','user_info.*','notifications.*')
 		->leftjoin('user_info','user_info.user_id','=','notifications.from_user')
-		->leftjoin('users','users.id','=','notifications.to_user')
+		->leftjoin('users','users.id','=','notifications.from_user')
 		->where('notifications.to_user',Auth::user()->id)
 		->orderBy('notifications.id','DESC')
 		->paginate(20);
@@ -83,10 +83,15 @@ class AccountController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getMessages(){
+	public function getMessages($userId=''){
 		$model = new Message;
-		$messages = $model->getUserMessages(Auth::user()->id);
-		return View::make('content.front.account.messages',compact('messages'));
+		if(empty($userId)){
+			$dialogs = $model->getUserDialogs(Auth::user()->id);
+			return View::make('content.front.account.dialogs',compact('dialogs'));
+		}
+		$messages = $model->getUserMessages(Auth::user()->id,$userId);
+		$model->where('to',Auth::user()->id)->update(array('readed'=>1));
+		return View::make('content.front.account.messages',compact('messages','userId'));
 	}
 
 	/**
