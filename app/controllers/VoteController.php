@@ -153,7 +153,7 @@ class VoteController extends BaseController {
 			$model = new Votedusers;
 			$model->user_id = Auth::user()->id;
 			$model->vote_id = $answer->vote_id;
-			$model->save;
+			$model->save();
 		} else {
 			return Redirect::back()->withErrors(array('Вы уже голосовали'));
 		}
