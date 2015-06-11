@@ -40,7 +40,7 @@
 										</div>
 									@endforeach
 								@else
-									<div class="text-center">Сообщения отсутствуют</div>
+									<div class="text-center" style="margin-top:20px">Сообщения отсутствуют</div>
 								@endif
 							</div>
 						</div>
