@@ -35,6 +35,9 @@
 												<div class="price">{{ $project->budget }} руб.</div>
 											</header>
 											<div class="text">{{ $project->description }}</div>
+											@if(!empty($project->new_messages))
+												<div class="new_mess_badge text-center">Новые сообщения - {{ $project->new_messages }}</div>
+											@endif
 											<ul class="meta-list">
 												<li>Добавлен: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
 												<li>Город: <span>{{ $project->city }}</span></li>
@@ -59,6 +62,16 @@
 																	echo 'Вы подписались на проект';
 																	break;
 															}?>
+														</span>
+													</li>
+												@else
+													<li>Статус: 
+														<span>
+															@if($project->closed==1)
+																Проект закрыт
+															@else
+																Проект активен
+															@endif
 														</span>
 													</li>
 												@endif

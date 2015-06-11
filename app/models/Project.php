@@ -6,6 +6,7 @@ class Project extends \Eloquent {
 
     public function getAllProjects(){
         $projects =  DB::table($this->table)
+            ->where('closed','!=',1)
             ->orderBy('id','DESC')
             ->paginate(10);
         return $projects;
@@ -13,10 +14,12 @@ class Project extends \Eloquent {
 
     public function getProjectsByUser($userId){
         $projects =  DB::table($this->table)
-            ->select('user_info.*',$this->table.'.*')
+            ->select('user_info.*',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),$this->table.'.*')
             ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
+            ->leftjoin('project_messages','project_messages.project_id','=',DB::raw(DB::getTablePrefix().$this->table.'.id AND '.DB::getTablePrefix().'project_messages.readed=0 AND '.DB::getTablePrefix().'project_messages.to_user='.$userId))
             ->where($this->table.'.user_id',$userId)
             ->orderBy($this->table.'.id','DESC')
+            ->groupBy($this->table.'.id')
             ->paginate(10);
         return $projects;
     }
@@ -41,6 +44,7 @@ class Project extends \Eloquent {
             $this->table.'.id as project_id',
             'user_info.*',
             'users.created_at as usercreated',
+            'users.alias',
             'roles.name as rolename')
         ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
         ->leftjoin('users','users.id','=',$this->table.'.user_id')

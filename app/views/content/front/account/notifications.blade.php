@@ -30,9 +30,11 @@
 										</div>
 										<div class="notif-text">
 											<span class="photo-like">
-												<div class="pull-left"> 
-													{{ $noty->text }}
-													<br>
+												<div class="pull-left">
+													@if($noty->readed==0)
+														<div class="new_mess_badge text-center" style="font-size:14px; width:100px">Новое</div>
+													@endif 
+													<div>{{ $noty->text }}</div>
 													<a href="/{{ $noty->link }}" style="color:#44B39B">Посмотреть</a>
 												</div>
 												@if(!empty($noty->image))

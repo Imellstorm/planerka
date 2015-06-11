@@ -26,7 +26,7 @@ class ProjectmessagesController extends BaseController {
 	        $model->price   		= Input::get('price')?Input::get('price'):'';
 	        $model->term   			= Input::get('term')?Input::get('term'):'';
 	        $model->text   			= Input::get('text');
-	        $model->albums   		= $albums?trim($albums,','):'';
+	        $model->albums   		= !empty($albums)?trim($albums,','):'';
 
         	$model->save();
 		}

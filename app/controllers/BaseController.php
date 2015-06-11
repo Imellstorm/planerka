@@ -10,7 +10,9 @@ class BaseController extends Controller {
 			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
 			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
 			$newProjectMessages = Projectmessages::where('to_user',Auth::user()->id)->where('readed',0)->get();
+			$newNotifications = Notifications::where('to_user',Auth::user()->id)->where('readed',0)->get();
 			View::share('newProjectMessages',count($newProjectMessages));
+			View::share('newNotifications',count($newNotifications));
 			View::share('newMessages',count($newMessages));
 			View::share('userInfo',$userInfo);
 		}

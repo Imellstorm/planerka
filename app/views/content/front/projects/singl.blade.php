@@ -14,6 +14,7 @@
 				$('.albums').val($('.albums').val()+$(this).attr('album_id')+',');
 				$('.album-input').before('<img src="'+$(this).attr('src')+'">');
 				albIds.push($(this).attr('album_id'));
+				$('.albumsIds').val(albIds);
 			}
 			$.fancybox.close();
 		})
@@ -45,7 +46,6 @@
 	<div id="main">
 		<div class="project">
 			<div class="container">
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="proj-card">
@@ -54,27 +54,36 @@
 								<div class="price">{{ $project->budget }} руб.</div>
 							</header>
 							<div class="cont">
-								<div class="user-info">
-									<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
-									<div class="name">
-										<a href="#null">{{ $project->name }} {{ $project->surname }}</a>
-										<span class="online"></span>
-										@if($project->pro)
-											<span class="status">PRO</span>
-										@endif
+								<div class="row">
+									@if(!empty($project->thumb))
+										<div class="col-md-3">
+											<img src="/{{ $project->thumb }}" style="width:100%">
+										</div>
+									@endif
+									<div class="col-md-9">
+										<div class="user-info">
+											<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
+											<div class="name">
+												<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
+												<span class="online"></span>
+												@if($project->pro)
+													<span class="status">PRO</span>
+												@endif
+											</div>
+											<span class="place">{{ $project->city }}</span>
+											<div class="reg">Зарегистрирован на сайте: <span>
+												 {{ Common_helper::getPastTime($project->usercreated) }}
+											</span></div>
+										</div>
+										<div class="msg">
+											{{ $project->description }}
+										</div>
+										<ul class="tag">
+											<li>Раздел</li>
+											<li><a>{{ $project->rolename }}</a></li>
+										</ul>
 									</div>
-									<span class="place">{{ $project->city }}</span>
-									<div class="reg">Зарегистрирован на сайте: <span>
-										 {{ Common_helper::getPastTime($project->usercreated) }}
-									</span></div>
 								</div>
-								<div class="msg">
-									{{ $project->description }}
-								</div>
-								<ul class="tag">
-									<li>Раздел</li>
-									<li><a>{{ $project->rolename }}</a></li>
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -107,7 +116,7 @@
 										<label for="" class="pull-left">Прикрепить альбомы</label>
 										<div class="form-group album-load" style="margin-left:140px">
 											<a href="/album/list" class="album-input fancybox_ajax"></a>	
-											<input type="hidden" name="albums">			
+											<input type="hidden" name="albums" class="albumsIds">			
 										</div>
 										<div class="form-group">
 											<input type="submit" class="btn-main" value="Ответить на проект">
@@ -135,10 +144,10 @@
 								@foreach($usersToProject as $key=>$performer)
 									<div style="border-bottom:solid 1px #44B39B">
 										<div class="user-info" style="padding-top:20px;">
-											<a href="/{{ $performer->alias }}/photo" class="avatar"><img src="{{ Common_helper::getUserAvatar($performer->user_id) }}" alt=""></a>
+											<a href="/{{ $performer->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($performer->user_id) }}" alt=""></a>
 											<div class="info-cont">
 												<div class="name">
-													<a href="/{{ $performer->alias }}/photo">{{ $performer->name }} {{ $performer->surname }}</a>
+													<a href="/{{ $performer->alias }}">{{ $performer->name }} {{ $performer->surname }}</a>
 													<span class="online"></span>
 													@if(!empty($performer->pro))
 														<span class="status">PRO</span>

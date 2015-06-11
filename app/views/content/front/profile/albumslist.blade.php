@@ -1,6 +1,3 @@
-<style type="text/css">
-	
-</style>
 @if(count($albums))
 	<div style="max-width:630px">
 		@foreach($albums as $album)

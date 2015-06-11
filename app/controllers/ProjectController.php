@@ -22,8 +22,21 @@ class ProjectController extends BaseController {
 			$projectAssign = Userstoproject::where('user_id',Auth::user()->id)->where('project_id',$id)->first();
 			$model = new Projectmessages;
 			$projectMessages = $model->getProjectMessagesByUser($id,Auth::user()->id);
+			if(!empty($projectMessages)){
+				foreach ($projectMessages as $mess){
+					if(!empty($mess->albums)){
+						$albumsIds = explode(',',$mess->albums);
+						foreach ($albumsIds as $albumId) {
+							$album = Album::find($albumId);
+							if(!empty($album)){
+								$albums[$mess->id][] = $album;
+							}
+						}
+					}
+				}
+			}
 			$model->where('to_user',Auth::user()->id)->where('project_id',$id)->update(array('readed'=>1));
-			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages'));
+			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages','albums'));
 		}
 
 		$usersToProject = Userstoproject::select('user_info.*','users_to_project.*','users_to_project.id as users_to_project_id','users.*')
@@ -185,7 +198,17 @@ class ProjectController extends BaseController {
 		if(empty($userId)){
 			App::abort(404);
 		}
-		$projects = Project::where('user_id',Auth::user()->id)->lists('title','id');
+		$projects = Project::where('user_id',Auth::user()->id)->where('closed','!=',1)->lists('title','id');
+		
+		foreach ($projects as $key => $val) {
+			$performerExist = Userstoproject::where('project_id',$key)->where('status','>',2)->first();
+			if(!empty($performerExist)){
+				unset($projects[$key]);
+			}
+		}
+		if(empty($projects)){
+			return '<div class="text-center" style="padding:20px">У вас отсутствуют проекты на которые можно пригласить исполнителя</div>';
+		}
 		return View::make('content.front.projects.inviteperformer',compact('userId','projects'));
 	}
 }

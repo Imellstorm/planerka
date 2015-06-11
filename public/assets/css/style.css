@@ -1977,7 +1977,7 @@ input.btn-main {
   .user-nav .menu-panel .mail a:hover{
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .mail span, .user-nav .menu-panel .list span {
+.user-nav .menu-panel .mail span, .user-nav .menu-panel .list span, .count_circle{
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -1990,6 +1990,13 @@ input.btn-main {
   position: absolute;
   top: 5px;
   left: 0px;
+}
+.count_circle{
+  color:white;
+  top: -10px;
+}
+.notif-list li{
+  position: relative;
 }
 .user-nav .menu-panel .user {
   position: relative;
@@ -4065,4 +4072,7 @@ form.project .checkbox span {
   padding:2px 5px;
   width:165px;
   border-radius: 3px;
+}
+.albums_list{
+  margin-top: 20px;
 }

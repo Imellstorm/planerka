@@ -24,8 +24,11 @@
 									<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 								</div>
 								<div class="cont">
-									<div class="date">{{ $review->created_at }}</div>
-									<p>{{ $review->text }}</p>
+									<div class="date">
+										{{ $review->created_at }}
+										<div>Отзыв по проекту - {{ $review->project_title }}</div>
+									</div>
+									<div>{{ $review->text }}</p>
 									<!-- <ul class="photo-list">
 										<li>
 											<img src="#" alt="">

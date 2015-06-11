@@ -1,5 +1,8 @@
 <div class="item" style="margin-top:20px">
-	<div class="name">{{ $message->name }} {{ $message->surname }}<span class="online"></span></div>
+	<div class="name">
+		<a href="/{{ $message->alias }}" style="color:#3C3C3C">{{ $message->name }} {{ $message->surname }}</a>
+		<span class="online"></span>
+	</div>
 	<div class="date">{{ $message->created_at }}</div>
 	<div class="chat-msg">{{ $message->text }}</div>
 	@if(!empty($message->price))
@@ -13,4 +16,17 @@
 		</div>
 	@endif
 	<div style="clear:both"></div>
+	<div class="albums_list">
+		@if(isset($albums[$message->id])&&!empty($albums[$message->id]))
+			@foreach($albums[$message->id] as $album)
+				<a href="/{{ $message->alias }}/album/{{ $album->id }}">
+					@if(!empty($album->image))
+						<img src="/{{ $album->image }}">
+					@else
+						<img src="/assets/img/noimage.png" style="width:212px;">				
+					@endif
+				</a>
+			@endforeach
+		@endif
+	</div>
 </div>

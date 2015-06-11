@@ -31,10 +31,15 @@ class Message extends \Eloquent {
         foreach($result as $key=>$val){
             if($val->to==$userId){
                 $val->userdialog = $val->from_name;
-                $dialogs[$val->from][]=$val;
+                $dialogs[$val->from]['mess'][]=$val;
+
+                if($val->readed==0){
+                    if(!isset($dialogs[$val->from]['count']))  $dialogs[$val->from]['count']=0;
+                    $dialogs[$val->from]['count']=$dialogs[$val->from]['count']+1;
+                }
             } else {
                 $val->userdialog = $val->to_name;
-                $dialogs[$val->to][]=$val;
+                $dialogs[$val->to]['mess'][]=$val;
             }
         }
         return $dialogs;

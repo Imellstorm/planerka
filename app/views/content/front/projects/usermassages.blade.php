@@ -16,6 +16,6 @@
 				</div>
 			</div>
 		@endif
-		<a href="/project/singl/{{ $project->project_id }}" class="btn-main">Вырнуться назад</a>
+		<a href="/project/singl/{{ $project->project_id }}" class="btn-main">Вернуться назад</a>
 	</div>
 @stop

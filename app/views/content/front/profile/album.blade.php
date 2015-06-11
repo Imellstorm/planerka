@@ -8,12 +8,8 @@
 		<div class="row photos">
 			@if(!empty($images))
 				<?php $imgCount = count($images); ?>
-				<div class="col-md-4">
+				<div class="col-md-6 col-md-offset-3">
 					@foreach($images as $key=>$image)
-						@if($key>=$imgCount/3)
-							</div>
-							<div class="col-md-4">
-						@endif
 						<div class="img-wrapp">
 							<a href="/{{ $image->path }}" rel="gallery1" class="fancybox" >
 								<img src="/{{ $image->thumb_big }}" alt="">

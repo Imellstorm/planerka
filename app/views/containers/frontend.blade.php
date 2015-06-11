@@ -148,14 +148,11 @@
                         <div class="menu-panel">
                             <div class="list">
                                 <a href="/project/list"><img src="/assets/img/paper.png" alt=""></a>
-                                @if(!empty($newProjectMessages))
-                                    <span>{{ $newProjectMessages }}</span>
-                                @endif
                             </div>
                             <div class="mail">
                                 <a href="/account/messages"><img src="/assets/img/mail.png" alt=""></a>
-                                @if(!empty($newMessages))
-                                    <span>{{ $newMessages }}</span>
+                                @if(!empty($newMessages) || !empty($newProjectMessages) || !empty($newNotifications))
+                                    <span>{{ $newMessages+$newProjectMessages+$newNotifications }}</span>
                                 @endif
                             </div>
                             <div class="count">

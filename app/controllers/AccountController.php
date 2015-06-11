@@ -69,12 +69,15 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getNotifications(){
-		$notifications = Notifications::select('users.alias','user_info.*','notifications.*')
+		$model = new Notifications;
+		$notifications = $model->select('users.alias','user_info.*','notifications.*')
 		->leftjoin('user_info','user_info.user_id','=','notifications.from_user')
 		->leftjoin('users','users.id','=','notifications.from_user')
 		->where('notifications.to_user',Auth::user()->id)
 		->orderBy('notifications.id','DESC')
 		->paginate(20);
+
+		$model->where('to_user',Auth::user()->id)->update(array('readed'=>1));
 		return View::make('content.front.account.notifications',compact('notifications'));
 	}
 
