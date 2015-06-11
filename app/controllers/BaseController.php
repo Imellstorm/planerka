@@ -22,7 +22,9 @@ class BaseController extends Controller {
 
     public function getUserinfo($userId=''){
     	if(empty($userId)){
-			$userId = Auth::user()->id;
+    		if(Auth::check()){
+				$userId = Auth::user()->id;
+			}
     	}
     	$userInfo = Userinfo::select('user_info.*','users.alias','users.role_id')
 	    	->leftjoin('users','users.id','=','user_info.user_id')

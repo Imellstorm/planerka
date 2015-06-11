@@ -194,7 +194,7 @@ class AuthController extends BaseController {
                 return array('success'=>true);
             }
         }
-        return array('error'=>'Вы не можете войти с помощбю '.$network);
+        return array('error'=>'Вы не можете войти с помощью '.$network);
     }
  
 }
