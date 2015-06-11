@@ -27,7 +27,7 @@ class Message extends \Eloquent {
                     ->orWhere('from',$userId)
                     ->orderBy($this->table.'.id','DESC')
                     ->get();
-
+        $dialogs = '';
         foreach($result as $key=>$val){
             if($val->to==$userId){
                 $val->userdialog = $val->from_name;
