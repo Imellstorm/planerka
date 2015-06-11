@@ -66,11 +66,10 @@
 													</li>
 												@else
 													<li>Статус: 
-														<span>
 															@if($project->closed==1)
-																Проект закрыт
+																<span>Проект закрыт</span>
 															@else
-																Проект активен
+																<span style="color:#44B39B">Проект активен</span>															
 															@endif
 														</span>
 													</li>

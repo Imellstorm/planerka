@@ -19,7 +19,7 @@
 	<div class="albums_list">
 		@if(isset($albums[$message->id])&&!empty($albums[$message->id]))
 			@foreach($albums[$message->id] as $album)
-				<a href="/{{ $message->alias }}/album/{{ $album->id }}">
+				<a href="/{{ $message->alias }}/album/{{ $album->id }}" target="blank">
 					@if(!empty($album->image))
 						<img src="/{{ $album->image }}">
 					@else

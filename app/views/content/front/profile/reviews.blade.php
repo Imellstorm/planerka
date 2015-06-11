@@ -12,9 +12,9 @@
 						@foreach($reviews as $review)
 							<div class="review">
 								<div class="user-info">
-									<a href="/{{ $review->alias }}/photo" class="avatar"><img src="{{ Common_helper::getUserAvatar($review->user_id) }}" alt=""></a>
+									<a href="/{{ $review->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($review->user_id) }}" alt=""></a>
 									<div class="name">
-										<a href="/{{ $review->alias }}/photo">{{ $review->name }} {{ $review->surname }}</a>
+										<a href="/{{ $review->alias }}">{{ $review->name }} {{ $review->surname }}</a>
 										<span class="online"></span>
 										@if(!empty($review->created_at->pro))
 											<span class="status">PRO</span>
@@ -28,7 +28,7 @@
 										{{ $review->created_at }}
 										<div>Отзыв по проекту - {{ $review->project_title }}</div>
 									</div>
-									<div>{{ $review->text }}</p>
+									<div>{{ $review->text }}</div>
 									<!-- <ul class="photo-list">
 										<li>
 											<img src="#" alt="">

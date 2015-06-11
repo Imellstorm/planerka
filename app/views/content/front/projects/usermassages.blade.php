@@ -3,7 +3,25 @@
 @section('title') {{ 'Мероприятие' }} @stop
 
 @section('main')
+
 	<div class="container">
+		<div class="project">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="proj-card">
+						<header>
+							<div class="title">{{ $project->title }}</div>
+							<div class="price">{{ $project->budget }} руб.</div>
+						</header>
+						<div class="cont">	
+							<div>
+								{{ $project->description }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		@if(empty($project->closed))
 			@include('content.front.projects.chatform')
 		@endif

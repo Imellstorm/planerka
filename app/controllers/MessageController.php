@@ -64,12 +64,12 @@ class MessageController extends BaseController {
         	$message->save();
 		}
 
-		$notify = new Notifications;
-		$notify->from_user = Auth::user()->id;
-		$notify->to_user = $message->to;
-		$notify->text = 'У вас новое личное сообщение';
-		$notify->link = 'account/messages';
-		$notify->save();
+		// $notify = new Notifications;
+		// $notify->from_user = Auth::user()->id;
+		// $notify->to_user = $message->to;
+		// $notify->text = 'У вас новое личное сообщение';
+		// $notify->link = 'account/messages';
+		// $notify->save();
 
 		Session::flash('success', 'Сообщение отправлено!');
 		return Redirect::back();

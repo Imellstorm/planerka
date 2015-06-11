@@ -9,9 +9,11 @@ class ProfileController extends BaseController {
 		if(empty($this->user)){
 			App::abort(404);
 		}
+		$projectsDone = Userstoproject::where('user_id',$this->user->id)->where('status',6)->get();
 		$this->getUserinfo($this->user->id);
 		View::share('profile',true);
 		View::share('user',$this->user);
+		View::share('projectsDoneCount',count($projectsDone));
     }
 
 	/**

@@ -195,7 +195,7 @@
                             </div>
                             <div class="bott-cont">
                                 <div class="place">{{ $userInfo->city }}</div>
-                                <div class="order-count">Выполнено заказов:&nbsp;&nbsp; 22</div>
+                                <div class="order-count">Выполнено заказов:&nbsp;&nbsp; {{ $projectsDoneCount }}</div>
                                 <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
                             </div>
                         </div>
