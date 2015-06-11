@@ -3,7 +3,7 @@
         @foreach($messages as $message)
             <div class="row" style="margin:10px;  border-bottom: dotted 1px lightgrey;   padding: 10px;">
                 <div class="col-md-5">
-                    <img src="/{{ $message->avatar }}" style="width:40px; float:left; margin-right:10px">
+                    <img src="/{{ Common_helper::getUserAvatar($message->user_id) }}" style="width:40px; float:left; margin-right:10px">
                     <div style="font-weight:bold">{{ $message->name }} {{ $message->surname }}</div>
                     <div style="font-size:12px; margin-bottom:10px">{{ $message->created_at }}</div>
                 </div>
