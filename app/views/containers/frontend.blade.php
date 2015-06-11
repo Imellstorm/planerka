@@ -195,7 +195,9 @@
                             </div>
                             <div class="bott-cont">
                                 <div class="place">{{ $userInfo->city }}</div>
-                                <div class="order-count">Выполнено заказов:&nbsp;&nbsp; {{ $projectsDoneCount }}</div>
+                                @if($user->role_id!=2)
+                                    <div class="order-count">Выполнено заказов:&nbsp;&nbsp; {{ $projectsDoneCount }}</div>
+                                @endif
                                 <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
                             </div>
                         </div>
