@@ -38,7 +38,9 @@
 												<a href="/account/messages/{{ $key }}" class="reply">история переписки</a>
 											</div>
 										</div>
-									@endforeach	
+									@endforeach
+								@else
+									<div class="text-center">Сообщения отсутствуют</div>
 								@endif
 							</div>
 						</div>
