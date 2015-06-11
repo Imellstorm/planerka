@@ -31,7 +31,9 @@ class ProjectmessagesController extends BaseController {
         	$model->save();
 		}
 
-		$projectAssign = Userstoproject::where('project_id',$projectId)->where('user_id',Auth::user()->id)->first();
+		$userId = Auth::user()->role_id!=2?Auth::user()->id:$model->to_user;
+		$projectAssign = Userstoproject::where('project_id',$projectId)->where('user_id',$userId)->first();
+
 		if(empty($projectAssign))	{
 			$userstoproject = new Userstoproject;
 			$userstoproject->user_id 	= Auth::user()->role_id!=2?Auth::user()->id:$model->to_user;
