@@ -17,7 +17,7 @@
 									@foreach($dialogs as $key=>$dialog)
 										<div class="single-msg" style="border:none">
 											<div class="user-info">
-												<div style="padding:10px;background:#44B39B;margin-bottom:20px;color:white">Переписка с {{ $dialog['mess'][0]->userdialog }}</div>
+												<!-- <div style="padding:10px;background:#44B39B;margin-bottom:20px;color:white">Переписка с {{ $dialog['mess'][0]->userdialog }}</div> -->
 												<a href="/{{ $dialog['mess'][0]->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($dialog['mess'][0]->from) }}" alt=""></a>
 												<div class="name">
 													<a href="/{{ $dialog['mess'][0]->alias }}">{{ $dialog['mess'][0]->name }} {{ $dialog['mess'][0]->surname }}</a>
