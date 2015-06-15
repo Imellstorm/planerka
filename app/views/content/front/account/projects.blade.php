@@ -20,7 +20,11 @@
 											<div class="user-info">
 												<a href="/{{ $project->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
 												<div class="name">
+												@if(!empty($project->name) || !empty($project->surname))
 													<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
+												@else
+													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
+												@endif
 													<span class="online"></span>
 													@if($project->pro)
 														<span class="status">PRO</span>
