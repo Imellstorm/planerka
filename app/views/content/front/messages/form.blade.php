@@ -1,13 +1,21 @@
 <div style="padding-top:10px">
     @if(!empty($messages))
         @foreach($messages as $message)
-            <div class="row" style="margin:10px;  border-bottom: dotted 1px lightgrey;   padding: 10px;">
-                <div class="col-md-5">
+            <div class="row" style="margin:10px;max-width:500px;padding:10px;">
+                <div class="col-md-12">
                     <img src="{{ Common_helper::getUserAvatar($message->user_id) }}" style="width:40px; float:left; margin-right:10px">
-                    <div style="font-weight:bold">{{ $message->name }} {{ $message->surname }}</div>
-                    <div style="font-size:12px; margin-bottom:10px">{{ $message->created_at }}</div>
+                    @if(!empty($message->name) || !empty($message->surname))
+                        <div style="font-weight:bold">{{ $message->name }} {{ $message->surname }}2</div>
+                    @else
+                        <div style="font-weight:bold">{{ $message->alias }}</div>
+                    @endif
+                    <span class="online"></span>
+                    <div style="font-size:12px; margin-bottom:10px">{{ $message->city }}</div>
                 </div>
-                <div class="col-md-7" style="max-width:350px">{{ $message->text }}</div>
+                <div class="col-md-12" style="background:#FAFAF5;padding:20px;">
+                    <div style="font-size:12px">{{ $message->created_at }}</div>
+                    <div>{{ $message->text }}</div>
+                </div>
             </div>
         @endforeach
     @endif
@@ -22,8 +30,7 @@
         </div>
 
         <div class='form-group'>
-            {{ Form::label('text','Текст сообщения') }}
-            {{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:100px','required')) }}
+            {{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:100px','placeholder'=>'Введите сообщение','required')) }}
         </div>
 
         {{ Form::submit('Отправить', array('class' => 'btn-main', 'style'=>'margin:0 auto')) }}

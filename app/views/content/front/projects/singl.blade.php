@@ -55,16 +55,15 @@
 							</header>
 							<div class="cont">
 								<div class="row">
-									@if(!empty($project->thumb))
-										<div class="col-md-3">
-											<img src="/{{ $project->thumb }}" style="width:100%">
-										</div>
-									@endif
-									<div class="col-md-9">
+									<div class="col-md-12">
 										<div class="user-info">
 											<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
 											<div class="name">
-												<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
+												@if(!empty($project->name) || !empty($project->surname))
+													<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
+												@else
+													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
+												@endif
 												<span class="online"></span>
 												@if($project->pro)
 													<span class="status">PRO</span>
@@ -83,6 +82,11 @@
 											<li><a>{{ $project->rolename }}</a></li>
 										</ul>
 									</div>
+									@if(!empty($project->thumb))
+										<div class="col-md-12" style="margin-top:20px">
+											<img src="/{{ $project->thumb }}" style="width:100%; max-widtH:200px">
+										</div>
+									@endif
 								</div>
 							</div>
 						</div>
@@ -147,7 +151,11 @@
 											<a href="/{{ $performer->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($performer->user_id) }}" alt=""></a>
 											<div class="info-cont">
 												<div class="name">
-													<a href="/{{ $performer->alias }}">{{ $performer->name }} {{ $performer->surname }}</a>
+													@if(!empty($performer->name) || !empty($performer->surname))
+														<a href="/{{ $performer->alias }}">{{ $performer->name }} {{ $performer->surname }}</a>
+													@else
+														<a href="/{{ $performer->alias }}">{{ $performer->alias }}</a>
+													@endif
 													<span class="online"></span>
 													@if(!empty($performer->pro))
 														<span class="status">PRO</span>

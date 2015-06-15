@@ -14,7 +14,11 @@
 								<div class="user-info">
 									<a href="/{{ $review->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($review->user_id) }}" alt=""></a>
 									<div class="name">
-										<a href="/{{ $review->alias }}">{{ $review->name }} {{ $review->surname }}</a>
+										@if(!empty($review->name) || !empty($review->surname))
+											<a href="/{{ $review->alias }}">{{ $review->name }} {{ $review->surname }}</a>
+										@else
+											<a href="/{{ $review->alias }}">{{ $review->alias }}</a>
+										@endif
 										<span class="online"></span>
 										@if(!empty($review->created_at->pro))
 											<span class="status">PRO</span>

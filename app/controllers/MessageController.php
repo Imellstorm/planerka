@@ -26,6 +26,7 @@ class MessageController extends BaseController {
 			App::abort(404);
 		}
 		$messages = Message::leftjoin('user_info','user_info.user_id','=','messages.from')
+							->leftjoin('users','users.id','=','user_info.user_id')
 							->where('from',Auth::user()->id)
 							->where('to',$userId)
 							->orWhere('to',Auth::user()->id)

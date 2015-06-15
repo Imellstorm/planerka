@@ -35,8 +35,8 @@ class ProfileController extends BaseController {
 		}
 
 		if(!empty($userinfo)){
-			//echo '<fix style="display:none"></fix>'; // фикс странного бага с удвоением инкримента
-			$userinfo->increment('enters_count');
+			//echo '<fix></fix>'; // фикс странного бага с удвоением инкримента
+			Userinfo::increment('enters_count',0.5);
 		}
 		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));
 	}
@@ -61,6 +61,7 @@ class ProfileController extends BaseController {
 		->leftjoin('projects','projects.id','=','reviews.project_id')
 		->leftjoin('user_info','user_info.user_id','=','reviews.from_user')
 		->leftjoin('users','users.id','=','reviews.from_user')
+		->orderBy('reviews.id','DESC')
 		->where('to_user',$this->user->id)->get();
 		return View::make('content.front.profile.reviews',compact('reviews'));
 	}

@@ -19,7 +19,11 @@
 										<div class="user-info">
 											<a href="/{{ $noty->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($noty->from_user) }}" alt=""></a>
 											<div class="name">
-												<a href="/{{ $noty->alias }}">{{ $noty->name }} {{ $noty->surname }}</a>
+												@if(!empty($noty->name) || !empty($noty->surname))
+													<a href="/{{ $noty->alias }}">{{ $noty->name }} {{ $noty->surname }}</a>
+												@else
+													<a href="/{{ $noty->alias }}">{{ $noty->alias }}</a>
+												@endif
 												<span class="online"></span>
 												@if(!empty($noty->pro))
 													<span class="status">PRO</span>

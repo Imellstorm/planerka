@@ -9,4 +9,8 @@
 	        </div>
 		@endforeach
 	</div>
+@else
+	<div style="text-center; margin: 40px 20px 0px 20px">
+		Альбомы отсутствуют
+	</div>
 @endif

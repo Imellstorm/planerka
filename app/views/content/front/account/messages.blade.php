@@ -20,7 +20,11 @@
 										<div class="user-info">
 											<a href="/{{ $message->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($message->from) }}" alt=""></a>
 											<div class="name">
-												<a href="/{{ $message->alias }}">{{ $message->name }} {{ $message->surname }}</a>
+												@if(!empty($message->name) || !empty($message->surname))
+													<a href="/{{ $message->alias }}">{{ $message->name }} {{ $message->surname }}</a>
+												@else
+													<a href="/{{ $message->alias }}">{{ $message->alias }}</a>
+												@endif
 												<span class="online"></span>
 												@if(!empty($message->pro))
 													<span class="status">PRO</span>

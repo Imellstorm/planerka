@@ -133,6 +133,7 @@
     </script>
 </head>
 <body>
+
 <a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 
 <!-- HEADER
@@ -189,7 +190,11 @@
                         <div class="pers-info">
                             <div class="avatar"><img src="<?php echo Common_helper::getUserAvatar($userInfo->user_id); ?>" alt=""></div>
                             <div class="top-cont">
-                                <div class="name"><?php echo $userInfo->name.' '.$userInfo->surname; ?></div>
+                                <?php if(!empty($userInfo->name) || !empty($userInfo->surname)): ?>
+                                    <div class="name"><?php echo $userInfo->name.' '.$userInfo->surname; ?></div>
+                                <?php else: ?>
+                                    <div class="name"><?php echo $userInfo->alias; ?></div>
+                                <?php endif; ?>
                                 <div class="online"></div>
                                 <div class="status">PRO</div>
                             </div>
@@ -201,11 +206,16 @@
                                 <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
                             </div>
                         </div>
-                        <?php if(!empty($userInfo->profs)): ?>
+                        <?php if(count($userInfo->profs)): ?>
                             <ul class="price">
                                 <?php foreach($userInfo->profs as $prof): ?>
                                     <li><?php echo $prof->name; ?> от <?php echo $prof->price; ?></li>
                                 <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                        <?php if($userInfo->role_id==2): ?>
+                            <ul class="price">
+                                <li>Заказчик</li>
                             </ul>
                         <?php endif; ?>
                         <div class="msg">

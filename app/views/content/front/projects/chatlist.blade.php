@@ -1,6 +1,10 @@
 <div class="item" style="margin-top:20px">
 	<div class="name">
-		<a href="/{{ $message->alias }}" style="color:#3C3C3C">{{ $message->name }} {{ $message->surname }}</a>
+		@if(!empty($message->name) || !empty($message->surname))
+			<a href="/{{ $message->alias }}" style="color:#3C3C3C">{{ $message->name }} {{ $message->surname }}</a>
+		@else
+			<a href="/{{ $message->alias }}" style="color:#3C3C3C">{{ $message->alias }}</a>
+		@endif
 		<span class="online"></span>
 	</div>
 	<div class="date">{{ $message->created_at }}</div>

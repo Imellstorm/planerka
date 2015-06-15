@@ -2353,6 +2353,9 @@ input.btn-main {
   overflow: hidden;
   position: relative;
 }
+.add_album:hover{
+  background: #DBDBE0;
+}
 .add_album a {
   position: absolute;
   height: 100%;
@@ -2482,7 +2485,7 @@ input.btn-main {
 }
 /* == USER PAGE ========> */
 #user-page {
-  min-height: 700px;
+  /*min-height: 700px;*/
 }
 .inner-nav {
   padding: 40px 0;

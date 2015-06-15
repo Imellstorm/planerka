@@ -133,6 +133,7 @@
     </script>
 </head>
 <body>
+
 <a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 
 <!-- HEADER
@@ -189,7 +190,11 @@
                         <div class="pers-info">
                             <div class="avatar"><img src="{{ Common_helper::getUserAvatar($userInfo->user_id) }}" alt=""></div>
                             <div class="top-cont">
-                                <div class="name">{{ $userInfo->name.' '.$userInfo->surname }}</div>
+                                @if(!empty($userInfo->name) || !empty($userInfo->surname))
+                                    <div class="name">{{ $userInfo->name.' '.$userInfo->surname }}</div>
+                                @else
+                                    <div class="name">{{ $userInfo->alias }}</div>
+                                @endif
                                 <div class="online"></div>
                                 <div class="status">PRO</div>
                             </div>
@@ -201,11 +206,16 @@
                                 <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
                             </div>
                         </div>
-                        @if(!empty($userInfo->profs))
+                        @if(count($userInfo->profs))
                             <ul class="price">
                                 @foreach($userInfo->profs as $prof)
                                     <li>{{ $prof->name }} от {{ $prof->price }}</li>
                                 @endforeach
+                            </ul>
+                        @endif
+                        @if($userInfo->role_id==2)
+                            <ul class="price">
+                                <li>Заказчик</li>
                             </ul>
                         @endif
                         <div class="msg">

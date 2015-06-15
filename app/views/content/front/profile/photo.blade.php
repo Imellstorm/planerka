@@ -27,12 +27,14 @@
 
                             @if(!empty($userinfo->additional_email))
                                 <dt>E-mail</dt>
-                                <dd>{{ $userinfo->additional_email }}</dd>
+                                <dd></dd>
+                                <div style="color:#665e83;margin-bottom:10px;">{{ $userinfo->additional_email }}</div>
                             @endif
                                 
                             @if(!empty($userinfo->site))
                                 <dt>Сайт</dt>
-                                <dd>{{ $userinfo->site }}</dd>
+                                <dd></dd>
+                                <div style="color:#665e83;margin-bottom:10px;">{{ $userinfo->site }}</div>
                             @endif    
 
                             <dt>Просмотр профиля</dt>
@@ -67,7 +69,7 @@
                                             <img src="/{{ $album->image?$album->image:'' }}" alt="">
                                         @endif
                                         <div class="album-header">
-                                            <h4>{{ $album->name }}</a></h4>
+                                            <h4>{{ $album->name }}</h4>
                                             <p>{{ $album->imgcount }} фото</p>
                                         </div>
                                     </a>
