@@ -454,4 +454,8 @@ $(document).ready(function() {
       openSpeed: 400,
       closeSpeed: 400
     });
+
+    $('.favorites_button').on('click',function(){
+      $(this).parent().hide();
+    })
 });

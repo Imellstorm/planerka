@@ -13,7 +13,7 @@
                     <div style="font-size:12px; margin-bottom:10px">{{ $message->city }}</div>
                 </div>
                 <div class="col-md-12" style="background:#FAFAF5;padding:20px;">
-                    <div style="font-size:12px">{{ $message->created_at }}</div>
+                    <!-- <div style="font-size:12px">{{ $message->created_at }}</div> -->
                     <div>{{ $message->text }}</div>
                 </div>
             </div>

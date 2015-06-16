@@ -221,8 +221,14 @@
                         <div class="msg">
                             <?php echo $userInfo->biography; ?>
                         </div>
-                        <div class="star"><img src="/assets/img/star.png" alt=""></div>
                         <?php if(Auth::check() && $userInfo->user_id!=Auth::user()->id): ?>
+                            <?php if(!$favoriteExist): ?>
+                                <div class="star">
+                                    <a href="/favorites/save/<?php echo $userInfo->alias; ?>" class="fancybox_ajax favorites_button">
+                                        <img src="/assets/img/star.png" title="Добавить в избранное">
+                                    </a>
+                                </div>
+                            <?php endif; ?>
                             <a href="/message/create/<?php echo $userInfo->user_id; ?>" class="btn-main fancybox_ajax">Отправить сообщение</a>
                         <?php endif; ?>
                     </div>

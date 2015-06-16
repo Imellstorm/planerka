@@ -221,8 +221,14 @@
                         <div class="msg">
                             {{ $userInfo->biography }}
                         </div>
-                        <div class="star"><img src="/assets/img/star.png" alt=""></div>
                         @if(Auth::check() && $userInfo->user_id!=Auth::user()->id)
+                            @if(!$favoriteExist)
+                                <div class="star">
+                                    <a href="/favorites/save/{{ $userInfo->alias }}" class="fancybox_ajax favorites_button">
+                                        <img src="/assets/img/star.png" title="Добавить в избранное">
+                                    </a>
+                                </div>
+                            @endif
                             <a href="/message/create/{{ $userInfo->user_id }}" class="btn-main fancybox_ajax">Отправить сообщение</a>
                         @endif
                     </div>

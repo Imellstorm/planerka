@@ -11,9 +11,24 @@ class ProfileController extends BaseController {
 		}
 		$projectsDone = Userstoproject::where('user_id',$this->user->id)->where('status',6)->get();
 		$this->getUserinfo($this->user->id);
+		$favoriteExist = $this->getFavorites();
+
+		View::share('favoriteExist',$favoriteExist);
 		View::share('profile',true);
 		View::share('user',$this->user);
 		View::share('projectsDoneCount',count($projectsDone));
+    }
+
+    private function getFavorites(){
+    	if(Auth::check()){
+			$favoriteExist = Favorites::where('selected_user_id',$this->user->id)->where('user_id',Auth::user()->id)->first();
+			if(!empty($favoriteExist)){
+				$favoriteExistVal=true;
+			} else {
+				$favoriteExistVal=false;
+			}	
+			return $favoriteExistVal;
+		}
     }
 
 	/**
