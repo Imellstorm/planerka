@@ -233,7 +233,7 @@
                             <div class="login">
                                 <p>Что бы воспользоваться всеми преимуществами нашего портала пройдите быструю регистрацию или залогиньтесь !</p>
                                 <div class="registration">
-                                    <a href="#modal-login" class="fancybox">Вход</a>|<a href="#modal-register" class="fancybox" id="registration-button">Регистрация</a>
+                                    <a href="/auth/showloginform" class="fancybox_ajax">Вход</a>|<a href="#modal-register" class="fancybox" id="registration-button">Регистрация</a>
                                 </div>
                             </div>
                         @endif

@@ -56,74 +56,6 @@
     </div>
 </div>
 
-<div class="custom-modal" id="modal-login">
-    <div>
-        <div class="title">Вход на сайт</div>
-
-        <div class="social-login">
-            <p>Войдите с помощью:</p>
-            <a href="/auth/loginfacebook" class="facebook social"></a>
-            <a href="/auth/loginvk" class="vk social"></a>
-            <a href="/auth/logintwitter" class="twitter social"></a>
-        </div>
-
-        {{ Form::open(array('url' =>'/auth', 'role' => 'form', 'class'=>'login')) }}
-            <div class="form-group">
-                <input type="text" class="form-control email" name="username" placeholder="Электронная почта">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control password" name="password" placeholder="Пароль">
-            </div>
-            <footer>
-                <div class="pull-left">
-                    <div>
-                        <a href="#fancybox_password" class="fancybox">Забыли пароль?</a>
-                    </div>
-                </div>
-                <input type="submit" style="margin:0 auto" class="btn-main rulesDone" value="Войти">
-            </footer>
-
-        {{ Form::close() }}   
-    </div>
-</div>
-
-<div class="custom-modal" id="fancybox_password">
-    <div>
-        <div class="title">Напоминание пароля</div>
-
-
-        {{ Form::open(array('url' =>'/password/remind', 'role' => 'form', 'class'=>'login')) }}
-            <div class="form-group">
-                <input type="email" required class="form-control email" name="email" placeholder="Электронная почта">
-            </div>
-            <footer>
-                <input type="submit" style="margin:0 auto" class="btn-main rulesDone" value="Отправить">
-            </footer>
-
-        {{ Form::close() }}   
-    </div>
-</div>
-
-<a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
-<div class="custom-modal" id="fancybox_reset_password">
-    <div>
-        <div class="title">Восстановление пароля</div>
-            <input type="hidden" class="form-control token" name="token" value="{{ Session::has('token')?Session::get('token'):'' }}">
-            <div class="form-group">
-                <input type="password" class="form-control password" placeholder="Пароль" name="password" >
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control confirm_password" placeholder="Пароль повторно" name="password_confirmation">
-                <div class="password error"></div>
-            </div>
-            <footer>
-                <input type="submit" style="margin:0 auto" class="btn-main rulesDone password_reset_submit" value="Сохранить">
-            </footer>
-    </div>
-</div>
-
-
-
 
 <div class="custom-modal" id="modal-reg-second" >
     <div class="title">Выберите тип вашего аккаунта</div>
@@ -165,4 +97,24 @@
             <a href="#null">Другое</a>
         </div>
     </div>                      
+</div>
+
+
+
+<a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
+<div class="custom-modal" id="fancybox_reset_password">
+    <div>
+        <div class="title">Восстановление пароля</div>
+        <input type="hidden" class="form-control token" name="token" value="{{ Session::has('token')?Session::get('token'):'' }}">
+        <div class="form-group">
+            <input type="password" class="form-control password" placeholder="Пароль" name="password" >
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control confirm_password" placeholder="Пароль повторно" name="password_confirmation">
+            <div class="password error"></div>
+        </div>
+        <footer>
+            <input type="submit" style="margin:0 auto" class="btn-main rulesDone password_reset_submit" value="Сохранить">
+        </footer>
+    </div>
 </div>

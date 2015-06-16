@@ -31,7 +31,6 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/users', 'UserController');
 	Route::controller('admin/articles', 'ArticleController');
 	Route::controller('admin/roles', 'RoleController');
-	Route::controller('admin/settings', 'SettingsController');
 	Route::controller('admin/menus', 'MenuController');
 	Route::controller('admin/vote', 'VoteController');
 });
@@ -45,8 +44,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 Route::group(array('before' => 'auth'), function() {		
 	Route::controller('account','AccountController');
 	Route::controller('userinfo','UserinfoController');	
-	Route::controller('specializations','SpecializationsController');
-	Route::controller('settings','SettingsController');	
+	Route::controller('specializations','SpecializationsController');	
 	Route::controller('album','AlbumsController');
 	Route::controller('image','ImageController');
 	Route::controller('video','VideoController');

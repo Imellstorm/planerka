@@ -2,24 +2,46 @@
  
 class AuthController extends BaseController {
  
-    public function getIndex()
-    {
+    public function getIndex(){
         return View::make('content.auth.login');
     }
 
-    public function getAjax()
-    {
+    public function getAjax(){
         return View::make('content.auth.ajax_login');
     }
+
+    public function getShowloginform(){
+        if(isset($_COOKIE['lhc'])){
+            $cookieData = Crypt::decrypt($_COOKIE['lhc']);
+            $authArray = explode(',',$cookieData);
+            $this->postIndex($authArray);
+            echo '<style>.fancybox-close{display:none}</style><div class="text-center" style="padding:30px 20px 0 20px">Вы успешно авторизировались <a href="/" class="btn-main" style="margin:20px 0">Продолжить</a></div>';
+        } else {
+            return View::make('content.auth.login_modal');
+        }
+    }
+
+        public function getShowpasswordreminder(){
+        return View::make('content.auth.password_reminder');
+    }
  
-    public function postIndex()
-    {
-        $username = Input::get('username');
-        $password = Input::get('password');
+    public function postIndex($authArray=''){
+        if(!empty($authArray)){
+            $username = $authArray[0];
+            $password = $authArray[1];
+        } else {
+            $username = Input::get('username');
+            $password = Input::get('password');
+            $remember = Input::get('rememberme');
+        }
  
         if (Auth::attempt(array('email' => $username, 'password' => $password)))
         {
             if(Auth::user()->email_verify == 1){
+                if(!empty($remember)){
+                    $value = Crypt::encrypt($username.','.$password);
+                    setcookie("lhc", $value, time()+3600*24*7);
+                }
                 return Redirect::intended('/');
             } else {
                 Auth::logout();
