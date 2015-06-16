@@ -2,14 +2,20 @@
  
 class AuthController extends BaseController {
  
-    public function getIndex()
-    {
+    public function getIndex(){
         return View::make('content.auth.login');
     }
 
-    public function getAjax()
-    {
+    public function getAjax(){
         return View::make('content.auth.ajax_login');
+    }
+
+    public function getShowloginform(){
+        return View::make('content.auth.login_modal');
+    }
+
+    public function getShowpasswordreminder(){
+        return View::make('content.auth.password_reminder');
     }
  
     public function postIndex()
