@@ -18,10 +18,6 @@
             </div>
             <footer>
                 <div class="pull-left">
-                    <div class='form-group'>         
-                        {{ Form::checkbox('rememberme',1,'',array('id' => 'rememberme')) }}
-                        {{ Form::label('rememberme', 'Запомнить меня') }}
-                    </div>
                     <div class='form-group'>
                         <a href="/auth/showpasswordreminder" class="fancybox_ajax">Забыли пароль?</a>
                     </div>
