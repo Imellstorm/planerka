@@ -6,8 +6,11 @@ class ProjectController extends BaseController {
 	);
 
 	protected $rules = array(
-		'title'				=> 'required|max:256',
-		'pro_only'			=> 'max:1'
+		'title'		=> 'required|max:256',
+		'pro_only'	=> 'max:1',
+		'status'	=> 'max:32',
+		'city'		=> 'max:256',
+		'phone'		=> 'max:64'	
 	);
 
 	public function getSingl($id){
@@ -94,8 +97,7 @@ class ProjectController extends BaseController {
 	public function postStore(){
 		$validator = Validator::make(Input::all(), $this->rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()){
 			$errMess = '<div style="color:red">';
 			foreach($validator->messages()->toArray() as $key=>$val){
 				$errMess.= $val[0].'<br>';
@@ -114,7 +116,7 @@ class ProjectController extends BaseController {
 	        $model->role_id   			= Input::get('role_id');
 	        $model->term   				= Input::get('term');
 	        $model->pro_only   			= $proOnly?$proOnly:'';
-
+			
 	        if(Input::hasFile('image')) {
 				$image = Common_helper::fileUpload(Input::file('image'),'images/'.Auth::user()->alias);
 				if(isset($image['path']) && !empty($image['path'])){
@@ -125,8 +127,35 @@ class ProjectController extends BaseController {
 					};
 				}
 			}
+			//Если заказчик заказывает исполнителя напрямую
+			$performer = Input::get('performer');
+			if(!empty($performer)){
+				$model->city 	= Input::get('city');
+				$model->date 	= date('Y-m-d',strtotime(Input::get('date')));
+				$model->phone 	= Input::get('phone');
+				$model->status 	= 'private';
+			}
+
         	$model->save();
 		}
+
+		if(!empty($performer)){
+			$projmess = new Projectmessages;
+			$projmess->from_user   	= Auth::user()->id;
+			$projmess->to_user   	= $performer;
+			$projmess->project_id	= $model->id;
+	        $projmess->price   		= $model->budget;
+	        $projmess->term   		= $model->term;
+	        $projmess->text   		= $model->description;
+        	$projmess->save();
+
+        	$userstoproject = new Userstoproject;
+			$userstoproject->user_id 	= $performer;
+			$userstoproject->project_id = $model->id;
+			$userstoproject->status 	= 2;
+			$userstoproject->save();
+		}
+
 		$view = View::make('content.front.messagebox',array('message'=>'Мероприятие добавлено!'))->render();
         return Redirect::back()->with('message', $view);
 	}
@@ -198,17 +227,20 @@ class ProjectController extends BaseController {
 		if(empty($userId)){
 			App::abort(404);
 		}
-		$projects = Project::where('user_id',Auth::user()->id)->where('closed','!=',1)->lists('title','id');
+		$roles = Role::lists('name','id');
+		unset($roles[1]);
+		unset($roles[2]);
+		// $projects = Project::where('user_id',Auth::user()->id)->where('closed','!=',1)->lists('title','id');
 		
-		foreach ($projects as $key => $val) {
-			$performerExist = Userstoproject::where('project_id',$key)->where('status','>',2)->first();
-			if(!empty($performerExist)){
-				unset($projects[$key]);
-			}
-		}
-		if(empty($projects)){
-			return '<div class="text-center" style="padding:20px">У вас отсутствуют проекты на которые можно пригласить исполнителя</div>';
-		}
-		return View::make('content.front.projects.inviteperformer',compact('userId','projects'));
+		// foreach ($projects as $key => $val) {
+		// 	$performerExist = Userstoproject::where('project_id',$key)->where('status','>',2)->first();
+		// 	if(!empty($performerExist)){
+		// 		unset($projects[$key]);
+		// 	}
+		// }
+		// if(empty($projects)){
+		// 	return '<div class="text-center" style="padding:20px">У вас отсутствуют проекты на которые можно пригласить исполнителя</div>';
+		// }
+		return View::make('content.front.projects.inviteperformer',compact('userId','roles'));
 	}
 }

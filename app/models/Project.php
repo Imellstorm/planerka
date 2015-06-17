@@ -7,6 +7,7 @@ class Project extends \Eloquent {
     public function getAllProjects(){
         $projects =  DB::table($this->table)
             ->where('closed','!=',1)
+            ->where('status','')
             ->orderBy('id','DESC')
             ->paginate(10);
         return $projects;
@@ -26,7 +27,7 @@ class Project extends \Eloquent {
 
     public function getAcceptedProjects($userId){
         $projects =  DB::table('users_to_project')
-            ->select($this->table.'.*','reviews.id as review','user_info.name','user_info.surname','user_info.city','user_info.pro','users.alias','users_to_project.status','users_to_project.id as users_to_project_id')
+            ->select($this->table.'.*','reviews.id as review','user_info.name','user_info.surname','user_info.city','user_info.pro','users.alias','users_to_project.status','users_to_project.id as users_to_project_id',$this->table.'.city as project_city')
             ->leftjoin($this->table,'users_to_project.project_id','=',$this->table.'.id')
             ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
             ->leftjoin('users','users.id','=',$this->table.'.user_id')
@@ -45,7 +46,8 @@ class Project extends \Eloquent {
             'user_info.*',
             'users.created_at as usercreated',
             'users.alias',
-            'roles.name as rolename')
+            'roles.name as rolename',
+            $this->table.'.city as project_city')
         ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
         ->leftjoin('users','users.id','=',$this->table.'.user_id')
         ->leftjoin('roles','roles.id','=',$this->table.'.role_id')

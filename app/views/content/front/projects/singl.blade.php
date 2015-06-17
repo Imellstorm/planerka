@@ -81,6 +81,21 @@
 											<li>Раздел</li>
 											<li><a>{{ $project->rolename }}</a></li>
 										</ul>
+										<ul class="tag" style="margin-top:10px">
+											<li style="width:48px">Город</li>
+											@if(!empty($project->project_city))
+												<li><a>{{ $project->project_city }}</a></li>
+											@else
+												<li><a>{{ $project->city }}</a></li>
+											@endif
+										</ul>
+										@if($project->date!='0000-00-00')
+											<ul class="tag" style="margin-top:10px">
+												<li style="width:48px">Дата</li>
+												<li><a>{{ $project->date }}</a></li>
+											</ul>
+										@endif
+	
 									</div>
 									@if(!empty($project->thumb))
 										<div class="col-md-12" style="margin-top:20px">

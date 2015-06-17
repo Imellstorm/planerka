@@ -44,10 +44,16 @@
 											@endif
 											<ul class="meta-list">
 												<li>Добавлен: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
-												<li>Город: <span>{{ $project->city }}</span></li>
+
+												@if(isset($project->project_city) && !empty($project->project_city))
+													<li>Город: <span>{{ $project->project_city }}</span></li>
+												@elseif(!empty($project->city))
+													<li>Город: <span>{{ $project->city }}</span></li>
+												@endif
+
 												@if(Auth::user()->role_id!=2)
 													<li>Статус: 
-														<span>
+														<span style="max-width:200px; display:block;">
 															<?php switch ($project->status) {
 																case 2:
 																	echo 'Вы выбраны в качестве исполнителя';
@@ -70,12 +76,11 @@
 													</li>
 												@else
 													<li>Статус: 
-															@if($project->closed==1)
-																<span>Проект закрыт</span>
-															@else
-																<span style="color:#44B39B">Проект активен</span>															
-															@endif
-														</span>
+														@if($project->closed==1)
+															<span>Проект закрыт</span>
+														@else
+															<span style="color:#44B39B">Проект активен</span>															
+														@endif
 													</li>
 												@endif
 											</ul>

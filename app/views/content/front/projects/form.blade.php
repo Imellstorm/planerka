@@ -64,12 +64,6 @@ $(document).ready(function(){
 
 		<div class="form-group">
 			<label class="pull-left">Добавить фото</label>
-		<!-- 	<div class="add-file">
-			    <div class="file-title">Выберите файл</div>
-			    <input type="file" name="image" class="upload" title="Choose a file to upload">
-			</div> -->
-			<!-- <a href="#null" class="btn-photo">Добавить фото</a> -->
-			
 			<input type="file" name="image" style="position:relative; top:15px;">
 		</div>
 		<div class="form-group" style="padding-top: 10px;">
