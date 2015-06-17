@@ -5,15 +5,15 @@
                 <div class="col-md-12">
                     <img src="{{ Common_helper::getUserAvatar($message->user_id) }}" style="width:40px; float:left; margin-right:10px">
                     @if(!empty($message->name) || !empty($message->surname))
-                        <div style="font-weight:bold">{{ $message->name }} {{ $message->surname }}2</div>
+                        <div class="pull-left" style="font-weight:bold">{{ $message->name }} {{ $message->surname }}</div>
                     @else
-                        <div style="font-weight:bold">{{ $message->alias }}</div>
+                        <div class="pull-left" style="font-weight:bold">{{ $message->alias }}</div>
                     @endif
                     <span class="online"></span>
                     <div style="font-size:12px; margin-bottom:10px">{{ $message->city }}</div>
                 </div>
                 <div class="col-md-12" style="background:#FAFAF5;padding:20px;">
-                    <!-- <div style="font-size:12px">{{ $message->created_at }}</div> -->
+                    <div style="font-size:12px">{{ $message->created_at }}</div>
                     <div>{{ $message->text }}</div>
                 </div>
             </div>

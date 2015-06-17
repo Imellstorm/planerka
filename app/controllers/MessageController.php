@@ -7,8 +7,8 @@ class MessageController extends BaseController {
 		'text'		=> 'required',
 	);
 	protected $table_fields = array(
-			'From'		=> 'from_name',
-			'To'		=> 'to_name',
+			'От кого'	=> 'from_name',
+			'Кому'		=> 'to_name',
 			'Создан'	=> 'created_at',
 			'Прочитано'	=> 'readed',
 		);	
@@ -25,7 +25,8 @@ class MessageController extends BaseController {
 		if(empty($user)){
 			App::abort(404);
 		}
-		$messages = Message::leftjoin('user_info','user_info.user_id','=','messages.from')
+		$messages = Message::select('users.alias','user_info.*','messages.*')
+							->leftjoin('user_info','user_info.user_id','=','messages.from')
 							->leftjoin('users','users.id','=','user_info.user_id')
 							->where('from',Auth::user()->id)
 							->where('to',$userId)
@@ -65,69 +66,7 @@ class MessageController extends BaseController {
         	$message->save();
 		}
 
-		// $notify = new Notifications;
-		// $notify->from_user = Auth::user()->id;
-		// $notify->to_user = $message->to;
-		// $notify->text = 'У вас новое личное сообщение';
-		// $notify->link = 'account/messages';
-		// $notify->save();
-
 		Session::flash('success', 'Сообщение отправлено!');
-		return Redirect::back();
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Redirect
-	 */
-	public function inboxDelete($id='')
-	{
-		$message = Message::find($id);
-		if(empty($message) || $message->to != Auth::User()->id){
-			App::abort(404);
-		}
-
-		if($message->from_del==1){
-			Message::destroy($id);
-		} else {
-			$updateData['to_del'] = 1;
-		}		
-
-		if(isset($updateData)){			
-			$message->update($updateData);
-		}
-
-		Session::flash('success', 'Сообщение удалёно!');
-		return Redirect::back();
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Redirect
-	 */
-	public function outboxDelete($id='')
-	{
-		$message = Message::find($id);
-		if(empty($message) || $message->from != Auth::User()->id){
-			App::abort(404);
-		}
-
-		if($message->to_del==1){
-			Message::destroy($id);
-		} else {
-			$updateData['from_del'] = 1;
-		}		
-
-		if(isset($updateData)){			
-			$message->update($updateData);
-		}
-
-		Session::flash('success', 'Сообщение удалёно!');
 		return Redirect::back();
 	}
 

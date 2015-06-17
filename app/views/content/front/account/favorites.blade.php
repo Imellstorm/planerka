@@ -18,6 +18,7 @@
 					@foreach($favorites as $favorite)
 						<div class="col-md-3 col-sm-6">
 							<article id="card">
+								<a href="#" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="right:25px"></a>
 								<figure>
 									<a href="#null"><img src="/assets/img/photog.jpg" alt=""></a>
 								</figure>
