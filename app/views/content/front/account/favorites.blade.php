@@ -15,7 +15,6 @@
 			</div>
 			<div class="row">
 				@if(!empty($favorites))
-				@for ($i = 0; $i < 10; $i++)
 					@foreach($favorites as $favorite)
 						<div class="col-md-3 col-sm-6">
 							<article id="card">
@@ -96,7 +95,6 @@
 							</article>
 						</div>
 					@endforeach
-				@endfor
 				@endif
 			</div>
 		</div>
