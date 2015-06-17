@@ -18,12 +18,12 @@
 					@foreach($favorites as $favorite)
 						<div class="col-md-3 col-sm-6">
 							<article id="card">
-								<a href="#" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="right:25px"></a>
+								<a href="/favorites/delete/{{ $favorite->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="right:25px"></a>
 								<figure>
-									<a href="#null"><img src="/assets/img/photog.jpg" alt=""></a>
+									<a href="/{{ $favorite->alias }}"><img src="/assets/img/photog.jpg" alt=""></a>
 								</figure>
 								<div class="user-info">
-									<a href="#null" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
+									<a href="/{{ $favorite->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($favorite->user_id) }}" alt=""></a>
 									<div class="info-cont">
 										<div class="name">
 											@if(!empty($favorite->name) || !empty($favorite->surname))
@@ -42,7 +42,7 @@
 								</div>
 								<div class="detail-info">
 									<header>
-										<a href="#null" class="avatar"><img src="/assets/img/avatar.jpg" alt=""></a>
+										<a href="/{{ $favorite->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($favorite->user_id) }}" alt=""></a>
 										<div class="name">
 											@if(!empty($favorite->name) || !empty($favorite->surname))
 												<a href="/{{ $favorite->alias }}">{{ $favorite->name }} {{ $favorite->surname }}</a>

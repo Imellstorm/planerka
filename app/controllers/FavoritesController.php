@@ -25,22 +25,6 @@ class FavoritesController extends BaseController {
 		echo '<div class="text-center" style="padding:30px 20px 0 20px">Пользователь добавлен в избанное</div>';
 	}
 
-	public function postStore(){
-
-		$video = Common_helper::fileUpload(Input::file('video'),'video/'.Auth::user()->alias,'','200000','mp4');
-		if( isset($video['errors']) ) {
-	    	return Redirect::back()->withErrors($video['errors']);
-        }
-
-    	$model = new Video;
-    	$model->user_id 	= Auth::user()->id;
-    	$model->name 		= $video['name'];
-    	$model->path 		= $video['path'];
-    	$model->save();
-
-    	return Redirect::back();
-	}
-
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -49,12 +33,12 @@ class FavoritesController extends BaseController {
 	 */
 	public function getDelete($id)
 	{
-		$model = Video::find($id);
+		$model = Favorites::find($id);
 		if(!empty($model) && $this->is_owner($model->user_id)){
-			Video::destroy($model->id);
+			Favorites::destroy($model->id);
 			return Redirect::back();
 		}
-		return Redirect::back()->withErrors(array('Вы не можете удалить это видео!'));
+		return Redirect::back()->withErrors(array('Вы не можете удалить элемент!'));
 	}
 
 }

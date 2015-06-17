@@ -103,7 +103,7 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getFavorites(){
-		$favorites = Favorites::select(DB::raw('COUNT('.DB::getTablePrefix().'reviews.id) as reviews'),'users.alias','users.role_id','user_info.*')
+		$favorites = Favorites::select(DB::raw('COUNT('.DB::getTablePrefix().'reviews.id) as reviews'),'users.alias','users.role_id','user_info.*','favorites.id as id')
 			->leftjoin('user_info','user_info.user_id','=','favorites.selected_user_id')
 			->leftjoin('users','users.id','=','favorites.selected_user_id')
 			->leftjoin('reviews','reviews.to_user','=','favorites.selected_user_id')
