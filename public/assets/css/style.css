@@ -956,7 +956,7 @@ input.btn-main {
   color: #a6a5a5;
 }
 #card .detail-info header .meta {
-  width: 160px;
+  /*width: 160px;*/
   position: absolute;
   top: 20px;
   right: 20px;
