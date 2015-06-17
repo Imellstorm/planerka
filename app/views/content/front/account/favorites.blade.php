@@ -75,13 +75,18 @@
 											@endforeach
 										</ul>
 									@endif
-									@if(count($favorite->specializations))
 										<div class="price">
-											@foreach($favorite->specializations as $spec)
-												<p>{{ $spec->description }} <span>от {{ $spec->price }}</span></p>
-											@endforeach
+											@if($favorite->role_id==2)
+												<p>Заказчик</p>
+											@else
+												@if(count($favorite->specializations))
+													@foreach($favorite->specializations as $spec)
+														<p>{{ $spec->description }} <span>от {{ $spec->price }}</span></p>
+													@endforeach
+												@endif
+											@endif
 										</div>
-									@endif
+
 									<a href="/message/create/{{ $favorite->user_id }}" class="btn-message fancybox_ajax">Сообщение</a>
 									@if(Auth::user()->role_id==2 && $favorite->role_id!=2)
 										<a href="/project/inviteperformer/{{ $favorite->user_id }}" class="btn-order fancybox_ajax">Заказать</a>

@@ -103,20 +103,22 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getFavorites(){
-		$favorites = Favorites::select(DB::raw('COUNT('.DB::getTablePrefix().'reviews.id) as reviews'),DB::raw('COUNT('.DB::getTablePrefix().'users_to_project.id) as projects'),'users.alias','user_info.*')
+		$favorites = Favorites::select(DB::raw('COUNT('.DB::getTablePrefix().'reviews.id) as reviews'),'users.alias','users.role_id','user_info.*')
 			->leftjoin('user_info','user_info.user_id','=','favorites.selected_user_id')
 			->leftjoin('users','users.id','=','favorites.selected_user_id')
 			->leftjoin('reviews','reviews.to_user','=','favorites.selected_user_id')
-			->leftjoin('users_to_project','users_to_project.user_id','=','favorites.selected_user_id')
 			->where('favorites.user_id',Auth::user()->id)
-			->where('users_to_project.status',6)
 			->groupBy('favorites.id')
 			->get();
-			var_dump($favorites);
 		if(count($favorites)){
 			foreach ($favorites as $key => $fav) {
 				$fav->specializations = Specialization::where('user_id',$fav->user_id)->get();
 				$fav->albums = Album::where('user_id',$fav->user_id)->get();
+				if($fav->role_id==2){
+					$fav->projects = Project::where('user_id',$fav->user_id)->count();
+				} else {
+					$fav->projects = Userstoproject::where('user_id',$fav->user_id)->where('status',6)->count();
+				}
 			}
 		}
 		return View::make('content.front.account.favorites',compact('favorites'));
