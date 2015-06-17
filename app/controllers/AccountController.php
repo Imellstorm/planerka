@@ -112,6 +112,7 @@ class AccountController extends BaseController {
 			->where('users_to_project.status',6)
 			->groupBy('favorites.id')
 			->get();
+			var_dump($favorites);
 		if(count($favorites)){
 			foreach ($favorites as $key => $fav) {
 				$fav->specializations = Specialization::where('user_id',$fav->user_id)->get();
