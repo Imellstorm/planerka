@@ -195,7 +195,7 @@
                                 <?php else: ?>
                                     <div class="name"><?php echo $userInfo->alias; ?></div>
                                 <?php endif; ?>
-                                <div class="online"></div>
+                                <div class="<?php echo $user->online?'online':'offline'; ?>"></div>
                                 <div class="status">PRO</div>
                             </div>
                             <div class="bott-cont">

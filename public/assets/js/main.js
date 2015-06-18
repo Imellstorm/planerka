@@ -1,10 +1,9 @@
+window.onbeforeunload = function() {
+    $.ajax({url:"/setoffline", async:false})
+    //return "Wait! Have you claimed Your FREE CD Yet?"
+}
+
 $(document).ready(function() {
-
-	//FIX LOGIN
-
-	//$("#header .login").sticky({topSpacing:0});
-
-
 
 	//SHOW SUB MENU
 

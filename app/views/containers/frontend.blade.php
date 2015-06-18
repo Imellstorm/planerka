@@ -195,7 +195,7 @@
                                 @else
                                     <div class="name">{{ $userInfo->alias }}</div>
                                 @endif
-                                <div class="online"></div>
+                                <div class="{{ $user->online?'online':'offline' }}"></div>
                                 <div class="status">PRO</div>
                             </div>
                             <div class="bott-cont">

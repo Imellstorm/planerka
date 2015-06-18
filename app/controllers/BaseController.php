@@ -18,6 +18,21 @@ class BaseController extends Controller {
 		}
 		View::share('rules',$rules);
 		View::share('roles',$roles);
+		$this->setOnline();
+    }
+
+    private function setOnline(){
+    	if(Auth::check()){
+    		$user = User::find(Auth::user()->id);
+    		$user->update(array('online'=>1));
+    	}
+    }
+
+    public function setOffline(){
+    	if(Auth::check()){
+    		$user = User::find(Auth::user()->id);
+    		$user->update(array('online'=>0));
+    	}
     }
 
     public function getUserinfo($userId=''){

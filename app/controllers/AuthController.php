@@ -26,7 +26,7 @@ class AuthController extends BaseController {
         if (Auth::attempt(array('email' => $username, 'password' => $password)))
         {
             if(Auth::user()->email_verify == 1){
-                return Redirect::intended('/');
+                return Redirect::to('/');  //intended
             } else {
                 Auth::logout();
                 $view = View::make('content.front.messagebox',array('message'=>'Вы не можете зайти так как у вас не подтверждён email. <br>Проверте вашу почту.'))->render();
@@ -44,7 +44,8 @@ class AuthController extends BaseController {
  
     public function getLogout()
     {
-        Auth::logout(); 
+        $this->setOffline();
+        Auth::logout();
         return Redirect::to('/');
     }
 

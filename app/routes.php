@@ -55,6 +55,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::controller('review', 'ReviewController');
 	Route::controller('favorites', 'FavoritesController');
 	Route::post('vote/proccess', 'VoteController@postProccess');
+	Route::get('/setoffline','BaseController@setOffline');
 });
 
 /*
