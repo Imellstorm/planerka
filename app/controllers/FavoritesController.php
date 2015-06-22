@@ -22,7 +22,9 @@ class FavoritesController extends BaseController {
 		$model->user_id = Auth::user()->id;
 		$model->selected_user_id = $selectedUser->id;
 		$model->save();
-		echo '<div class="text-center" style="padding:30px 20px 0 20px">Пользователь добавлен в избанное</div>';
+
+		return Redirect::back();
+		//echo '<div class="text-center" style="padding:30px 20px 0 20px">Пользователь добавлен в избанное</div>';
 	}
 
 	/**

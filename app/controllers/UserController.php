@@ -15,7 +15,7 @@ class UserController extends BaseController {
 			'Имя'		=> 'users.username',
 			'Email'		=> 'users.email',
 			'Создан'	=> 'users.created_at',
-			'Изменён'	=> 'users.updated_at',
+			'Город'		=> 'user_info.city',
 			'Статус'	=> 'roles.name',
 			'Баланс'	=> 'users.balance',
 		);	

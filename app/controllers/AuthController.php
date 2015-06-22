@@ -23,7 +23,7 @@ class AuthController extends BaseController {
         $username = Input::get('username');
         $password = Input::get('password');
  
-        if (Auth::attempt(array('email' => $username, 'password' => $password)))
+        if (Auth::attempt(array('email' => $username, 'password' => $password),true))
         {
             if(Auth::user()->email_verify == 1){
                 return Redirect::to('/');  //intended

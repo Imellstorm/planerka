@@ -38,7 +38,7 @@
                             @endif    
 
                             <dt>Просмотр профиля</dt>
-                            <dd>{{ $userinfo->enters_count }}</dd>
+                            <dd>{{ round($userinfo->enters_count) }}</dd>
 
                             <dt>Лайков</dt>
                             <dd>{{ $userinfo->likes }}</dd>

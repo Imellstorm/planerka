@@ -9,7 +9,7 @@
                     @else
                         <div class="pull-left" style="font-weight:bold">{{ $message->alias }}</div>
                     @endif
-                    <span class="online"></span>
+                    <span class="{{ $message->online?'online':'offline' }}"></span>
                     <div style="font-size:12px; margin-bottom:10px">{{ $message->city }}</div>
                 </div>
                 <div class="col-md-12" style="background:#FAFAF5;padding:20px;">
@@ -22,17 +22,13 @@
 </div>  
 {{ Form::open(array('role' => 'form', 'url' => 'message/store')) }}
     <div style="padding:10px">
-        <h3 class="text-center" style="margin-bottom:10px">Личное сообщение</h3>
-        <div class='form-group'>
-            <div class="text-center">для {{ $user->username }}</div>
-            {{ Form::hidden('username', $user->username, array('class' => 'form-control', 'disabled' => 'disabled', 'required')) }}
-            {{ Form::hidden('user_id', $user->id) }}
-        </div>
+        {{ Form::hidden('username', $user->username, array('class' => 'form-control','required')) }}
+        {{ Form::hidden('user_id', $user->id) }}
 
-        <div class='form-group'>
+        <div class='form-group' style="margin: 0 10px;">
             {{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:100px','placeholder'=>'Введите сообщение','required')) }}
         </div>
 
-        {{ Form::submit('Отправить', array('class' => 'btn-main', 'style'=>'margin:0 auto')) }}
+        {{ Form::submit('Отправить', array('class' => 'btn-main', 'style'=>'margin:10px auto')) }}
     </div>
 {{ Form::close() }}

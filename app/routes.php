@@ -63,7 +63,7 @@ Route::group(array('before' => 'auth'), function() {
 | Root
 |--------------------------------------------------------------------------
 */
-
+Route::get('/search', 'FrontController@search');
 Route::get('/page/{alias}', 'FrontController@page');
 Route::get('/{useralias}/album/{id}','AlbumsController@getShow');
 Route::controller('/{useralias}', 'ProfileController');

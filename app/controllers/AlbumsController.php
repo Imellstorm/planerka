@@ -91,6 +91,6 @@ class AlbumsController extends BaseController {
 		}
 		Image::where('album_id',$album->id)->delete();
 		$album->delete();
-		return Redirect::to('/'.Auth::user()->alias.'/photo');
+		return Redirect::to('/'.Auth::user()->alias);
 	}
 }

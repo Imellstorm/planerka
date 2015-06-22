@@ -512,7 +512,7 @@ input.btn-main {
 }
 #header .search .theme .bootstrap-select,
 #header .search .paym .bootstrap-select {
-  width: 118px;
+  width: 180px;
 }
 /* == NAV MENU ========================> */
 #nav-menu {
@@ -1085,15 +1085,20 @@ input.btn-main {
   font-size: 15px;
   color: #a6a5a5;
 }
-.online {
+.online, .offline {
   display: inline-block;
   height: 8px;
   width: 8px;
-  background: #38ad46;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
   margin-left: 3px;
+}
+.online{
+  background: #38ad46;
+}
+.offline{
+  background: rgb(255, 81, 81);
 }
 .user-info .reg {
   font-size: 16px;
@@ -1106,8 +1111,8 @@ input.btn-main {
 .user-info .rait {
   font-family: 'Neuron', sans-serif;
   font-size: 16px;
-  margin-top: -6px;
-  margin-bottom: -5px;
+/*  margin-top: -6px;
+  margin-bottom: -5px;*/
   color: #525252;
 }
 /* == FOOTER NAV ========================> */
@@ -1914,7 +1919,7 @@ input.btn-main {
 }
 #header .star {
   float: left;
-  margin-right: 40px;
+  margin-right: 20px;
   line-height: 34px;
 }
 #header .btn-main {
@@ -1942,7 +1947,7 @@ input.btn-main {
 .user-nav .menu-panel {
   float: right;
   color: #fff;
-  line-height: 56px;
+  line-height: 59px;
 }
 .user-nav .menu-panel div {
   display: inline-block;
@@ -2141,7 +2146,7 @@ input.btn-main {
   color: #fff;
   float: left;
 }
-.online, .offline{
+/*.online, .offline{
   display: block;
   float: left;
   height: 9px;
@@ -2150,13 +2155,8 @@ input.btn-main {
   -moz-border-radius: 50%;
   border-radius: 50%;
   margin: 15px 10px 0 15px;
-}
-.online{
-  background: #38ad46;
-}
-.offline{
-  background: rgb(255, 81, 81);
-}
+}*/
+
 
 .pers-info .top-cont .status {
   width: 34px;
@@ -2291,6 +2291,7 @@ input.btn-main {
 }
 .profile-albums .album h4 {
   position: absolute;
+  top:20px;
   bottom: 70px;
   left: 30px;
   font-weight: 700;

@@ -112,7 +112,7 @@ class AccountController extends BaseController {
 			->get();
 		if(count($favorites)){
 			foreach ($favorites as $key => $fav) {
-				$fav->specializations = Specialization::where('user_id',$fav->user_id)->get();
+				$fav->specializations = Specialization::where('user_id',$fav->user_id)->join('roles','roles.id','=','specializations.role_id')->get();
 				$fav->albums = Album::where('user_id',$fav->user_id)->get();
 				if($fav->role_id==2){
 					$fav->projects = Project::where('user_id',$fav->user_id)->count();

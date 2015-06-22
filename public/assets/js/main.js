@@ -381,6 +381,7 @@ $(document).ready(function() {
           socimage: socimage
         },
         success: function(ret){
+          $('.loading').hide();
           if(ret.success == 'success'){
             $.fancybox(ret.view);
           }
@@ -451,7 +452,12 @@ $(document).ready(function() {
       openEffect: 'fade',
       closeEffect: 'fade',
       openSpeed: 400,
-      closeSpeed: 400
+      closeSpeed: 400,
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
     });
 
     $('.favorites_button').on('click',function(){

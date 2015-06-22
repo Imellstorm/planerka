@@ -32,14 +32,16 @@
 												<span class="place">{{ $dialog['mess'][0]->city }}</span>
 												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 											</div>
-											<div class="msg-cont">
-												@if(!empty($dialog['count']))
-													<div class="new_mess_badge text-center">Новые сообщения - {{ $dialog['count'] }}</div>
-												@endif
-												<div class="time">{{ $dialog['mess'][0]->created_at }}</div>
-												<div class="text-msg">{{ $dialog['mess'][0]->text }}</div>
-												<a href="/account/messages/{{ $key }}" class="reply">история переписки</a>
-											</div>
+											<!-- <a href="/account/messages/{{ $key }}" class="reply"> -->
+											<a href="/message/create/{{ $key }}" class="fancybox_ajax">
+												<div class="msg-cont">
+													@if(!empty($dialog['count']))
+														<div class="new_mess_badge text-center">Новые сообщения - {{ $dialog['count'] }}</div>
+													@endif
+													<div class="time">{{ $dialog['mess'][0]->created_at }}</div>
+													<div class="text-msg">{{ $dialog['mess'][0]->text }}</div>
+												</div>
+											</a>
 										</div>
 									@endforeach
 								@else

@@ -57,50 +57,6 @@
 </div>
 
 
-<div class="custom-modal" id="modal-reg-second" >
-    <div class="title">Выберите тип вашего аккаунта</div>
-    <div class="account-tipes">
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="rings"></a>
-            </figure>
-            <a href="#null">Я заказчик,<br> ищу исполнителя</a>
-        </div>
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="mic"></a>
-            </figure>
-            <a href="#null">Я ведущий<br> или тамада</a>
-        </div>
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="photo"></a>
-            </figure>
-            <a href="#null">Я фотограф<br> или оператор</a>
-        </div>
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="make"></a>
-            </figure>
-            <a href="#null">Я стилист<br> или визажист</a>
-        </div>
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="anim"></a>
-            </figure>
-            <a href="#null">Я организатор<br> мероприятий</a>
-        </div>
-        <div class="tipe">
-            <figure>
-                <a href="#null" class="role_chose" user_role="other"></a>
-            </figure>
-            <a href="#null">Другое</a>
-        </div>
-    </div>                      
-</div>
-
-
-
 <a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 <div class="custom-modal" id="fancybox_reset_password">
     <div>

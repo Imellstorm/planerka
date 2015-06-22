@@ -29,10 +29,10 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td>{{ $user->username }}</td>
+                        <td><a href="/{{ $user->alias }}">{{ $user->username }}</a></td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
+                        <td>{{ $user->city }}</td>
                         <td>{{ $user->role }}</td>
                         <td>{{ $user->balance }}</td>
                         <td>

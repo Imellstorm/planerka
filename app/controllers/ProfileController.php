@@ -23,7 +23,7 @@ class ProfileController extends BaseController {
     	if(Auth::check()){
 			$favoriteExist = Favorites::where('selected_user_id',$this->user->id)->where('user_id',Auth::user()->id)->first();
 			if(!empty($favoriteExist)){
-				$favoriteExistVal=true;
+				$favoriteExistVal=$favoriteExist->id;
 			} else {
 				$favoriteExistVal=false;
 			}	

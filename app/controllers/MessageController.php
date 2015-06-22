@@ -25,7 +25,7 @@ class MessageController extends BaseController {
 		if(empty($user)){
 			App::abort(404);
 		}
-		$messages = Message::select('users.alias','user_info.*','messages.*')
+		$messages = Message::select('users.alias','users.online','user_info.*','messages.*')
 							->leftjoin('user_info','user_info.user_id','=','messages.from')
 							->leftjoin('users','users.id','=','user_info.user_id')
 							->where('from',Auth::user()->id)

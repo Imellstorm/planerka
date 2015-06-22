@@ -18,6 +18,8 @@ class BaseController extends Controller {
 		}
 		View::share('rules',$rules);
 		View::share('roles',$roles);
+		
+		Auth::viaRemember();
 		$this->setOnline();
     }
 

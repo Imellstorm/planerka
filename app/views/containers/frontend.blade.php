@@ -43,39 +43,28 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
         } 
+
         //Get the latitude and the longitude;
         function successFunction(position) {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
             codeLatLng(lat, lng)
         }
+
         function errorFunction(){
           //alert("Geocoder failed");
         }
+
         function initialize() {
             geocoder = new google.maps.Geocoder();
         }
+
         function codeLatLng(lat, lng) {
             var latlng = new google.maps.LatLng(lat, lng);
             geocoder.geocode({'latLng': latlng}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    //console.log(results)
-                    if (results[1]) {
-                        //formatted address
-                        //alert(results[0].formatted_address)
-                        //find country name
-                        for (var i=0; i<results[0].address_components.length; i++) {
-                        for (var b=0;b<results[0].address_components[i].types.length;b++) {
-                            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
-                                if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
-                                    //this is the object you are looking for
-                                    city= results[0].address_components[i];
-                                    break;
-                                }
-                            }
-                        }
-                        //city data
-                        //alert("Местоположение "+city.short_name + " " + city.long_name)
+                    if (results[0]) {
+                        city = results[0].address_components[3]
                         $('.city-input').val(city.long_name);
                     }
                 }
@@ -114,7 +103,7 @@
             initialize();
 
             @if (Session::has('message'))
-                $.fancybox('{{ Session::get('message') }}');
+                $.fancybox('{{ Session::get('message') }}',{helpers: {overlay: {locked: false} }});
             @endif
 
             @if(Session::has('token'))
@@ -138,7 +127,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url('{{ isset($userInfo)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68;">
+    <header id="header" style="background: url('{{ isset($profile)&&isset($userInfo->cover)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
@@ -159,7 +148,7 @@
                             <div class="count">
                                 <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
                             </div>
-                            <div class="status">PRO</div>
+                            <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
                             <div class="user" id="show-user-menu">
                                 <div class="name">{{ Auth::user()->username }}</div>
                                 <a href="#null"><img src="/assets/img/dropdown_icon.png" alt=""></a>
@@ -176,7 +165,6 @@
                                 </ul>
                                 <div class="avatar"><img src="{{ Common_helper::getUserAvatar(Auth::user()->id) }}" alt="" style="width:48px;height:48px;"></div>
                             </div>
-                            <!-- <a href="#null" class="download">Загрузить</a> -->
                         </div>
                     </div>
                 </div>
@@ -195,8 +183,8 @@
                                 @else
                                     <div class="name">{{ $userInfo->alias }}</div>
                                 @endif
-                                <div class="{{ $user->online?'online':'offline' }}"></div>
-                                <div class="status">PRO</div>
+                                <div class="{{ $user->online?'online':'offline' }}" style="margin-top:10px;"></div>
+                                <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
                             </div>
                             <div class="bott-cont">
                                 <div class="place">{{ $userInfo->city }}</div>
@@ -221,15 +209,22 @@
                         <div class="msg">
                             {{ $userInfo->biography }}
                         </div>
-                        @if(Auth::check() && $userInfo->user_id!=Auth::user()->id)
-                            @if(!$favoriteExist)
-                                <div class="star">
-                                    <a href="/favorites/save/{{ $userInfo->alias }}" class="fancybox_ajax favorites_button">
+                        @if(Auth::check() && $userInfo->user_id!=Auth::user()->id)                 
+                            <div class="star">
+                                @if(!$favoriteExist)
+                                    <a href="/favorites/save/{{ $userInfo->alias }}">
                                         <img src="/assets/img/star.png" title="Добавить в избранное">
                                     </a>
-                                </div>
-                            @endif
+                                @else
+                                    <a href="/favorites/delete/{{ $favoriteExist }}">
+                                        <img src="/assets/img/star_nocolor.png" title="Убрать из избранного">
+                                    </a>
+                                @endif
+                            </div>
                             <a href="/message/create/{{ $userInfo->user_id }}" class="btn-main fancybox_ajax">Отправить сообщение</a>
+                            @if(Auth::user()->role_id==2 && $userInfo->role_id!=2)
+                                <a href="/project/inviteperformer/{{ $user->id }}" class="btn-main fancybox_ajax" style="width:120px; margin-left:20px;">Заказать</a>
+                            @endif
                         @endif
                     </div>
                 @else
@@ -255,43 +250,35 @@
                             <div class="mobile-title">
                                 <a href="#null">Поиск мероприятия</a><span class='glyphicon glyphicon-search'></span>
                             </div>
-                            <form class="form-inline" role="form" method="get">
-                                <input type="hidden" name="search" value="true">
+                            {{ Form::open(array('role' => 'form', 'url' => '/search', 'class'=>'form-inline', 'method'=>'get')) }}
                                 <div class="form-group categ">
                                     @if(!empty($roles))
-                                    <select id="select-categ" class="selectpicker">
-                                        <option value="0">Жанр исполнителя</option>
+                                    <select id="select-categ" class="selectpicker" name="specialization">
+                                        <option value="0">Все специализации</option>
                                         @foreach($roles as $key=>$val)
                                             <option value="{{ $val }}">{{ $key }}</option>
                                         @endforeach
                                     </select>
                                     @endif
                                 </div>
-                                <div class="form-group theme">
-                                    <select id="select-theme" class="selectpicker">
-                                        <option>Тема</option>
-                                        <option>Тема 1</option>
-                                        <option>Тема 2</option>
-                                    </select>
+                                <div class="form-group">
+                                    <input type="text" placeholder="Город" name="city" class="form-control city-input" style="width:180px">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="Город" class="form-control city-input">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" id="datepicker" placeholder="Дата" class="form-control">
+                                    <input type="text" id="datepicker" name="date" placeholder="Дата" class="form-control">
                                 </div>
                                 <div class="form-group paym">
-                                    <select id="select-theme" class="selectpicker">
-                                        <option>Бюджет</option>
-                                        <option>От 0 до 1000 руб.</option>
-                                        <option>От 1000 до 3000 руб.</option>
-                                        <option>От 3000 до ...</option>
+                                    <select id="select-theme" class="selectpicker" name="budjet">
+                                        <option value="0">Бюджет</option>
+                                        <option value="1">От 0 до 1000 руб.</option>
+                                        <option value="2">От 1000 до 3000 руб.</option>
+                                        <option value="3">От 3000 до ...</option>
                                     </select>
                                 </div>
                                 <div class="form-group search-area">
                                     <button class="btn btn-search">Поиск</button>
                                 </div>
-                            </form> 
+                            {{ Form::close() }}
                         </div>
 
                         <div class="author-photo">
