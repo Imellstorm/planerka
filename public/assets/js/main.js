@@ -466,29 +466,32 @@ $(document).ready(function() {
 
     $('body').on('click','.send_message_btn',function(){
         text = $('textarea.text').val();
-        console.log($('.text'));
+        if(text==''){
+          alert('Вы не можете отправить пустое сообщение');
+        } else {
 
-        $.ajax({
-            url:'/message/store',
-            type:'post',
-            data:{
-                username:$('.username').val(),
-                user_id:$('.user_id').val(),
-                text:text,
-            },
-            success: function(res){
-              $.ajax({
-                url:'/message/messageblock',
-                type:'get',
-                data: {
-                  text:text
-                },
-                success:function(ret){
-                  $('.popup_dialog_cont').append(ret);
-                  $.fancybox.update();
-                }
-              });
-            }
-        })
+          $.ajax({
+              url:'/message/store',
+              type:'post',
+              data:{
+                  username:$('.username').val(),
+                  user_id:$('.user_id').val(),
+                  text:text,
+              },
+              success: function(res){
+                $.ajax({
+                  url:'/message/messageblock',
+                  type:'get',
+                  data: {
+                    text:text
+                  },
+                  success:function(ret){
+                    $('.popup_dialog_cont').append(ret);
+                    $.fancybox.update();
+                  }
+                });
+              }
+          })
+        }
     });
 });

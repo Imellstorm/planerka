@@ -25,11 +25,11 @@
 														<a href="/{{ $dialog['dialogUserInfo']->alias }}">{{ $dialog['dialogUserInfo']->alias }}</a>
 													@endif
 													<span class="online"></span>
-													@if(!empty($dialog['mess'][0]->pro))
+													@if(!empty($dialog['dialogUserInfo']->pro))
 														<span class="status">PRO</span>
 													@endif
 												</div>
-												<span class="place">{{ $dialog['mess'][0]->city }}</span>
+												<div class="place">{{ $dialog['dialogUserInfo']->city }}</div>
 												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 											</div>
 											<a href="/message/create/{{ $key }}" class="fancybox_ajax">
@@ -37,6 +37,9 @@
 													<div style="color:#44B39B">Последнее сообщение от {{ $dialog['mess'][0]->alias }}</div>
 													<div class="time">{{ $dialog['mess'][0]->created_at }}</div>
 													<div class="text-msg">{{ $dialog['mess'][0]->text }}</div>
+													@if(isset($dialog['count']) && !empty($dialog['count']))
+														<div class="new_mess_badge text-center" style="margin-top:10px">новые сообщения - {{ $dialog['count'] }}</div>
+													@endif
 												</div>
 											</a>
 										</div>

@@ -32,7 +32,8 @@ class MessageController extends BaseController {
 							->where('to',$userId)
 							->orWhere('to',Auth::user()->id)
 							->where('from',$userId)
-							->get();	
+							->get();
+		Message::where('to',Auth::user()->id)->where('from',$userId)->update(array('readed'=>1));
 		return View::make('content.front.messages.form',compact('user','messages'));
 	}
 

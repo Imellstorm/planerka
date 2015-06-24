@@ -1063,6 +1063,8 @@ input.btn-main {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+}
+.info-cont .name{
   float: left;
   width: 170px;
   height: 20px;
