@@ -465,17 +465,27 @@ $(document).ready(function() {
     });
 
     $('body').on('click','.send_message_btn',function(){
-        alert('111');
+        text = $('.text').val();
         $.ajax({
             url:'/message/store',
-            type:post,
+            type:'post',
             data:{
                 username:$('.username').val(),
                 user_id:$('.user_id').val(),
-                text:$('.text').val(),
+                text:text,
             },
             success: function(res){
-                alert('123');
+              $.ajax({
+                url:'/message/messageblock',
+                type:'get',
+                data: {
+                  text:text
+                },
+                success:function(ret){
+                  $('.popup_dialog_cont').append(ret);
+                  $.fancybox.update();
+                }
+              });
             }
         })
     });

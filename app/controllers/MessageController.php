@@ -36,6 +36,25 @@ class MessageController extends BaseController {
 		return View::make('content.front.messages.form',compact('user','messages'));
 	}
 
+	public function getMessageblock(){
+		$message = new StdClass;
+		$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+		if(!empty($userInfo)){
+			$message->name = $userInfo->name;
+			$message->surname = $userInfo->surname;
+			$message->city = $userInfo->city;
+		} else {
+			$message->city = '';
+		}
+		$message->user_id = Auth::user()->id;
+		$message->alias = Auth::user()->alias;
+		$message->online = 1;		
+		$message->created_at = date('Y-m-d H:i:s');
+		$message->text = Input::get('text');
+
+		return View::make('content.front.messages.messageblock',compact('message'));
+	}
+
 
 	/**
 	 * Store a newly created message in storage.
@@ -66,6 +85,9 @@ class MessageController extends BaseController {
         	$message->save();
 		}
 
+		if (Request::ajax()){
+			return 'success';
+		}
 		Session::flash('success', 'Сообщение отправлено!');
 		return Redirect::back();
 	}
