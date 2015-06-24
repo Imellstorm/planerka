@@ -16,7 +16,7 @@ class ImageController extends BaseController {
 	   	}
 	    $image = Common_helper::fileUpload(Input::file('file'),'images/'.Auth::user()->alias);
 	    if( isset($image['errors']) ) {
-	    	return Response::json($image['errors'], 400);
+	    	return Response::json('Ошибка при загрузке фото'/*$image['errors']*/, 400);
         }
        	$thumb_big = 'uploads/images/'.Auth::user()->alias.'/thumb_big_'.$image['name'];
         Common_helper::getThumb($image['path'],$thumb_big,600,400);

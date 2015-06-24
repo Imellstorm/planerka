@@ -80,7 +80,6 @@
                                             @foreach($album->images as $key=>$image)
                                                 <li><a href="/{{ $user->alias }}/album/{{ $album->id }}"><img src="/{{ $image->thumb_small }}" alt=""></a></li>
                                             @endforeach
-                                            <!-- <li class="add_more"><a href="#null"></a><p>Еще хочу посмотреть<br> немного фото</p><span>+ 5</span></li> -->
                                         </ul>
                                     @endif
                                 </div>
@@ -90,19 +89,20 @@
 
                     @if(!empty($otherProf))
                         @foreach($otherProf as $key=>$val)
-                            <div class="profile-info">
+                            <div class="profile-info" style="position:relative">
                                 <h3>{{ $val->name }}</h3>
                                 <span class="price">от {{ $val->price }}</span>
                                 <p>{{ $val->description }}</p>
+                                @if(Auth::check() && Auth::user()->id==$user->id)
+            <!--                         <div class="add_album">
+                                        <a href="#create-album" class="fancybox"></a>
+                                        <p>Создать новый альбом</p>
+                                        <span>+</span>
+                                    </div> -->
+                                    <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:0; right:0">Создать новый альбом</a>
+                                @endif
                             </div>
                         @endforeach
-                    @endif
-                    @if(Auth::check() && Auth::user()->id==$user->id)
-                        <div class="add_album">
-                            <a href="#create-album" class="fancybox"></a>
-                            <p>Создать новый альбом</p>
-                            <span>+</span>
-                        </div>
                     @endif
 
                     <div class="custom-modal" id="create-album" style="">

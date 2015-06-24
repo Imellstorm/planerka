@@ -81,9 +81,13 @@ class ProjectController extends BaseController {
 		return View::make('content.front.projects.usermassages',compact('messages','project','userId'));
 	}
 
+	public function getFiltr(){
+		return View::make('content.front.projects.filtr');
+	}
+
 	public function getList(){
 		$model = new Project;
-		$projects = $model->getAllProjects();
+		$projects = $model->getAllProjects(Input::all());
 		return View::make('content.front.projects.list',compact('projects'));
 	}
 
@@ -234,5 +238,14 @@ class ProjectController extends BaseController {
 		unset($roles[1]);
 		unset($roles[2]);
 		return View::make('content.front.projects.inviteperformer',compact('userId','roles'));
+	}
+
+	public function getDelete($id){
+		$project = Project::where('id',$id)->where('user_id',Auth::user()->id)->first();
+		if(empty($project)){
+			App::abort(404);
+		}
+		$project->update(array('deleted'=>1));
+		return Redirect::to('/account/projects');
 	}
 }

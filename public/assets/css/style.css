@@ -3085,6 +3085,7 @@ form.account .btn-main {
   overflow: hidden;
   margin-bottom: 30px;
   position: relative;
+  display: inline-block;
 }
 #album .img-wrapp img {
   width: 100%;
@@ -3099,7 +3100,7 @@ form.account .btn-main {
 }
 #album .img-wrapp .cont-box .like {
   margin-top: 10px;
-  margin-left: 30px;
+  margin-left: 15px;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -3138,7 +3139,7 @@ form.account .btn-main {
 }
 #album .img-wrapp .cont-box .share {
   position: absolute;
-  right: 20px;
+  right: 5px;
   top: 0;
 }
 #album .img-wrapp .cont-box .share h4 {
@@ -3523,9 +3524,11 @@ form.account .btn-main {
   width: 236px;
   height: 38px;
   display: inline-block;
-  top: 0;
+  top: 12px;
   left: 0;
+  font-size: 16px;
   cursor: pointer;
+  color: white;
   overflow: hidden;
   text-align: center;
   position: relative;
@@ -3533,6 +3536,8 @@ form.account .btn-main {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  padding-top: 8px;
+  margin-left: 10px;
 }
 #upload-photo .file-wrap .btn-upload {
   color: #fff;
@@ -3976,8 +3981,9 @@ form.project .checkbox span {
   outline: none;
 }
 .dz-default.dz-message {
-  padding: 20px;
-  border: dashed lightgrey;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 40px;
 }
 .dz-preview{
   position: relative;

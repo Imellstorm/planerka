@@ -51,6 +51,9 @@
 						<div class="proj-card">
 							<header>
 								<div class="title">{{ $project->title }}</div>
+								@if(Auth::check() && Auth::user()->id==$project->user_id)
+									<a href="/project/delete/{{ $project->project_id }}" style="float:right; margin-left:20px" class="btn-main">Удалить проект</a>
+								@endif
 								<div class="price">{{ $project->budget }} руб.</div>
 							</header>
 							<div class="cont">
@@ -99,7 +102,7 @@
 									</div>
 									@if(!empty($project->thumb))
 										<div class="col-md-12" style="margin-top:20px">
-											<img src="/{{ $project->thumb }}" style="width:100%; max-widtH:200px">
+											<img src="/{{ $project->thumb }}" style="width:100%; max-widtH:160px">
 										</div>
 									@endif
 								</div>

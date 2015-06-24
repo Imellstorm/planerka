@@ -8,8 +8,9 @@
 		<div class="row photos">
 			@if(!empty($images))
 				<?php $imgCount = count($images); ?>
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-6 col-md-offset-3 text-center">
 					@foreach($images as $key=>$image)
+						<?php //list($width,$height) = getimagesize(base_path().'/public/'.$image->thumb_big) ?>
 						<div class="img-wrapp">
 							<a href="/{{ $image->path }}" rel="gallery1" class="fancybox" >
 								<img src="/{{ $image->thumb_big }}" alt="">
@@ -72,14 +73,18 @@
 		</div>
 		<div class="custom-modal" id="upload-photo">
 			<div class="title">Загрузить фотографии</div>
-			<form action="/image/uploadimage" class="dropzone">
-			  <div class="fallback">
-			    <input name="file" type="file" multiple />
-			  </div>
-			</form>
+			<div style="background:#ebebeb;padding:40px;">
+				<form action="/image/uploadimage" class="dropzone">
+					<div class="fallback">
+						<input name="file" type="file" multiple />
+					</div>
+				</form>
+				<div style="color:#a8a8a8;clear:both;">
+					<p>Не менее 600px по большей стороне. Оптимельное 2400px
+					<br>Поддерживыемые расширения: Jpeg, Jpg, Png</p>
+				</div>
+			</div>
 			<footer style="clear:both">
-				<p style="font-size:12px">Не менее 600px по большей стороне. Оптимельное 2400px
-				<br>Поддерживыемые расширения: Jpeg, Jpg, Png</p>
 				<p>Ваш лимит: <span>20 фото в неделю</span></p>
 				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
 			</footer>
@@ -95,11 +100,15 @@
 <script type="text/javascript" src="/assets/js/dropzone.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		@if(isset($new) && !empty($new))
+			$(".add_photo").fancybox().trigger('click');
+		@endif
+
 		Dropzone.autoDiscover = false;
 		var myDropzone = new Dropzone(".dropzone", { 
 			url: "/image/uploadimage/{{ $album->id }}",
 			acceptedFiles: ".png, .jpg, .jpeg",
-			dictDefaultMessage: 'Перетащите картинки в эту область'
+			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
 		});
 		myDropzone.on('success',function(file,message){
 			$('.dz-upload').fadeOut('normal');

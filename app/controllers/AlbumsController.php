@@ -1,6 +1,6 @@
 <?php
 
-class AlbumsController extends BaseController {
+class AlbumsController extends ProfileController {
 
 	public function __construct(){
 		parent::__construct();
@@ -21,7 +21,7 @@ class AlbumsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getShow($useralias,$id)
+	public function getShow($useralias,$id,$new='')
 	{
 		$user = User::where('alias',$useralias)->first();
 		if(empty($user)){
@@ -35,7 +35,7 @@ class AlbumsController extends BaseController {
 					->get();
 		$album = Album::where('user_id',$user->id)->where('id',$id)->first();
 		if(!empty($album)){	
-			return View::make('content.front.profile.album', compact('album','images','user'));
+			return View::make('content.front.profile.album', compact('album','images','user','new'));
 		} else {
 			App::abort(404);
 		}
@@ -81,7 +81,7 @@ class AlbumsController extends BaseController {
 			$model->description = Input::get('description');
 			$model->save();
 		}	
-        return Redirect::to('/'.Auth::user()->alias.'/album/'.$model->id);
+        return Redirect::to('/'.Auth::user()->alias.'/album/'.$model->id.'/new');
 	}
 
 	public function getDelete($id){

@@ -64,6 +64,7 @@
             geocoder.geocode({'latLng': latlng}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
+                        console.log(results[0]);
                         city = results[0].address_components[3]
                         $('.city-input').val(city.long_name);
                     }
@@ -127,7 +128,7 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url('<?php echo isset($profile)&&isset($userInfo->cover)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png'; ?>') no-repeat top center;   background-color: #726E68;">
+    <header id="header" style="background: url('<?php echo isset($profile)&&isset($userInfo->cover)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png'; ?>') no-repeat top center;   background-color: #726E68; background-size: 100%;">
     <?php if(Auth::check()): ?>           
         <div class="user-nav">
             <div class="container">
@@ -197,7 +198,7 @@
                         <?php if(count($userInfo->profs)): ?>
                             <ul class="price">
                                 <?php foreach($userInfo->profs as $prof): ?>
-                                    <li><?php echo $prof->name; ?> от <?php echo $prof->price; ?></li>
+                                    <li><?php echo $prof->name; ?> от <?php echo $prof->price; ?> р.</li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
