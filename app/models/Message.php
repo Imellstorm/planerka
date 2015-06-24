@@ -44,6 +44,8 @@ class Message extends \Eloquent {
             foreach ($dialogs as $key => $val) {
                 $dialogs[$key]['dialogUserInfo'] = User::leftjoin('user_info','users.id','=','user_info.user_id')->where('users.id',$key)->first(); 
             }
+        } else {
+           $dialogs = ''; 
         }
         return $dialogs;
     }
