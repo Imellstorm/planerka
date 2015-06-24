@@ -40,9 +40,10 @@ class Message extends \Eloquent {
                 $dialogs[$val->to]['mess'][]=$val;
             }
         }
-
-        foreach ($dialogs as $key => $val) {
-            $dialogs[$key]['dialogUserInfo'] = User::leftjoin('user_info','users.id','=','user_info.user_id')->where('user_id',$key)->first(); 
+        if(isset($dialogs) && count($dialogs)){
+            foreach ($dialogs as $key => $val) {
+                $dialogs[$key]['dialogUserInfo'] = User::leftjoin('user_info','users.id','=','user_info.user_id')->where('users.id',$key)->first(); 
+            }
         }
         return $dialogs;
     }
