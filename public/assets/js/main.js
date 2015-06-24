@@ -466,6 +466,7 @@ $(document).ready(function() {
 
     $('body').on('click','.send_message_btn',function(){
         text = $('textarea.text').val();
+        $('textarea.text').val('');
         if(text==''){
           alert('Вы не можете отправить пустое сообщение');
         } else {
