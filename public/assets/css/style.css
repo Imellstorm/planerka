@@ -1065,6 +1065,7 @@ input.btn-main {
   font-weight: 700;
   float: left;
   width: 170px;
+  height: 20px;
   overflow: hidden;
 }
 .user-info .name a {
