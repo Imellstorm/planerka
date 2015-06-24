@@ -4092,3 +4092,7 @@ form.project .checkbox span {
 .albums_list{
   margin-top: 20px;
 }
+.send_message_btn{
+  margin:10px auto;
+  cursor: pointer;
+}

@@ -1,6 +1,5 @@
 <div class="custom-modal" id="modal-reg-second" style="display:block;">
     <div class="title">Выберите тип вашего аккаунта</div>
-    <img src="/assets/img/loading.gif" class="loading" style="width:50px;position:relative;left:47%;top:50px;display:none">
     <div class="account-tipes main-roles">
         <div class="tipe role_main" role="2">
             <figure>
@@ -55,4 +54,7 @@
             Другие роли отсутствуют
         @endif
     </div>                     
+</div>
+<div class="loading" style="text-align:center;display:none">
+    <img src="/assets/img/loading.gif" style="width:100px;margin-top:100px;">
 </div>

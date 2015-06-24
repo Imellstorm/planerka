@@ -12,7 +12,7 @@
                     <span class="{{ $message->online?'online':'offline' }}"></span>
                     <div style="font-size:12px; margin-bottom:10px">{{ $message->city }}</div>
                 </div>
-                <div class="col-md-12" style="background:#FAFAF5;padding:20px;">
+                <div class="col-md-12" style="background:#FAFAF5;padding:20px;margin-top:5px;">
                     <div style="font-size:12px">{{ $message->created_at }}</div>
                     <div>{{ $message->text }}</div>
                 </div>
@@ -22,13 +22,31 @@
 </div>  
 {{ Form::open(array('role' => 'form', 'url' => 'message/store')) }}
     <div style="padding:10px">
-        {{ Form::hidden('username', $user->username, array('class' => 'form-control','required')) }}
-        {{ Form::hidden('user_id', $user->id) }}
+        {{ Form::hidden('username', $user->username, array('class' => 'username','required')) }}
+        {{ Form::hidden('user_id', $user->id, array('class' => 'user_id','required')) }}
 
         <div class='form-group' style="margin: 0 10px;">
-            {{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:100px','placeholder'=>'Введите сообщение','required')) }}
+            {{ Form::textarea('text', null, array('class' => 'form-control text','style'=>'height:100px','placeholder'=>'Введите сообщение','required')) }}
         </div>
-
-        {{ Form::submit('Отправить', array('class' => 'btn-main', 'style'=>'margin:10px auto')) }}
+        <div class="btn-main send_message_btn">Отправить</div>
     </div>
 {{ Form::close() }}
+<script type="text/javascript">
+    // $(document).ready(function(){
+    //     $('.send_message_btn').on('click',function(){
+    //         alert('123');
+    //         $.ajax({
+    //             url:'/message/store',
+    //             type:post,
+    //             data:{
+    //                 username:$('.username').val(),
+    //                 user_id:$('.user_id').val(),
+    //                 text:$('.text').val(),
+    //             },
+    //             success: function(res){
+    //                 alert('123');
+    //             }
+    //         })
+    //     })
+    // });
+</script>

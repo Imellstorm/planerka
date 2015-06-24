@@ -364,7 +364,7 @@ $(document).ready(function() {
     });
 
     $('body').on('click','.role_main',function(){
-      $(this).parent().hide();
+      $(this).parent().parent().hide();
       $('.loading').show();
       $.ajax({
         url: '/admin/users/store',
@@ -462,5 +462,21 @@ $(document).ready(function() {
 
     $('.favorites_button').on('click',function(){
       $(this).parent().hide();
-    })
+    });
+
+    $('body').on('click','.send_message_btn',function(){
+        alert('111');
+        $.ajax({
+            url:'/message/store',
+            type:post,
+            data:{
+                username:$('.username').val(),
+                user_id:$('.user_id').val(),
+                text:$('.text').val(),
+            },
+            success: function(res){
+                alert('123');
+            }
+        })
+    });
 });

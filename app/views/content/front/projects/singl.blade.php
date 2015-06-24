@@ -52,7 +52,7 @@
 							<header>
 								<div class="title">{{ $project->title }}</div>
 								@if(Auth::check() && Auth::user()->id==$project->user_id)
-									<a href="/project/delete/{{ $project->project_id }}" style="float:right; margin-left:20px" class="btn-main">Удалить проект</a>
+									<a href="/project/delete/{{ $project->project_id }}" style="float:right; margin-left:20px" class="btn-main">Удалить</a>
 								@endif
 								<div class="price">{{ $project->budget }} руб.</div>
 							</header>
