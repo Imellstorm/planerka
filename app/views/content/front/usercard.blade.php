@@ -14,13 +14,13 @@
 				@else
 					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
 				@endif
-				<span class="online"></span>
 				@if($item->pro!=0)
 					<span class="status">PRO</span>
 				@endif
 			</div>
-			<div class="place">{{ $item->city }}</div>
+			<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
 			<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+			<div class="place" style="height:20px">{{ $item->city }}</div>
 		</div>
 	</div>
 	<div class="detail-info">

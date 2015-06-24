@@ -224,7 +224,9 @@
                             </div>
                             <a href="/message/create/{{ $userInfo->user_id }}" class="btn-main fancybox_ajax">Отправить сообщение</a>
                             @if(Auth::user()->role_id==2 && $userInfo->role_id!=2)
-                                <a href="/project/inviteperformer/{{ $user->id }}" class="btn-main fancybox_ajax" style="width:120px; margin-left:20px;">Заказать</a>
+                                    <br><br><br>
+                                    <a href="/project/inviteperformer/{{ $user->id }}" class="btn-main fancybox_ajax" style="width:120px; margin-left:52px;">Заказать</a>
+                                
                             @endif
                         @endif
                     </div>

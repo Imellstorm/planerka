@@ -1063,6 +1063,9 @@ input.btn-main {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+  float: left;
+  width: 170px;
+  overflow: hidden;
 }
 .user-info .name a {
   font-family: 'PT Sans', sans-serif;

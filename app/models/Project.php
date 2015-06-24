@@ -12,7 +12,7 @@ class Project extends \Eloquent {
             ->where($this->table.'.deleted',0)
             ->where($this->table.'.status','');
         if(isset($filtr['budjet']) && !empty($filtr['budjet'])){
-            $projects->where($this->table.'.budget',$filtr['budjet']);
+            $projects->where($this->table.'.budget','>=',$filtr['budjet']);
         }
         if(isset($filtr['term']) && !empty($filtr['term'])){
             $projects->where($this->table.'.term',$filtr['term']);

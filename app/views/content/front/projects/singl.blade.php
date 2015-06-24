@@ -50,10 +50,10 @@
 					<div class="col-sm-12">
 						<div class="proj-card">
 							<header>
-								<div class="title">{{ $project->title }}</div>
 								@if(Auth::check() && Auth::user()->id==$project->user_id)
-									<a href="/project/delete/{{ $project->project_id }}" style="float:right; margin-left:20px" class="btn-main">Удалить</a>
+									<a href="/project/delete/{{ $project->project_id }}" style="margin-bottom:20px" class="btn-main">Удалить мероприятие</a>
 								@endif
+								<div class="title">{{ $project->title }}</div>
 								<div class="price">{{ $project->budget }} руб.</div>
 							</header>
 							<div class="cont">

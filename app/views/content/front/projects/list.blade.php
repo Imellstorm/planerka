@@ -16,7 +16,8 @@
 						<div class="col-sm-12">
 							<div class="no-pro-msg">
 								Осталось ответов на проекты: <span>3</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
-								<a href="/project/filtr" class="btn-main fancybox_ajax" style=" float:right; margin: 20px 20px 0 0;">Фильтр</a>
+								<a href="/project/filtr" class="btn-main fancybox_ajax" style="width:150px; float:right; margin: 20px 20px 0 0;">Фильтр</a>
+								<a href="/project/list" class="btn-main" style=" float:right; margin: 20px 20px 0 0;">Очистить фильтр</a>
 							</div>
 						</div>
 					</div>

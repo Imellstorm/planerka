@@ -465,7 +465,9 @@ $(document).ready(function() {
     });
 
     $('body').on('click','.send_message_btn',function(){
-        text = $('.text').val();
+        text = $('textarea.text').val();
+        console.log($('.text'));
+
         $.ajax({
             url:'/message/store',
             type:'post',

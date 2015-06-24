@@ -26,21 +26,28 @@ class Message extends \Eloquent {
                     ->where('to',$userId)  
                     ->orWhere('from',$userId)
                     ->orderBy($this->table.'.id','DESC')
+                    //->groupBy('user_info.user_id')
                     ->get();
-        $dialogs = '';
+
         foreach($result as $key=>$val){
             if($val->to==$userId){
-                $val->userdialog = $val->from_name;
+                $dialogUserId = $val->to;
                 $dialogs[$val->from]['mess'][]=$val;
 
                 if($val->readed==0){
-                    if(!isset($dialogs[$val->from]['count']))  $dialogs[$val->from]['count']=0;
+                    if(!isset($dialogs[$key]['count']))  $dialogs[$val->from]['count']=0;
                     $dialogs[$val->from]['count']=$dialogs[$val->from]['count']+1;
+                    $model = Message::find($val->id);
+                    $model->update(array('readed'=>1));
                 }
             } else {
-                $val->userdialog = $val->to_name;
+                $dialogUserId = $val->from;
                 $dialogs[$val->to]['mess'][]=$val;
             }
+            
+        }
+        foreach ($dialogs as $key => $val) {
+            $dialogs[$key]['dialogUserInfo'] = User::leftjoin('user_info','users.id','=','user_info.user_id')->where('user_id',$key)->first();
         }
         return $dialogs;
     }

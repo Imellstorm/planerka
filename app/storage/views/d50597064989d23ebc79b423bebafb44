@@ -224,7 +224,9 @@
                             </div>
                             <a href="/message/create/<?php echo $userInfo->user_id; ?>" class="btn-main fancybox_ajax">Отправить сообщение</a>
                             <?php if(Auth::user()->role_id==2 && $userInfo->role_id!=2): ?>
-                                <a href="/project/inviteperformer/<?php echo $user->id; ?>" class="btn-main fancybox_ajax" style="width:120px; margin-left:20px;">Заказать</a>
+                                    <br><br><br>
+                                    <a href="/project/inviteperformer/<?php echo $user->id; ?>" class="btn-main fancybox_ajax" style="width:120px; margin-left:52px;">Заказать</a>
+                                
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>

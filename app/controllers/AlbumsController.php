@@ -1,6 +1,6 @@
 <?php
 
-class AlbumsController extends ProfileController {
+class AlbumsController extends BaseController {
 
 	public function __construct(){
 		parent::__construct();
@@ -15,6 +15,18 @@ class AlbumsController extends ProfileController {
 		return View::make('content.front.profile.albumslist', compact('albums'));
 	}
 
+	private function getFavorites($user){
+    	if(Auth::check()){
+			$favoriteExist = Favorites::where('selected_user_id',$user->id)->where('user_id',Auth::user()->id)->first();
+			if(!empty($favoriteExist)){
+				$favoriteExistVal=$favoriteExist->id;
+			} else {
+				$favoriteExistVal=false;
+			}	
+			return $favoriteExistVal;
+		}
+    }
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -27,6 +39,17 @@ class AlbumsController extends ProfileController {
 		if(empty($user)){
 			App::abort(404);
 		}
+
+
+		$projectsDone = Userstoproject::where('user_id',$user->id)->where('status',6)->get();
+		$this->getUserinfo($user->id);
+		$favoriteExist = $this->getFavorites($user);
+		View::share('favoriteExist',$favoriteExist);
+		View::share('profile',true);
+		View::share('projectsDoneCount',count($projectsDone));
+		View::share('user',$user);
+		
+
 		$this->getUserinfo($user->id);
 		$images = Image::select('images.*',DB::raw('count('.DB::getTablePrefix().'image_likes.id) as likes'))
 					->leftjoin('image_likes','image_likes.image_id','=','images.id')

@@ -17,12 +17,12 @@
 									@foreach($dialogs as $key=>$dialog)
 										<div class="single-msg" style="border:none">
 											<div class="user-info">												
-												<a href="/{{ $dialog['mess'][0]->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($dialog['mess'][0]->from) }}" alt=""></a>
+												<a href="/{{ $dialog['dialogUserInfo']->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($key) }}" alt=""></a>
 												<div class="name">
-													@if(!empty($dialog['mess'][0]->name) || !empty($dialog['mess'][0]->surname))
-														<a href="/{{ $dialog['mess'][0]->alias }}">{{ $dialog['mess'][0]->name }} {{ $dialog['mess'][0]->surname }}</a>
+													@if(!empty($dialog['dialogUserInfo']->name) || !empty($dialog['dialogUserInfo']->surname))
+														<a href="/{{ $dialog['dialogUserInfo']->alias }}">{{ $dialog['dialogUserInfo']->name }} {{ $dialog['dialogUserInfo']->surname }}</a>
 													@else
-														<a href="/{{ $dialog['mess'][0]->alias }}">{{ $dialog['mess'][0]->alias }}</a>
+														<a href="/{{ $dialog['dialogUserInfo']->alias }}">{{ $dialog['dialogUserInfo']->alias }}</a>
 													@endif
 													<span class="online"></span>
 													@if(!empty($dialog['mess'][0]->pro))
@@ -32,12 +32,9 @@
 												<span class="place">{{ $dialog['mess'][0]->city }}</span>
 												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 											</div>
-											<!-- <a href="/account/messages/{{ $key }}" class="reply"> -->
 											<a href="/message/create/{{ $key }}" class="fancybox_ajax">
 												<div class="msg-cont">
-													@if(!empty($dialog['count']))
-														<div class="new_mess_badge text-center">Новые сообщения - {{ $dialog['count'] }}</div>
-													@endif
+													<div style="color:#44B39B">Последнее сообщение от {{ $dialog['mess'][0]->alias }}</div>
 													<div class="time">{{ $dialog['mess'][0]->created_at }}</div>
 													<div class="text-msg">{{ $dialog['mess'][0]->text }}</div>
 												</div>
