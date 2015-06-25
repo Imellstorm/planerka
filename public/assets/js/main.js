@@ -323,6 +323,9 @@ $(document).ready(function() {
     $( "#city" ).autocomplete({
       source: availableTags
     });
+    $( "#city_search" ).autocomplete({
+      source: availableTags
+    });
 
 
     $('.create-account').on('click',function(){

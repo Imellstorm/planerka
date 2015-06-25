@@ -2213,6 +2213,7 @@ input.btn-main {
   width: 660px;
   float: left;
   border-bottom: solid 1px #44B39B;
+  position: relative;
 }
 .profile-info h3 {
   margin: 0;

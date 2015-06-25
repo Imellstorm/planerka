@@ -18,6 +18,7 @@
                                 <span class="price">от {{ $mainProf->price }}</span>
                             @endif
                             <p>{{ $mainProf->description }}</p>
+                            <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
                         </div>
                     @endif
                     <div class="profile-data">
@@ -101,7 +102,7 @@
                                         <p>Создать новый альбом</p>
                                         <span>+</span>
                                     </div> -->
-                                    <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:0; right:0">Создать новый альбом</a>
+                                    <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
                                 @endif
                             </div>
                         @endforeach

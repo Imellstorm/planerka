@@ -11,7 +11,7 @@ class CalendarController extends BaseController {
 			$dates = explode(',',$dates);	
 	    	foreach ($dates as $key => $val) {
 	    		$datesArray[] = array(
-	    			'user_id'	=> 1,
+	    			'user_id'	=> Auth::user()->id,
 	    			'date'		=> date('Y-m-d',strtotime($val)),
 	    		);
 	    	}
