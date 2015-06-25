@@ -87,8 +87,9 @@ class ProjectController extends BaseController {
 
 	public function getList(){
 		$model = new Project;
+		$filtr = Input::all();
 		$projects = $model->getAllProjects(Input::all());
-		return View::make('content.front.projects.list',compact('projects'));
+		return View::make('content.front.projects.list',compact('projects','filtr'));
 	}
 
 	public function getCreate(){

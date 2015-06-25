@@ -48,16 +48,19 @@
 
                             <div class="form-group">
                                 <label for="">Аватар</label>
-                                <img id="img_preview" src="{{ !empty($userInfo->avatar)?'/'.$userInfo->avatar:'' }}" style="display:{{ !empty($userInfo->avatar)?'block':'none' }}" alt="your image" />
+                                <div class="img_preview_cont">
+                                    <img id="img_preview" src="{{ !empty($userInfo->avatar)?'/'.$userInfo->avatar:'' }}" style="display:{{ !empty($userInfo->avatar)?'block':'none' }}" alt="your image" />
+                                </div>
                                 <i class="fa fa-times delete_image pull-right" title="Delete" style="display:{{ !empty($userInfo->avatar)?'block':'none' }}"></i>
                                 <input type="hidden" class="image-exist" name="imageexist" value="{{ !empty($userInfo->avatar)?1:0 }}">
                                 <div class="avatar">
                                     {{ Form::file('userfile', array('id' => 'imgInp')) }}
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
-                                {{ Form::file('userfile', array('id' => 'imgInp')) }}
+                                {{ Form::label('usercard', 'Обложка профиля') }}
+                                {{ Form::file('usercard', array('id' => 'profileCover')) }}
                             </div>
 
                             <div class="form-group">

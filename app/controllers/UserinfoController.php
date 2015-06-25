@@ -52,7 +52,17 @@ class UserinfoController extends BaseController {
 	        if(Input::hasFile('userfile')) {
 				$image = Common_helper::fileUpload(Input::file('userfile'),'images/'.Auth::user()->alias,'avatar');
 				if(isset($image['path']) && !empty($image['path'])){
-					$model->avatar = $image['path'];
+					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,100,100);
+					$model->avatar = $thumbPath;
+				}
+			}
+			if(Input::hasFile('usercard')) {
+				$image = Common_helper::fileUpload(Input::file('usercard'),'images/'.Auth::user()->alias,'usercard_cover');
+				if(isset($image['path']) && !empty($image['path'])){
+					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315);
+					$model->usercard_cover = $thumbPath;
 				}
 			}
         	$model->save();
@@ -102,12 +112,23 @@ class UserinfoController extends BaseController {
 	        if(Input::hasFile('userfile')) {
 				$image = Common_helper::fileUpload(Input::file('userfile'),'images/'.Auth::user()->alias,'avatar');
 				if(isset($image['path']) && !empty($image['path'])){
-					$data['avatar'] = $image['path'];
+					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,100,100);
+					$data['avatar'] = $thumbPath;
 				}
 			} else {
 				$imageexist = Input::get('imageexist');
 				if(empty($imageexist)){
 					$data['avatar'] = '';
+				}
+			}
+
+			if(Input::hasFile('usercard')) {
+				$image = Common_helper::fileUpload(Input::file('usercard'),'images/'.Auth::user()->alias,'usercard_cover');
+				if(isset($image['path']) && !empty($image['path'])){
+					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315);
+					$data['usercard_cover'] = $thumbPath;
 				}
 			}        
 

@@ -3,7 +3,15 @@
 		<a href="/favorites/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="right:25px"></a>
 	@endif
 	<figure>
-		<a href="/{{ $item->alias }}"><img src="/assets/img/photog.jpg" alt=""></a>
+		<a href="/{{ $item->alias }}" class="usercard_photo">
+			@if(!empty($item->usercard_cover))
+				<img src="/{{ $item->usercard_cover }}" alt="">
+			@else
+				<div class="usercard_no_photo">
+					Картинка отсутсвует
+				</div>
+			@endif
+		</a>
 	</figure>
 	<div class="user-info">
 		<a href="/{{ $item->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($item->user_id) }}" alt=""></a>

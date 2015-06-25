@@ -25,6 +25,9 @@ class Project extends \Eloquent {
         }
         if(Auth::check() && isset($filtr['myprof']) && !empty($filtr['myprof'])){
             $myProfs = Specialization::where('user_id',Auth::user()->id)->lists('role_id','id');
+            if(empty($myProfs)){
+                return array();
+            }
             $projects->whereIn($this->table.'.role_id',$myProfs);
         }
 

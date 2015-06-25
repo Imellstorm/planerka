@@ -3968,10 +3968,15 @@ form.project .checkbox span {
   color:black;
 }
 #img_preview{
-  position: absolute;
   width: 82px;
-  left: 177px;
+}
+.img_preview_cont{
+  width: 82px;
+  height: 82px;
+  overflow: hidden;
+  position: absolute;
   top: 4px;
+  left: 177px
 }
 .delete_image{
   position: absolute;
@@ -4104,4 +4109,20 @@ form.project .checkbox span {
 .send_message_btn{
   margin:10px auto;
   cursor: pointer;
+}
+#profileCover{
+  width: 400px;
+  margin-top: 7px;
+  display: inline-block;
+  outline: none;
+}
+.usercard_photo{
+  width: 261px;
+  height: 316px;
+  display: block;
+  text-align: center;
+  color: grey;
+}
+.usercard_no_photo{
+  padding-top: 140px;
 }
