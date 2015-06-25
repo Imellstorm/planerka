@@ -14,7 +14,9 @@
                     @if(!empty($mainProf))
                         <div class="profile-info">
                             <h3>{{ $mainProf->name }}</h3>
-                            <span class="price">от {{ $mainProf->price }}</span>
+                            @if(isset($mainProf->price) && !empty($mainProf->price))
+                                <span class="price">от {{ $mainProf->price }}</span>
+                            @endif
                             <p>{{ $mainProf->description }}</p>
                         </div>
                     @endif

@@ -38,6 +38,9 @@ class ProfileController extends BaseController {
 	 */
 	public function getIndex(){
 		$mainProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('role_id',$this->user->role_id)->where('user_id',$this->user->id)->first();
+		if(empty($mainProf)){
+			$mainProf = Role::where('id',$this->user->role_id)->first();
+		}
 		$otherProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('user_id',$this->user->id)->where('role_id','!=',$this->user->role_id)->get();
 		$userinfo = Userinfo::where('user_id',$this->user->id)->first();
 		$user = $this->user;
@@ -50,7 +53,6 @@ class ProfileController extends BaseController {
 		}
 
 		if(!empty($userinfo)){
-			//echo '<fix></fix>'; // фикс странного бага с удвоением инкримента
 			Userinfo::increment('enters_count',0.5);
 		}
 		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));

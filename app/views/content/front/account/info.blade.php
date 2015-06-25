@@ -55,6 +55,10 @@
                                     {{ Form::file('userfile', array('id' => 'imgInp')) }}
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                {{ Form::file('userfile', array('id' => 'imgInp')) }}
+                            </div>
 
                             <div class="form-group">
                                 {{ Form::label('name', 'Имя') }}

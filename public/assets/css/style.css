@@ -2308,6 +2308,9 @@ input.btn-main {
 .album img{
   width: 100%;
 }
+.profile-albums .photos{
+  margin-top: 20px;
+}
 .profile-albums .album a {
   color: #fff;
   line-height: 26px;
