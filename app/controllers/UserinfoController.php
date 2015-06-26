@@ -61,7 +61,7 @@ class UserinfoController extends BaseController {
 				$image = Common_helper::fileUpload(Input::file('usercard'),'images/'.Auth::user()->alias,'usercard_cover');
 				if(isset($image['path']) && !empty($image['path'])){
 					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
-					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315);
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315,false);
 					$model->usercard_cover = $thumbPath;
 				}
 			}
@@ -127,7 +127,7 @@ class UserinfoController extends BaseController {
 				$image = Common_helper::fileUpload(Input::file('usercard'),'images/'.Auth::user()->alias,'usercard_cover');
 				if(isset($image['path']) && !empty($image['path'])){
 					$thumbPath = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
-					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315);
+					Common_helper::getThumb(base_path().'/public/'.$image['path'],base_path().'/public/'.$thumbPath,260,315,false);
 					$data['usercard_cover'] = $thumbPath;
 				}
 			}        

@@ -5,7 +5,7 @@
 		@else
 			<a href="/{{ $message->alias }}" style="color:#3C3C3C">{{ $message->alias }}</a>
 		@endif
-		<span class="online"></span>
+		<span class="{{ $message->online?'online':'offline' }}"></span>
 	</div>
 	<div class="date">{{ $message->created_at }}</div>
 	<div class="chat-msg">{{ $message->text }}</div>

@@ -24,7 +24,7 @@
 												@else
 													<a href="/{{ $noty->alias }}">{{ $noty->alias }}</a>
 												@endif
-												<span class="online"></span>
+												<span class="{{ $noty->online?'online':'offline' }}"></span>
 												@if(!empty($noty->pro))
 													<span class="status">PRO</span>
 												@endif

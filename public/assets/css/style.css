@@ -1504,14 +1504,14 @@ input.btn-main {
   display: block;
   font-size: 22px;
   line-height: 26px;
-  color: #3c3c3c;
+  color: #44b39b;
   letter-spacing: 2px;
   float: left;
   max-width: 83%;
 }
 .project-list .single-proj .title a:hover {
   text-decoration: none;
-  color: #44b39b;
+  color: #008C6E;
 }
 .project-list .single-proj .price {
   float: right;
@@ -4005,6 +4005,8 @@ form.project .checkbox span {
   float: left;
   margin: 10px;
   max-width: 125px;
+  height: 220px;
+  overflow: hidden;
 }
 .dz-success-mark path{
   fill:green;

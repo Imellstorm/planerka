@@ -164,7 +164,11 @@
                                     <li><a href="/account/info">Настройки</a></li>
                                     <li><a href="/auth/logout">Выход</a></li>
                                 </ul>
-                                <div class="avatar"><img src="<?php echo Common_helper::getUserAvatar(Auth::user()->id); ?>" alt="" style="width:48px;height:48px;"></div>
+                            </div>
+                            <div class="avatar">
+                                <a href="/<?php echo Auth::user()->alias; ?>">    
+                                    <img src="<?php echo Common_helper::getUserAvatar(Auth::user()->id); ?>" alt="" style="width:48px;height:48px;">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +226,7 @@
                                     </a>
                                 <?php endif; ?>
                             </div>
-                            <a href="/message/create/<?php echo $userInfo->user_id; ?>" class="btn-main fancybox_ajax">Отправить сообщение</a>
+                            <a href="/message/create/<?php echo $userInfo->user_id; ?>" class="btn-main fancybox_ajax_scroll">Отправить сообщение</a>
                             <?php if(Auth::user()->role_id==2 && $userInfo->role_id!=2): ?>
                                     <br><br><br>
                                     <a href="/project/inviteperformer/<?php echo $user->id; ?>" class="btn-main fancybox_ajax" style="width:120px; margin-left:52px;">Заказать</a>

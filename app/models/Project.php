@@ -36,9 +36,10 @@ class Project extends \Eloquent {
 
     public function getProjectsByUser($userId){
         $projects =  DB::table($this->table)
-            ->select('user_info.*',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),$this->table.'.*')
+            ->select('users.online','user_info.*',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),$this->table.'.*')
             ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
             ->leftjoin('project_messages','project_messages.project_id','=',DB::raw(DB::getTablePrefix().$this->table.'.id AND '.DB::getTablePrefix().'project_messages.readed=0 AND '.DB::getTablePrefix().'project_messages.to_user='.$userId))
+            ->leftjoin('users','users.id','=',$this->table.'.user_id')
             ->where($this->table.'.user_id',$userId)
             ->where($this->table.'.deleted',0)
             ->orderBy($this->table.'.id','DESC')
@@ -49,7 +50,7 @@ class Project extends \Eloquent {
 
     public function getAcceptedProjects($userId){
         $projects =  DB::table('users_to_project')
-            ->select($this->table.'.*','reviews.id as review',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),'user_info.name','user_info.surname','user_info.city','user_info.pro','users.alias','users_to_project.status','users_to_project.id as users_to_project_id',$this->table.'.city as project_city')
+            ->select($this->table.'.*','reviews.id as review',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),'user_info.name','user_info.surname','user_info.city','user_info.pro','users.alias','users.online','users_to_project.status','users_to_project.id as users_to_project_id',$this->table.'.city as project_city')
             ->leftjoin($this->table,'users_to_project.project_id','=',$this->table.'.id')
             ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
             ->leftjoin('users','users.id','=',$this->table.'.user_id')
@@ -71,6 +72,7 @@ class Project extends \Eloquent {
             'user_info.*',
             'users.created_at as usercreated',
             'users.alias',
+            'users.online',
             'roles.name as rolename',
             $this->table.'.city as project_city')
         ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')

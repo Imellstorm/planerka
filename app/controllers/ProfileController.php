@@ -42,7 +42,7 @@ class ProfileController extends BaseController {
 			$mainProf = Role::where('id',$this->user->role_id)->first();
 		}
 		$otherProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('user_id',$this->user->id)->where('role_id','!=',$this->user->role_id)->get();
-		$userinfo = Userinfo::where('user_id',$this->user->id)->first();
+		$userinfo = Userinfo::where('user_id',$this->user->id)->groupBy('user_info.user_id')->first();
 		$user = $this->user;
 
 		$albums = Album::select('albums.*',DB::raw('count('.DB::getTablePrefix().'images.id) as imgcount'))->leftjoin('images','images.album_id','=','albums.id')->where('albums.user_id',$this->user->id)->groupby('albums.id')->get();
@@ -52,7 +52,7 @@ class ProfileController extends BaseController {
 			}
 		}
 
-		if(!empty($userinfo)){
+		if(!empty($userinfo) && (!Auth::check() || $user->id!=Auth::user()->id)){
 			Userinfo::increment('enters_count',0.5);
 		}
 		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));

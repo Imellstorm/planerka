@@ -19,7 +19,7 @@
 										@else
 											<a href="/{{ $review->alias }}">{{ $review->alias }}</a>
 										@endif
-										<span class="online"></span>
+										<span class="{{ $review->online?'online':'offline' }}"></span>
 										@if(!empty($review->created_at->pro))
 											<span class="status">PRO</span>
 										@endif
@@ -33,17 +33,6 @@
 										<div>Отзыв по проекту - {{ $review->project_title }}</div>
 									</div>
 									<div>{{ $review->text }}</div>
-									<!-- <ul class="photo-list">
-										<li>
-											<img src="#" alt="">
-										</li>
-										<li>
-											<img src="#" alt="">
-										</li>
-										<li>
-											<img src="#" alt="">
-										</li>
-									</ul> -->
 								</div>
 							</div>
 						@endforeach

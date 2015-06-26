@@ -161,7 +161,9 @@ $(document).ready(function() {
 
         changeMonth: true,
         
-      	changeYear: true
+      	changeYear: true,
+
+        yearRange: "-100:+0",
 
 	});
 
@@ -450,6 +452,24 @@ $(document).ready(function() {
       }
     });
 
+    $('.fancybox_ajax_scroll').fancybox({
+      type: 'ajax',
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      openSpeed: 400,
+      closeSpeed: 400,
+      afterShow: function(){
+        $(".fancybox-inner").animate({
+            scrollTop: $('.fancybox-inner')[0].scrollHeight,
+        });
+      },
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+
     $('.fancybox_ajax').fancybox({
       type: 'ajax',
       openEffect: 'fade',
@@ -491,7 +511,10 @@ $(document).ready(function() {
                   },
                   success:function(ret){
                     $('.popup_dialog_cont').append(ret);
-                    $.fancybox.update();
+                    $(".fancybox-inner").animate({
+                          scrollTop: $('.fancybox-inner')[0].scrollHeight,
+                      });
+                    //$.fancybox.update();
                   }
                 });
               }

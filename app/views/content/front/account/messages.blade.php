@@ -10,7 +10,7 @@
 		<div class="notification">
 			<div class="container">
 				@include('content.front.account.menu_two')
-				<a href="/message/create/{{ $userId }}" class="reply fancybox_ajax btn-main" style="margin:20px auto 0 auto">Ответить</a>
+				<a href="/message/create/{{ $userId }}" class="reply fancybox_ajax_scroll btn-main" style="margin:20px auto 0 auto">Ответить</a>
 				@if(count($messages))
 					<div class="row">
 						<div class="col-sm-12">
@@ -25,7 +25,7 @@
 												@else
 													<a href="/{{ $message->alias }}">{{ $message->alias }}</a>
 												@endif
-												<span class="online"></span>
+												<span class="{{ $message->online?'online':'offline' }}"></span>
 												@if(!empty($message->pro))
 													<span class="status">PRO</span>
 												@endif

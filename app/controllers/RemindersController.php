@@ -62,7 +62,7 @@ class RemindersController extends Controller {
       return Response::json(array('password'=>'Неверный токен'));
     }
     $user->update(array('password'=>Hash::make(Input::get('password')),'password_remind'=>''));
-    return Response::json(array('success'=>'success','view'=>'<div style="color:green; width:200px; margin:40px 0 0 0px; text-align:center;">Пароль изменён</div>'));
+    return Response::json(array('success'=>'success','view'=>'<div class="custom-modal" style="display:block; width:400px;"><div class="title">Пароль изменён</div></div>'));
   }
 }
 ?>

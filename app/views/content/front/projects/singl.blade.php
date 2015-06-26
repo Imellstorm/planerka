@@ -67,7 +67,7 @@
 												@else
 													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
 												@endif
-												<span class="online"></span>
+												<span class="{{ $project->online?'online':'offline' }}"></span>
 												@if($project->pro)
 													<span class="status">PRO</span>
 												@endif
@@ -174,7 +174,7 @@
 													@else
 														<a href="/{{ $performer->alias }}">{{ $performer->alias }}</a>
 													@endif
-													<span class="online"></span>
+													<span class="{{ $performer->online?'online':'offline' }}"></span>
 													@if(!empty($performer->pro))
 														<span class="status">PRO</span>
 													@endif

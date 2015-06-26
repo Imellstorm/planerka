@@ -20,7 +20,7 @@ class Message extends \Eloquent {
 
     public function getUserDialogs($userId){
         $result = DB::table($this->table)
-                    ->select('user_info.*','users.alias',$this->table.'.*')
+                    ->select('user_info.*','users.alias','users.online',$this->table.'.*')
                     ->leftjoin('user_info','user_info.user_id','=',$this->table.'.from')
                     ->leftjoin('users','users.id','=',$this->table.'.from')
                     ->where('to',$userId)  

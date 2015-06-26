@@ -40,7 +40,7 @@
 				@else
 					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
 				@endif
-				<span class="online"></span>
+				<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
 				@if($item->pro!=0)
 					<span class="status">PRO</span>
 				@endif

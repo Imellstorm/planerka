@@ -25,7 +25,7 @@
 												@else
 													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
 												@endif
-													<span class="online"></span>
+													<span class="{{ $project->online?'online':'offline' }}"></span>
 													@if($project->pro)
 														<span class="status">PRO</span>
 													@endif
@@ -69,7 +69,7 @@
 																	break;
 																																			
 																default:
-																	echo 'Вы подписались на проект';
+																	echo 'Вы подписаны на проект';
 																	break;
 															}?>
 														</span>

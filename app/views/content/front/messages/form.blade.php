@@ -11,8 +11,9 @@
         {{ Form::hidden('user_id', $user->id, array('class' => 'user_id','required')) }}
 
         <div class='form-group' style="margin: 0 10px;">
-            {{ Form::textarea('text', null, array('class' => 'form-control text','style'=>'height:100px','placeholder'=>'Введите сообщение','required')) }}
+            {{ Form::textarea('text', null, array('class' => 'form-control text','style'=>'height:100px; max-width:100%','placeholder'=>'Введите сообщение','required')) }}
         </div>
         <div class="btn-main send_message_btn">Отправить</div>
     </div>
 {{ Form::close() }}
+

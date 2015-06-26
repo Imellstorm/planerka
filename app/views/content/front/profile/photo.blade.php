@@ -18,7 +18,9 @@
                                 <span class="price">от {{ $mainProf->price }}</span>
                             @endif
                             <p>{{ $mainProf->description }}</p>
-                            <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
+                            @if(Auth::check() && Auth::user()->id==$user->id)
+                                <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
+                            @endif
                         </div>
                     @endif
                     <div class="profile-data">
@@ -97,11 +99,6 @@
                                 <span class="price">от {{ $val->price }}</span>
                                 <p>{{ $val->description }}</p>
                                 @if(Auth::check() && Auth::user()->id==$user->id)
-            <!--                         <div class="add_album">
-                                        <a href="#create-album" class="fancybox"></a>
-                                        <p>Создать новый альбом</p>
-                                        <span>+</span>
-                                    </div> -->
                                     <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
                                 @endif
                             </div>

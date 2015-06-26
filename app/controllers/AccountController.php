@@ -70,7 +70,7 @@ class AccountController extends BaseController {
 	 */
 	public function getNotifications(){
 		$model = new Notifications;
-		$notifications = $model->select('users.alias','user_info.*','notifications.*')
+		$notifications = $model->select('users.alias','users.online','user_info.*','notifications.*')
 		->leftjoin('user_info','user_info.user_id','=','notifications.from_user')
 		->leftjoin('users','users.id','=','notifications.from_user')
 		->where('notifications.to_user',Auth::user()->id)

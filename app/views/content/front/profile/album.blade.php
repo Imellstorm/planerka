@@ -51,7 +51,7 @@
 					</a>
 					<div class="name">
 						<a href="#null">{{ $userInfo->name.' '.$userInfo->surname }}</a>
-						<span class="online"></span>
+						<span class="{{ $user->online?'online':'offline' }}"></span>
 						<span class="status">PRO</span>
 					</div>
 					<span class="place">{{ $userInfo->city }}</span>
@@ -60,7 +60,7 @@
 				<div class="user-btns">
 					<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>
 					@if(Auth::check() && Auth::user()->id!=$user->id)
-						<a href="#null" class="btn-purple">Написать сообщение</a>
+						<a href="/message/create/{{ $user->id }}" class="btn-purple fancybox_ajax_scroll">Написать сообщение</a>
 					@endif
 				</div>				
 				@if(Auth::check() && Auth::user()->id==$user->id)

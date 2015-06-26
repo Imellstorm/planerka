@@ -24,7 +24,7 @@
 													@else
 														<a href="/{{ $dialog['dialogUserInfo']->alias }}">{{ $dialog['dialogUserInfo']->alias }}</a>
 													@endif
-													<span class="online"></span>
+													<span class="{{ $dialog['dialogUserInfo']->online?'online':'offline' }}"></span>
 													@if(!empty($dialog['dialogUserInfo']->pro))
 														<span class="status">PRO</span>
 													@endif
@@ -32,7 +32,7 @@
 												<div class="place">{{ $dialog['dialogUserInfo']->city }}</div>
 												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 											</div>
-											<a href="/message/create/{{ $key }}" class="fancybox_ajax">
+											<a href="/message/create/{{ $key }}" class="fancybox_ajax_scroll">
 												<div class="msg-cont">
 													<div style="color:#44B39B">Последнее сообщение от {{ $dialog['mess'][0]->alias }}</div>
 													<div class="time">{{ $dialog['mess'][0]->created_at }}</div>

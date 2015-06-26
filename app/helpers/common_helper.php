@@ -130,7 +130,7 @@ class Common_helper {
      * @param  bool  $crop
      * @return string
     */
-    public static function getThumb($source_path,$save_path,$thumbWidth,$thumbHeight){
+    public static function getThumb($source_path,$save_path,$thumbWidth,$thumbHeight,$adaptive=true){
         /*
         * Crop-to-fit PHP-GD
         * http://salman-w.blogspot.com/2009/04/crop-to-fit-image-using-aspphp.html
@@ -139,15 +139,15 @@ class Common_helper {
         * e.g. convert a large portrait/landscape image to a small square thumbnail
         */
 
-        // list($width, $height) = getimagesize($source_path);
+        list($width, $height) = getimagesize($source_path);
 
-        // if ($width > $height) {
+        if ($width > $height || !$adaptive) {
             $desired_image_width = $thumbWidth;
             $desired_image_height = $thumbHeight;
-        // } else {
-        //     $desired_image_width = $thumbHeight;
-        //     $desired_image_height = $thumbWidth;
-        // }
+        } else {
+            $desired_image_width = $thumbHeight;
+            $desired_image_height = $thumbWidth;
+        }
 
         /*
          * Add file validation code here
