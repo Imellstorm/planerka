@@ -103,7 +103,7 @@
         }
         $(document).ready(function(){
             //  initialize();
-            $(".phone").mask("(999) 999-9999");
+            $(".phone").mask("+7 (999) 999-9999");
 
             @if (Session::has('message'))
                 $.fancybox('{{ Session::get('message') }}',{helpers: {overlay: {locked: false} }});
