@@ -325,6 +325,9 @@ $(document).ready(function() {
     $( "#city" ).autocomplete({
       source: availableTags
     });
+    $( "#modal-order-place" ).autocomplete({
+      source: availableTags
+    });
     $( "#city_search" ).autocomplete({
       source: availableTags
     });

@@ -1105,6 +1105,7 @@ input.btn-main {
 }
 .offline{
   background: rgb(255, 81, 81);
+  margin: 0 6px 0 8px;
 }
 .user-info .reg {
   font-size: 16px;

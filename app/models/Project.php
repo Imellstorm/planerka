@@ -6,11 +6,13 @@ class Project extends \Eloquent {
 
     public function getAllProjects($filtr=''){
         $projects =  DB::table($this->table)
-            ->select($this->table.'.*')
-            ->join('user_info','user_info.user_id','=',$this->table.'.user_id')
+            ->select($this->table.'.*',DB::raw('COUNT('.DB::getTablePrefix().'project_messages.id) as messcount'))
+            ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
+            ->leftjoin('project_messages','project_messages.project_id','=',$this->table.'.id')
             ->where($this->table.'.closed','!=',1)
             ->where($this->table.'.deleted',0)
-            ->where($this->table.'.status','');
+            ->where($this->table.'.status','')
+            ->groupBy($this->table.'.id');
         if(isset($filtr['budjet']) && !empty($filtr['budjet'])){
             $projects->where($this->table.'.budget','>=',$filtr['budjet']);
         }

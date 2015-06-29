@@ -22,7 +22,8 @@
 				</div>
 			</div>
 		</div>
-		@if(empty($project->closed))
+
+		@if(empty($project->closed) && empty($declined))
 			@include('content.front.projects.chatform')
 		@endif
 		@if(count($messages))

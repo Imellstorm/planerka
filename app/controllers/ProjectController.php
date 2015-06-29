@@ -75,10 +75,11 @@ class ProjectController extends BaseController {
 		if(empty($project) || !$this->is_owner($project->user_id)){
 			App::abort(404);
 		}
+		$declined = Userstoproject::where('user_id',$userId)->where('project_id',$projectId)->where('status',4)->first();
 		$model = new Projectmessages;
 		$messages = $model->getProjectMessagesByUser($projectId,$userId);	
 		$model->where('to_user',Auth::user()->id)->where('project_id',$projectId)->update(array('readed'=>1));
-		return View::make('content.front.projects.usermassages',compact('messages','project','userId'));
+		return View::make('content.front.projects.usermassages',compact('messages','project','userId','declined'));
 	}
 
 	public function getFiltr(){

@@ -43,7 +43,7 @@
 											<li><span class="only-pro">Только для PRO</span></li>
 										@endif
 										<li>Создан: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
-										<li>Ответов: <span>321</span></li>
+										<li>Ответов: <span>{{ $project->messcount }}</span></li>
 									</ul>
 								</div>
 							@endforeach

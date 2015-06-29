@@ -7,6 +7,53 @@
 	      	changeYear: true
 
 		});
+
+		$(".phone").mask("(999) 999-9999");
+		var availableTags = [
+	      "Москва",
+	      "Санкт-Петербург",
+	      "Новосибирск",
+	      "Екатеринбург",
+	      "Нижний Новгород",
+	      "Казань",
+	      "Самара",
+	      "Челябинск",
+	      "Омск",
+	      "Ростов-на-Дону",
+	      "Уфа",
+	      "Красноярск",
+	      "Пермь",
+	      "Волгоград",
+	      "Воронеж",
+	      "Саратов",
+	      "Краснодар",
+	      "Тольятти",
+	      "Тюмень",
+	      "Ижевск",
+	      "Барнаул",
+	      "Ульяновск",
+	      "Иркутск",
+	      "Владивосток",
+	      "Ярославль",
+	      "Хабаровск",
+	      "Махачкала",
+	      "Оренбург",
+	      "Томск",
+	      "Новокузнецк",
+	      "Кемерово",
+	      "Астрахань",
+	      "Рязань",
+	      "Набережные Челны",
+	      "Пенза",
+	      "Липецк",
+	      "Тула",
+	      "Киров",
+	      "Чебоксары",
+	      "Калининград"
+	    ];
+		$( "#modal-order-place" ).autocomplete({
+	      source: availableTags
+	    });
 	})
 </script>
 <div class="custom-modal" id="modal-order" style="display:block; width:600px">
@@ -34,7 +81,7 @@
 		</div>
 		<div class="form-group">
 			<label for="modal-order-place">Город</label>
-			<input type="text" id="modal-order-place" name="city"  class="form-control green ">
+			<input type="text" id="modal-order-place" name="city"  id="city" class="form-control green ">
 		</div>
 		<div class="form-group">
 			<label for="modal-order-text">Комментарий<br> к заказу</label>
@@ -42,7 +89,7 @@
 		</div>
 		<div class="form-group">
 			<label for="modal-order-phone">Телефон</label>
-			<input type="text" id="modal-order-phone" placeholder="" name="phone" class="form-control green ">
+			<input type="text" id="modal-order-phone" placeholder="(000) 000-0000" name="phone" class="form-control phone green ">
 		</div>
 		<input type="hidden" name="performer" value="{{ $userId }}">
 		<input type="submit" class="btn-main btn-order" style="margin-top:0" value="Заказать">

@@ -96,7 +96,7 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('phone', 'Мобилный телефон') }}
-                                {{ Form::text('phone', null, array('class' => 'form-control')) }}
+                                {{ Form::text('phone', null, array('class' => 'form-control phone', 'placeholder'=>'(000) 000-0000')) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('biography', 'Биография') }}

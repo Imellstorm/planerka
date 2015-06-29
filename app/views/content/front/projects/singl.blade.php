@@ -147,7 +147,7 @@
 								</div>
 							</div>
 						</div>
-					@else
+					@elseif($projectAssign->status!=4)
 						@include('content.front.projects.chatform')
 					@endif
 					@if(count($projectMessages))
