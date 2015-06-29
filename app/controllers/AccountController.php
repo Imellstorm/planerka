@@ -137,8 +137,11 @@ class AccountController extends BaseController {
 	 * Store Email verification data and send mail
 	 *
 	 */
-	public function postSendemailverification(){
-		$user = User::findOrFail(Auth::User()->id);
+	public function postSendemailverification($userId=''){
+		if(empty($userId)){
+			$userId = Auth::User()->id;
+		}
+		$user = User::findOrFail($userId);
 		$emailVerify = $user->email_verify;	
 
 		if($emailVerify!='1'){	
@@ -147,7 +150,10 @@ class AccountController extends BaseController {
 			$data['email_verify'] = $randomStr;						
 			$user->update($data);
 
-			mail(Auth::User()->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );			
+			mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );			
+		}
+		if(!empty($userId)){
+			return Redirect::to('/');
 		}
 	}
 

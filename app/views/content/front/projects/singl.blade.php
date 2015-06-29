@@ -153,7 +153,7 @@
 					@if(count($projectMessages))
 						<div class="order-review">
 							<div class="chat">
-								@foreach($projectMessages as $message)
+								@foreach($projectMessages as $key=>$message)
 									@include('content.front.projects.chatlist')
 								@endforeach
 							</div>

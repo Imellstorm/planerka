@@ -8,7 +8,7 @@ class Projectmessages extends \Eloquent {
     	$this->userId = $userId;
     	if($toArray) DB::setFetchMode(PDO::FETCH_ASSOC);
 		$result = DB::table($this->table)
-					->select('users.alias','users.online','user_info.*',$this->table.'.*')
+					->select('users.alias','users.online','users.role_id','user_info.*',$this->table.'.*')
 					->leftjoin('user_info','user_info.user_id','=',$this->table.'.from_user')
 					->leftjoin('users','users.id','=',$this->table.'.from_user')
 					->where($this->table.'.project_id',$projectId)

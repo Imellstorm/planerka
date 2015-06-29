@@ -28,9 +28,10 @@ class AuthController extends BaseController {
             if(Auth::user()->email_verify == 1){
                 return Redirect::to('/');  //intended
             } else {
+                $userId = Auth::user()->id;
                 Auth::logout();
-                $view = View::make('content.front.messagebox',array('message'=>'Вы не можете зайти так как у вас не подтверждён email. <br>Проверте вашу почту.'))->render();
-                return Redirect::back()->with('message', $view);
+                $view = View::make('content.front.messagebox',array('message'=>'Вы не можете зайти так как у вас не подтверждён email. <br>Проверте вашу почту. <a href="/account/resendmailverify/'.$userId.'" class="btn-main" style="width:270px; margin: 20px auto;">Повторно отправить письмо</a>'))->render();
+                return Redirect::back()->with(array('message'=>$view));
             }
         }
         $view = View::make('content.front.messagebox',array('message'=>'Неверный логин или пароль.'))->render();

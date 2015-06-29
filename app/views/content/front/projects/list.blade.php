@@ -33,7 +33,10 @@
 										<div class="title">
 											<a href="/project/singl/{{ $project->id }}">{{ $project->title }}</a>
 										</div>
-										<div class="price">{{ $project->budget }} руб.</div>
+										<div style="position:absolute; right:30px">
+											<div class="price">{{ $project->budget }} руб.</div>
+											<div style="margin-top:20px"><a href="/project/singl/{{ $project->id }}" class="btn-main">Просмотреть</a></div>
+										</div>
 									</header>
 									<div class="text">
 										{{ $project->description }}

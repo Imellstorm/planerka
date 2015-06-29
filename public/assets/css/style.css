@@ -1515,7 +1515,6 @@ input.btn-main {
   color: #008C6E;
 }
 .project-list .single-proj .price {
-  float: right;
   font-family: 'NeuronItalic', sans-serif;
   color: #44b39b;
   font-size: 24px;
@@ -2210,7 +2209,7 @@ input.btn-main {
 }
 /* == USER PROFILE ========> */
 .profile-info {
-  margin: 30px 20px 20px 0;
+  margin: 20px 20px 20px 0;
   width: 660px;
   float: left;
   border-bottom: solid 1px #44B39B;
@@ -2363,6 +2362,12 @@ input.btn-main {
   font-size: 24px;
   margin-top: 10px;
   margin-left: -10px;
+}
+.profile-albums{
+  margin-top: -230px;
+}
+.info_cont{
+  overflow: hidden;
 }
 .add_album {
   width: 200px;

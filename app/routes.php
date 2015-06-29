@@ -16,6 +16,7 @@ Route::post('admin/users/validate', 'UserController@postValidate');
 Route::post('admin/users/store', 'UserController@postStore');
 Route::put('admin/users/update/{id}', 'UserController@putUpdate');
 Route::get('account/verifyemail/{data}','AccountController@getVerifyemail');
+Route::get('account/resendmailverify/{id}','AccountController@postSendemailverification');
 Route::controller('password', 'RemindersController');
 
 
