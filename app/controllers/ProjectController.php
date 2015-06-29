@@ -200,6 +200,14 @@ class ProjectController extends BaseController {
 			$usersToProject->update(array('status'=>3)); //подтвердил участие в проекте
 			$text = 'Получено согласие на участие в проекте';
 			$userId = $project->user_id;
+
+			if(!empty($project->date)){
+				$calendar = new Calendar;
+				$calendar->user_id = Auth::user()->id;
+				$calendar->date = $project->date;
+				$calendar->system = 1;
+				$calendar->save();
+			}
 		}
 		if($status==5 && $usersToProject->user_id == $currentUser->id){
 			$usersToProject->delete();					//отказался от проекта
@@ -211,7 +219,7 @@ class ProjectController extends BaseController {
 			$userId = $project->user_id;
 		}
 		if($status==6 && ($usersToProject->user_id == $currentUser->id || $project->user_id == $currentUser->id)){
-			$usersToProject->update(array('status'=>6)); //подтвердил участие в проекте
+			$usersToProject->update(array('status'=>6)); //завершил проект
 			$text = 'Проект завершен';
 			if($usersToProject->user_id == $currentUser->id){
 				$userId = $project->user_id;

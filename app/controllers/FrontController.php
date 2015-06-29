@@ -35,17 +35,22 @@ class FrontController extends BaseController {
 		$budjet = Input::get('budjet');
 
 		$result = User::join('user_info','user_info.user_id','=','users.id')
-					  ->leftjoin('specializations','specializations.user_id','=','users.id')
 					  ->where('users.role_id','!=',2);
 
 		if(!empty($spec)){
-			$result->where('specializations.role_id',$spec);
-		} else {
-			$result->groupBy('users.id');
-		}
+			$result->leftjoin('specializations','specializations.user_id','=','users.id')
+				   ->where('specializations.role_id',$spec)
+				   ->orWhere('users.role_id',$spec);
+		} 
 
 		if(!empty($city)){
 			$result->where('user_info.city',$city);
+		}
+
+		if(!empty($date)){
+			$result->select('users.*','user_info.*',DB::raw('COUNT('.DB::getTablePrefix().'calendar.id) as cnt'))
+				   ->leftjoin('calendar','users.id','=',DB::raw(DB::getTablePrefix().'calendar.user_id AND '.DB::getTablePrefix().'calendar.date = "'.date('Y-m-d',strtotime($date)).'"' )	)
+				   ->having('cnt', '=', 0);	 
 		}
 
 		if(!empty($budjet)){
@@ -63,13 +68,12 @@ class FrontController extends BaseController {
 			}
 		}
 
-		//$result->where('calendar.date','!=','2015-05-26');
-
+		$result->groupBy('users.id');
 		$result = $result->paginate(16)
 						 ->appends(array(
 						 	'spec' 	=> $spec, 
 						 	'city' 	=> $city, 
-						 	'date' 	=>$date, 
+						 	'date' 	=> $date, 
 						 	'budjet'=> $budjet,
 						 ));
 

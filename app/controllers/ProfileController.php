@@ -92,7 +92,7 @@ class ProfileController extends BaseController {
 		if(!Auth::check() && Auth::user()->role_id!=2){
 			App::abort(404);
 		}
-		$dates = Calendar::where('user_id',Auth::user()->id)->get();
+		$dates = Calendar::where('user_id',$this->user->id)->get();
 		return View::make('content.front.profile.calendar',compact('dates'));
 	}	
 }

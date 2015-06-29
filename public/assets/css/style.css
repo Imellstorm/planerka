@@ -3969,14 +3969,14 @@ form.project .checkbox span {
   color:black;
 }
 #img_preview{
-  width: 82px;
+  width: 100%;
 }
 .img_preview_cont{
-  width: 82px;
-  height: 82px;
+  width: 83px;
+  height: 83px;
   overflow: hidden;
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: 177px
 }
 .delete_image{

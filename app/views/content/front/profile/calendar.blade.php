@@ -13,13 +13,15 @@
 					</div>
 				</div>
 				<div class="col-sm-6 text-center">
-					{{ Form::open(array('role' => 'form', 'url' => 'calendar/store')) }}
-						<div class="calendar">
-							<div id="with-altField"></div>
+					<div class="calendar">
+						<div id="with-altField"></div>
+					</div>
+					@if($userInfo->user_id == Auth::user()->id)
+						{{ Form::open(array('role' => 'form', 'url' => 'calendar/store')) }}
 							<input type="hidden" name="dates" id="altField">
-						</div>
-						<input type="submit" value="Сохранить" class="btn-main" style=" position:relative;left:125px;top:10px;">
-					{{ Form::close() }}
+							<input type="submit" value="Сохранить" class="btn-main" style="position:relative;left:125px;top:10px;">
+						{{ Form::close() }}
+					@endif
 				</div>
 			</div>
 		</div>
