@@ -4159,3 +4159,8 @@ form.project .checkbox span {
 .upload_process{
   cursor:pointer;
 }
+.loading{
+  width: 40px;
+  margin: 0 auto;
+  display: block;
+}

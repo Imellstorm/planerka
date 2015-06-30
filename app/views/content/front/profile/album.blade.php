@@ -90,6 +90,7 @@
 			</footer>
 			<div style="margin-top:20px">
 				<div class="btn-main upload_process" style="margin:0 auto">ПРОДОЛЖИТЬ</div>
+				<img src="/assets/img/loading.gif" class="loading" style="display:none">
 			</div>						
 		</div>
 	</div>
@@ -120,6 +121,8 @@
 
 		myDropzone.on('error',function(file,message){
 			$('.dz-upload').fadeOut('normal');
+			$('.loading').hide();
+			$('.upload_process').show();
 			$.fancybox.update();	
 		})
 
@@ -128,6 +131,8 @@
 		})
 
 		$('.upload_process').on('click',function(){
+			$(this).hide();
+			$('.loading').show();
 			myDropzone.processQueue();
 		})
 
