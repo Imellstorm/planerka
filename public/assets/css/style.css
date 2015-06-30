@@ -4135,3 +4135,27 @@ form.project .checkbox span {
 .usercard_no_photo{
   padding-top: 140px;
 }
+.dz-remove{
+  width: 22px;
+  height: 22px;
+  display: block;
+  overflow: hidden;
+  background: white;
+  color: white;
+  border-radius: 50px;
+  border: solid 1px green;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor:pointer;
+}
+.dz-remove:after {
+  content: "X";
+  color: green;
+  position: absolute;
+  top: 1px;
+  left: 6px;
+}
+.upload_process{
+  cursor:pointer;
+}

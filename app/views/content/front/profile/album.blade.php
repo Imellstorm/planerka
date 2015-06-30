@@ -89,7 +89,7 @@
 				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
 			</footer>
 			<div style="margin-top:20px">
-				<a href="/{{ $user->alias }}/album/{{ $album->id }}" class="btn-main" style="margin:0 auto">ПРОДОЛЖИТЬ</a>
+				<div class="btn-main upload_process" style="margin:0 auto">ПРОДОЛЖИТЬ</div>
 			</div>						
 		</div>
 	</div>
@@ -108,15 +108,27 @@
 		var myDropzone = new Dropzone(".dropzone", { 
 			url: "/image/uploadimage/{{ $album->id }}",
 			acceptedFiles: ".png, .jpg, .jpeg",
+			autoProcessQueue: false,
+			addRemoveLinks: 'dictCancelUpload',
 			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
-		});
-		myDropzone.on('success',function(file,message){
+		})
+
+		myDropzone.on('addedfile',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$.fancybox.update();	
 		})
+
 		myDropzone.on('error',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$.fancybox.update();	
+		})
+
+		myDropzone.on('success',function(file,message){
+			window.location.href = document.URL;
+		})
+
+		$('.upload_process').on('click',function(){
+			myDropzone.processQueue();
 		})
 
 		$('.like').on('click',function(){
