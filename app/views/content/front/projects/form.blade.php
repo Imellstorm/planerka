@@ -1,5 +1,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
+	$('.create_project_form').on('submit',function(){
+		$('.create_project_btn').hide();
+		$('.create_project_loading').show();
+	})
+
 	$('body').on('keydown','.price-input',function (e) {
 	        // Allow: backspace, delete, tab, escape, enter and .
 	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -24,7 +29,7 @@ $(document).ready(function(){
 
 <div class="custom-modal" id="new-project" style="display:block;">
 	<div class="title" style="padding:10px 0 ">Создать проэкт</div>
-	{{ Form::open(array('role' => 'form', 'url' => '/project/store', 'class'=>'project','files'=> true)) }}
+	{{ Form::open(array('role' => 'form', 'url' => '/project/store', 'class'=>'project create_project_form','files'=> true)) }}
 
 		<div class="form-group">
 			<label for="theme">Заголовок</label>
@@ -67,7 +72,10 @@ $(document).ready(function(){
 			<input type="file" name="image" style="position:relative; top:15px;">
 		</div>
 		<div class="form-group" style="padding-top: 10px;">
-			<input type="submit" class="btn-main" value="Опубликовать">
+			<div class="text-center create_project_loading" style="margin-top:20px; display:none">
+				<img src="/assets/img/loading.gif" style="width:20px">
+			</div>
+			<input type="submit" class="btn-main create_project_btn" value="Опубликовать">
 		</div>
 	{{ Form::close() }}
 </div>

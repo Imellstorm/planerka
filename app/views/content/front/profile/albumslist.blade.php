@@ -10,7 +10,7 @@
 		@endforeach
 	</div>
 @else
-	<div style="text-center; margin: 40px 20px 0px 20px">
-		Альбомы отсутствуют
+	<div class="custom-modal" style="display:block; width:400px">
+	    <div class="title text-center">Альбомы отсутствуют</div>
 	</div>
 @endif

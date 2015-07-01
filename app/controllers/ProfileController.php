@@ -74,7 +74,7 @@ class ProfileController extends BaseController {
 	 * @return Response
 	 */
 	public function getReviews(){
-		$reviews = Review::select('users.alias','projects.title as project_title','user_info.*','reviews.*')
+		$reviews = Review::select('users.alias','users.online','projects.title as project_title','user_info.*','reviews.*')
 		->leftjoin('projects','projects.id','=','reviews.project_id')
 		->leftjoin('user_info','user_info.user_id','=','reviews.from_user')
 		->leftjoin('users','users.id','=','reviews.from_user')

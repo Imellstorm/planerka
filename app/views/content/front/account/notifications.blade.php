@@ -11,6 +11,9 @@
 			<div class="container">
 				@include('content.front.account.menu_two')
 				<div class="row">
+					{{ $notifications->links() }}
+				</div>
+				<div class="row">
 					<div class="col-sm-12">
 						@if(count($notifications))
 							<div class="notif-content">	
@@ -56,6 +59,9 @@
 							</div>
 						@endif
 					</div>
+				</div>
+				<div class="row">
+					{{ $notifications->links() }}
 				</div>
 			</div>
 		</div>	

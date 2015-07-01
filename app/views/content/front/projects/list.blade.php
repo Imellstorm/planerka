@@ -27,27 +27,36 @@
 				@if(count($projects))
 					<div class="row">
 						<div class="col-sm-12">
+							{{ $projects->links() }}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
 							@foreach($projects as $project)
 								<div class="single-proj">
-									<header>
-										<div class="title">
-											<a href="/project/singl/{{ $project->id }}">{{ $project->title }}</a>
+									<div class="col-sm-9">
+										<header>
+											<div class="title" style="overflow:hidden">
+												<a href="/project/singl/{{ $project->id }}">{{ $project->title }}</a>
+											</div>
+										</header>
+										<div class="text" style="overflow:hidden">
+											{{ $project->description }}
 										</div>
-										<div style="position:absolute; right:30px">
-											<div class="price">{{ $project->budget }} руб.</div>
-											<div style="margin-top:20px"><a href="/project/singl/{{ $project->id }}" class="btn-main">Просмотреть</a></div>
-										</div>
-									</header>
-									<div class="text">
-										{{ $project->description }}
+										<ul class="meta-list">
+											@if($project->pro_only)
+												<li><span class="only-pro">Только для PRO</span></li>
+											@endif
+											<li>Создан: <span>{{ date('d-m-Y H:i:s',strtotime($project->created_at)) }}</span></li>
+											<li>Ответов: <span>{{ $project->messcount }}</span></li>
+										</ul>
 									</div>
-									<ul class="meta-list">
-										@if($project->pro_only)
-											<li><span class="only-pro">Только для PRO</span></li>
-										@endif
-										<li>Создан: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
-										<li>Ответов: <span>{{ $project->messcount }}</span></li>
-									</ul>
+									<div class="col-sm-3">
+										<div class="price">{{ $project->budget }} руб.</div>
+										<div style="margin-top:20px;">
+											<a href="/project/singl/{{ $project->id }}" class="btn-main" style="width:100%;">Просмотреть</a>
+										</div>
+									</div>
 								</div>
 							@endforeach
 						</div>

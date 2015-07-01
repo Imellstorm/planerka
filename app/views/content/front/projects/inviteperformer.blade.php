@@ -1,5 +1,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		$('.modal-order-form').on('submit',function(){
+			$('.btn-order').hide();
+			$('.create_project_loading').show();
+		})
+
 		$('#datepicker, .datepicker').datepicker({
 			inline: true,
 			showOtherMonths: true,
@@ -64,7 +70,7 @@
 			<input type="text" class="form-control" name="title" style="width: 385px;" required>
 		</div>
 		<div class="form-group">
-			<label>Тема</label>
+			<label>Cпециализация</label>
 			{{ Form::select('role_id',$roles,'',array('class'=>'form-control')); }}
 		
 			<input type="text" placeholder="Дата" name="date" class="form-control date green datepicker">
@@ -92,6 +98,9 @@
 			<input type="text" id="modal-order-phone" placeholder="(000) 000-0000" name="phone" class="form-control phone green ">
 		</div>
 		<input type="hidden" name="performer" value="{{ $userId }}">
+		<div class="text-center create_project_loading" style="margin-top:20px; display:none">
+			<img src="/assets/img/loading.gif" style="width:20px">
+		</div>
 		<input type="submit" class="btn-main btn-order" style="margin-top:0" value="Заказать">
 	{{ Form::close() }}
 </div>

@@ -61,21 +61,27 @@
 									<div class="col-md-12">
 										<div class="user-info">
 											<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($project->user_id) }}" alt=""></a>
-											<div class="name">
-												@if(!empty($project->name) || !empty($project->surname))
-													<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
-												@else
-													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
-												@endif
-												<span class="{{ $project->online?'online':'offline' }}"></span>
-												@if($project->pro)
-													<span class="status">PRO</span>
-												@endif
+											<div class="info-cont">
+												<div class="name">
+													@if(!empty($project->name) || !empty($project->surname))
+														<a href="/{{ $project->alias }}">{{ $project->name }} {{ $project->surname }}</a>
+													@else
+														<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
+													@endif
+													<span class="{{ $project->online?'online':'offline' }}"></span>
+													@if($project->pro)
+														<span class="status">PRO</span>
+													@endif
+												</div>
+												<span class="place">{{ $project->city }}</span>
+												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+												<div class="reg">
+													Зарегистрирован на сайте: 
+													<span>
+														{{ Common_helper::getPastTime($project->usercreated) }}
+													</span>
+												</div>
 											</div>
-											<span class="place">{{ $project->city }}</span>
-											<div class="reg">Зарегистрирован на сайте: <span>
-												 {{ Common_helper::getPastTime($project->usercreated) }}
-											</span></div>
 										</div>
 										<div class="msg">
 											{{ $project->description }}
@@ -110,7 +116,6 @@
 						</div>
 					</div>
 				</div>
-
 				@if(Auth::user()->role_id!=2)
 					@if(empty($projectAssign))
 						<div class="row">
@@ -147,7 +152,7 @@
 								</div>
 							</div>
 						</div>
-					@elseif($projectAssign->status!=4)
+					@elseif($projectAssign->status!=4 && $projectAssign->status!=6)
 						@include('content.front.projects.chatform')
 					@endif
 					@if(count($projectMessages))
@@ -159,6 +164,7 @@
 							</div>
 						</div>
 					@endif
+					<a href="/account/projects" class="btn-main">Вернуться назад</a>
 				@else
 					@if(count($usersToProject))
 						<div class="proj-prop" style="margin:0;padding:0;border-bottom:none">
@@ -190,7 +196,7 @@
 													<li>Стоимость:  <span>{{ $performer->mainMessage['price'] }} руб</span></li>
 													<li>Срок:  <span>{{ $performer->mainMessage['term'] }}</span></li>
 												</ul>
-												<p>{{ $performer->mainMessage['text'] }}</p>
+												<!-- <p>{{ $performer->mainMessage['text'] }}</p> -->
 												@if(isset($performer->albums) && !empty($performer->albums))
 													<div class="portf">
 														@foreach($performer->albums as $album)
@@ -199,25 +205,27 @@
 													</div>
 												@endif
 											</div>
-											<footer>
-												@if(!empty($newProjectMessages))
-				                                    <div class="new_mess_badge">Есть новые сообщения</div>
-				                                @endif
-												<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>
-												@if($project->closed!=1)
-													@if($performer->status==1 && empty($existPerformer))
-														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/2" class="btn-main">Выбрать исполнителем</a>
-														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/4" class="btn-purple">Отказать</a>
+											@if($project->user_id==Auth::user()->id)
+												<footer>
+													@if(!empty($newProjectMessages))
+					                                    <div class="new_mess_badge">Есть новые сообщения</div>
+					                                @endif
+													<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>
+													@if($project->closed!=1)
+														@if($performer->status==1 && empty($existPerformer))
+															<a href="/project/changestatus/{{ $performer->users_to_project_id }}/2" class="btn-main">Выбрать исполнителем</a>
+															<a href="/project/changestatus/{{ $performer->users_to_project_id }}/4" class="btn-purple">Отказать</a>
+														@endif
+														@if($performer->status==3)
+															<a href="/project/changestatus/{{ $performer->users_to_project_id }}/6" class="btn-main">Завершить проект</a>
+														@endif
+													@else
+														@if($performer->status==6 && empty($existReview))
+															<a href="/review/form/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main fancybox_ajax">Оставить отзыв</a>
+														@endif
 													@endif
-													@if($performer->status==3)
-														<a href="/project/changestatus/{{ $performer->users_to_project_id }}/6" class="btn-main">Завершить проект</a>
-													@endif
-												@else
-													@if($performer->status==6 && empty($existReview))
-														<a href="/review/form/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main fancybox_ajax">Оставить отзыв</a>
-													@endif
-												@endif
-											</footer>
+												</footer>
+											@endif
 										@endif
 									</div>
 								@endforeach	

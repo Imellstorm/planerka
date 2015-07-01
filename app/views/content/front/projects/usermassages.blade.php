@@ -30,7 +30,10 @@
 			<div class="order-review" style="border:none">
 				<div class="chat">
 					@foreach($messages as $key=>$message)
-						@include('content.front.projects.chatlist')
+						@if($message->role_id==2 && !isset($messages[$key+1]))
+						@else
+							@include('content.front.projects.chatlist')
+						@endif
 					@endforeach
 				</div>
 			</div>

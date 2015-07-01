@@ -152,7 +152,7 @@ class ProjectController extends BaseController {
 			$projmess->project_id	= $model->id;
 	        $projmess->price   		= $model->budget;
 	        $projmess->term   		= $model->term;
-	        $projmess->text   		= $model->description;
+	        $projmess->text   		= 'Вас пригласили принять участие в проекте';
         	$projmess->save();
 
         	$userstoproject = new Userstoproject;

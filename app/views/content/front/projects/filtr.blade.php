@@ -2,7 +2,7 @@
 	<div class="title" style="padding: 10px 0 20px 0;">Фильтр</div>
 	<form class="project" method="get" action="/project/list">
 		<div class="form-group">
-			<label for="bj">Бюджет</label>
+			<label for="bj">Бюджет от</label>
 			<input type="text" id="bj" name="budjet" class="form-control">
 
 			<select class="selectpicker sel-green" name="term">

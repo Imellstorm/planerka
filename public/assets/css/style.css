@@ -1065,9 +1065,7 @@ input.btn-main {
   font-weight: 700;
 }
 .info-cont .name{
-  float: left;
   width: 170px;
-  height: 20px;
   overflow: hidden;
 }
 .user-info .name a {
@@ -1336,9 +1334,7 @@ input.btn-main {
 }
 .notification .notif-content .order-body {
   overflow: hidden;
-  float: left;
   margin-left: 20px;
-  max-width: 750px;
   min-width: 650px;
 }
 .notification .notif-content .order-body header {
@@ -1497,6 +1493,7 @@ input.btn-main {
   -moz-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #e1e1e1;
+  overflow: hidden;
 }
 .project-list .single-proj header {
   overflow: hidden;
@@ -1522,6 +1519,8 @@ input.btn-main {
   line-height: 38px;
   padding: 0 10px 0 16px;
   background: #e9e9e9;
+  text-align: center;
+  overflow: hidden;
 }
 .project-list .single-proj .text {
   font-family: 'Neuron', sans-serif;
@@ -1840,7 +1839,6 @@ input.btn-main {
 .project .proj-answ .btn-main {
   width: 256px;
   font-size: 20px;
-  margin-left: 143px;
   margin-top: 10px;
 }
 /* == PROJECT PROPOSITION =======> */
@@ -1867,8 +1865,8 @@ input.btn-main {
   font-family: 'Neuron', sans-serif;
   font-size: 16px;
   line-height: 23px;
-  width: 645px;
   margin-bottom: 26px;
+  overflow: hidden;
 }
 .proj-prop .prop-body .portf {
   margin-bottom: 40px;
@@ -4097,6 +4095,9 @@ form.project .checkbox span {
   background: white;
   margin: 5px 10px 0 0;
   float: left;
+  max-width: 200px;
+  overflow: hidden;
+  height: 29px;
 }
 #new-project .form-group{
     margin-bottom: 15px;

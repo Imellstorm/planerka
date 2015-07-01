@@ -82,7 +82,7 @@
                             @endif
                         </div>
                     </div>
-                    @if(!empty($albums))
+                    @if(count($albums))
                         <div class="profile-albums">
                             @foreach($albums as $album)
                                 <div class="album">

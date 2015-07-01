@@ -12,6 +12,9 @@
 				@include('content.front.account.menu_two')
 				@if(count($projects))
 					<div class="row">
+						{{ $projects->links() }}
+					</div>
+					<div class="row">
 						<div class="col-sm-12">
 							<div class="notif-content">	
 								@foreach($projects as $project)					
@@ -43,7 +46,7 @@
 												<div class="new_mess_badge text-center">Новые сообщения - {{ $project->new_messages }}</div>
 											@endif
 											<ul class="meta-list">
-												<li>Добавлен: <span>{{ date('d-m-Y',strtotime($project->created_at)) }}</span></li>
+												<li>Добавлен: <span>{{ date('d-m-Y H:i:s',strtotime($project->created_at)) }}</span></li>
 
 												@if(isset($project->project_city) && !empty($project->project_city))
 													<li>Город: <span>{{ $project->project_city }}</span></li>
@@ -59,7 +62,7 @@
 																	echo 'Вы выбраны в качестве исполнителя';
 																	break;
 																case 3:
-																	echo 'Заказ принят';
+																	echo '<span style="color:#44B39B">Заказ принят</span>';
 																	break;
 																case 4:
 																	echo 'Вам отказали';
@@ -105,6 +108,9 @@
 								@endforeach
 							</div>
 						</div>
+					</div>
+					<div class="row">
+						{{ $projects->links() }}
 					</div>
 				@endif
 			</div>
