@@ -73,16 +73,12 @@
 		</div>
 		<div class="custom-modal" id="upload-photo">
 			<div class="title">Загрузить фотографии</div>
-			<div style="background:#ebebeb;padding:40px;">
+			<div>
 				<form action="/image/uploadimage" class="dropzone">
 					<div class="fallback">
 						<input name="file" type="file" multiple />
 					</div>
 				</form>
-				<div style="color:#a8a8a8;clear:both;">
-					<p>Не менее 600px по большей стороне. Оптимельное 2400px
-					<br>Поддерживыемые расширения: Jpeg, Jpg, Png</p>
-				</div>
 			</div>
 			<footer style="clear:both">
 				<p>Ваш лимит: <span>20 фото в неделю</span></p>
@@ -101,6 +97,7 @@
 <script type="text/javascript" src="/assets/js/dropzone.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+
 		@if(isset($new) && !empty($new))
 			$(".add_photo").fancybox().trigger('click');
 		@endif
@@ -111,28 +108,51 @@
 			acceptedFiles: ".png, .jpg, .jpeg",
 			autoProcessQueue: false,
 			addRemoveLinks: 'dictCancelUpload',
+  			uploadMultiple: false,
 			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
 		})
 
 		myDropzone.on('addedfile',function(file,message){
 			$('.dz-upload').fadeOut('normal');
+			$('.upload_process').show();
 			$.fancybox.update();	
+		})
+
+		myDropzone.on('removedfile',function(file,message){
+			if(myDropzone.getQueuedFiles().length==0){
+				$('.upload_process').hide();
+			}
 		})
 
 		myDropzone.on('error',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$('.loading').hide();
-			$('.upload_process').show();
-			$.fancybox.update();	
+			$('.upload_process').hide();
+			$(file.previewElement).find('.dz-error-mark').show();
+			uploadErr = 1;
+				
 		})
 
 		myDropzone.on('success',function(file,message){
-			window.location.href = document.URL;
+			console.log(file.previewElement);
+			$(file.previewElement).find('.dz-success-mark').show();
+			//$('.dz-success-mark').show();
+		})
+
+		myDropzone.on('queuecomplete',function(file,message){
+			$.fancybox.update();
+			if(uploadErr!=1){
+				window.location.href = document.URL;
+			}
+		})
+
+		myDropzone.on('processing',function(file,message){
+			$('.upload_process').hide();
+			$('.loading').show();
 		})
 
 		$('.upload_process').on('click',function(){
-			$(this).hide();
-			$('.loading').show();
+			uploadErr = 0;
 			myDropzone.processQueue();
 		})
 

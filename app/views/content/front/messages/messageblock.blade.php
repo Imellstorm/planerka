@@ -11,6 +11,6 @@
     </div>
     <div class="col-md-12" style="background:#FAFAF5;padding:20px;margin-top:5px;">
         <div style="font-size:12px">{{ $message->created_at }}</div>
-        <div>{{ $message->text }}</div>
+        <div style="overflow: hidden;">{{ $message->text }}</div>
     </div>
 </div>

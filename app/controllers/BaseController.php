@@ -9,7 +9,7 @@ class BaseController extends Controller {
 		if(Auth::check()){
 			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
 			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
-			$newProjectMessages = Projectmessages::where('to_user',Auth::user()->id)->where('readed',0)->get();
+			$newProjectMessages = Projectmessages::leftjoin('projects','projects.id','=','project_messages.project_id')->where('projects.deleted','!=',1)->where('to_user',Auth::user()->id)->where('readed',0)->get();
 			$newNotifications = Notifications::where('to_user',Auth::user()->id)->where('readed',0)->get();
 			View::share('newProjectMessages',count($newProjectMessages));
 			View::share('newNotifications',count($newNotifications));

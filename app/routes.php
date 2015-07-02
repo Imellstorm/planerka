@@ -44,6 +44,7 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 
 Route::group(array('before' => 'auth'), function() {		
 	Route::controller('account','AccountController');
+	Route::controller('settings','SettingsController');
 	Route::controller('userinfo','UserinfoController');	
 	Route::controller('specializations','SpecializationsController');	
 	Route::controller('album','AlbumsController');

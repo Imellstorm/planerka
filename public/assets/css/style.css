@@ -1282,6 +1282,7 @@ input.btn-main {
   color: #373737;
   font-size: 15px;
   line-height: 19px;
+  overflow: hidden;
 }
 .notification .notif-content .msg-cont .reply {
   color: #44b39b;
@@ -2303,6 +2304,9 @@ input.btn-main {
   margin: 0;
   color: #fff;
   width: 100%;
+  width: 202px;
+  height: 20px;
+  overflow: hidden;
 }
 .album img{
   width: 100%;
@@ -4009,7 +4013,7 @@ form.project .checkbox span {
   float: left;
   margin: 10px;
   max-width: 125px;
-  height: 220px;
+  height: 185px;
   overflow: hidden;
 }
 .dz-success-mark path{
@@ -4031,6 +4035,19 @@ form.project .checkbox span {
 }
 .dz-success-mark, .dz-error-mark{
   display: none;
+  position: absolute;
+  top: 45px;
+  left: 45px;
+  background: white;
+  border-radius: 100px;
+  height: 34px;
+}
+.dz-error-message{
+  display: none;
+}
+.dz-success-mark svg, .dz-error-mark svg{
+  position: relative;
+  top: -10px;
 }
 .dz-progress {
   position: absolute;
@@ -4159,9 +4176,21 @@ form.project .checkbox span {
 }
 .upload_process{
   cursor:pointer;
+  display: none;
 }
 .loading{
   width: 40px;
   margin: 0 auto;
   display: block;
+}
+.dropzone {
+  background: #ebebeb;
+  padding: 40px 40px 0 40px;
+  overflow: hidden;
+}
+.dz-message:after{
+  color: #a8a8a8;
+  font-size: 14px;
+  content:'\a\aНе менее 600px по большей стороне. Оптимельное 2400px \a Поддерживыемые расширения: Jpeg, Jpg, Png';
+  white-space: pre;
 }

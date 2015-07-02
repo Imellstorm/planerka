@@ -33,7 +33,7 @@ class AlbumsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getShow($useralias,$id,$new='')
+	public function getShow($useralias,$id)
 	{
 		$user = User::where('alias',$useralias)->first();
 		if(empty($user)){
@@ -57,7 +57,8 @@ class AlbumsController extends BaseController {
 					->groupby('images.id')
 					->get();
 		$album = Album::where('user_id',$user->id)->where('id',$id)->first();
-		if(!empty($album)){	
+		if(!empty($album)){
+			$new = Session::get('newAlbum',0);
 			return View::make('content.front.profile.album', compact('album','images','user','new'));
 		} else {
 			App::abort(404);
@@ -103,8 +104,9 @@ class AlbumsController extends BaseController {
 			$model->name 		= Input::get('name');
 			$model->description = Input::get('description');
 			$model->save();
-		}	
-        return Redirect::to('/'.Auth::user()->alias.'/album/'.$model->id.'/new');
+		}
+		Session::flash('newAlbum', 1);	
+        return Redirect::to('/'.Auth::user()->alias.'/album/'.$model->id);
 	}
 
 	public function getDelete($id){
