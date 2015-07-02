@@ -9,14 +9,16 @@
 		$('body').on('click','.album_image',function(){
 			var exist = $.inArray($(this).attr('album_id'),albIds);
 			if(exist!=-1){
-				alert('Данный альбом уже добавлен');
+				$(this).after('<div class="album_added">Данный альбом уже добавлен</div>');
+				//alert('Данный альбом уже добавлен');
 			} else {
 				$('.albums').val($('.albums').val()+$(this).attr('album_id')+',');
 				$('.album-input').before('<img src="'+$(this).attr('src')+'">');
 				albIds.push($(this).attr('album_id'));
 				$('.albumsIds').val(albIds);
+				$.fancybox.close();
 			}
-			$.fancybox.close();
+			
 		})
 
 		$('body').on('keydown','.price-input',function (e) {

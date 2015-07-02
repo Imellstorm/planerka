@@ -4194,3 +4194,10 @@ form.project .checkbox span {
   content:'\a\aНе менее 600px по большей стороне. Оптимельное 2400px \a Поддерживыемые расширения: Jpeg, Jpg, Png';
   white-space: pre;
 }
+.album_added{
+  position: absolute;
+  top: 70px;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.5);
+}

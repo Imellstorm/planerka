@@ -108,7 +108,6 @@
 			acceptedFiles: ".png, .jpg, .jpeg",
 			autoProcessQueue: false,
 			addRemoveLinks: 'dictCancelUpload',
-  			uploadMultiple: false,
 			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
 		})
 
@@ -136,10 +135,10 @@
 		myDropzone.on('success',function(file,message){
 			console.log(file.previewElement);
 			$(file.previewElement).find('.dz-success-mark').show();
-			//$('.dz-success-mark').show();
 		})
 
 		myDropzone.on('queuecomplete',function(file,message){
+			this.options.autoProcessQueue = false
 			$.fancybox.update();
 			if(uploadErr!=1){
 				window.location.href = document.URL;
@@ -149,6 +148,7 @@
 		myDropzone.on('processing',function(file,message){
 			$('.upload_process').hide();
 			$('.loading').show();
+			this.options.autoProcessQueue = true
 		})
 
 		$('.upload_process').on('click',function(){

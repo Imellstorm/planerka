@@ -517,7 +517,7 @@ $(document).ready(function() {
                     $(".fancybox-inner").animate({
                           scrollTop: $('.fancybox-inner')[0].scrollHeight,
                       });
-                    //$.fancybox.update();
+                     $.fancybox.update();
                   }
                 });
               }
