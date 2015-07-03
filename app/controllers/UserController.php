@@ -255,18 +255,4 @@ class UserController extends BaseController {
 		return Redirect::to('admin/users');
 	}
 
-	/**
-	 * Update user settungs
-	 *
-	 * @return Redirect
-	 */
-	public function updateSettings()
-	{
-		$get_mail = Input::get('get_mail');
-		$user = User::find(Auth::User()->id);		
-		$data['get_mail'] = empty($get_mail)?0:1;
-		$user->update($data);
-		Session::flash('success', 'Настройки обновлены!');
-		return Redirect::back();
-	}
 }

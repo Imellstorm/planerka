@@ -16,6 +16,7 @@
 	<div class="user-info">
 		<a href="/{{ $item->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($item->user_id) }}" alt=""></a>
 		<div class="info-cont">
+			<div class="pull-left {{ !empty($item->online)?'online':'offline' }}" style="margin: 5px 5px 0 0;"></div>
 			<div class="name">
 				@if(!empty($item->name) || !empty($item->surname))
 					<a href="/{{ $item->alias }}">{{ $item->name }} {{ $item->surname }}</a>
@@ -26,7 +27,6 @@
 					<span class="status">PRO</span>
 				@endif
 			</div>
-			<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
 			<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 			<div class="place" style="height:20px">{{ $item->city }}</div>
 		</div>

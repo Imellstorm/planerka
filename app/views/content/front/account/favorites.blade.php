@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 
-@section('title') {{ 'Уведомления' }} @stop
+@section('title') {{ 'Избранное' }} @stop
 
 @section('main')
 <!-- MAIN CONTENT
