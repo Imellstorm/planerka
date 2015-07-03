@@ -23,11 +23,12 @@
 			</div>
 		</div>
 
-		@if(empty($project->closed) && empty($declined))
+		@if(empty($project->closed) && $userToProject->status!=4)
 			@include('content.front.projects.chatform')
 		@endif
 		@if(count($messages))
 			<div class="order-review" style="border:none">
+				{{ $messages->links() }}
 				<div class="chat">
 					@foreach($messages as $key=>$message)
 						@if($message->role_id==2 && !isset($messages[$key+1]))
@@ -36,6 +37,7 @@
 						@endif
 					@endforeach
 				</div>
+				{{ $messages->links() }}
 			</div>
 		@endif
 		<a href="/project/singl/{{ $project->project_id }}" class="btn-main">Вернуться назад</a>

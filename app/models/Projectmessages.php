@@ -16,9 +16,13 @@ class Projectmessages extends \Eloquent {
 							$query->where($this->table.'.from_user',$this->userId)
 								  ->orWhere($this->table.'.to_user',$this->userId);
 					})
-					->orderby($this->table.'.id','DESC')
-					->get();
-		if($toArray) DB::setFetchMode(PDO::FETCH_CLASS);
+					->orderby($this->table.'.id','DESC');
+		if($toArray){ 
+			$result = $result->get();
+			DB::setFetchMode(PDO::FETCH_CLASS);
+		} else {
+			$result = $result->paginate(10);
+		}
 		return $result;
     }
 }

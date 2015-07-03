@@ -39,6 +39,7 @@ class ProjectmessagesController extends BaseController {
 			$userstoproject->user_id 	= Auth::user()->role_id!=2?Auth::user()->id:$model->to_user;
 			$userstoproject->project_id = $projectId;
 			$userstoproject->status 	= Auth::user()->role_id!=2?1:2;
+			$userstoproject->new 		= 1;
 			$userstoproject->save();
 		}
 

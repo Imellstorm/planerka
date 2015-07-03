@@ -42,8 +42,18 @@
 												<div class="price">{{ $project->budget }} руб.</div>
 											</header>
 											<div class="text">{{ $project->description }}</div>
-											@if(!empty($project->new_messages))
-												<div class="new_mess_badge text-center">Новые сообщения - {{ $project->new_messages }}</div>
+											@if(!empty($project->new))
+												<div class="new_mess_badge text-center" style="margin-top:20px;">
+													Новый заказ
+												</div>
+											@elseif(!empty($project->new_subscriber))
+												<div class="new_mess_badge text-center" style="margin-top:20px;">
+													Новый исполнитель
+												</div>
+											@elseif(!empty($project->new_messages))
+												<div class="new_mess_badge text-center" style="margin-top:20px;">
+													Новые сообщения - {{ $project->new_messages }}
+												</div>
 											@endif
 											<ul class="meta-list">
 												<li>Добавлен: <span>{{ date('d-m-Y H:i:s',strtotime($project->created_at)) }}</span></li>
@@ -88,9 +98,9 @@
 												@endif
 											</ul>
 											@if(Auth::user()->role_id!=2)
-												@if($project->status!=6)
+												@if($project->status!=6 && $project->status!=4)
 													<a href="/project/singl/{{ $project->id }}" class="btn-purple">Обсудить условия</a>
-												@elseif(empty($project->review))
+												@elseif(empty($project->review) && $project->status!=4)
 													<a href="/review/form/{{ $project->user_id }}/{{ $project->id }}" class="btn-purple fancybox_ajax">Оставить отзыв</a>
 												@endif
 												@if($project->status==2)

@@ -38,6 +38,9 @@ class ProjectController extends BaseController {
 					}
 				}
 			}
+			if($project->new){
+				Project::where('id',$id)->update(array('new'=>0));
+			}
 			$model->where('to_user',Auth::user()->id)->where('project_id',$id)->update(array('readed'=>1));
 			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages','albums'));
 		}
@@ -54,7 +57,7 @@ class ProjectController extends BaseController {
 		if(!empty($usersToProject)){
 			foreach ($usersToProject as $key => $val) {
 				$model = new Projectmessages;
-				$messages = $model->getProjectMessagesByUser($id,$val->user_id,true);	
+				$messages = $model->getProjectMessagesByUser($id,$val->user_id,true);
 				if(!empty($messages)){
 					$val->mainMessage = array_pop($messages);
 					if(!empty($val->mainMessage['albums'])){
@@ -75,11 +78,14 @@ class ProjectController extends BaseController {
 		if(empty($project) || !$this->is_owner($project->user_id)){
 			App::abort(404);
 		}
-		$declined = Userstoproject::where('user_id',$userId)->where('project_id',$projectId)->where('status',4)->first();
+		$model = new Userstoproject;
+		$userToProject = $model->where('user_id',$userId)->where('project_id',$projectId)->first();
+		$model->find($userToProject->id)->update(array('new'=>0));
+
 		$model = new Projectmessages;
 		$messages = $model->getProjectMessagesByUser($projectId,$userId);	
 		$model->where('to_user',Auth::user()->id)->where('project_id',$projectId)->update(array('readed'=>1));
-		return View::make('content.front.projects.usermassages',compact('messages','project','userId','declined'));
+		return View::make('content.front.projects.usermassages',compact('messages','project','userId','userToProject'));
 	}
 
 	public function getFiltr(){
@@ -128,7 +134,7 @@ class ProjectController extends BaseController {
 				if(isset($image['path']) && !empty($image['path'])){
 					$model->image = $image['path'];
 					$thumb_path = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
-					if(Common_helper::getThumb($image['path'],$thumb_path,300,200)){
+					if(Common_helper::getThumb($image['path'],$thumb_path,200,200)){
 						$model->thumb = $thumb_path;
 					};
 				}
@@ -140,6 +146,7 @@ class ProjectController extends BaseController {
 				$model->date 	= !empty($model->date)?date('Y-m-d',strtotime(Input::get('date'))):date('Y-m-d');
 				$model->phone 	= Input::get('phone');
 				$model->status 	= 'private';
+				$model->new 	= 1;
 			}
 
         	$model->save();

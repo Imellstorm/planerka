@@ -21,8 +21,8 @@
 			
 		})
 
-		$('body').on('keydown','.price-input',function (e) {
-	        // Allow: backspace, delete, tab, escape, enter and .
+		function preventChars(e){
+			 // Allow: backspace, delete, tab, escape, enter and .
 	        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
 	             // Allow: Ctrl+A
 	            (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -39,6 +39,14 @@
 	        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 	            e.preventDefault();
 	        }
+		}
+
+		$('body').on('keydown','.price-input',function (e) {
+	        preventChars(e);
+	    });
+
+	    $('body').on('keydown','.term',function (e) {
+	        preventChars(e);
 	    });
 	})
 </script>
@@ -134,7 +142,7 @@
 		            							{{ Form::text('price', null, array('class' => 'form-control price-input','placeholder'=>'в рублях','required')) }}
 
 												{{ Form::label('term', 'Срок', array('style'=>'text-align:right;padding-right:20px;')) }}
-		            							{{ Form::text('term', null, array('class' => 'form-control','required')) }}
+		            							{{ Form::text('term', null, array('class' => 'form-control term','required', 'placeholder'=>'в часах')) }}
 											</div>
 											<div class="form-group">
 												{{ Form::label('text', 'Текст ответа') }}
@@ -160,11 +168,13 @@
 						@endif
 						@if(count($projectMessages))
 							<div class="order-review">
+								{{ $projectMessages->links() }}
 								<div class="chat">
 									@foreach($projectMessages as $key=>$message)
 										@include('content.front.projects.chatlist')
 									@endforeach
 								</div>
+								{{ $projectMessages->links() }}
 							</div>
 						@endif
 						<a href="/account/projects" class="btn-main">Вернуться назад</a>
@@ -197,7 +207,7 @@
 												<div class="prop-body">
 													<ul class="raider">
 														<li>Стоимость:  <span>{{ $performer->mainMessage['price'] }} руб</span></li>
-														<li>Срок:  <span>{{ $performer->mainMessage['term'] }}</span></li>
+														<li>Срок:  <span>{{ $performer->mainMessage['term'] }} ч.</span></li>
 													</ul>
 													<!-- <p>{{ $performer->mainMessage['text'] }}</p> -->
 													@if(isset($performer->albums) && !empty($performer->albums))
@@ -210,7 +220,9 @@
 												</div>
 												@if($project->user_id==Auth::user()->id)
 													<footer>
-														@if(!empty($newProjectMessages))
+														@if($performer->new)
+															<div class="new_mess_badge text-center">Новый исполнитель</div>
+														@elseif(!empty($newProjectMessages))
 						                                    <div class="new_mess_badge">Есть новые сообщения</div>
 						                                @endif
 														<a href="/project/usermassages/{{ $performer->user_id }}/{{ $project->project_id }}" class="btn-main">История сообщений</a>

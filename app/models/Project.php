@@ -38,10 +38,11 @@ class Project extends \Eloquent {
 
     public function getProjectsByUser($userId){
         $projects =  DB::table($this->table)
-            ->select('users.online','user_info.*',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),$this->table.'.*')
+            ->select('users.online','user_info.*','users_to_project.new as new_subscriber',DB::raw('count('.DB::getTablePrefix().'project_messages.id) as new_messages'),$this->table.'.*')
             ->leftjoin('user_info','user_info.user_id','=',$this->table.'.user_id')
             ->leftjoin('project_messages','project_messages.project_id','=',DB::raw(DB::getTablePrefix().$this->table.'.id AND '.DB::getTablePrefix().'project_messages.readed=0 AND '.DB::getTablePrefix().'project_messages.to_user='.$userId))
             ->leftjoin('users','users.id','=',$this->table.'.user_id')
+            ->leftjoin('users_to_project','users_to_project.project_id','=',DB::raw(DB::getTablePrefix().$this->table.'.id AND '.DB::getTablePrefix().'users_to_project.new=1'))
             ->where($this->table.'.user_id',$userId)
             ->where($this->table.'.deleted',0)
             ->orderBy($this->table.'.id','DESC')

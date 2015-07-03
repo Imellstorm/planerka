@@ -16,7 +16,7 @@
 	@endif
 	@if(!empty($message->term))
 		<div class="wite_badge">
-			Срок {{ $message->term }}
+			Срок {{ $message->term }} ч.
 		</div>
 	@endif
 	<div style="clear:both"></div>
