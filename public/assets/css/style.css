@@ -2806,7 +2806,7 @@ form.account .form-group.chbox {
   margin-top: 75px;
 }
 form.account label {
-  /*margin-top: 8px;*/
+  margin-top: 8px;
   width: 195px;
 }
 form.account input {
@@ -4200,4 +4200,9 @@ form.project .checkbox span {
   text-align: center;
   color: white;
   background: rgba(0,0,0,0.5);
+}
+.error_field_message{
+  color: red;
+  margin-left: 200px;
+  width: 340px;
 }

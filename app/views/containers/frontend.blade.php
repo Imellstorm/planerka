@@ -327,15 +327,6 @@
         </div>
     </nav>
 
-    @if ($errors->has())
-        @foreach ($errors->all() as $error)
-            <div class='bg-danger alert text-center'>
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
-
     @yield('main')
 
     @if(!Auth::check())

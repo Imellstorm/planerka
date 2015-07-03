@@ -10,7 +10,6 @@ class UserinfoController extends BaseController {
 		'gender'			=> 'max:16',
 		'phone'				=> 'max:64',
 		'biography'			=> '',
-		'additional_email'	=> 'max:128|email',
 		'site'				=> 'max:128',
 		'city_departure'	=> 'max:1',
 		'country_departure'	=> 'max:1',
@@ -44,7 +43,6 @@ class UserinfoController extends BaseController {
 	        $model->gender   			= Input::get('gender');
 	        $model->phone   			= Input::get('phone');
 	        $model->biography   		= Input::get('biography');
-	        $model->additional_email   	= Input::get('additional_email');
 	        $model->site   				= Input::get('site');
 	        $model->city_departure   	= empty($city_departure)?0:1;
 	        $model->country_departure   = empty($country_departure)?0:1;
@@ -103,7 +101,6 @@ class UserinfoController extends BaseController {
 		        'gender'   			=> Input::get('gender'),
 		        'phone'   			=> Input::get('phone'),
 		        'biography'   		=> Input::get('biography'),
-		        'additional_email'  => Input::get('additional_email'),
 		        'site'   			=> Input::get('site'),
 		        'city_departure'   	=> empty($city_departure)?0:1,
 		        'country_departure' => empty($country_departure)?0:1,	        

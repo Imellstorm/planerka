@@ -16,12 +16,19 @@
                         {{ Form::model($settings, array('role' => 'form', 'url' => '/settings/update/' . $settings->id, 'method' => 'PUT', 'class'=>'account')) }}
                     @endif
                         <div class="form-group">
+                            {{ Form::label('email', 'Электронная почта') }}
+                            {{ Form::text('email', Auth::user()->email, array('class' => 'form-control')) }}
+                            <div class="error_field_message">{{ $errors->first('email'); }}</div>
+                        </div>
+                        <div class="form-group">
                             <label for="oldpass">Старый пароль</label>
                             <input type="password" name="oldpass" class="form-control" id="oldpass">
+                            <div class="error_field_message">{{ $errors->first('oldpass'); }}</div>
                         </div>
                         <div class="form-group">
                             <label for="newpass">Новый пароль</label>
                             <input type="password" name="newpass" class="form-control" id="newpass">
+                            <div class="error_field_message">{{ $errors->first('newpass'); }}</div>
                         </div>
                         <div class="form-group">
                             <label for="passconf">Подтвердите</label>

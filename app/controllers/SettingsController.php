@@ -1,8 +1,11 @@
 <?php
 class SettingsController extends BaseController {
   protected $rules = array(
-    'newpass' => 'same:passconf',
+    'newpass'     => 'same:passconf',
+    'email'       => 'max:128|email',
   );
+
+
   /**
    * Store a newly created resource in storage.
    *
@@ -10,7 +13,7 @@ class SettingsController extends BaseController {
    */
   public function postStore()
   { 
-    $validator = Validator::make(Input::all(), $this->rules);
+    $validator = Validator::make(Input::all(), $this->rules, array('same'=>'новый пароль не совпадает с подтверждением'));
     if ($validator->fails()){
       return Redirect::back()->withErrors($validator)->withInput(Input::except('newpass','passconf','oldpass'));
     } else {
@@ -23,15 +26,18 @@ class SettingsController extends BaseController {
       $model->adminmail   = $adminmail?$adminmail:0;
       $model->blogmail    = $blogmail?$blogmail:0;
       $model->privatemail = $privatemail?$privatemail:0;
-      //$model->projectsmail= Input::get('projectsmail');
+      
       $model->save();
     }
-      if(!$this->updatePassword()){
-        return Redirect::back()->withErrors(array('oldpassword'=>'Неверный старый пароль'));
+      $userUpdateResult = $this->updateUser();
+      if(isset($userUpdateResult['errors'])){
+        return Redirect::back()->withErrors($userUpdateResult['errors']);
       };  
     $view = View::make('content.front.messagebox',array('message'=>'Настройки сохранены!'))->render();
         return Redirect::back()->with('message', $view);
   }
+
+
   /**
    * Update the specified resource in storage.
    *
@@ -45,7 +51,7 @@ class SettingsController extends BaseController {
       App::abort(404);
     }
     
-    $validator = Validator::make($data = Input::all(), $this->rules);
+    $validator = Validator::make($data = Input::all(), $this->rules, array('same'=>'новый пароль не совпадает с подтверждением'));
     if ($validator->fails()){
       return Redirect::back()->withErrors($validator)->withInput(Input::except('newpass','passconf','oldpass'));
     } else {
@@ -57,28 +63,37 @@ class SettingsController extends BaseController {
             'adminmail'     => $adminmail?$adminmail:0,
             'blogmail'      => $blogmail?$blogmail:0,            
             'privatemail'   => $privatemail?$privatemail:0,
-            //'projectsmail'  => Input::get('projectsmail')?Input::get('blogmail'):0,
           );          
           $model->update($data);
-          if(!$this->updatePassword()){
-            return Redirect::back()->withErrors(array('oldpassword'=>'Неверный старый пароль'));
+
+          $userUpdateResult = $this->updateUser();
+          if(isset($userUpdateResult['errors'])){
+            return Redirect::back()->withErrors($userUpdateResult['errors']);
           };
     }
     $view = View::make('content.front.messagebox',array('message'=>'Настройки обновлены!'))->render();
         return Redirect::back()->with('message', $view);
   }
-  private function updatePassword(){
-    $newpass = Input::get('newpass');
-    if(empty($newpass)){
-      return true;
+
+  private function updateUser(){
+    $model = User::find(Auth::user()->id);
+    $updateData = array();
+
+    $newpass = Input::get('newpass'); 
+    if(!empty($newpass) && Hash::check(Input::get('oldpass'),Auth::user()->password) ){
+      $updateData['password']  = Hash::make($newpass);    
+    } elseif(!empty($newpass)) {
+      return array('errors'=>array('oldpass'=>'Неверный старый пароль'));
     }
-    if( Hash::check( Input::get('oldpass'),Auth::user()->password) ){
-      $model = User::find(Auth::user()->id);
-      $model->update(array(
-        'password'  =>  Hash::make($newpass),
-      ));
-      return true;
+
+    $newmail = Input::get('email');
+    if(!empty($newmail)){
+       $updateData['email']  = $newmail;
     }
-    return false;
+
+    if(!empty($updateData)){
+      $model->update($updateData);
+    }
+
   }
 }
