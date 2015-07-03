@@ -45,11 +45,15 @@ class SettingsController extends BaseController {
     if ($validator->fails()){
       return Redirect::back()->withErrors($validator)->withInput(Input::except('newpass','passconf','oldpass'));
     } else {
+      $adminmail = Input::get('adminmail');
+      $blogmail = Input::get('blogmail');
+      $privatemail = Input::get('privatemail');
+      
       $data = array(
-            'adminmail'     => Input::get('adminmail')?Input::get('adminmail'):0,
-            'blogmail'      => Input::get('blogmail')?Input::get('blogmail'):0,            
-            'privatemail'   => Input::get('privatemail')?Input::get('blogmail'):0,
-            'projectsmail'  => Input::get('projectsmail')?Input::get('blogmail'):0,
+            'adminmail'     => $adminmail?$adminmail:0,
+            'blogmail'      => $blogmail?$blogmail:0,            
+            'privatemail'   => $privatemail?$privatemail:0,
+            //'projectsmail'  => Input::get('projectsmail')?Input::get('blogmail'):0,
           );          
           $model->update($data);
           if(!$this->updatePassword()){
