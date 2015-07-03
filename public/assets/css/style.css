@@ -2244,7 +2244,7 @@ input.btn-main {
   border-radius: 3px;
   box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
-.profile-data dl {
+.profile-data {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 16px;
@@ -2252,18 +2252,18 @@ input.btn-main {
   margin-bottom: 0;
   border-bottom: 1px solid #44b39b;
 }
-.profile-data dl dt {
-  width: 220px;
+.profile-data dt {
+  width: 200px;
   color: #868686;
   float: left;
   font-weight: normal;
 }
-.profile-data dl dd {
+.profile-data dd {
   margin-bottom: 6px;
-  height: 22px;
+  /*height: 22px;*/
   color: #665e83;
 }
-.profile-data dl dd:last-child {
+.profile-data dd:last-child {
   margin-bottom: 0;
 }
 .profile-data footer {
@@ -2366,7 +2366,7 @@ input.btn-main {
   margin-left: -10px;
 }
 .profile-albums{
-  margin-top: -230px;
+  margin-top: -170px;
 }
 .info_cont{
   overflow: hidden;

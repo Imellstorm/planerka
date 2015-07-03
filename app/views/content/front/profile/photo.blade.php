@@ -25,7 +25,7 @@
                             </div>
                         @endif
                         <div class="profile-data">
-                            <dl>
+                         
                                 @if(!empty($userinfo->phone))
                                     <dt>Мобильний телефон</dt>
                                     <dd>{{ $userinfo->phone }}</dd>
@@ -33,14 +33,12 @@
 
                                 @if(!empty($userinfo->additional_email))
                                     <dt>E-mail</dt>
-                                    <dd></dd>
-                                    <div style="color:#665e83;margin-bottom:10px;">{{ $userinfo->additional_email }}</div>
+                                    <dd style="color:#665e83;margin-bottom:10px;">{{ $userinfo->additional_email }}</dd>
                                 @endif
                                     
                                 @if(!empty($userinfo->site))
                                     <dt>Сайт</dt>
-                                    <dd></dd>
-                                    <div style="color:#665e83;margin-bottom:10px;">{{ $userinfo->site }}</div>
+                                    <dd style="color:#665e83;margin-bottom:10px;">{{ $userinfo->site }}</dd>
                                 @endif 
 
                                 @if(!empty($userinfo->birthday))
@@ -73,7 +71,7 @@
                                 <dd>
                                     {{ Common_helper::getPastTime($user->created_at) }}
                                 </dd>
-                            </dl>
+                          
                             @if($userInfo->role_id!=2)
                                 <footer>
                                     <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
