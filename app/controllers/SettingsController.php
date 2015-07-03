@@ -14,12 +14,16 @@ class SettingsController extends BaseController {
     if ($validator->fails()){
       return Redirect::back()->withErrors($validator)->withInput(Input::except('newpass','passconf','oldpass'));
     } else {
+      $adminmail = Input::get('adminmail');
+      $blogmail = Input::get('blogmail');
+      $privatemail = Input::get('privatemail');
+
       $model = new Usersettings;
-      $model->user_id   = Auth::user()->id;
-      $model->adminmail   = Input::get('adminmail');
-      $model->blogmail  = Input::get('blogmail');
-      $model->privatemail = Input::get('privatemail');
-      $model->projectsmail= Input::get('projectsmail');
+      $model->user_id     = Auth::user()->id;
+      $model->adminmail   = $adminmail?$adminmail:0;
+      $model->blogmail    = $blogmail?$blogmail:0;
+      $model->privatemail = $privatemail?$privatemail:0;
+      //$model->projectsmail= Input::get('projectsmail');
       $model->save();
     }
       if(!$this->updatePassword()){
@@ -48,7 +52,7 @@ class SettingsController extends BaseController {
       $adminmail = Input::get('adminmail');
       $blogmail = Input::get('blogmail');
       $privatemail = Input::get('privatemail');
-      
+
       $data = array(
             'adminmail'     => $adminmail?$adminmail:0,
             'blogmail'      => $blogmail?$blogmail:0,            
