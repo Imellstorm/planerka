@@ -31,10 +31,9 @@
                                     <dd>{{ $userinfo->phone }}</dd>
                                 @endif
 
-                                @if(!empty($userinfo->additional_email))
-                                    <dt>E-mail</dt>
-                                    <dd style="color:#665e83;margin-bottom:10px;">{{ $userinfo->additional_email }}</dd>
-                                @endif
+                                <dt>E-mail</dt>
+                                <dd style="color:#665e83;margin-bottom:10px;">{{ $user->email }}</dd>
+
                                     
                                 @if(!empty($userinfo->site))
                                     <dt>Сайт</dt>

@@ -20,8 +20,15 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Управление пользователями <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li class="<?php echo Request::segment(2)=='articles'?'active':''; ?>"><?php echo link_to('admin/users','Пользователи'); ?></li>
-                    <li class="<?php echo Request::segment(2)=='articles'?'active':''; ?>"><?php echo link_to('admin/roles','Типы пользователей'); ?></li>  
+                    <li class="<?php echo Request::segment(2)=='users'?'active':''; ?>"><?php echo link_to('admin/users','Пользователи'); ?></li>
+                    <li class="<?php echo Request::segment(2)=='roles'?'active':''; ?>"><?php echo link_to('admin/roles','Типы пользователей'); ?></li>  
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Блог <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="<?php echo Request::segment(3)=='categories'?'active':''; ?>"><?php echo link_to('admin/blog/categories','Категории'); ?></li>
+                    <li class="<?php echo Request::segment(3)=='subcategories'?'active':''; ?>"><?php echo link_to('admin/blog/subcategories','Подкатегории'); ?></li>  
                   </ul>
                 </li>
                 <li class="<?php echo Request::segment(2)=='menus'?'active':''; ?>"><?php echo link_to('admin/menus','Меню'); ?></li>

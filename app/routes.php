@@ -34,6 +34,8 @@ Route::group(array('before' => 'is_admin_filter'), function() {
 	Route::controller('admin/roles', 'RoleController');
 	Route::controller('admin/menus', 'MenuController');
 	Route::controller('admin/vote', 'VoteController');
+	Route::controller('admin/blog/categories', 'BlogcategoriesController');
+	Route::controller('admin/blog/subcategories', 'BlogsubcategoriesController');
 });
 
 /*
