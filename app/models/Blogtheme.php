@@ -1,10 +1,10 @@
 <?php
 
-class Blogcategory extends \Eloquent {
-	protected $table = 'blog_categories';
+class Blogtheme extends \Eloquent {
+	protected $table = 'blog_themes';
     protected $guarded = array('_token');
 
-    public function getBlogCategories($table_fields,$params){
+    public function getBlogThemes($table_fields,$params){
 		$sort = $params['sort'];
     	$order = $params['order'];
     	$field = $params['field'];

@@ -21,6 +21,10 @@
             {{ Form::label('name', 'Название*') }}
             {{ Form::text('name', null, array('class' => 'form-control')) }}
         </div>
+        <div class='form-group'>
+            {{ Form::label('name', 'Описание') }}
+            {{ Form::textarea('description', null, array('class' => 'form-control')) }}
+        </div>
 
         <div class='form-group'>
             {{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}

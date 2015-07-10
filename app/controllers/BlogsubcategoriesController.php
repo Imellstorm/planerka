@@ -9,7 +9,7 @@ class BlogsubcategoriesController extends BaseController {
 		'Имя'			=> 'blog_subcategories.name',
 		'Категория'		=> 'blog_categories.name',
 		'Создана'		=> 'blog_subcategories.created_at',
-		'Обноввлена'	=> 'blog_subcategories.updated_at',
+		'Обновлена'	=> 'blog_subcategories.updated_at',
 	);	
 
 
@@ -59,6 +59,7 @@ class BlogsubcategoriesController extends BaseController {
 			$model = new Blogsubcategory;
 			$model->name   		= Input::get('name');
 	        $model->category_id = Input::get('category_id');
+	        $model->description = Input::get('description');
 
         	$model->save();
 		}
@@ -105,7 +106,8 @@ class BlogsubcategoriesController extends BaseController {
 		} else {
 			$data = array(
 		        'name'      		=> Input::get('name'),
-		        'category_id' 		=> Input::get('category_id'),        
+		        'category_id' 		=> Input::get('category_id'),
+		        'description'		=> Input::get('description'),        
 	        );	        
 
         	$subcategory->update($data);

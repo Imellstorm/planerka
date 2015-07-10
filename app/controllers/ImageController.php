@@ -36,6 +36,27 @@ class ImageController extends BaseController {
     	return Response::json('success', 200);
 	}
 
+	public function postUploadpostimage(){
+		$postId = (int)Input::get('post_id');
+		$post = Blogpost::where('id',$postId)->first();
+		if(Auth::check() && !empty($post) && $this->is_owner($post->user_id)){
+			$image = Common_helper::fileUpload(Input::file('file'),'images/'.Auth::user()->alias);
+		    if( isset($image['errors']) ) {
+		    	return Response::json('Ошибка при загрузке фото', 400);
+	        }
+	        $thumb = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+        	Common_helper::getThumb($image['path'],$thumb,200,200);
+	    	$model = new Blogimage;
+	    	$model->user_id 	= Auth::user()->id;
+	    	$model->path 		= $image['path'];
+	    	$model->thumb 		= $thumb;
+	    	$model->post_id 	= $postId;
+	    	$model->save();
+
+	    	return Response::json('success', 200);        	
+		}
+	}
+
 	public function postLike(){
 		$imageId = Input::get('imageid');
 		$model = new Imagelikes;
