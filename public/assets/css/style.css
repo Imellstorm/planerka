@@ -3538,7 +3538,7 @@ form.account .btn-main {
   line-height: 38px;
   margin-right: 20px;
 }
-#upload-photo .file-wrap {
+.file-wrap {
   width: 236px;
   height: 38px;
   display: inline-block;
@@ -4205,4 +4205,10 @@ form.project .checkbox span {
   color: red;
   margin-left: 200px;
   width: 340px;
+}
+.blog_theme_title{
+  color: #44B39B;
+}
+.blog_theme_title:hover{
+  color: #2CA087;
 }

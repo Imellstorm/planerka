@@ -28,27 +28,25 @@
 						@foreach($categories as $key=>$item)
 							@if($key==0 || $item->category_id!=$categories[$key-1]->category_id)
 								<div class="category">
-									<div class="cat-title">{{ $item->parent_name }}</div>
-							@endif
-									<div class="post">
-										<div class="post-cont">
-											<h3><a href="/blog/category/{{ $item->id }}">{{ $item->name }}</a></h3>
-											<p>{{ $item->description }}</p>
-										</div>
-										<div class="post-info">
-											<dl>
-												<dt>Темы:</dt>
-												<dd>{{ $item->themes_count }}</dd>
-											</dl>
-											<dl>
-												<dt>Сообщений:</dt>
-												<dd>{{ $item->posts_count }}</dd>
-											</dl>
-										</div>
-									</div>
-							@if($key==0 || $item->category_id!=$categories[$key-1]->category_id)		
+									<div class="cat-title">{{ $item->parent_name }}</div>		
 								</div>
-							@endif			
+							@endif	
+							<div class="post">
+								<div class="post-cont">
+									<h3><a href="/blog/category/{{ $item->id }}">{{ $item->name }}</a></h3>
+									<p>{{ $item->description }}</p>
+								</div>
+								<div class="post-info">
+									<dl>
+										<dt>Темы:</dt>
+										<dd>{{ $item->themes_count }}</dd>
+									</dl>
+									<dl>
+										<dt>Сообщений:</dt>
+										<dd>{{ $item->posts_count }}</dd>
+									</dl>
+								</div>
+							</div>		
 						@endforeach
 					@endif
 				</div>

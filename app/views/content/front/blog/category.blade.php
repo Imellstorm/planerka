@@ -29,9 +29,11 @@
 					@if(count($themes))
 						@foreach($themes as $theme)
 							<div class="single-blog" style="position:relative">
-								<a href="/blog/theme/{{ $theme->id }}">
-									<h3>{{ $theme->name }}</h3>
-								</a>
+								<h3>
+									<a href="/blog/theme/{{ $theme->id }}" class="blog_theme_title">
+										{{ $theme->name }}
+									</a>
+								</h3>
 								<p>{{ $theme->text }}</p>
 								<footer>
 									<div class="user-info">
