@@ -14,10 +14,11 @@ $crc = $_REQUEST["SignatureValue"];
 $crc = strtoupper($crc);
 
 $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1"));
+echo 'Полученный ключ';
 var_dump($crc); 
-echo '<br>';
+echo '<br>Составленный ключ';
 var_dump($my_crc);
-exit;
+
 // проверка корректности подписи
 // check signature
 if ($my_crc != $crc)
