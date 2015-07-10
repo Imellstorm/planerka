@@ -35,7 +35,7 @@
 								<p>{{ $theme->text }}</p>
 								<footer>
 									<div class="user-info">
-										<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($theme->user_id) }}" alt=""></a>
+										<a href="/{{ $theme->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($theme->user_id) }}" alt=""></a>
 										<div class="name">
 											@if(!empty($theme->user_name) || !empty($theme->surname))
 												<a href="/{{ $theme->alias }}">{{ $theme->user_name }} {{ $theme->surname }}</a>

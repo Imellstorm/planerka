@@ -33,7 +33,7 @@ class BlogController extends BaseController {
 		if(empty($category)){
 			App::abort(404);
 		}
-		$themes = Blogtheme::select('blog_posts.text','user_info.*','users.online','user_info.name as user_name','blog_themes.*')
+		$themes = Blogtheme::select('blog_posts.text','user_info.*','users.online','users.alias','user_info.name as user_name','blog_themes.*')
 				->leftjoin('blog_posts','blog_posts.theme_id','=','blog_themes.id')
 				->leftjoin('user_info','user_info.user_id','=','blog_themes.user_id')
 				->leftjoin('users','users.id','=','blog_themes.user_id')
@@ -56,7 +56,7 @@ class BlogController extends BaseController {
 		if(empty($category)){
 			App::abort(404);
 		}
-		$posts = Blogpost::select('user_info.*','users.online','user_info.name as user_name','blog_posts.*')
+		$posts = Blogpost::select('user_info.*','users.online','users.alias','user_info.name as user_name','blog_posts.*')
 			->leftjoin('user_info','user_info.user_id','=','blog_posts.user_id')
 			->leftjoin('users','users.id','=','blog_posts.user_id')
 			->where('theme_id',$id)

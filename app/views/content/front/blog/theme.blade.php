@@ -95,7 +95,7 @@
 						if(res.length){
 							$('.post_id').val(res);
 							$.when(myDropzone.processQueue()).then(function(){
-								window.location.href = document.URL
+								//window.location.href = document.URL
 							})
 						}
 					}
@@ -135,7 +135,7 @@
 							<div class="single-blog" style="position:relative">
 								<footer>
 									<div class="user-info">
-										<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($post->user_id) }}" alt=""></a>
+										<a href="/{{ $post->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($post->user_id) }}" alt=""></a>
 										<div class="name">
 											@if(!empty($post->user_name) || !empty($post->surname))
 												<a href="/{{ $post->alias }}">{{ $post->user_name }} {{ $post->surname }}</a>
