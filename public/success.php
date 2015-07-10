@@ -2,7 +2,7 @@
 
 // регистрационная информация (пароль #1)
 // registration info (password #1)
-$mrh_pass1 = "password_1";
+$mrh_pass1 = "Qwerty111";
 
 // чтение параметров
 // read parameters
