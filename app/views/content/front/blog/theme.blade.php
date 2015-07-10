@@ -95,7 +95,7 @@
 						if(res.length){
 							$('.post_id').val(res);
 							$.when(myDropzone.processQueue()).then(function(){
-								//window.location.href = document.URL
+								window.location.href = document.URL
 							})
 						}
 					}
