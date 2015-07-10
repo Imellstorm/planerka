@@ -23,23 +23,8 @@ if ($my_crc != $crc)
   echo "bad sign\n";
   exit();
 }
+echo "Операция прошла успешно\n";
 
-// проверка наличия номера счета в истории операций
-// check of number of the order info in history of operations
-$f=@fopen("order.txt","r+") or die("error");
-
-while(!feof($f))
-{
-  $str=fgets($f);
-
-  $str_exp = explode(";", $str);
-  if ($str_exp[0]=="order_num :$inv_id")
-  { 
-	echo "Операция прошла успешно\n";
-	echo "Operation of payment is successfully completed\n";
-  }
-}
-fclose($f);
 ?>
 
 
