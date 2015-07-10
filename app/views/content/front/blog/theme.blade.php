@@ -94,9 +94,9 @@
 					success:function(res){
 						if(res.length){
 							$('.post_id').val(res);
-							// $.when(myDropzone.processQueue()).then(function(){
-							// 	window.location.href = document.URL
-							// })
+							$.when(myDropzone.processQueue()).then(function(){
+								//window.location.href = document.URL
+							})
 						}
 					}
 				})
