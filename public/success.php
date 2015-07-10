@@ -8,13 +8,12 @@ $mrh_pass1 = "Qwerty111";
 // read parameters
 $out_summ = $_REQUEST["OutSum"];
 $inv_id = $_REQUEST["InvId"];
-$shp_item = $_REQUEST["Shp_item"];
 $crc = $_REQUEST["SignatureValue"];
 
 
 $crc = strtoupper($crc);
 
-$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:Shp_item=$shp_item"));
+$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1"));
 var_dump($crc); 
 echo '<br>';
 var_dump($my_crc);
