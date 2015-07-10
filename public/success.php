@@ -11,11 +11,14 @@ $inv_id = $_REQUEST["InvId"];
 $shp_item = $_REQUEST["Shp_item"];
 $crc = $_REQUEST["SignatureValue"];
 
-var_dump($crc); exit;
+
 $crc = strtoupper($crc);
 
 $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:Shp_item=$shp_item"));
-
+var_dump($crc); 
+echo '<br>';
+var_dump($my_crc);
+exit;
 // проверка корректности подписи
 // check signature
 if ($my_crc != $crc)
