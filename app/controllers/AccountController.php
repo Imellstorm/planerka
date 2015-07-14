@@ -134,6 +134,15 @@ class AccountController extends BaseController {
 	}
 
 	/**
+	 * Show Places page
+	 *
+	 * @return Response
+	 */
+	public function getPlaces(){
+		return View::make('content.front.account.places');
+	}
+
+	/**
 	 * Store Email verification data and send mail
 	 *
 	 */

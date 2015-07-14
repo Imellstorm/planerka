@@ -4212,3 +4212,77 @@ form.project .checkbox span {
 .blog_theme_title:hover{
   color: #2CA087;
 }
+
+.block_1{
+  height: 200px;
+  margin: 0 -8px 8px -8px;
+}
+.block_2{
+  height: 100px; 
+  margin: 2px;  
+}
+.block_3{
+  height: 90px;
+  margin: 5px -8px;
+}
+.block_4{
+  height: 120px;
+  margin: 5px -8px;  
+}
+.block_1, .block_2, .block_3, .block_4{
+  background: lightgrey;
+  border:solid 2px grey;
+}
+.grey_line{
+  background: lightgray;
+  height: 20px;
+  margin-bottom: 10px;
+}
+.blue-area{
+  background: rgb(217, 237, 253);
+  border: solid 2px rgb(61, 149, 249);
+}
+.pink-area{
+  background: rgb(247, 200, 221);
+  border: solid 2px rgb(255, 0, 184);
+}
+.yellow-area{
+  background: #ECDEB4;
+  border: solid 2px #D5AA26;
+}
+.green-area{
+  background: rgb(203, 234, 203);
+  border: solid 2px #2BD03A;
+}
+
+.blue_back, .pink_back, .yellow_back, .green_back{
+  padding: 10px;
+  color:white;
+  text-align: center;
+}
+.white_back{
+  background: white;
+  padding: 10px;
+  color:grey;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.blue_back{
+  background: #3D95F9;  
+}
+.pink_back{
+  background: #FF00B8;
+}
+.yellow_back{
+  background: #D5AA26;
+}
+.green_back{
+  background: #2BD03A;
+}
+.contact_info_line{
+  margin-top: 20px;
+  padding: 10px 0;
+  background: white;
+  font-size: 18px;
+}
+
