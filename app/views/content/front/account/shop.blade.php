@@ -109,7 +109,7 @@
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="promo">
+			<div class="promo">
 				<div class="row">
 					<div class="col-md-12 section-title decor">
 						Промо-размещение — Ваше портфолио всегда наверху!
@@ -122,7 +122,7 @@
 						<a href="#null" class="by-promo">Оформить ПРОМО-размещение на 7 дней за 299 руб.</a>
 					</div>
 				</div>
-			</div> -->	
+			</div>	
 		</div>
 	</div>	
 @stop
