@@ -7,16 +7,17 @@ class BaseController extends Controller {
 		$rules = Article::where('alias','rules')->first();
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
 		if(Auth::check()){
-			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			$this->userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
 			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
 			$newProjectMessages = Projectmessages::leftjoin('projects','projects.id','=','project_messages.project_id')->where('projects.deleted','!=',1)->where('to_user',Auth::user()->id)->where('readed',0)->get();
 			$newNotifications = Notifications::where('to_user',Auth::user()->id)->where('readed',0)->get();
 			View::share('newProjectMessages',count($newProjectMessages));
 			View::share('newNotifications',count($newNotifications));
 			View::share('newMessages',count($newMessages));
-			View::share('userInfo',$userInfo);
+			View::share('userInfo',$this->userInfo);
+		} else {
+			View::share('rules',$rules);
 		}
-		View::share('rules',$rules);
 		View::share('roles',$roles);
 		
 		Auth::viaRemember();
@@ -35,6 +36,13 @@ class BaseController extends Controller {
     		$user = User::find(Auth::user()->id);
     		$user->update(array('online'=>0));
     	}
+    }
+
+    public function isPro(){
+    	if($this->userInfo->pro >= date('Y-m-d')){
+    		return true;
+    	}
+    	return false;
     }
 
     public function getUserinfo($userId=''){

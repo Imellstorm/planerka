@@ -134,6 +134,50 @@ class AccountController extends BaseController {
 	}
 
 	/**
+	 * Generate Buy popup 
+	 *
+	 * @return Response
+	 */
+	public function getBuy($type=''){
+		if(empty($type)){
+			App::abort(404);
+		}
+
+		// регистрационная информация (логин, пароль #1)
+		$mrh_login = "planerka";
+		$mrh_pass1 = "Qwerty111";
+
+		// кодировка
+		$encoding = "utf-8";
+
+		if($type=='pro'){
+			// сумма заказа
+			$out_summ = "199.00";
+			$view = 'content.front.account.buypro';
+		}
+		if($type=='promo'){
+			// сумма заказа
+			$out_summ = "299.00";
+			$view = 'content.front.account.buypromo';
+		}
+
+		$oreder = new Order;
+		$oreder->user_id 	= Auth::user()->id;
+		$oreder->amount 	= (int)$out_summ;
+		$oreder->status 	= 'not paid';
+		$oreder->type 		= $type;
+		$oreder->save();
+
+		// номер заказа
+		$inv_id = $oreder->id;
+
+		// формирование подписи
+		$crc  = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
+
+		return View::make($view,compact('mrh_login','out_summ','inv_id','crc'));
+	}
+
+	/**
 	 * Show Places page
 	 *
 	 * @return Response

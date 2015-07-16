@@ -133,33 +133,37 @@
 								<div class="col-sm-12">
 									<div class="proj-answ">
 										<div class="title">Ваш ответ на проект</div>
-										<div class="no-pro-msg">
-											Осталось ответов на проекты: <span>3</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
-										</div>
-										{{ Form::open(array('role' => 'form', 'url' => 'projectmessages/store')) }}
-											<div class="form-group">
-											    {{ Form::label('price', 'Стоимость') }}
-		            							{{ Form::text('price', null, array('class' => 'form-control price-input','placeholder'=>'в рублях','required')) }}
+										@if($userInfo->pro < date('Y-m-d'))
+											<div class="no-pro-msg">
+												Осталось ответов на проекты: <span>{{ $projectsCount }}</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
+											</div>
+										@endif
+										@if($userInfo->pro > date('Y-m-d') || $projectsCount>0)
+											{{ Form::open(array('role' => 'form', 'url' => 'projectmessages/store')) }}
+												<div class="form-group">
+												    {{ Form::label('price', 'Стоимость') }}
+			            							{{ Form::text('price', null, array('class' => 'form-control price-input','placeholder'=>'в рублях','required')) }}
 
-												{{ Form::label('term', 'Срок', array('style'=>'text-align:right;padding-right:20px;')) }}
-		            							{{ Form::text('term', null, array('class' => 'form-control term','required', 'placeholder'=>'в часах')) }}
-											</div>
-											<div class="form-group">
-												{{ Form::label('text', 'Текст ответа') }}
-		            							{{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:150px','required')) }}
-											</div>
-											{{ Form::hidden('project_id', $project->project_id) }}
-											{{ Form::hidden('to_user', $project->user_id) }}
+													{{ Form::label('term', 'Срок', array('style'=>'text-align:right;padding-right:20px;')) }}
+			            							{{ Form::text('term', null, array('class' => 'form-control term','required', 'placeholder'=>'в часах')) }}
+												</div>
+												<div class="form-group">
+													{{ Form::label('text', 'Текст ответа') }}
+			            							{{ Form::textarea('text', null, array('class' => 'form-control','style'=>'height:150px','required')) }}
+												</div>
+												{{ Form::hidden('project_id', $project->project_id) }}
+												{{ Form::hidden('to_user', $project->user_id) }}
 
-											<label for="" class="pull-left">Прикрепить альбомы</label>
-											<div class="form-group album-load" style="margin-left:140px">
-												<a href="/album/list" class="album-input fancybox_ajax"></a>	
-												<input type="hidden" name="albums" class="albumsIds">			
-											</div>
-											<div class="form-group">
-												<input type="submit" class="btn-main" value="Ответить на проект">
-											</div>
-										{{ Form::close() }}
+												<label for="" class="pull-left">Прикрепить альбомы</label>
+												<div class="form-group album-load" style="margin-left:140px">
+													<a href="/album/list" class="album-input fancybox_ajax"></a>	
+													<input type="hidden" name="albums" class="albumsIds">			
+												</div>
+												<div class="form-group">
+													<input type="submit" class="btn-main" value="Ответить на проект">
+												</div>
+											{{ Form::close() }}
+										@endif
 									</div>
 								</div>
 							</div>

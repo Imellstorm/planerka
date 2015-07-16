@@ -40,17 +40,20 @@ class AlbumsController extends BaseController {
 			App::abort(404);
 		}
 
-
 		$projectsDone = Userstoproject::where('user_id',$user->id)->where('status',6)->get();
-		$this->getUserinfo($user->id);
+		//$this->getUserinfo($user->id);
 		$favoriteExist = $this->getFavorites($user);
 		View::share('favoriteExist',$favoriteExist);
 		View::share('profile',true);
 		View::share('projectsDoneCount',count($projectsDone));
 		View::share('user',$user);
-		
 
-		$this->getUserinfo($user->id);
+		if(!$this->isPro()){
+			$date = new DateTime;
+			$date->modify('-1 week');
+			$formatted_date = $date->format('Y-m-d H:i:s');
+			$uploadsCount = Image::where('user_id',Auth::user()->id)->where('created_at','>=',$date)->count();
+		}
 		$images = Image::select('images.*',DB::raw('count('.DB::getTablePrefix().'image_likes.id) as likes'))
 					->leftjoin('image_likes','image_likes.image_id','=','images.id')
 					->where('album_id',$id)
@@ -59,7 +62,7 @@ class AlbumsController extends BaseController {
 		$album = Album::where('user_id',$user->id)->where('id',$id)->first();
 		if(!empty($album)){
 			$new = Session::get('newAlbum',0);
-			return View::make('content.front.profile.album', compact('album','images','user','new'));
+			return View::make('content.front.profile.album', compact('album','images','user','new','uploadsCount'));
 		} else {
 			App::abort(404);
 		}

@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 
-@section('title') {{ 'Сообщения' }} @stop
+@section('title') Услуги @stop
 
 @section('main')
 <!-- MAIN CONTENT
@@ -72,7 +72,7 @@
 							<tr>
 								<th>
 									<h3><b>PRO</b> аккаунт <br>199 руб. / мес</h3>
-									<a href="#null" class="add">Оформить PRO на 1 месяц</a>
+									<a href="/account/buy/pro" class="add fancybox_ajax">Оформить PRO на 1 месяц</a>
 								</th>
 							</tr>
 							<tr>
@@ -119,7 +119,7 @@
 					<div class="col-sm-12">
 						<p>Воспользовавшись услугой промо-размещения вы получите возможность публикации Вашего портфолио на самом заметном месте сайта — на главной странице и в верхней части каталога исполнителей и страниц результатов поиска, над обычными портфолио.</p>
 						<img src="/assets/img/promo.png" alt="">
-						<a href="#null" class="by-promo">Оформить ПРОМО-размещение на 7 дней за 299 руб.</a>
+						<a href="/account/buy/promo" class="by-promo fancybox_ajax">Оформить ПРОМО-размещение на 7 дней за 299 руб.</a>
 					</div>
 				</div>
 			</div>	

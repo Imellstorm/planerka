@@ -11,9 +11,19 @@ class ProjectmessagesController extends BaseController {
 	);
 
 	public function postStore(){
+		if(!$this->isPro()){
+			$date = new DateTime;
+			$date->modify('-1 week');
+			$formatted_date = $date->format('Y-m-d H:i:s');
+			$projectsCount = Userstoproject::where('user_id',Auth::user()->id)->where('created_at','>=',$date)->count();
+			if($projectsCount>=3){
+				$view = View::make('content.front.messagebox',array('title'=>'Ошибка','message'=>'Превышен лимит ответов. Купите RPO аккаунт и отвечайте без ограничений!'))->render();
+				return Redirect::back()->with('message', $view);
+			}
+		}
+
 		$validator = Validator::make(Input::all(), $this->rules);
-		if ($validator->fails())
-		{
+		if ($validator->fails()){
 			return Redirect::back()->withErrors($validator)->withInput();
 		} else {
 			$model = new Projectmessages;

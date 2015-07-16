@@ -1,6 +1,6 @@
 @extends('containers.frontend')
 
-@section('title') {{ 'Сообщения' }} @stop
+@section('title') Размещение рекламы @stop
 
 @section('main')
 <!-- MAIN CONTENT
@@ -38,7 +38,7 @@
 					<div class="col-md-3"><div class="block_4"></div></div>
 				</div>
 				<div class="col-md-5">
-				<div class="block_1_desc">
+				<div class="block_1_desc">	
 					<div class="blue_back">Аренда баннера сроком на 1 месяц</div>
 					<div class="white_back">Баннер "ТОП" 50000 рублей</div>
 				</div>
@@ -86,7 +86,7 @@
 			$('.block_2').removeClass('pink-area');
 		})
 
-		$('.block_3_desc').on('mouseover',function(){
+		$('.block_3_desc').on('mouseover',function(){	
 			$('.block_3').addClass('yellow-area');
 		})
 		$('.block_3_desc').on('mouseout',function(){

@@ -11,11 +11,11 @@
 						Лента проэктов
 					</div>
 				</div>
-				@if(Auth::check() && Auth::user()->role_id!=2)
+				@if(Auth::check() && Auth::user()->role_id!=2 && $userInfo->pro<date('Y-m-d'))
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="no-pro-msg">
-								Осталось ответов на проекты: <span>3</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
+								Осталось ответов на проекты: <span>{{ $projectsCount }}</span>. Купите аккаунт <div class="status">PRO</div> и отвечайте без ограничений.
 								<a href="/project/filtr" class="btn-main fancybox_ajax" style="width:150px; float:right; margin: 20px 20px 0 0;">Фильтр</a>
 								@if(!empty($filtr))
 									<a href="/project/list" class="btn-main" style=" float:right; margin: 20px 20px 0 0;">Очистить фильтр</a>

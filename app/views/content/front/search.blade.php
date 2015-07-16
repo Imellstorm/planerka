@@ -14,17 +14,25 @@
 				</div>
 			</div>
 			<div class="row">
-				@if(count($result))
-					@foreach($result as $item)
+				@if(count($promo))
+					@foreach($promo as $item)
 						<div class="col-md-3">
 							@include('content.front.usercard')
 						</div>
 					@endforeach
-				@else
+				@endif
+				@if(count($normal))
+					@foreach($normal as $item)
+						<div class="col-md-3">
+							@include('content.front.usercard')
+						</div>
+					@endforeach
+				@endif
+				@if(!count($promo) && !count($normal))
 					<div class="text-center">Ничего не найдено</div>
 				@endif
 			</div>
-			{{ $result->links() }}
+			{{ $normal->links() }}
 		</div>
 	</div>
 @stop

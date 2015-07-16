@@ -151,7 +151,9 @@
                             <div class="count">
                                 <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
                             </div>
-                            <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                            @if($userInfo->pro >= date('Y-m-d'))
+                                <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                            @endif
                             <div class="user" id="show-user-menu">
                                 <div class="name">{{ Auth::user()->username }}</div>
                                 <a href="#null"><img src="/assets/img/dropdown_icon.png" alt=""></a>
@@ -201,7 +203,9 @@
                                     <div class="name">{{ $userInfo->alias }}</div>
                                 @endif
                                 <div class="{{ $user->online?'online':'offline' }}" style="margin-top:10px;"></div>
-                                <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                                @if($userInfo->pro >= date('Y-m-d'))
+                                    <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                                @endif
                             </div>
                             <div class="bott-cont">
                                 <div class="place">{{ $userInfo->city }}</div>
@@ -326,6 +330,15 @@
             </div>
         </div>
     </nav>
+
+    @if ($errors->has())
+        @foreach ($errors->all() as $error)
+            <div class='bg-danger alert text-center'>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                {{ $error }}
+            </div>
+        @endforeach
+    @endif
 
     @yield('main')
 

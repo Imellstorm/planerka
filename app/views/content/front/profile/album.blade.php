@@ -28,7 +28,9 @@
 									<div class="set">
 										<h4>Установить</h4>
 										<a href="/album/setalbumcover/{{ $album->id.'/'.$image->id }}" class="hover_green">обложкой альбома</a>
-										<a href="/album/setprofilecover/{{ $image->id }}" class="hover_green">баннером профиля</a>
+										@if($userInfo->pro>=date('Y-m-d'))
+											<a href="/album/setprofilecover/{{ $image->id }}" class="hover_green">баннером профиля</a>
+										@endif
 									</div>
 								@endif
 								<div class="share">
@@ -81,7 +83,7 @@
 				</form>
 			</div>
 			<footer style="clear:both">
-				<p>Ваш лимит: <span>20 фото в неделю</span></p>
+				<p>Вы можете загрузить ещё: <span>{{ 10-$uploadsCount }} фото</span></p>
 				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
 			</footer>
 			<div style="margin-top:20px">
@@ -108,6 +110,7 @@
 			acceptedFiles: ".png, .jpg, .jpeg",
 			autoProcessQueue: false,
 			addRemoveLinks: 'dictCancelUpload',
+			maxFiles: 10-{{ $uploadsCount }},
 			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
 		})
 
@@ -120,6 +123,8 @@
 		myDropzone.on('removedfile',function(file,message){
 			if(myDropzone.getQueuedFiles().length==0){
 				$('.upload_process').hide();
+			} else {
+				$('.upload_process').show();
 			}
 		})
 

@@ -34,8 +34,25 @@ class FrontController extends BaseController {
 		$date 	= Input::get('date');
 		$budjet = Input::get('budjet');
 
+		$promo 	= $this->takeUsers($spec,$city,$date,$budjet,'promo');
+		$normal = $this->takeUsers($spec,$city,$date,$budjet,'normal');
+
+		$hideDel = true;
+		return View::make('content.front.search',compact('promo','normal','hideDel'));
+	}
+
+	private function takeUsers($spec,$city,$date,$budjet,$type){
 		$result = User::join('user_info','user_info.user_id','=','users.id')
-					  ->where('users.role_id','!=',2);
+			  ->where('users.role_id','!=',1)
+			  ->where('users.role_id','!=',2);
+
+		if($type=='promo'){
+			  $result->where('user_info.promo','>',date('Y-m-d'))
+			  		 ->orderBy('user_info.promo','DESC');
+		}
+		if($type=='normal'){
+			  $result->where('user_info.promo','<=',date('Y-m-d'));
+		}
 
 		if(!empty($spec)){
 			$result->leftjoin('specializations','specializations.user_id','=','users.id')
@@ -85,8 +102,6 @@ class FrontController extends BaseController {
 				$val->projects = Userstoproject::where('user_id',$val->user_id)->where('status',6)->count();
 			}
 		}
-
-		$hideDel = true;
-		return View::make('content.front.search',compact('result','hideDel'));
+		return $result;
 	}
 }

@@ -42,7 +42,8 @@ class ProjectController extends BaseController {
 				Project::where('id',$id)->update(array('new'=>0));
 			}
 			$model->where('to_user',Auth::user()->id)->where('project_id',$id)->update(array('readed'=>1));
-			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages','albums'));
+			$projectsCount = $this->getProjectsCount();
+			return View::make('content.front.projects.singl',compact('project','userDate','projectAssign','projectMessages','albums','projectsCount'));
 		}
 
 		$usersToProject = Userstoproject::select('user_info.*','users_to_project.*','users_to_project.id as users_to_project_id','users.*')
@@ -92,11 +93,24 @@ class ProjectController extends BaseController {
 		return View::make('content.front.projects.filtr');
 	}
 
+	private function getProjectsCount(){
+		$projectsCount = '';
+		if(!$this->isPro()){
+			$date = new DateTime;
+			$date->modify('-1 week');
+			$formatted_date = $date->format('Y-m-d H:i:s');
+			$projectsCount = Userstoproject::where('user_id',Auth::user()->id)->where('created_at','>=',$date)->count();
+			$projectsCount = 3 - $projectsCount;
+		}
+		return $projectsCount;
+	}
+
 	public function getList(){
 		$model = new Project;
 		$filtr = Input::all();
+		$projectsCount = $this->getProjectsCount();
 		$projects = $model->getAllProjects(Input::all());
-		return View::make('content.front.projects.list',compact('projects','filtr'));
+		return View::make('content.front.projects.list',compact('projects','filtr','projectsCount'));
 	}
 
 	public function getCreate(){

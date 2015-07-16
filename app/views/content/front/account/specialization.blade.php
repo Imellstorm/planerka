@@ -49,7 +49,7 @@
 								<label for="description">Что входит в стоимость</label>
 								<textarea id="description" name="description[]" class="form-control">{{ isset($mainRole->description)?$mainRole->description:'' }}</textarea>
 							</div>
-							@if(!count($otheRoles))
+							@if(!count($otheRoles) && $userInfo->pro>=date('Y-m-d'))
 								<span class="add-specif">Добавить другую специализацию</span>
 							@endif
 						</div>
@@ -70,7 +70,7 @@
 										<label for="description">Что входит в стоимость</label>
 										<textarea name="description[]" class="form-control">{{ $val->description }}</textarea>
 									</div>
-									@if(!isset($otheRoles[$key+1]))
+									@if(!isset($otheRoles[$key+1]) && $userInfo->pro>=date('Y-m-d'))
 										<span class="add-specif">Добавить другую специализацию</span>
 									@endif
 								</div>

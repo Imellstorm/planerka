@@ -7,7 +7,18 @@ class ImageController extends BaseController {
 		if(!$this->is_owner($album->user_id)){
 			return Response::json('Вы не можете добавить фото не в свой альбом', 400);
 		}
+		if(!$this->isPro()){
+			$date = new DateTime;
+			$date->modify('-1 week');
+			$formatted_date = $date->format('Y-m-d H:i:s');
+			$uploadsCount = Image::where('user_id',Auth::user()->id)->where('created_at','>=',$date)->count();
+			if($uploadsCount>10){
+				return Response::json('Превышен лимит загрузок', 400);
+			}
+		}
+
 		$file = Input::file('file');
+
 		if(!empty($file)){
 	   		$dimensions = getimagesize($file);
 	   		if($dimensions[0]<600 && $dimensions[1]<600){

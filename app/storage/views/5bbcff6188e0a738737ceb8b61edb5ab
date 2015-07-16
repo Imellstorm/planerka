@@ -13,17 +13,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<?php if(count($result)): ?>
-					<?php foreach($result as $item): ?>
+				<?php if(count($promo)): ?>
+					<?php foreach($promo as $item): ?>
 						<div class="col-md-3">
 							<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 						</div>
 					<?php endforeach; ?>
-				<?php else: ?>
+				<?php endif; ?>
+				<?php if(count($normal)): ?>
+					<?php foreach($normal as $item): ?>
+						<div class="col-md-3">
+							<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+				<?php if(!count($promo) && !count($normal)): ?>
 					<div class="text-center">Ничего не найдено</div>
 				<?php endif; ?>
 			</div>
-			<?php echo $result->links(); ?>
+			<?php echo $normal->links(); ?>
 		</div>
 	</div>
 <?php $__env->stopSection(); ?>

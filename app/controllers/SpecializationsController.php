@@ -35,9 +35,8 @@ class SpecializationsController extends BaseController {
 				$model->save();
 
 				if($key==0 && $role!=1){
-					$model = new User;
-					$model->find(Auth::user()->id);
-					$model->update(array('role_id'=>$role));
+					$user = User::find(Auth::user()->id);
+					$user->update(array('role_id'=>$role));
 				}
 			}
 		}
