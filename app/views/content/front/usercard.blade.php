@@ -79,7 +79,9 @@
 				@endif
 			</div>
 		@if(Auth::check())
-			<a href="/message/create/{{ $item->user_id }}" class="btn-message fancybox_ajax">Сообщение</a>
+			@if(Auth::user()->id != $item->user_id)
+				<a href="/message/create/{{ $item->user_id }}" class="btn-message fancybox_ajax">Сообщение</a>
+			@endif
 			@if(Auth::user()->role_id==2 && $item->role_id!=2)
 				<a href="/project/inviteperformer/{{ $item->user_id }}" class="btn-order fancybox_ajax">Заказать</a>
 			@endif

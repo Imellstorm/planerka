@@ -40,6 +40,9 @@ class BlogController extends BaseController {
 				->where('subcategory',$id)
 				->groupBy('blog_themes.id')
 				->paginate(10);
+		foreach ($themes as $key => $val) {
+			$themes[$key]->posts_count = Blogpost::where('theme_id',$val->id)->count();
+		}
 		return View::make('content.front.blog.category',compact('category','subcategory','themes'));
 	}
 

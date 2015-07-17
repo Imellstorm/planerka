@@ -6,6 +6,7 @@ class BaseController extends Controller {
 		$this->getMenus();
 		$rules = Article::where('alias','rules')->first();
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
+		$additionalRoles = Role::where('type','другое')->get();
 		if(Auth::check()){
 			$this->userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
 			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
@@ -14,10 +15,12 @@ class BaseController extends Controller {
 			View::share('newProjectMessages',count($newProjectMessages));
 			View::share('newNotifications',count($newNotifications));
 			View::share('newMessages',count($newMessages));
+
 			View::share('userInfo',$this->userInfo);
 		} else {
 			View::share('rules',$rules);
 		}
+		View::share('additionalRoles',$additionalRoles);
 		View::share('roles',$roles);
 		
 		Auth::viaRemember();

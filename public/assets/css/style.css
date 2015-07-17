@@ -612,7 +612,7 @@ input.btn-main {
   transition: all 0.3s ease;
 }
 #nav-menu ul ul {
-  display: none;
+/*  display: none;*/
   position: absolute;
   top: 78px;
   right: -33px;
@@ -1072,6 +1072,10 @@ input.btn-main {
   font-family: 'PT Sans', sans-serif;
   color: #494848;
 }
+#card .user-info .name a{
+  display: block;
+  height: 25px;
+}
 .user-info .name a:hover {
   text-decoration: none;
   color: #a9a7af;
@@ -1367,6 +1371,7 @@ input.btn-main {
   line-height: 24px;
   color: #373737;
   margin-top: 18px;
+  margin-bottom: 20px;
 }
 .notification .notif-content .order-body .meta-list {
   margin: 30px 0;
@@ -2961,6 +2966,7 @@ form.account .btn-main {
   line-height: 22px;
   width: 640px;
   margin-bottom: 40px;
+  margin-top: 20px;
 }
 .single-blog .user-info {
   width: 263px;

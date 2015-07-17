@@ -41,7 +41,7 @@
 												<div class="title"><a href="/project/singl/{{ $project->id }}" style="color:#44B39B">{{ $project->title }}</a></div>
 												<div class="price">{{ $project->budget }} руб.</div>
 											</header>
-											<div class="text">{{ $project->description }}</div>
+											
 											@if(!empty($project->new))
 												<div class="new_mess_badge text-center" style="margin-top:20px;">
 													Новый заказ
@@ -97,6 +97,7 @@
 													</li>
 												@endif
 											</ul>
+											<div class="text">{{ $project->description }}</div>
 											@if(Auth::user()->role_id!=2)
 												@if($project->status!=6 && $project->status!=4)
 													<a href="/project/singl/{{ $project->id }}" class="btn-purple">Обсудить условия</a>

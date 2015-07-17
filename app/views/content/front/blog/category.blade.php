@@ -34,7 +34,6 @@
 										{{ $theme->name }}
 									</a>
 								</h3>
-								<p>{{ $theme->text }}</p>
 								<footer>
 									<div class="user-info">
 										<a href="/{{ $theme->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($theme->user_id) }}" alt=""></a>
@@ -54,11 +53,13 @@
 									</div>
 									<ul class="meta">
 										<li>Опубликовано: <span>{{ $theme->created_at }}</span></li>
+										<li>Постов: <span>{{ $theme->posts_count }}</span></li>
 									</ul>
 								</footer>
 								@if(Auth::check() && (Auth::user()->id==$theme->user_id || Auth::user()->role_id==1))
 									<a href="/blog/deletetheme/{{ $theme->id }}" class="fa fa-times delete-image"></a>
 								@endif
+								<p>{{ $theme->text }}</p>
 							</div>
 						@endforeach
 					@endif

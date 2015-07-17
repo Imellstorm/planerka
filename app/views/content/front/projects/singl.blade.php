@@ -181,7 +181,7 @@
 								{{ $projectMessages->links() }}
 							</div>
 						@endif
-						<a href="/account/projects" class="btn-main">Вернуться назад</a>
+						<a href="/project/list" class="btn-main">Вернуться назад</a>
 					@else
 						@if(count($usersToProject))
 							<div class="proj-prop" style="margin:0;padding:0;border-bottom:none">

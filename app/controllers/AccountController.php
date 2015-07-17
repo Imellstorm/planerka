@@ -130,7 +130,15 @@ class AccountController extends BaseController {
 	 * @return Response
 	 */
 	public function getShop(){
-		return View::make('content.front.account.shop');
+		$pricePro = 199;
+		$pricePromo = 299;
+		if($this->userInfo->pro > date('Y-m-d')){
+			$pricePro = $pricePro-$pricePro*0.2;
+		}
+		if($this->userInfo->promo > date('Y-m-d')){
+			$pricePromo = $pricePromo-$pricePromo*0.2;
+		}
+		return View::make('content.front.account.shop',compact('pricePro','pricePromo'));
 	}
 
 	/**
@@ -152,12 +160,18 @@ class AccountController extends BaseController {
 
 		if($type=='pro'){
 			// сумма заказа
-			$out_summ = "199.00";
+			$out_summ = 199.00;
+			if($this->userInfo->pro > date('Y-m-d')){
+				$out_summ = $out_summ-$out_summ*0.2;
+			}
 			$view = 'content.front.account.buypro';
 		}
 		if($type=='promo'){
 			// сумма заказа
-			$out_summ = "299.00";
+			$out_summ = 299.00;
+			if($this->userInfo->promo > date('Y-m-d')){
+				$out_summ = $out_summ-$out_summ*0.2;
+			}
 			$view = 'content.front.account.buypromo';
 		}
 

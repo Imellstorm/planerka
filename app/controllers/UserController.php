@@ -134,6 +134,11 @@ class UserController extends BaseController {
         	$userInfo = new Userinfo;
         	$userInfo->user_id = $user->id;
         	$userInfo->save();
+
+        	$specialization = new Specialization;
+        	$specialization->user_id = $user->id;
+        	$specialization->role_id = $role;
+        	$specialization->save();
 		}
 
 		if(!Request::ajax()){

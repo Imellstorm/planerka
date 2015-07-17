@@ -82,10 +82,12 @@
 					</div>
 				</form>
 			</div>
-			<footer style="clear:both">
-				<p>Вы можете загрузить ещё: <span>{{ 10-$uploadsCount }} фото</span></p>
-				<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
-			</footer>
+			@if($userInfo->pro < date('Y-m-d'))
+				<footer style="clear:both">
+					<p>Вы можете загрузить ещё: <span>{{ 10-$uploadsCount }} фото</span></p>
+					<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
+				</footer>
+			@endif
 			<div style="margin-top:20px">
 				<div class="btn-main upload_process" style="margin:0 auto">ПРОДОЛЖИТЬ</div>
 				<img src="/assets/img/loading.gif" class="loading" style="display:none">
@@ -110,7 +112,9 @@
 			acceptedFiles: ".png, .jpg, .jpeg",
 			autoProcessQueue: false,
 			addRemoveLinks: 'dictCancelUpload',
-			maxFiles: 10-{{ $uploadsCount }},
+			@if($userInfo->pro < date('Y-m-d'))
+				maxFiles: 10-{{ $uploadsCount }},
+			@endif
 			dictDefaultMessage: 'Перетащите фотографии сюда или <span class="file-wrap">Загрузите с компьютера</span>'
 		})
 

@@ -28,7 +28,7 @@
     @yield('styles')
 
 <!-- JS -->
-    <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>  -->
+    <!--   -->
     <script type="text/javascript" src="/assets/js/modernizr.js"></script>
     <script type="text/javascript" src="/assets/js/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="/assets/js/jquery-ui-1.9.2.js"></script>
@@ -40,6 +40,8 @@
     <script type="text/javascript" src="/assets/js/main.js"></script>
     @yield('scripts')
     <script>
+        //<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
+
         // var geocoder;
         // if (navigator.geolocation) {
         //     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
@@ -314,23 +316,49 @@
 
 <!-- NAVMENU
     ============================= -->
+
     <nav id="nav-menu">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 top_menu">
+                <div class="col-md-12">
                     <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
-                    {{ $menu->top }}
-                    <img src="/assets/img/dropdown_icon.png" style="margin: -5px 0 0 30px;">
-                    <script>           
-                        $(".menu:first>li>a").width(function(i,val){
-                            $(this).css('width',val-val*0.48);
-                        });                 
-                    </script>
+                    <ul class="menu">
+                        <li>
+                            <a href="#null">Ведущий<br>Тамада</a>
+                        </li>
+                        <li>
+                            <a href="#null">Фотограф<br>Оператор</a>
+                        </li>
+                        <li>
+                            <a href="#null">Визажист<br>Стилист</a>
+                        </li>
+                        <li>
+                            <a href="#null">Артисты<br>Шоу</a>
+                        </li>
+                        <li>
+                            <a href="/blog">Свадебные<br>блоги</a>
+                        </li>
+                        <li>
+                            <a href="#null">Оформление<br>свадьбы</a>
+                        </li>
+                        <li>
+                            <a id="sub-menu-show">Другое</a>
+                            @if(count($additionalRoles))
+                                <ul class="sub-menu" style="display:none">
+                                    @foreach($additionalRoles as $val)
+                                        <li><a href="#null">{{ $val->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </nav>
 
+<!-- ERRORS LOG
+    ============================= -->
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             <div class='bg-danger alert text-center'>
@@ -340,7 +368,13 @@
         @endforeach
     @endif
 
+<!-- MAIN content
+    ============================= -->
+
     @yield('main')
+
+<!-- MODALS
+    ============================= -->
 
     @if(!Auth::check())
         @include('content.front.modals')

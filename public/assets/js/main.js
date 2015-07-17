@@ -7,10 +7,21 @@ $(document).ready(function() {
 
 	//SHOW SUB MENU
 
-	$('.top_menu>ul>li:last-child>a').click(function(event) {
-		$('.menu ul').toggle(200);
-    return false;
-	});
+
+  $('#sub-menu-show').on('click',function() {
+    $('.sub-menu').toggle(200);
+  });
+
+	// $('.top_menu>ul>li:last-child>a').click(function(event) {
+	// 	$('.menu ul').toggle(200);
+  //    return false;
+	// });
+
+  // $('body').on('click',function(event){
+  //   if($(event.target).closest(".top_menu>ul>li:last-child>a").length) return;
+  //   $('.menu ul').hide();
+  // });
+
 
 
 	//USER MENU 
@@ -24,11 +35,6 @@ $(document).ready(function() {
   $('body').on('click',function(event){
     if($(event.target).closest("#show-user-menu").length) return;
     $('#user-menu').hide();
-  });
-
-  $('body').on('click',function(event){
-    if($(event.target).closest(".top_menu>ul>li:last-child>a").length) return;
-    $('.menu ul').hide();
   });
 
 

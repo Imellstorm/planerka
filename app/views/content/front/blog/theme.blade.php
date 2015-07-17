@@ -21,6 +21,8 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$('.toggle_comment_form').on('click',function(){
+			var text = $(this).text();
+			$(this).text(text == "Ответить" ? "Скрыть" : "Ответить")
 			$('.blog_comment_form').toggle();
 		})
 
@@ -95,7 +97,7 @@
 						if(res.length){
 							$('.post_id').val(res);
 							$.when(myDropzone.processQueue()).then(function(){
-								//window.location.href = document.URL
+								window.location.href = document.URL
 							})
 						}
 					}
@@ -185,7 +187,7 @@
 								<div class="fallback">
 									<input name="file" type="file" multiple />
 								</div>
-								<div class="btn-main post_submit" style="display:block;float:right;margin-top:-37px;cursor:pointer;">ПРОДОЛЖИТЬ</div>
+								<div class="btn-main post_submit" style="display:block;float:right;margin-top:-37px;cursor:pointer;">Ответить</div>
 								<img src="/assets/img/loading.gif" class="loading" style="display:none;float:right;margin: -40px 50px 0 0;">
 							{{ Form::close() }}
 						</div>

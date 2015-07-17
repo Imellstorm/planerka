@@ -48,6 +48,7 @@ class AlbumsController extends BaseController {
 		View::share('projectsDoneCount',count($projectsDone));
 		View::share('user',$user);
 
+		$uploadsCount = 0;
 		if(!$this->isPro()){
 			$date = new DateTime;
 			$date->modify('-1 week');

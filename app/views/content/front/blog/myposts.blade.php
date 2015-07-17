@@ -10,6 +10,16 @@
 					Мои посты
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<ul class="inner-nav">
+						<li><a href="/blog">Блоги</a></li>
+						@if(Auth::check())
+							<li><a href="/blog/myposts" class="active">Мои посты</a></li>
+						@endif
+					</ul>
+				</div>
+			</div>
 
 			{{ $themes->links() }}
 
