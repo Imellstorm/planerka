@@ -611,6 +611,9 @@ input.btn-main {
   -ms-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+#sub-menu-show, .btn-photo{
+  cursor: pointer;
+}
 #nav-menu ul ul {
 /*  display: none;*/
   position: absolute;
@@ -880,6 +883,7 @@ input.btn-main {
 }
 #card .user-info {
   padding: 7px 8px;
+  min-height: 100px;
 }
 #card .detail-info {
   display: none;
@@ -2945,7 +2949,7 @@ form.account .btn-main {
   display: inline-block;
 }
 .single-blog {
-  padding: 40px 30px 30px 30px;
+  padding: 20px 30px 30px 30px;
   border: 1px solid #e3e3e3;
   margin-bottom: 30px;
   -webkit-border-radius: 3px;
@@ -2965,7 +2969,6 @@ form.account .btn-main {
   font-size: 16px;
   line-height: 22px;
   width: 640px;
-  margin-bottom: 40px;
   margin-top: 20px;
 }
 .single-blog .user-info {
@@ -4291,4 +4294,8 @@ form.project .checkbox span {
   background: white;
   font-size: 18px;
 }
+.post_text::-webkit-input-placeholder {color:#c0392b;}
+.post_text::-moz-placeholder          {color:#c0392b;}/* Firefox 19+ */
+.post_text:-moz-placeholder           {color:#c0392b;}/* Firefox 18- */
+.post_text:-ms-input-placeholder      {color:#c0392b;}
 

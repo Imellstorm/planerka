@@ -17,10 +17,10 @@ $(document).ready(function() {
   //    return false;
 	// });
 
-  // $('body').on('click',function(event){
-  //   if($(event.target).closest(".top_menu>ul>li:last-child>a").length) return;
-  //   $('.menu ul').hide();
-  // });
+  $('body').on('click',function(event){
+    if($(event.target).closest('#sub-menu-show').length) return;
+    $('.menu ul').hide();
+  });
 
 
 

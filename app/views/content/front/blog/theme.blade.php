@@ -177,7 +177,7 @@
 							{{ Form::open(array('role' => 'form', 'url' => '/blog/storepost', 'method' => 'post', 'class'=>'blog-msg dropzone', 'style'=>'overflow:initial;margin-top:200px;padding:0;background:none;')) }}
 								<div style="overflow:hidden; margin-top:-200px;">
 									<div class="form-group">
-										<textarea id="text" name="text" class="form-control post_text" required placeholder="Текст сообщения" style="max-width:100%;"></textarea>
+										<textarea id="text" name="text" class="form-control post_text" required style="max-width:100%;"></textarea>
 									</div>
 									<div class="btn-photo" style="float:left;margin: 0 20px 0 0;">Добавить фото</div>
 									<input type="hidden" name="theme_id" class="theme_id" value="{{ $theme->id }}">

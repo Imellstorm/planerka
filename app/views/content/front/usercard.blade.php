@@ -23,10 +23,10 @@
 				@else
 					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
 				@endif
-				@if($item->pro!=0)
-					<span class="status">PRO</span>
-				@endif
 			</div>
+			@if($item->pro!=0)
+				<span class="status">PRO</span>
+			@endif
 			<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 			<div class="place" style="height:20px">{{ $item->city }}</div>
 		</div>
@@ -41,10 +41,10 @@
 					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
 				@endif
 				<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
-				@if($item->pro!=0)
-					<span class="status">PRO</span>
-				@endif
 			</div>
+			@if($item->pro!=0)
+				<span class="status">PRO</span>
+			@endif
 			<span class="place">{{ $item->city }}</span>
 			<div class="meta">
 				<div class="review"><span>{{ $item->reviews }}</span>отзывов</div>
