@@ -91,7 +91,8 @@
 			<div style="margin-top:20px">
 				<div class="btn-main upload_process" style="margin:0 auto">ПРОДОЛЖИТЬ</div>
 				<img src="/assets/img/loading.gif" class="loading" style="display:none">
-			</div>						
+			</div>	
+			<div class="text-center foto_upload_error" style="color:red; display:none">Внимание! Некоторые файлы не были загружены</div>					
 		</div>
 	</div>
 </div>	
@@ -121,6 +122,7 @@
 		myDropzone.on('addedfile',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$('.upload_process').show();
+			$('.foto_upload_error').hide();
 			$.fancybox.update();	
 		})
 
@@ -137,6 +139,7 @@
 			$('.loading').hide();
 			$('.upload_process').hide();
 			$(file.previewElement).find('.dz-error-mark').show();
+			$('.foto_upload_error').show();
 			uploadErr = 1;
 				
 		})
