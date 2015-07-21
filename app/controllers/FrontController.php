@@ -29,7 +29,8 @@ class FrontController extends BaseController {
 		if(count($frontUsers)){
 			$frontUsers = $this->getAdditionlUsersData($frontUsers);
 		}
-		return View::make('content.front.index',compact('frontArticles','blogThemes','vote','answers','userVoted','frontUsers'));
+		$hideDel = true;
+		return View::make('content.front.index',compact('frontArticles','blogThemes','vote','answers','userVoted','frontUsers','hideDel'));
 	}
 
 	public function page($alias){
