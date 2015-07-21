@@ -63,6 +63,7 @@ class ArticleController extends BaseController {
 	        $model->title   	= Input::get('title');
 	        $model->alias   	= Input::get('alias');
 	        $model->content   	= Input::get('content');
+	        $model->onfront   	= Input::get('onfront');
 	        $model->user_id   	= Auth::User()->id;
 
         	$model->save();
@@ -126,18 +127,38 @@ class ArticleController extends BaseController {
 		$this->rules['alias'] = 'max:128|unique:articles,alias,'.$id;
 		$validator = Validator::make($data = Input::all(), $this->rules);
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()){
 			return Redirect::back()->withErrors($validator)->withInput();
-		} else {
-			$data = array(
-		        'title'  	 => Input::get('title'),
-		        'alias'      => Input::get('alias'),		        
-		        'content' 	 => Input::get('content'),
-	        );	        
-
-        	$article->update($data);
 		}
+
+		$image = $article->image;
+		$thumb = $article->thumb;
+		$uploadedImage = Input::file('userfile');
+		if(!empty($uploadedImage)){
+			$image = Common_helper::fileUpload($uploadedImage,'images/'.Auth::user()->alias);
+			$thumb = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+        	Common_helper::getThumb($image['path'],$thumb,260,280);
+        	$image = $image['path'];
+		}
+		$existImage = Input::file('image');
+		if(empty($existImage) && empty($uploadedImage)){
+			$image = '';
+			$thumb = '';
+		}
+
+		$data = array(
+	        'title'  	 => Input::get('title'),
+	        'alias'      => Input::get('alias'),		        
+	        'content' 	 => Input::get('content'),
+	        'onfront' 	 => Input::get('onfront'),
+	        'image'		 => $image,
+	        'thumb'		 => $thumb,
+        );	        
+
+    	$article->update($data);
+
+
+
 		Session::flash('success', 'Данные статьи обновлены!');
 
 		return Redirect::to('admin/articles');

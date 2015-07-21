@@ -4,9 +4,14 @@
 class FrontController extends BaseController {
 
 	public function getIndex(){
-		if(Input::get('search')){
-			return View::make('content.front.search');
-		}
+		setlocale(LC_ALL, "ru_RU.UTF-8");
+		$frontArticles = Article::where('onfront',1)->take(4)->orderBy('updated_at','DESC')->get();
+		$blogThemes = Blogtheme::select(DB::raw('COUNT('.DB::getTablePrefix().'blog_posts.id) as postscount'),'blog_themes.*')
+			->leftjoin('blog_posts','blog_posts.theme_id','=','blog_themes.id')
+			->groupBy('blog_themes.id')
+			->orderBy('postscount','DESC')
+			->take(4)
+			->get();
 		$vote = Vote::where('active',1)->first();
 		if(!empty($vote)){
 			if(Auth::check()){
@@ -16,7 +21,15 @@ class FrontController extends BaseController {
 			}
 			$answers = Voteanswer::where('vote_id',$vote->id)->get();
 		}
-		return View::make('content.front.index',compact('vote','answers','userVoted'));
+		$frontUsers = User::leftjoin('user_info','user_info.user_id','=','users.id')
+			->where('users.onfront',1)
+			->orderBy('users.updated_at','DESC')
+			->take(4)
+			->get();
+		if(count($frontUsers)){
+			$frontUsers = $this->getAdditionlUsersData($frontUsers);
+		}
+		return View::make('content.front.index',compact('frontArticles','blogThemes','vote','answers','userVoted','frontUsers'));
 	}
 
 	public function page($alias){
@@ -95,13 +108,18 @@ class FrontController extends BaseController {
 						 ));
 
 		if(count($result)){
-			foreach ($result as $key => $val) {
-				$val->specializations = Specialization::where('user_id',$val->user_id)->join('roles','roles.id','=','specializations.role_id')->get();
-				$val->albums = Album::where('user_id',$val->user_id)->get();
-				$val->reviews = Review::where('to_user',$val->user_id)->count();
-				$val->projects = Userstoproject::where('user_id',$val->user_id)->where('status',6)->count();
-			}
+			$result = $this->getAdditionlUsersData($result);
 		}
 		return $result;
+	}
+
+	private function getAdditionlUsersData($users){
+		foreach ($users as $key => $val) {
+			$val->specializations = Specialization::where('user_id',$val->user_id)->join('roles','roles.id','=','specializations.role_id')->get();
+			$val->albums = Album::where('user_id',$val->user_id)->get();
+			$val->reviews = Review::where('to_user',$val->user_id)->count();
+			$val->projects = Userstoproject::where('user_id',$val->user_id)->where('status',6)->count();
+		}
+		return $users;
 	}
 }

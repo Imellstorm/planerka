@@ -107,6 +107,7 @@ class UserController extends BaseController {
 	        $user->email      	= $inputData['email'];
 	        $user->role_id    	= $role;
 	        $user->password   	= Hash::make($inputData['password']);
+	        $user->onfront      = $inputData['onfront'];
 
 	        if($this->is_admin()){
 				$randomStr = '1';
@@ -116,14 +117,16 @@ class UserController extends BaseController {
 			}
 	        $user->email_verify	= $randomStr;
 
-	        $socNet = $inputData['socnet'];
-			$socId = $inputData['socid'];
-			$socImage = $inputData['socimage'];
-	        if(!empty($socNet) && !empty($socId)){
-	        	$user->socnet = $socNet;
-	        	$user->socid  = $socId;
-	        	$user->socimage  = $socImage;
-	        }
+	        if(isset($inputData['socnet']) && isset($inputData['socid']) && isset($inputData['socimage'])){
+		        $socNet = $inputData['socnet'];
+				$socId = $inputData['socid'];
+				$socImage = $inputData['socimage'];
+		        if(!empty($socNet) && !empty($socId)){
+		        	$user->socnet = $socNet;
+		        	$user->socid  = $socId;
+		        	$user->socimage  = $socImage;
+		        }
+		    }
 
 	        if($this->is_admin() && $inputData['balance']){
 				$user->balance = $inputData['balance'];
@@ -210,7 +213,8 @@ class UserController extends BaseController {
 			$data = array(
 		        'username'  	=> Input::get('username'),
 		        'email'     	=> Input::get('email'),	
-		        'alias'			=> $inputData['alias'],	        
+		        'alias'			=> $inputData['alias'],
+		        'onfront'		=> Input::get('onfront'),	        
 	        );	        
 	        if(Input::get('password')){
 	        	$data['password'] = Hash::make(Input::get('password'));

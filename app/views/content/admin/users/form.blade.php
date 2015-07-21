@@ -31,22 +31,18 @@
     </div>
 
     <div class='form-group'>
-        {{ Form::label('address', 'Адрес') }}
-        {{ Form::text('address', null, array('placeholder' => 'Address', 'class' => 'form-control')) }}
+        {{ Form::label('role', 'Роль') }}
+        {{ Form::select('role', $roles_dd,isset($user->role->id)?$user->role->id:'3',array('class'=>'form-control')); }}
     </div>
 
     <div class='form-group'>
-        {{ Form::label('phone', 'Телефон') }}
-        {{ Form::text('phone', null, array('placeholder' => 'Phone', 'class' => 'form-control')) }}
+        {{ Form::label('onfront', 'Показывать на главной') }}
+        {{ Form::checkbox('onfront', 1, 0, array('id' => 'onfront')) }}
     </div>
 
 </div>
 
 <div class='col-lg-6'>
-    <div class='form-group'>
-        {{ Form::label('role', 'Роль') }}
-        {{ Form::select('role', $roles_dd,isset($user->role->id)?$user->role->id:'3',array('class'=>'form-control')); }}
-    </div>
 
     <div class='form-group'>
         {{ Form::label('balance', 'Счёт') }}

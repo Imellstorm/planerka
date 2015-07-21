@@ -30,22 +30,18 @@
     </div>
 
     <div class='form-group'>
-        <?php echo Form::label('address', 'Адрес'); ?>
-        <?php echo Form::text('address', null, array('placeholder' => 'Address', 'class' => 'form-control')); ?>
+        <?php echo Form::label('role', 'Роль'); ?>
+        <?php echo Form::select('role', $roles_dd,isset($user->role->id)?$user->role->id:'3',array('class'=>'form-control'));; ?>
     </div>
 
     <div class='form-group'>
-        <?php echo Form::label('phone', 'Телефон'); ?>
-        <?php echo Form::text('phone', null, array('placeholder' => 'Phone', 'class' => 'form-control')); ?>
+        <?php echo Form::label('onfront', 'Показывать на главной'); ?>
+        <?php echo Form::checkbox('onfront', 1, 0, array('id' => 'onfront')); ?>
     </div>
 
 </div>
 
 <div class='col-lg-6'>
-    <div class='form-group'>
-        <?php echo Form::label('role', 'Роль'); ?>
-        <?php echo Form::select('role', $roles_dd,isset($user->role->id)?$user->role->id:'3',array('class'=>'form-control'));; ?>
-    </div>
 
     <div class='form-group'>
         <?php echo Form::label('balance', 'Счёт'); ?>
