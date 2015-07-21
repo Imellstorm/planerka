@@ -58,6 +58,16 @@ class ArticleController extends BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput(Input::except('password'));
 		} else {
+			$image = '';
+			$thumb = '';
+			$uploadedImage = Input::file('userfile');
+			if(!empty($uploadedImage)){
+				$image = Common_helper::fileUpload($uploadedImage,'images/'.Auth::user()->alias);
+				$thumb = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
+	        	Common_helper::getThumb($image['path'],$thumb,260,280);
+	        	$image = $image['path'];
+			}
+
 			$model = new Article;
  
 	        $model->title   	= Input::get('title');
@@ -65,6 +75,8 @@ class ArticleController extends BaseController {
 	        $model->content   	= Input::get('content');
 	        $model->onfront   	= Input::get('onfront')?Input::get('onfront'):0;
 	        $model->user_id   	= Auth::User()->id;
+	        $model->image 		= $image;
+	        $model->thumb 		= $thumb;
 
         	$model->save();
 		}
