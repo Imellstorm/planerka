@@ -64,7 +64,7 @@ class ArticleController extends BaseController {
 			if(!empty($uploadedImage)){
 				$image = Common_helper::fileUpload($uploadedImage,'images/'.Auth::user()->alias);
 				$thumb = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
-	        	Common_helper::getThumb($image['path'],$thumb,260,280);
+	        	Common_helper::getThumb($image['path'],$thumb,260,260);
 	        	$image = $image['path'];
 			}
 
@@ -149,7 +149,7 @@ class ArticleController extends BaseController {
 		if(!empty($uploadedImage)){
 			$image = Common_helper::fileUpload($uploadedImage,'images/'.Auth::user()->alias);
 			$thumb = 'uploads/images/'.Auth::user()->alias.'/thumb_'.$image['name'];
-        	Common_helper::getThumb($image['path'],$thumb,260,280);
+        	Common_helper::getThumb($image['path'],$thumb,260,260);
         	$image = $image['path'];
 		}
 		$existImage = Input::file('image');
