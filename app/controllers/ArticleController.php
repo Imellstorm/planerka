@@ -63,7 +63,7 @@ class ArticleController extends BaseController {
 	        $model->title   	= Input::get('title');
 	        $model->alias   	= Input::get('alias');
 	        $model->content   	= Input::get('content');
-	        $model->onfront   	= Input::get('onfront');
+	        $model->onfront   	= Input::get('onfront')?Input::get('onfront'):0;
 	        $model->user_id   	= Auth::User()->id;
 
         	$model->save();
