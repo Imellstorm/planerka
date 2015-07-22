@@ -152,7 +152,7 @@ class ArticleController extends BaseController {
         	Common_helper::getThumb($image['path'],$thumb,260,260);
         	$image = $image['path'];
 		}
-		$existImage = Input::file('image');
+		$existImage = Input::get('image');
 		if(empty($existImage) && empty($uploadedImage)){
 			$image = '';
 			$thumb = '';
