@@ -70,8 +70,8 @@ class FrontController extends BaseController {
 
 		if(!empty($spec)){
 			$result->leftjoin('specializations','specializations.user_id','=','users.id')
-				   ->where('specializations.role_id',$spec)
-				   ->orWhere('users.role_id',$spec);
+				   ->where('specializations.role_id',$spec);
+				   //->orWhere('users.role_id',$spec);
 		} 
 
 		if(!empty($city)){

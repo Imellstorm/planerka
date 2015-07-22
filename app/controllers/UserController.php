@@ -107,7 +107,7 @@ class UserController extends BaseController {
 	        $user->email      	= $inputData['email'];
 	        $user->role_id    	= $role;
 	        $user->password   	= Hash::make($inputData['password']);
-	        $user->onfront      = $inputData['onfront'];
+	        $user->onfront      = isset($inputData['onfront'])?$inputData['onfront']:0;
 
 	        if($this->is_admin()){
 				$randomStr = '1';
@@ -214,7 +214,7 @@ class UserController extends BaseController {
 		        'username'  	=> Input::get('username'),
 		        'email'     	=> Input::get('email'),	
 		        'alias'			=> $inputData['alias'],
-		        'onfront'		=> Input::get('onfront'),	        
+		        'onfront'		=> Input::get('onfront')?Input::get('onfront'):0,	        
 	        );	        
 	        if(Input::get('password')){
 	        	$data['password'] = Hash::make(Input::get('password'));

@@ -880,7 +880,6 @@ input.btn-main {
   width: 472px;
   background: #fff;
   position: absolute;
-  top: -75px;
   left: -89px;
   z-index: 1;
   -webkit-border-radius: 5px;
@@ -1194,7 +1193,7 @@ input.btn-main {
   margin-bottom: 27px;
 }
 .search-result #card .detail-info {
-  top: -75px;
+  bottom:150px;
 }
 /* == NOTIFICATION =======> */
 .notification .notif-list {
@@ -1364,11 +1363,9 @@ input.btn-main {
   font-size: 16px;
   line-height: 24px;
   color: #373737;
-  margin-top: 18px;
-  margin-bottom: 20px;
 }
 .notification .notif-content .order-body .meta-list {
-  margin: 30px 0;
+  margin: 20px 0;
   padding: 23px 27px;
   list-style: none;
   overflow: hidden;
@@ -4175,8 +4172,7 @@ form.project .checkbox span {
   display: none;
 }
 .loading{
-  width: 40px;
-  margin: 0 auto;
+  text-align: center;
   display: block;
 }
 .dropzone {
@@ -4292,8 +4288,8 @@ form.project .checkbox span {
   top: 5px;
 }
 .single-blog img {
-  width: 200px;
-  height: 200px;
+  width: 170px;
+  height: 170px;
 }
 .single-post .image img{
   width: 262px;

@@ -52,14 +52,15 @@
 										<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 									</div>
 									<ul class="meta">
-										<li>Опубликовано: <span>{{ $theme->created_at }}</span></li>
-										<li>Постов: <span>{{ $theme->posts_count }}</span></li>
+										<li>{{ $theme->text }}</li>
 									</ul>
 								</footer>
+								<div>Опубликовано: <span>{{ $theme->created_at }}</span></div>
+								<div>Ответов: <span>{{ $theme->posts_count }}</span></div>
 								@if(Auth::check() && (Auth::user()->id==$theme->user_id || Auth::user()->role_id==1))
 									<a href="/blog/deletetheme/{{ $theme->id }}" class="fa fa-times delete-image"></a>
 								@endif
-								<p>{{ $theme->text }}</p>
+								
 							</div>
 						@endforeach
 					@endif

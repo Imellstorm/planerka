@@ -43,12 +43,6 @@
 			$('.dz-upload').fadeOut('normal');	
 		})
 
-		// myDropzone.on('removedfile',function(file,message){
-		// 	if(myDropzone.getQueuedFiles().length==0){
-		// 		$('.upload_process').hide();
-		// 	}
-		// })
-
 		myDropzone.on('error',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$('.loading').hide();
@@ -66,10 +60,6 @@
 			this.options.autoProcessQueue = false
 			$('.post_submit').show();
 			$('.loading').hide();
-			
-			// if(uploadErr!=1){
-			// 	window.location.href = document.URL;
-			// }
 		})
 
 		myDropzone.on('complete',function(file,message){
@@ -137,30 +127,40 @@
 							<div class="single-blog" style="position:relative">
 								<footer>
 									<div class="user-info">
-										<a href="/{{ $post->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($post->user_id) }}" alt=""></a>
-										<div class="name">
-											@if(!empty($post->user_name) || !empty($post->surname))
-												<a href="/{{ $post->alias }}">{{ $post->user_name }} {{ $post->surname }}</a>
-											@else
-												<a href="/{{ $post->alias }}">{{ $post->alias }}</a>
-											@endif
-											<span class="{{ $post->online?'online':'offline' }}"></span>
-											@if($post->pro)
-												<span class="status">PRO</span>
-											@endif
+										<div style="overflow:hidden">
+											<a href="/{{ $post->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($post->user_id) }}" alt=""></a>
+											<div class="name">
+												@if(!empty($post->user_name) || !empty($post->surname))
+													<a href="/{{ $post->alias }}">{{ $post->user_name }} {{ $post->surname }}</a>
+												@else
+													<a href="/{{ $post->alias }}">{{ $post->alias }}</a>
+												@endif
+												<span class="{{ $post->online?'online':'offline' }}"></span>
+												@if($post->pro)
+													<span class="status">PRO</span>
+												@endif
+											</div>
+											<span class="place">{{ $post->city }}</span>
 										</div>
-										<span class="place">{{ $post->city }}</span>
+										<div>Опубликовано: <span>{{ $post->created_at }}</span></div>
 									</div>
+
 									<ul class="meta">
-										<li>Опубликовано: <span>{{ $post->created_at }}</span></li>
+										<li>
+											<div style="margin-bottom:10px">{{ $post->text }}</div>
+											<div>
+												@if(count($post->images))
+													@foreach($post->images as $image)
+														<a href="/{{ $image->path }}" class="fancybox">
+															<img src="/{{ $image->thumb }}" style="margin-top:3px">
+														</a>
+													@endforeach
+												@endif
+											</div>
+										</li>
 									</ul>
 								</footer>
-								<p style="margin-top:20px">{{ $post->text }}</p>
-								@if(count($post->images))
-									@foreach($post->images as $image)
-										<img src="/{{ $image->thumb }}" style="margin-top:3px">
-									@endforeach
-								@endif
+							
 								@if(Auth::check() && (Auth::user()->id==$post->user_id || Auth::user()->role_id==1))
 									<a href="/blog/deletepost/{{ $post->id }}" class="fa fa-times delete-image"></a>
 								@endif
