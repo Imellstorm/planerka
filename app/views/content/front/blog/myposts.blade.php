@@ -30,27 +30,29 @@
 							<div class="single-blog">
 								<a href="/blog/theme/{{ $theme->id }}">
 									<h3>{{ $theme->name }}</h3>
-								</a>
-								<p>{{ $theme->text }}</p>
+								</a>	
 								<footer>
 									<div class="user-info">
-										<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($theme->user_id) }}" alt=""></a>
-										<div class="name">
-											@if(!empty($theme->user_name) || !empty($theme->surname))
-												<a href="/{{ $theme->alias }}">{{ $theme->user_name }} {{ $theme->surname }}</a>
-											@else
-												<a href="/{{ $theme->alias }}">{{ $theme->alias }}</a>
-											@endif
-											<span class="{{ $theme->online?'online':'offline' }}"></span>
-											@if($theme->pro)
-												<span class="status">PRO</span>
-											@endif
+										<div style="overflow:hidden">
+											<a href="#null" class="avatar"><img src="{{ Common_helper::getUserAvatar($theme->user_id) }}" alt=""></a>
+											<div class="name">
+												@if(!empty($theme->user_name) || !empty($theme->surname))
+													<a href="/{{ $theme->alias }}">{{ $theme->user_name }} {{ $theme->surname }}</a>
+												@else
+													<a href="/{{ $theme->alias }}">{{ $theme->alias }}</a>
+												@endif
+												<span class="{{ $theme->online?'online':'offline' }}"></span>
+												@if($theme->pro)
+													<span class="status">PRO</span>
+												@endif
+											</div>
+											<span class="place">{{ $theme->city }}</span>
+											<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
 										</div>
-										<span class="place">{{ $theme->city }}</span>
-										<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+										<div style="margin-top:10px">Опубликовано: <span>{{ $theme->created_at }}</span></div>
 									</div>
 									<ul class="meta">
-										<li>Опубликовано: <span>{{ $theme->created_at }}</span></li>
+										<li>{{ $theme->text }}</li>
 									</ul>
 								</footer>
 							</div>

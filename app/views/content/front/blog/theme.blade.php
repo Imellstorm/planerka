@@ -142,7 +142,7 @@
 											</div>
 											<span class="place">{{ $post->city }}</span>
 										</div>
-										<div>Опубликовано: <span>{{ $post->created_at }}</span></div>
+										<div style="margin-top:10px">Опубликовано: <span>{{ $post->created_at }}</span></div>
 									</div>
 
 									<ul class="meta">
