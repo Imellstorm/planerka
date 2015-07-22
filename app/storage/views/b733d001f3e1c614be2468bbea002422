@@ -42,7 +42,7 @@
                     <ul class="theme-list">
                         <?php foreach($blogThemes as $item): ?>
                             <li>
-                                <div class="title"><?php echo $item->name; ?></div>
+                            <div class="title"><a href="/blog/theme/<?php echo $item->id; ?>"><?php echo $item->name; ?></a></div>
                                 <div class="comment"><?php echo $item->postscount; ?></div>
                                 <div class="date"><?php echo Common_helper::translateDate(strtotime($item->created_at)); ?></div>
                             </li>

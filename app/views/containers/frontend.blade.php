@@ -324,29 +324,26 @@
                     <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
                     <ul class="menu">
                         <li>
-                            <a href="#null">Ведущий<br>Тамада</a>
+                            <a href="/search?specialization=3">Ведущий<br>Тамада</a>
                         </li>
                         <li>
-                            <a href="#null">Фотограф<br>Оператор</a>
+                            <a href="/search?specialization=4">Фотограф<br>Оператор</a>
                         </li>
                         <li>
-                            <a href="#null">Визажист<br>Стилист</a>
+                            <a href="/search?specialization=5">Визажист<br>Стилист</a>
                         </li>
                         <li>
-                            <a href="#null">Артисты<br>Шоу</a>
+                            <a href="/search?specialization=6">Организатор<br>свадьбы</a>
                         </li>
                         <li>
                             <a href="/blog">Свадебные<br>блоги</a>
-                        </li>
-                        <li>
-                            <a href="#null">Оформление<br>свадьбы</a>
                         </li>
                         <li>
                             <a id="sub-menu-show">Другое</a>
                             @if(count($additionalRoles))
                                 <ul class="sub-menu" style="display:none">
                                     @foreach($additionalRoles as $val)
-                                        <li><a href="#null">{{ $val->name }}</a></li>
+                                        <li><a href="/search?specialization={{ $val->id }}">{{ $val->name }}</a></li>
                                     @endforeach
                                 </ul>
                             @endif
