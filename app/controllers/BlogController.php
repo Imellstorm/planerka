@@ -63,6 +63,7 @@ class BlogController extends BaseController {
 			->leftjoin('user_info','user_info.user_id','=','blog_posts.user_id')
 			->leftjoin('users','users.id','=','blog_posts.user_id')
 			->where('theme_id',$id)
+			->orderBy('blog_posts.id')
 			->paginate(10);
 		foreach ($posts as $key => $val) {
 			$val->images = Blogimage::where('post_id',$val->id)->get();
@@ -116,15 +117,26 @@ class BlogController extends BaseController {
 		if(!Auth::check()){
 			return '';
 		}
-		$theme = Blogtheme::where('id',Input::get('theme_id'));
+		$theme = Blogtheme::where('id',Input::get('theme_id'))->first();
 		if(empty($theme)){
 			return '';
 		}
+
 		$post = new Blogpost;
 		$post->user_id 	= Auth::user()->id;
 		$post->text 	= Input::get('text');
 		$post->theme_id = Input::get('theme_id');
 		$post->save();
+
+		if($post->user_id != $theme->user_id){
+			$notify = new Notifications;
+			$notify->from_user = Auth::user()->id;
+			$notify->to_user = $theme->user_id;
+			$notify->text = 'У вас новое сообщение в блоге';
+			$notify->link = 'blog/theme/'.$theme->id;
+			$notify->save();
+		}
+
 		return $post->id;
 	}
 

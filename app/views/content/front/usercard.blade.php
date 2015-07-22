@@ -8,7 +8,7 @@
 				<img src="/{{ $item->usercard_cover }}" alt="">
 			@else
 				<div class="usercard_no_photo">
-					Картинка отсутсвует
+					<img src="/assets/img/no_image.png" style="width:initial; height:initial">
 				</div>
 			@endif
 		</a>

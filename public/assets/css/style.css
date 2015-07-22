@@ -691,20 +691,22 @@ input.btn-main {
   margin: 0 auto;
   position: relative;
   top: -245px;
+  background: rgba(0,0,0,0.5);
 }
 .latest-posts .single-post .post-title {
-  margin-right: 15px;
-  padding-left: 25px;
+  width: 260px;
+  padding: 10px;
   display: block;
   height: 70px;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 16px;
   color: #fff;
-  line-height: 25px;
   position: absolute;
   bottom: 20px;
   letter-spacing: 0.4px;
+  background: rgba(0,0,0,0.5);
+  text-align: center;
 }
 .latest-posts .single-post .post-title:hover {
   text-decoration: underline;
@@ -4161,7 +4163,7 @@ form.project .checkbox span {
   color: grey;
 }
 .usercard_no_photo{
-  padding-top: 140px;
+  padding-top: 50px;
 }
 .dz-remove{
   width: 22px;
@@ -4299,3 +4301,17 @@ form.project .checkbox span {
 .post_text::-moz-placeholder          {color:#c0392b;}/* Firefox 19+ */
 .post_text:-moz-placeholder           {color:#c0392b;}/* Firefox 18- */
 .post_text:-ms-input-placeholder      {color:#c0392b;}
+
+.rub_icon{
+  font-size: 22px;
+  position: relative;
+  top: 5px;
+}
+.single-blog img {
+  width: 200px;
+  height: 200px;
+}
+.single-post .image img{
+  width: 260px;
+  height: 260px;
+}

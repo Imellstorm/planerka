@@ -151,7 +151,7 @@
                                 @endif
                             </div>
                             <div class="count">
-                                <a href="/account/shop">{{ Auth::user()->balance }} руб.</a>
+                            <a href="/account/shop"><i class="fa fa-rub rub_icon"></i></a>
                             </div>
                             @if($userInfo->pro >= date('Y-m-d'))
                                 <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
