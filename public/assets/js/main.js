@@ -100,7 +100,7 @@ $(document).ready(function() {
 
     $('.show-menu').click(function(event) {
 
-    	$('#nav-menu .menu').toggle();
+    	$('#mobile-menu .menu').toggle();
 
     });
 

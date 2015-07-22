@@ -15,12 +15,12 @@
                 </div>
                 <div class="row">
                     @foreach($frontArticles as $item)
-                        <div class="single-post col-md-3 col-sm-6">
+                        <div class="single-post col-md-3">
                             <div class="image">
                                 <img src="{{ $item->thumb }}" alt="">
+                                <a href="/page/{{ $item->alias }}" class="btn-more">Новости</a>
+                                <a href="/page/{{ $item->alias }}" class="post-title">{{ $item->title }}</a>
                             </div>
-                            <a href="/page/{{ $item->alias }}" class="btn-more">Новости</a>
-                            <a href="/page/{{ $item->alias }}" class="post-title">{{ $item->title }}</a>
                         </div>
                     @endforeach
                 </div>
@@ -99,9 +99,9 @@
                         Лучшие свадебные исполнители
                     </div>
                 </div>
-                <div class="row">
+                <div class="row text-center">
                     @foreach($frontUsers as $item)
-                        <div class="col-md-3">
+                        <div style="margin:0 10px; display:inline-block">
                             @include('content.front.usercard')
                         </div>
                     @endforeach

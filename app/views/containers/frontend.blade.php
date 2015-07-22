@@ -130,6 +130,53 @@
 
 <a href="#fancybox_reset_password" class="fancybox" id="fancybox_reset_password_btn" style="display:none">link</a>
 
+<!--MOBILE MENU ================= -->
+
+<nav id="mobile-menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo pull-left">
+                    <a href="/">
+                        <img src="/assets/img/user-logo.png" style="width:200px;margin-top:4px;" alt="">
+                    </a>
+                </div>
+                <a href="#null" class="show-menu pull-right">  
+                    <i class="fa fa-bars"></i> МЕНЮ
+                </a>
+            </div>
+        </div>
+    </div>
+    <ul class="menu">
+        <li>
+        <a href="/auth/showloginform"><b>Вход</b></a>
+        </li>
+        <li>
+        <a href="#modal-register"><b>Регистрация</b></a>
+        </li>
+        <li>
+            <a href="/search?specialization=3">Ведущий Тамада</a>
+        </li>
+        <li>
+            <a href="/search?specialization=4">Фотограф Оператор</a>
+        </li>
+        <li>
+            <a href="/search?specialization=5">Визажист Стилист</a>
+        </li>
+        <li>
+            <a href="/search?specialization=6">Организатор свадьбы</a>
+        </li>
+        <li>
+            <a href="/blog">Свадебные блоги</a>
+        </li>
+        @if(count($additionalRoles))
+            @foreach($additionalRoles as $val)
+                <li><a href="/search?specialization={{ $val->id }}">{{ $val->name }}</a></li>
+            @endforeach
+        @endif
+    </ul>
+</nav>
+
 <!-- HEADER
     ============================= -->
     <header id="header" style="background: url('{{ isset($profile)&&isset($userInfo->cover)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68; background-size: 100%;">
@@ -254,7 +301,7 @@
                     </div>
                 @else
                 <div class="col-sm-12">
-                    <div class="header-content" style="padding-top:{{ Auth::check()?'60px':'' }}">
+                    <div class="header-content" style="{{ Auth::check()?'padding-top:60px':'' }}">
 
                         <div class="logo">
                             <a href="/"><img src="/assets/img/logo.png" alt=""></a>
@@ -299,11 +346,11 @@
                             {{ Form::close() }}
                         </div>
 
-                        <div class="author-photo">
-                            @if(isset($cover)&&!empty($cover->author))
-                                Автор Фото: <a href="#null">{{ isset($cover)&&!empty($cover->author)?$cover->author:'' }}</a>
-                            @endif
-                        </div>
+                        @if(isset($cover)&&!empty($cover->author))
+                            <div class="author-photo">                
+                                    Автор Фото: <a href="#null">{{ isset($cover)&&!empty($cover->author)?$cover->author:'' }}</a>     
+                            </div>
+                        @endif
                         @if(Auth::check() && Auth::user()->role_id == 2)
                             <a href="/project/create" class="add_post fancybox_ajax">Добавить мероприятие</a>
                         @endif
@@ -321,7 +368,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="#null" class="show-menu"><span class="glyphicon glyphicon-align-justify"></span>MENU</a>
+                    <div class="logo pull-left" style="display:none">
+                        <a href="/">
+                            <img src="/assets/img/user-logo.png" style="width:200px;margin-top:4px;" alt="">
+                        </a>
+                    </div>
                     <ul class="menu">
                         <li>
                             <a href="/search?specialization=3">Ведущий<br>Тамада</a>
