@@ -59,11 +59,11 @@
                                 <dd>{{ round($userinfo->enters_count) }}</dd>
 
                                 <dt>Лайков</dt>
-                                <dd>{{ $userinfo->likes }}</dd>
+                                <dd>{{ $likesCount }}</dd>
 
                                 @if($userInfo->role_id!=2)
                                     <dt>Выполненных заказов</dt>
-                                    <dd>{{ $userinfo->finished_jobs }}</dd>
+                                    <dd>{{ $projectsDoneCount }}</dd>
                                 @endif
 
                                 <dt>Регистрация на сайте</dt>

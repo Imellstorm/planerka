@@ -44,6 +44,7 @@ class ProfileController extends BaseController {
 		$otherProf = Specialization::join('roles','roles.id','=','specializations.role_id')->where('user_id',$this->user->id)->where('role_id','!=',$this->user->role_id)->get();
 		$userinfo = Userinfo::where('user_id',$this->user->id)->groupBy('user_info.user_id')->first();
 		$user = $this->user;
+		$likesCount = Image::where('user_id',$user->id)->count();
 
 		$albums = Album::select('albums.*',DB::raw('count('.DB::getTablePrefix().'images.id) as imgcount'))->leftjoin('images','images.album_id','=','albums.id')->where('albums.user_id',$this->user->id)->groupby('albums.id')->get();
 		if(!empty($albums)){
@@ -58,7 +59,7 @@ class ProfileController extends BaseController {
 				$this->saveRating();
 			}
 		}
-		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));
+		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','likesCount','userinfo','registerdTime','albums'));
 	}
 
 	private function saveRating(){

@@ -239,7 +239,7 @@ class ProjectController extends BaseController {
 			$usersToProject->update(array('status'=>2)); //исполнитель принят
 			$text = 'Ваше участие в проекте подтверждено';
 			$userId = $usersToProject->user_id;
-			$this->saveRating($userId);
+			$this->saveRating('accepted_in_project',2,$userId);
 		}
 		if($status==4 && $project->user_id == $currentUser->id){
 			$usersToProject->update(array('status'=>4)); //исполнитель не принят
