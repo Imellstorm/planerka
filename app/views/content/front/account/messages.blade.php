@@ -26,12 +26,12 @@
 													<a href="/{{ $message->alias }}">{{ $message->alias }}</a>
 												@endif
 												<span class="{{ $message->online?'online':'offline' }}"></span>
-												@if(!empty($message->pro))
+												@if($message->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $message->city }}</span>
-											<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+											<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $message->rating }</div>
 										</div>
 										<div class="msg-cont">
 											<div class="time">{{ $message->created_at }}</div>

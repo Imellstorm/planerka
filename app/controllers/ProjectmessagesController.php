@@ -51,16 +51,34 @@ class ProjectmessagesController extends BaseController {
 			$userstoproject->status 	= Auth::user()->role_id!=2?1:2;
 			$userstoproject->new 		= 1;
 			$userstoproject->save();
+
+			$this->saveRating();
 		}
 
-		// $notify = new Notifications;
-		// $notify->from_user = Auth::user()->id;
-		// $notify->to_user = $model->to_user;
-		// $notify->text = 'У вас новое сообщение в проекте';
-		// $notify->link = Auth::user()->role_id==2?'project/singl/'.$projectId:'project/usermassages/'.$model->from_user.'/'.$projectId;
-		// $notify->save();	
-
 		return Redirect::back();
+	}
+
+	private function saveRating(){
+		$model = new Ratinghistory;
+
+		$startToday = date('Y-m-d 00:00:00');
+		$endToday = date('Y-m-d 23:59:59');
+		$todayRatingCount = $model->where('user_id',Auth::user()->id)
+			->where('type','projectsubscription')
+			->whereBetween('created_at', array($startToday,$endToday))
+			->count();
+		
+		if($todayRatingCount < 3){
+			$model->user_id = Auth::user()->id;
+			$model->user_type = 'performer';
+			$model->amount = 1;
+			$model->type = 'projectsubscription';
+			$model->save();
+
+			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			$newRating = $userInfo->rating+1;
+			$userInfo->update(array('rating'=>$newRating));
+		}
 	}
 
 	/**

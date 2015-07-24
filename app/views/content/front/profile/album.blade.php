@@ -54,10 +54,12 @@
 					<div class="name">
 						<a href="#null">{{ $userInfo->name.' '.$userInfo->surname }}</a>
 						<span class="{{ $user->online?'online':'offline' }}"></span>
-						<span class="status">PRO</span>
+						@if($userInfo->pro > date('Y-m-d'))
+							<span class="status">PRO</span>
+						@endif
 					</div>
 					<span class="place">{{ $userInfo->city }}</span>
-					<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+					<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $userInfo->rating }}</div>
 				</div>				
 				<div class="user-btns">
 					<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>

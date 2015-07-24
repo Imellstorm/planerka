@@ -28,12 +28,12 @@
 													<a href="/{{ $noty->alias }}">{{ $noty->alias }}</a>
 												@endif
 												<span class="{{ $noty->online?'online':'offline' }}"></span>
-												@if(!empty($noty->pro))
+												@if($noty->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $noty->city }}</span>
-											<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+											<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $noty->rating }}</div>
 										</div>
 										<div class="notif-text">
 											<span class="photo-like">
@@ -42,7 +42,9 @@
 														<div class="new_mess_badge text-center" style="font-size:14px; width:100px">Новое</div>
 													@endif 
 													<div>{{ $noty->text }}</div>
-													<a href="/{{ $noty->link }}" style="color:#44B39B">Посмотреть</a>
+													@if(!empty($noty->link))
+														<a href="/{{ $noty->link }}" style="color:#44B39B">Посмотреть</a>
+													@endif
 												</div>
 												@if(!empty($noty->image))
 													<a href="/{{ $noty->link }}">

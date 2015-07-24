@@ -261,7 +261,7 @@
                                 @if($user->role_id!=2)
                                     <div class="order-count">Выполнено заказов:&nbsp;&nbsp; {{ $projectsDoneCount }}</div>
                                 @endif
-                                <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
+                                <div class="rait">Рейтинг:&nbsp;&nbsp; {{ $userInfo->rating }}</div>
                             </div>
                         </div>
                         @if(count($userInfo->profs))

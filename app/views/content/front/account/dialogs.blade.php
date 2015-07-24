@@ -25,12 +25,12 @@
 														<a href="/{{ $dialog['dialogUserInfo']->alias }}">{{ $dialog['dialogUserInfo']->alias }}</a>
 													@endif
 													<span class="{{ $dialog['dialogUserInfo']->online?'online':'offline' }}"></span>
-													@if(!empty($dialog['dialogUserInfo']->pro))
+													@if($dialog['dialogUserInfo']->pro > date('Y-m-d'))
 														<span class="status">PRO</span>
 													@endif
 												</div>
 												<div class="place">{{ $dialog['dialogUserInfo']->city }}</div>
-												<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+												<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $dialog['dialogUserInfo']->rating }}</div>
 											</div>
 											<a href="/message/create/{{ $key }}" class="fancybox_ajax_scroll">
 												<div class="msg-cont">

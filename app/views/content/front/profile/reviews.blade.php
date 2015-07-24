@@ -20,12 +20,12 @@
 											<a href="/{{ $review->alias }}">{{ $review->alias }}</a>
 										@endif
 										<span class="{{ $review->online?'online':'offline' }}"></span>
-										@if(!empty($review->created_at->pro))
+										@if($review->pro > date('Y-m-d'))
 											<span class="status">PRO</span>
 										@endif
 									</div>
 									<span class="place">{{ $review->city }}</span>
-									<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+									<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $review->rating }}</div>
 								</div>
 								<div class="cont">
 									<div class="date">

@@ -261,7 +261,7 @@
                                 <?php if($user->role_id!=2): ?>
                                     <div class="order-count">Выполнено заказов:&nbsp;&nbsp; <?php echo $projectsDoneCount; ?></div>
                                 <?php endif; ?>
-                                <div class="rait">Рейтинг:&nbsp;&nbsp; 452.2</div>
+                                <div class="rait">Рейтинг:&nbsp;&nbsp; <?php echo $userInfo->rating; ?></div>
                             </div>
                         </div>
                         <?php if(count($userInfo->profs)): ?>

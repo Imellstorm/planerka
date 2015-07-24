@@ -137,6 +137,8 @@ class BlogController extends BaseController {
 			$notify->save();
 		}
 
+		$this->saveRating();
+
 		return $post->id;
 	}
 
@@ -181,8 +183,32 @@ class BlogController extends BaseController {
         	$post->save();
 		}
 
+		$this->saveRating();
+
 		$view = View::make('content.front.messagebox',array('message'=>'Тема блога добавлена!'))->render();
 		return Redirect::back()->with('message', $view);
 	}
 
+	private function saveRating(){
+		$model = new Ratinghistory;
+
+		$startToday = date('Y-m-d 00:00:00');
+		$endToday = date('Y-m-d 23:59:59');
+		$todayRatingCount = $model->where('user_id', Auth::user()->id)
+			->where('type','blogactivity')
+			->whereBetween('created_at', array($startToday,$endToday))
+			->count();
+		
+		if($todayRatingCount < 1){
+			$model->user_id = Auth::user()->id;
+			$model->user_type = Auth::user()->role_id==2?'customer':'performer';
+			$model->amount = 1;
+			$model->type = 'blogactivity';
+			$model->save();
+
+			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			$newRating = $userInfo->rating+1;
+			$userInfo->update(array('rating'=>$newRating));
+		}
+	}
 }

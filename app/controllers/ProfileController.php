@@ -52,10 +52,36 @@ class ProfileController extends BaseController {
 			}
 		}
 
-		if(!empty($userinfo) && (!Auth::check() || $user->id!=Auth::user()->id)){
+		if(!empty($userinfo) && Auth::check() && $user->id!=Auth::user()->id){
 			Userinfo::increment('enters_count',0.5);
+			if(round($userinfo->enters_count)%10==0){
+				$this->saveRating();
+			}
 		}
 		return View::make('content.front.profile.photo',compact('mainProf','otherProf','user','userinfo','registerdTime','albums'));
+	}
+
+	private function saveRating(){
+		$model = new Ratinghistory;
+
+		$startToday = date('Y-m-d 00:00:00');
+		$endToday = date('Y-m-d 23:59:59');
+		$todayRatingCount = $model->where('user_id',$this->user->id)
+			->where('type','profileview')
+			->whereBetween('created_at', array($startToday,$endToday))
+			->count();
+		
+		if($todayRatingCount < 2){
+			$model->user_id = $this->user->id;
+			$model->user_type = $this->user->role_id==2?'customer':'performer';
+			$model->amount = 1;
+			$model->type = 'profileview';
+			$model->save();
+
+			$userInfo = Userinfo::where('user_id',$this->user->id)->first();
+			$newRating = $userInfo->rating+1;
+			$userInfo->update(array('rating'=>$newRating));
+		}
 	}
 
 	/**

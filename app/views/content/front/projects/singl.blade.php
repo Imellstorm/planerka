@@ -80,12 +80,12 @@
 															<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
 														@endif
 														<span class="{{ $project->online?'online':'offline' }}"></span>
-														@if($project->pro)
+														@if($project->pro > date('Y-m-d'))
 															<span class="status">PRO</span>
 														@endif
 													</div>
 													<span class="place">{{ $project->city }}</span>
-													<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+													<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $project->rating }}</div>
 													<div class="reg">
 														Зарегистрирован на сайте: 
 														<span>
@@ -198,12 +198,12 @@
 															<a href="/{{ $performer->alias }}">{{ $performer->alias }}</a>
 														@endif
 														<span class="{{ $performer->online?'online':'offline' }}"></span>
-														@if(!empty($performer->pro))
+														@if($performer->pro>date('Y-m-d'))
 															<span class="status">PRO</span>
 														@endif
 													</div>
 													<div class="place">{{ $performer->city }}</div>
-													<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+													<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $performer->rating }}</div>
 													<div class="reg">Зарегистрирован на сайте: <span>{{ Common_helper::getPastTime($performer->created_at) }}</span></div>
 												</div>
 											</div>

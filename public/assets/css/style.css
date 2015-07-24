@@ -496,9 +496,8 @@ input.btn-main {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  position: absolute;
-  right: 0;
-  bottom: 35px;
+  float: right;
+  margin-bottom: 20px;
 }
 #header .add_post:hover {
   background: #d8e3eb;
@@ -863,7 +862,8 @@ input.btn-main {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  position: relative;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.05);
 }
 #card figure img {
@@ -881,6 +881,7 @@ input.btn-main {
   background: #fff;
   position: absolute;
   left: -89px;
+  bottom: 118px;
   z-index: 1;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -902,6 +903,7 @@ input.btn-main {
 #card .detail-info header {
   overflow: hidden;
   margin-bottom: 20px;
+  text-align: left;
 }
 #card .detail-info header .avatar {
   display: block;
@@ -1191,9 +1193,6 @@ input.btn-main {
 }
 .search-result #card {
   margin-bottom: 27px;
-}
-.search-result #card .detail-info {
-  bottom:150px;
 }
 /* == NOTIFICATION =======> */
 .notification .notif-list {
@@ -4347,4 +4346,8 @@ form.project .checkbox span {
   }
   #mobile-menu .menu li a { 
     color:#fff;
+  }
+  .review_textarea{
+    max-height: 150px;
+    max-width: 100%;
   }

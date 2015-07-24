@@ -34,7 +34,7 @@
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->city }}</td>
                         <td>{{ $user->role }}</td>
-                        <td>{{ $user->balance }}</td>
+                        <td><a href="/admin/rating/{{ $user->id }}" class="fancybox_ajax">{{ $user->rating }}</a></td>
                         <td>
                             {{ link_to('admin/orders/'.$user->id, 'платежи', array('class' => 'btn btn-info btn-xs pull-left', 'title'=>'pay history')) }}
                             {{ link_to('admin/users/edit/'.$user->id, 'править', array('class' => 'btn btn-info btn-xs pull-left left10', 'title'=>'edit')) }}
@@ -51,4 +51,25 @@
         {{ $users->links() }}    
     @endif
 
+@stop
+
+@section('scripts')
+    <link rel="stylesheet" href="/assets/css/fancybox.css">
+    <script type="text/javascript" src="/assets/js/fancybox.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.fancybox_ajax').fancybox({
+          type: 'ajax',
+          openEffect: 'fade',
+          closeEffect: 'fade',
+          openSpeed: 400,
+          closeSpeed: 400,
+          helpers: {
+            overlay: {
+              locked: false
+            }
+          }
+        });
+    })
+    </script>
 @stop

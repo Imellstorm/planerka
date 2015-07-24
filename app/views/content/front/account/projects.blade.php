@@ -29,7 +29,7 @@
 													<a href="/{{ $project->alias }}">{{ $project->alias }}</a>
 												@endif
 													<span class="{{ $project->online?'online':'offline' }}"></span>
-													@if($project->pro)
+													@if($project->pro > date('Y-m-d'))
 														<span class="status">PRO</span>
 													@endif
 												</div>

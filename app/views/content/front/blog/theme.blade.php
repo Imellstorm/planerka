@@ -136,7 +136,7 @@
 													<a href="/{{ $post->alias }}">{{ $post->alias }}</a>
 												@endif
 												<span class="{{ $post->online?'online':'offline' }}"></span>
-												@if($post->pro)
+												@if($post->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
 												@endif
 											</div>

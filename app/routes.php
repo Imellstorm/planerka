@@ -32,6 +32,8 @@ Route::controller('blog', 'BlogController');
 Route::group(array('before' => 'is_admin_filter'), function() {	
 	Route::get('admin', 'UserController@getIndex');
 	Route::get('admin/orders/{id}', 'OrderController@getUserOrders');
+	Route::get('/admin/rating/{id}', 'RatingController@ratingForm');
+	Route::post('/admin/rating/store', 'RatingController@postStore');
 	Route::controller('admin/users', 'UserController');
 	Route::controller('admin/articles', 'ArticleController');
 	Route::controller('admin/roles', 'RoleController');

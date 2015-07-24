@@ -85,12 +85,31 @@ class ImageController extends BaseController {
 				$notify->text = 'Вашу фотографию оценили';
 				$notify->link = $image->alias.'/album/'.$image->album_id;
 				$notify->image = $image->thumb_small;
-				$notify->save();	
+				$notify->save();
+
+				$likesCount = $model->where('image_id',$imageId)->count();
+				if($likesCount%20==0){
+					$this->saveRating($image);
+				}	
 
 				return Response::json('success');
 			}
 		}
 		return Response::json('error');
+	}
+
+	private function saveRating($image){
+		$model = new Ratinghistory;
+
+		$model->user_id = $image->user_id;
+		$model->user_type = $image->role_id==2?'customer':'performer';
+		$model->amount = 1;
+		$model->type = 'imagelike';
+		$model->save();
+
+		$userInfo = Userinfo::where('user_id',$image->user_id)->first();
+		$newRating = $userInfo->rating+1;
+		$userInfo->update(array('rating'=>$newRating));
 	}
 
 

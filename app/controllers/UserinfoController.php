@@ -64,10 +64,42 @@ class UserinfoController extends BaseController {
 				}
 			}
         	$model->save();
+
+        	$this->calculateRating($model->id);
 		}
 		$view = View::make('content.front.messagebox',array('message'=>'Информация о пользователе добавлена!'))->render();
         return Redirect::back()->with('message', $view);
 	}
+
+	private function calculateRating($id){
+		$userInfo = Userinfo::find($id);
+		if(empty($userInfo)){
+			return false;
+		}
+		if(!empty($userInfo->name) 
+			&& !empty($userInfo->surname) 
+			&& !empty($userInfo->city) 
+			&& !empty($userInfo->birthday) 
+			&& !empty($userInfo->gender) 
+			&& !empty($userInfo->phone) 
+			&& !empty($userInfo->biography) 
+			&& !empty($userInfo->avatar)
+			&& !empty($userInfo->cover)
+		){
+			$exist = Ratinghistory::where('user_id',Auth::user()->id)->where('type','profile')->first();
+			if(empty($exist)){
+				$model = new Ratinghistory;
+				$model->user_id = Auth::user()->id;
+				$model->user_type = Auth::user()->role_id==2?'customer':'performer';
+				$model->amount = 1000;
+				$model->type = 'profile';
+				$model->save();
+
+				$newRating = $userInfo->rating+1000;
+				$userInfo->update(array('rating'=>$newRating));
+			}
+		}
+	} 
 
 
 	/**
@@ -130,6 +162,8 @@ class UserinfoController extends BaseController {
 			}        
 
         	$role->update($data);
+
+        	$this->calculateRating($id);
 		}
 		$view = View::make('content.front.messagebox',array('message'=>'Информация о пользователе обновлена!'))->render();
         return Redirect::back()->with('message', $view);

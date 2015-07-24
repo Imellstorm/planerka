@@ -17,8 +17,32 @@ class CalendarController extends BaseController {
 	    	}
 	    	$model->insert($datesArray);
 	    }
-
+	    $this->saveRating('calendar',1,'-1 week');
     	return Redirect::back();
+	}
+
+	private function saveRating($type,$amount,$term){
+		$model = new Ratinghistory;
+
+		$endDate = new DateTime;
+		$startDate = new DateTime($term);
+		
+		$monthRatingCount = $model->where('user_id',Auth::user()->id)
+			->where('type',$type)
+			->whereBetween('created_at', array($startDate->format('Y-m-d H:i:s'),$endDate->format('Y-m-d H:i:s')))
+			->count();
+		
+		if($monthRatingCount == 0){
+			$model->user_id = Auth::user()->id;
+			$model->user_type = Auth::user()->role_id==2?'customer':'performer';
+			$model->amount = $amount;
+			$model->type = $type;
+			$model->save();
+
+			$userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+			$newRating = $userInfo->rating+$amount;
+			$userInfo->update(array('rating'=>$newRating));
+		}
 	}
 
 	/**

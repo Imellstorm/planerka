@@ -181,13 +181,42 @@ class ProjectController extends BaseController {
 			$userstoproject->project_id = $model->id;
 			$userstoproject->status 	= 2;
 			$userstoproject->save();
+
+			$this->saveRating('performeraccepted',2,$performer);
+
 			$view = View::make('content.front.project_created_modal')->render();
 		} else {
 			$view = View::make('content.front.messagebox',array('message'=>'Мероприятие добавлено!'))->render();
 		}
 
-		
+		$this->saveRating('create_project',1,Auth::user()->id);
         return Redirect::back()->with('message', $view);
+	}
+
+	private function saveRating($type,$amount,$userId){
+		$model = new Ratinghistory;
+
+		$endDate = date('Y-m-d 23:59:59');
+		$startDate = date('Y-m-d 00:00:00');
+		
+		$ratingCount = $model->where('user_id',$userId)
+			->where('type',$type)
+			->whereBetween('created_at', array($startDate,$endDate))
+			->count();
+		
+		if($ratingCount < 3){
+			$user = User::find($userId);
+
+			$model->user_id = $userId;
+			$model->user_type = $user->role_id==2?'customer':'performer';
+			$model->amount = $amount;
+			$model->type = $type;
+			$model->save();
+
+			$userInfo = Userinfo::where('user_id',$userId)->first();
+			$newRating = $userInfo->rating+$amount;
+			$userInfo->update(array('rating'=>$newRating));
+		}
 	}
 
 	public function getChangestatus($id='',$status=''){
@@ -210,6 +239,7 @@ class ProjectController extends BaseController {
 			$usersToProject->update(array('status'=>2)); //исполнитель принят
 			$text = 'Ваше участие в проекте подтверждено';
 			$userId = $usersToProject->user_id;
+			$this->saveRating($userId);
 		}
 		if($status==4 && $project->user_id == $currentUser->id){
 			$usersToProject->update(array('status'=>4)); //исполнитель не принят

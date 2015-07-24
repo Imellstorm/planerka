@@ -6,6 +6,7 @@ class ReviewController extends BaseController {
 		'text'			=> 'required',
 		'to_user' 		=> 'required',
 		'project_id'	=> 'required',
+		'estimation'	=> 'required',
 	);
 
 	public function getForm($toUser,$projectId){
@@ -43,6 +44,7 @@ class ReviewController extends BaseController {
 			$model->to_user 		= $toUser;
 			$model->project_id 		= $projectId;
 			$model->text 			= Input::get('text');
+			$model->estimation		= Input::get('estimation');
 			$model->save();
 
 			$notify = new Notifications;
@@ -51,7 +53,39 @@ class ReviewController extends BaseController {
 			$notify->text = 'О вас написали отзыв';
 			$notify->link = $user->alias.'/reviews';
 			$notify->save();
+
+			$this->updateRating($model->estimation,$model->to_user);
+
 		}
     	return Redirect::back();
+	}
+
+	private function updateRating($estimation,$user_id){
+		switch ($estimation) {
+			case 'good':
+					$ratingAmount = 10;
+				break;
+			case 'normal':
+					$ratingAmount = 4;
+				break;
+			case 'bad':
+					$ratingAmount = -20;
+				break;
+			default:
+					App::abort(404);
+				break;
+		}
+		$user = User::find($user_id);
+
+		$model = new Ratinghistory;
+		$model->user_id = $user_id;
+		$model->user_type = $user->role_id==2?'customer':'performer';
+		$model->amount = $ratingAmount;
+		$model->type = 'review';
+		$model->save();
+
+		$userInfo = Userinfo::where('user_id',$user_id)->first();
+		$newRating = $userInfo->rating+$ratingAmount;
+		$userInfo->update(array('rating'=>$newRating));
 	}
 }

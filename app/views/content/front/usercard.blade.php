@@ -24,10 +24,10 @@
 					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
 				@endif
 			</div>
-			@if($item->pro!=0)
+			@if($item->pro > date('Y-m-d'))
 				<span class="status">PRO</span>
 			@endif
-			<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+			<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $item->rating }}</div>
 			<div class="place" style="height:20px">{{ $item->city }}</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 				@endif
 				<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
 			</div>
-			@if($item->pro!=0)
+			@if($item->pro > date('Y-m-d'))
 				<span class="status">PRO</span>
 			@endif
 			<span class="place">{{ $item->city }}</span>

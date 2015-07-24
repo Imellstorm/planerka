@@ -42,12 +42,12 @@
 													<a href="/{{ $theme->alias }}">{{ $theme->alias }}</a>
 												@endif
 												<span class="{{ $theme->online?'online':'offline' }}"></span>
-												@if($theme->pro)
+												@if($theme->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $theme->city }}</span>
-											<div class="rait">Рейтинг:&nbsp;&nbsp;452.5</div>
+											<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $theme->rating }}</div>
 										</div>
 										<div style="margin-top:10px">Опубликовано: <span>{{ $theme->created_at }}</span></div>
 									</div>

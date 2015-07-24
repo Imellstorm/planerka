@@ -91,9 +91,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     	isset($table_fields[$field])?$search_field=$table_fields[$field]:$search_field='users.id';
 
     	$users =  DB::table('users')
+    					->select('users.*','roles.name as role','user_info.city','user_info.rating')
     					->leftjoin('roles','roles.id','=','users.role_id')
     					->leftjoin('user_info','user_info.user_id','=','users.id')
-    					->select('users.*','roles.name as role','user_info.city')
     					->where($search_field,'like','%'.$search.'%')
     					->orderBy($sort_by,$order)
     					->paginate(20)

@@ -33,7 +33,7 @@
                         <td><?php echo $user->created_at; ?></td>
                         <td><?php echo $user->city; ?></td>
                         <td><?php echo $user->role; ?></td>
-                        <td><?php echo $user->balance; ?></td>
+                        <td><a href="/admin/rating/<?php echo $user->id; ?>" class="fancybox_ajax"><?php echo $user->rating; ?></a></td>
                         <td>
                             <?php echo link_to('admin/orders/'.$user->id, 'платежи', array('class' => 'btn btn-info btn-xs pull-left', 'title'=>'pay history')); ?>
                             <?php echo link_to('admin/users/edit/'.$user->id, 'править', array('class' => 'btn btn-info btn-xs pull-left left10', 'title'=>'edit')); ?>
@@ -50,5 +50,26 @@
         <?php echo $users->links(); ?>    
     <?php endif; ?>
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+    <link rel="stylesheet" href="/assets/css/fancybox.css">
+    <script type="text/javascript" src="/assets/js/fancybox.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.fancybox_ajax').fancybox({
+          type: 'ajax',
+          openEffect: 'fade',
+          closeEffect: 'fade',
+          openSpeed: 400,
+          closeSpeed: 400,
+          helpers: {
+            overlay: {
+              locked: false
+            }
+          }
+        });
+    })
+    </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make ('containers.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -31,6 +31,8 @@ class BaseController extends Controller {
     	if(Auth::check()){
     		$user = User::find(Auth::user()->id);
     		$user->update(array('online'=>1));
+    		$this->updateRatingDayActivity();
+    		$this->updateRatingSpecialization();	
     	}
     }
 
@@ -39,6 +41,65 @@ class BaseController extends Controller {
     		$user = User::find(Auth::user()->id);
     		$user->update(array('online'=>0));
     	}
+    }
+
+    private function updateRatingSpecialization(){
+        $userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+        if(empty($userInfo)){
+            return false;
+        }
+        if($userInfo->pro > date('Y-m-d')){
+            $specCount = Specialization::where('user_id',Auth::user()->id)->count();
+            $specRating = Ratinghistory::where('user_id',Auth::user()->id)->where('type','specialization')->orderBy('id','DESC')->first();
+            $monthPass = false;
+            if(!empty($specRating)){
+                $dateNow = new DateTime;
+                $date = new DateTime( $specRating->created_at );
+                $date->modify( '+1 month' );
+                if($date < $dateNow){
+                    $monthPass = true;
+                }
+            }
+            if($specCount>1 && (empty($specRating) || $monthPass)){
+                $model = new Ratinghistory;
+                $model->user_id = Auth::user()->id;
+                $model->user_type = Auth::user()->role_id==2?'customer':'performer';
+                $model->amount = 25;
+                $model->type = 'specialization';
+                $model->save();
+
+                $newRating = $userInfo->rating+25;
+                $userInfo->update(array('rating'=>$newRating));
+            }            
+        }
+    }
+
+    private function updateRatingDayActivity(){
+        $userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
+        if(empty($userInfo)){
+            return false;
+        }
+        $rating = Ratinghistory::where('user_id',Auth::user()->id)->where('type','dayactivity')->orderBy('id','DESC')->first();
+        $dayPass = false;
+        if(!empty($rating)){
+        	$dateNow = new DateTime;
+            $date = new DateTime( $rating->created_at );
+            $date->modify( '+1 day' );
+            if($date < $dateNow){
+                $dayPass = true;
+            }
+        }
+        if(empty($rating) || $dayPass){
+            $model = new Ratinghistory;
+            $model->user_id = Auth::user()->id;
+            $model->user_type = Auth::user()->role_id==2?'customer':'performer';
+            $model->amount = 1;
+            $model->type = 'dayactivity';
+            $model->save();
+
+            $newRating = $userInfo->rating+1;
+            $userInfo->update(array('rating'=>$newRating));
+        }
     }
 
     public function isPro(){
