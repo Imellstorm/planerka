@@ -13,9 +13,9 @@
                         Наши последние обновления
                     </div>
                 </div>
-                <div class="row">
+                <div class="text-center">
                     @foreach($frontArticles as $item)
-                        <div class="single-post col-md-3">
+                        <div class="single-post">
                             <div class="image">
                                 <img src="{{ $item->thumb }}" alt="">
                                 <a href="/page/{{ $item->alias }}" class="btn-more">Новости</a>

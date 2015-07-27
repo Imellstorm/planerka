@@ -1,8 +1,8 @@
-<div class="custom-modal" id="modal-login" style="display:block">
+<div class="custom-modal" id="modal-login" style="display:block; width:530px;">
     <div>
         <div class="title">Вход на сайт</div>
 
-        <div class="social-login">
+        <div class="social-login mobile">
             <p>Войдите с помощью:</p>
             <a href="/auth/loginfacebook" class="facebook social"></a>
             <a href="/auth/loginvk" class="vk social"></a>

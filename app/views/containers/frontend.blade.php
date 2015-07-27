@@ -148,12 +148,18 @@
         </div>
     </div>
     <ul class="menu">
-        <li>
-        <a href="/auth/showloginform"><b>Вход</b></a>
-        </li>
-        <li>
-        <a href="#modal-register"><b>Регистрация</b></a>
-        </li>
+        @if(!Auth::check())
+            <li>
+                <a href="/auth/login"><b>Вход</b></a>
+            </li>
+            <li>
+                <a href="/auth/register"><b>Регистрация</b></a>
+            </li>
+        @else
+            <li>
+                <a href="/auth/logout"><b>Выход</b></a>
+            </li>
+        @endif
         <li>
             <a href="/search?specialization=3">Ведущий Тамада</a>
         </li>

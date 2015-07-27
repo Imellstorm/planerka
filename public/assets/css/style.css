@@ -662,6 +662,7 @@ input.btn-main {
 }
 .latest-posts .single-post {
   height: 280px;
+  display: inline-block;
 }
 .latest-posts .single-post .image {
   -webkit-border-radius: 3px;
@@ -3278,7 +3279,6 @@ form.account .btn-main {
   min-width: 95%;
 }
 .custom-modal {
-  width: 750px;
   background: #fff;
   display: none;
   -webkit-border-radius: 5px;
@@ -3310,9 +3310,6 @@ form.account .btn-main {
 }
 .custom-modal label {
   margin: 0;
-}
-.message-modal{
-  width: 400px;
 }
 .message-modal .message-text {
   text-align: center;
@@ -3618,10 +3615,10 @@ form.account .btn-main {
   max-width: 530px;
   padding: 0 70px 50px 70px;
 }
-#modal-login .social-login, #modal-register .social-login {
+.social-login {
   margin-bottom: 40px;
 }
-#modal-login .social-login p, #modal-register .social-login p {
+.social-login p {
   display: inline-block;
   font-family: 'PT Sans', sans-serif;
   font-size: 18px;
@@ -3629,20 +3626,20 @@ form.account .btn-main {
   vertical-align: top;
   margin: 11px 20px 0 0;
 }
-#modal-login .social-login a, #modal-register .social-login a {
+.social-login a {
   display: inline-block;
   width: 48px;
   height: 48px;
   margin-right: 8px;
   background: url(../img/social-login.png) no-repeat;
 }
-#modal-login .social-login a.vk, #modal-register .social-login a.vk {
+.social-login a.vk {
   background-position: -57px 0;
 }
-#modal-login .social-login a.twitter, #modal-register .social-login a.twitter {
+.social-login a.twitter {
   background-position: -112px 0;
 }
-#modal-login form.login .form-group, #modal-register form.login .form-group {
+form.login .form-group {
   margin-bottom: 20px;
 }
 
@@ -4350,4 +4347,11 @@ form.project .checkbox span {
   .review_textarea{
     max-height: 150px;
     max-width: 100%;
+  }
+  .user_card_cont{
+    margin:0 10px; 
+    display:inline-block;
+  }
+  .social-login.mobile a{
+    border-radius: 100px;
   }

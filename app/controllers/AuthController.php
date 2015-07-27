@@ -40,7 +40,12 @@ class AuthController extends BaseController {
  
     public function getLogin()
     {
-        return Redirect::to('/auth');
+        return View::make('content.auth.login');
+    }
+
+    public function getRegister()
+    {
+        return View::make('content.auth.registration');
     }
  
     public function getLogout()

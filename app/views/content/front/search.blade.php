@@ -13,17 +13,17 @@
 					Результаты поиска
 				</div>
 			</div>
-			<div class="row">
+			<div class="text-center">
 				@if(count($promo))
 					@foreach($promo as $item)
-						<div class="col-md-3">
+						<div class="user_card_cont">
 							@include('content.front.usercard')
 						</div>
 					@endforeach
 				@endif
 				@if(count($normal))
 					@foreach($normal as $item)
-						<div class="col-md-3">
+						<div class="user_card_cont">
 							@include('content.front.usercard')
 						</div>
 					@endforeach

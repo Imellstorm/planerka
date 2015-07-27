@@ -12,17 +12,17 @@
 					Результаты поиска
 				</div>
 			</div>
-			<div class="row">
+			<div class="text-center">
 				<?php if(count($promo)): ?>
 					<?php foreach($promo as $item): ?>
-						<div class="col-md-3">
+						<div class="user_card_cont">
 							<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 						</div>
 					<?php endforeach; ?>
 				<?php endif; ?>
 				<?php if(count($normal)): ?>
 					<?php foreach($normal as $item): ?>
-						<div class="col-md-3">
+						<div class="user_card_cont">
 							<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 						</div>
 					<?php endforeach; ?>
