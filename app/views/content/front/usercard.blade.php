@@ -26,6 +26,8 @@
 			</div>
 			@if($item->pro > date('Y-m-d'))
 				<span class="status">PRO</span>
+			@else
+				<span class="status not_active">PRO</span>
 			@endif
 			<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $item->rating }}</div>
 			<div class="place" style="height:20px">{{ $item->city }}</div>

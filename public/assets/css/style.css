@@ -1,7 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   background: #f5f5f3;
-  font-size: 14px;
+  font-size: 14px;676
   color: #373737;
 }
 
@@ -663,6 +663,7 @@ input.btn-main {
 .latest-posts .single-post {
   height: 280px;
   display: inline-block;
+  margin: 0 10px;
 }
 .latest-posts .single-post .image {
   -webkit-border-radius: 3px;
@@ -677,7 +678,7 @@ input.btn-main {
   margin: 0 auto;
   position: relative;
   top: -245px;
-  background: rgba(0,0,0,0.5);
+  /*background: rgba(0,0,0,0.5);*/
 }
 .latest-posts .single-post .post-title {
   width: 100%;
@@ -691,7 +692,7 @@ input.btn-main {
   position: absolute;
   bottom: 37px;
   letter-spacing: 0.4px;
-  background: rgba(0,0,0,0.5);
+  /*background: rgba(0,0,0,0.5);*/
   text-align: center;
 }
 .latest-posts .single-post .post-title:hover {
@@ -2044,10 +2045,9 @@ input.btn-main {
   .user-nav .menu-panel .count a:hover {
     background: rgba(55, 66, 78, 0.7);
   }
-.user-nav .menu-panel .status {
+.not_active{
   color: #685e85;
   background: #fff;
-  float: none;
 }
 .user-nav .menu-panel #status{
   display: inline-block;
@@ -2997,7 +2997,6 @@ form.account .btn-main {
   float: left;
   margin-right: 36px;
   border: 1px solid #c3c3c2;
-  cursor: pointer;
 }
 .price-tables table:last-child {
   margin-right: 0;
@@ -3022,9 +3021,6 @@ form.account .btn-main {
   line-height: 20px;
   color: #3c3c3c;
   border: 1px solid #c3c3c2;
-}
-.price-tables table tr td:hover {
-  background: #efefef;
 }
 .price-tables table tr td span {
   font-weight: 700;
@@ -3067,7 +3063,7 @@ form.account .btn-main {
   line-height: 30px;
   color: #3c3c3c;
 }
-#shop .promo a.by-promo {
+.by-promo {
   font-family: 'NeuronLight', sans-serif;
   font-size: 17px;
   color: #fff;
@@ -4168,7 +4164,8 @@ form.project .checkbox span {
   display: none;
 }
 .loading{
-  text-align: center;
+  margin: 0 auto;
+  max-width: 40px;
   display: block;
 }
 .dropzone {
@@ -4279,7 +4276,7 @@ form.project .checkbox span {
 .post_text:-ms-input-placeholder      {color:#c0392b;}
 
 .rub_icon{
-  font-size: 22px;
+  font-size: 24px;
   position: relative;
   top: 5px;
 }
@@ -4294,64 +4291,70 @@ form.project .checkbox span {
 .mobile-title .form-group{
   margin-bottom: 15px !important;
 }
-  /* mobile menu */
-  #mobile-menu .show-menu {
-    display: none;
-    font-size: 28px;
-    line-height: 49px;
-    color: #fff;
-    margin-left: 10px;
-  }
-  #mobile-menu .show-menu span {
-    font-size: 24px;
-    margin-right: 10px;
-  }
-  #mobile-menu .show-menu:hover {
-    text-decoration: none;
-  }
-  #mobile-menu { 
-    display: none;
-    background:#44b39b; 
-  }
-  #mobile-menu .menu { 
-    display: none; clear:both; 
-  }
-  #mobile-menu .show-menu { 
-    display: block; 
-  }
-  #mobile-menu { 
-    position: absolute; 
-    top: 0; left: 0; 
-    width: 100%; 
-    z-index: 999; 
-    height: 50px; 
-    border-bottom: 1px solid #373737
-  }
-  #mobile-menu .menu li { 
-    margin: 0; 
-    width: 100%; 
-    border-bottom: 1px dashed #fff; 
-    padding: 10px 0; 
-    background:#44b39b;
-    text-align: center;
-  }
-  #mobile-menu .menu li:last-child { 
-    border-bottom: none; 
-  }
-  #mobile-menu .menu li:after { 
-    content: none; 
-  }
-  #mobile-menu .menu li a { 
-    color:#fff;
-  }
-  .review_textarea{
-    max-height: 150px;
-    max-width: 100%;
-  }
-  .user_card_cont{
-    margin:0 10px; 
-    display:inline-block;
-  }
-  .social-login.mobile a{
-    border-radius: 100px;
-  }
+/* mobile menu */
+#mobile-menu .show-menu {
+  display: none;
+  font-size: 28px;
+  line-height: 49px;
+  color: #fff;
+  margin-left: 10px;
+}
+#mobile-menu .show-menu span {
+  font-size: 24px;
+  margin-right: 10px;
+}
+#mobile-menu .show-menu:hover {
+  text-decoration: none;
+}
+#mobile-menu { 
+  display: none;
+  background:#44b39b; 
+}
+#mobile-menu .menu { 
+  display: none; clear:both; 
+}
+#mobile-menu .show-menu { 
+  display: block; 
+}
+#mobile-menu { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 100%; 
+  z-index: 999; 
+  height: 50px; 
+  border-bottom: 1px solid #373737
+}
+#mobile-menu .menu li { 
+  margin: 0; 
+  width: 100%; 
+  border-bottom: 1px dashed #fff; 
+  padding: 10px 0; 
+  background:#44b39b;
+  text-align: center;
+}
+#mobile-menu .menu li:last-child { 
+  border-bottom: none; 
+}
+#mobile-menu .menu li:after { 
+  content: none; 
+}
+#mobile-menu .menu li a { 
+  color:#fff;
+}
+.review_textarea{
+  max-height: 150px;
+  max-width: 100%;
+}
+.user_card_cont{
+  margin:0 5px; 
+  display:inline-block;
+}
+.social-login.mobile a{
+  border-radius: 100px;
+}
+.sort-by a{
+  cursor: pointer;
+}
+#modal-reg-second {
+  max-width: 750px;
+}

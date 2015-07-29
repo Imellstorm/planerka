@@ -82,6 +82,8 @@
 														<span class="{{ $project->online?'online':'offline' }}"></span>
 														@if($project->pro > date('Y-m-d'))
 															<span class="status">PRO</span>
+														@else
+															<span class="status not_active">PRO</span>
 														@endif
 													</div>
 													<span class="place">{{ $project->city }}</span>
@@ -200,6 +202,8 @@
 														<span class="{{ $performer->online?'online':'offline' }}"></span>
 														@if($performer->pro>date('Y-m-d'))
 															<span class="status">PRO</span>
+														@else
+															<span class="status not_active">PRO</span>
 														@endif
 													</div>
 													<div class="place">{{ $performer->city }}</div>

@@ -56,6 +56,8 @@
 						<span class="{{ $user->online?'online':'offline' }}"></span>
 						@if($userInfo->pro > date('Y-m-d'))
 							<span class="status">PRO</span>
+						@else
+							<span class="status not_active">PRO</span>
 						@endif
 					</div>
 					<span class="place">{{ $userInfo->city }}</span>
@@ -75,7 +77,7 @@
 				@endif
 			</div>
 		</div>
-		<div class="custom-modal" id="upload-photo">
+		<div class="custom-modal" id="upload-photo" style="max-width:760px">
 			<div class="title">Загрузить фотографии</div>
 			<div>
 				<form action="/image/uploadimage" class="dropzone">

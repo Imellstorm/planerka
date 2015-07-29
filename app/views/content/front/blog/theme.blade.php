@@ -138,6 +138,8 @@
 												<span class="{{ $post->online?'online':'offline' }}"></span>
 												@if($post->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
+												@else
+													<span class="status not_active">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $post->city }}</span>

@@ -24,6 +24,24 @@ class BlogController extends BaseController {
 		return View::make('content.front.blog.index',compact('categories'));
 	}
 
+	public function getLastblogthemes($interval=''){
+		$result = Blogtheme::select(DB::raw('COUNT('.DB::getTablePrefix().'blog_posts.id) as postscount'),'blog_themes.*')
+			->leftjoin('blog_posts','blog_posts.theme_id','=','blog_themes.id')
+			->groupBy('blog_themes.id')
+			->orderBy('postscount','DESC')
+			->take(4);
+		if(!empty($interval)){
+			$date = new DateTime;
+			$date->modify('-1 '.$interval);
+			$result->where('blog_themes.created_at', '>', $date->format('Y-m-d'));
+		}
+		$blogThemes = $result->get();
+		if(Request::ajax()){
+			return View::make('content.front.blog.themeslist',compact('blogThemes')); 
+		}
+		return $blogThemes;
+	}
+
 	public function getCategory($id){
 		$subcategory = Blogsubcategory::where('id',$id)->first();
 		if(empty($subcategory)){

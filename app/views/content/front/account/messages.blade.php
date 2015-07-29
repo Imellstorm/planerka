@@ -28,6 +28,8 @@
 												<span class="{{ $message->online?'online':'offline' }}"></span>
 												@if($message->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
+												@else
+													<span class="status not_active">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $message->city }}</span>

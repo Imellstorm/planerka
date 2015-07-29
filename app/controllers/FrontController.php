@@ -5,13 +5,12 @@ class FrontController extends BaseController {
 
 	public function getIndex(){
 		setlocale(LC_ALL, "ru_RU.UTF-8");
+
 		$frontArticles = Article::where('onfront',1)->take(4)->orderBy('updated_at','DESC')->get();
-		$blogThemes = Blogtheme::select(DB::raw('COUNT('.DB::getTablePrefix().'blog_posts.id) as postscount'),'blog_themes.*')
-			->leftjoin('blog_posts','blog_posts.theme_id','=','blog_themes.id')
-			->groupBy('blog_themes.id')
-			->orderBy('postscount','DESC')
-			->take(4)
-			->get();
+
+		$blog = new BlogController;
+		$blogThemes = $blog->getLastblogthemes('month');
+
 		$vote = Vote::where('active',1)->first();
 		if(!empty($vote)){
 			if(Auth::check()){
@@ -21,6 +20,7 @@ class FrontController extends BaseController {
 			}
 			$answers = Voteanswer::where('vote_id',$vote->id)->get();
 		}
+
 		$frontUsers = User::leftjoin('user_info','user_info.user_id','=','users.id')
 			->where('users.onfront',1)
 			->orderBy('users.updated_at','DESC')
@@ -65,7 +65,9 @@ class FrontController extends BaseController {
 			  		 ->orderBy('user_info.promo','DESC');
 		}
 		if($type=='normal'){
-			  $result->where('user_info.promo','<=',date('Y-m-d'));
+			  $result->where('user_info.promo','<=',date('Y-m-d'))
+			  		 ->orderBy('pro','DESC')
+			  		 ->orderBy('rating','DESC');
 		}
 
 		if(!empty($spec)){

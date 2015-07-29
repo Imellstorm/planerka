@@ -84,7 +84,7 @@ class UserinfoController extends BaseController {
 			&& !empty($userInfo->phone) 
 			&& !empty($userInfo->biography) 
 			&& !empty($userInfo->avatar)
-			&& !empty($userInfo->cover)
+			&& !empty($userInfo->usercard_cover)
 		){
 			$exist = Ratinghistory::where('user_id',Auth::user()->id)->where('type','profile')->first();
 			if(empty($exist)){

@@ -12,6 +12,9 @@
 					Закажите PROдвинутые услуги на ПЛАНЁРКЕ
 				</div>
 			</div>
+			<a href="#promo" class="by-promo" style="top:-30px">
+				Продлить ПРОМО-размещение на 7 дней за 239 руб.
+			</a>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="price-tables">
@@ -107,7 +110,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td id="promo">
 									<span>Безлимитные ответы на проекты</span>
 									Вы можете отвечать на неограниченное <br>количество проектов
 								</td>

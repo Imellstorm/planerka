@@ -27,6 +27,8 @@
 													<span class="{{ $dialog['dialogUserInfo']->online?'online':'offline' }}"></span>
 													@if($dialog['dialogUserInfo']->pro > date('Y-m-d'))
 														<span class="status">PRO</span>
+													@else
+														<span class="status not_active">PRO</span>
 													@endif
 												</div>
 												<div class="place">{{ $dialog['dialogUserInfo']->city }}</div>

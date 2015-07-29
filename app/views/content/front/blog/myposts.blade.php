@@ -44,6 +44,8 @@
 												<span class="{{ $theme->online?'online':'offline' }}"></span>
 												@if($theme->pro > date('Y-m-d'))
 													<span class="status">PRO</span>
+												@else
+													<span class="status not_active">PRO</span>
 												@endif
 											</div>
 											<span class="place">{{ $theme->city }}</span>

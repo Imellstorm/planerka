@@ -74,6 +74,9 @@ class OrderController extends BaseController {
 	}
 
 	private function saveRating($type,$amount,$term){
+		if(!Auth::check()){
+			return false;
+		}
 		$model = new Ratinghistory;
 
 		$endDate = new DateTime;

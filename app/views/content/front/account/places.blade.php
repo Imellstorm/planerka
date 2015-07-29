@@ -28,9 +28,9 @@
 						<div class="grey_line" style="width:60%"></div>
 						<div class="grey_line" style="width:50%"></div>
 					</div>
-					<div class="col-md-3">
-						<div class="block_3"></div>
-						<div class="block_3"></div>
+					<div class="col-md-3" style="height:200px">
+		<!-- 				<div class="block_3"></div>
+						<div class="block_3"></div> -->
 					</div>
 					<div class="col-md-3"><div class="block_4"></div></div>
 					<div class="col-md-3"><div class="block_4"></div></div>
@@ -46,10 +46,10 @@
 					<div class="pink_back">Публикация статьи или новостисроком на 14 дней</div>
 					<div class="white_back">Статья (новость) 5000 рублей</div>
 				</div>
-				<div class="block_3_desc">
+	<!-- 			<div class="block_3_desc">
 					<div class="yellow_back">Аренда малого баннера сроком на 1 месяц</div>
 					<div class="white_back">Баннер "малый" 25000 рублей</div>
-				</div>
+				</div> -->
 				<div class="block_4_desc">
 					<div class="green_back">Публикация профиля на главной сроком на 1 месяц</div>
 					<div class="white_back">"Лучший" 10000 рублей</div>

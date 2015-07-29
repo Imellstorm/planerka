@@ -185,7 +185,16 @@
 
 <!-- HEADER
     ============================= -->
-    <header id="header" style="background: url('{{ isset($profile)&&isset($userInfo->cover)&&!empty($userInfo->cover)?'/'.$userInfo->cover:'/assets/img/body_bg.png' }}') no-repeat top center;   background-color: #726E68; background-size: 100%;">
+    <?php
+         $cover = '';
+         if(isset($userInfo->cover)&&!empty($userInfo->cover)){
+            $cover = $userInfo->cover;
+        } 
+        if(!isset($profile)){
+            $cover = '/assets/img/body_bg.png';
+        }
+    ?>
+    <header id="header" style="background: url('{{ $cover }}') no-repeat top center;   background-color: #726E68; background-size: 100%;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
@@ -204,10 +213,12 @@
                                 @endif
                             </div>
                             <div class="count">
-                            <a href="/account/shop"><i class="fa fa-rub rub_icon"></i></a>
+                            <a href="/account/shop"><i class="fa fa-shopping-cart rub_icon"></i></a>
                             </div>
                             @if($userInfo->pro >= date('Y-m-d'))
                                 <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                            @else
+                                <div class="status not_active" style="margin: 7px 7px 0 10px;">PRO</div>
                             @endif
                             <div class="user" id="show-user-menu">
                                 <div class="name">{{ Auth::user()->username }}</div>

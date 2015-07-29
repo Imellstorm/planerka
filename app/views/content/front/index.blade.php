@@ -35,20 +35,14 @@
             <div class="latest-themes col-md-8">
                 <div class="section-title">Популярные темы форума</div>
                 <div class="sort-by">
-                    <a href="/" class="active">За все время</a>
-                    <a href="/">В этом месяце</a>
-                    <a href="/">На этой неделе</a>
+                    <a source="/blog/lastblogthemes" cont="theme_list_cont" class="active">За все время</a>
+                    <a source="/blog/lastblogthemes/month" cont="theme_list_cont">В этом месяце</a>
+                    <a source="/blog/lastblogthemes/week" cont="theme_list_cont">На этой неделе</a>
                 </div>
                 @if(count($blogThemes))
-                    <ul class="theme-list">
-                        @foreach($blogThemes as $item)
-                            <li>
-                            <div class="title"><a href="/blog/theme/{{ $item->id }}">{{ $item->name }}</a></div>
-                                <div class="comment">{{ $item->postscount }}</div>
-                                <div class="date">{{ Common_helper::translateDate(strtotime($item->created_at)) }}</div>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <div class="theme_list_cont">
+                        @include('content.front.blog.themeslist')
+                    </div>
                 @endif
             </div>
             <div class="sidebar col-md-4">
@@ -109,5 +103,28 @@
             @endif
         </div>
     </div>
+@stop
+
+@section('scripts')
+<script type="text/javascript">
+    function getContent(from,to){
+        $.ajax({
+            url:from,
+            type:'get',
+            success: function(res){
+                elem = '.'+to
+                $(elem).html(res);
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        $('.latest-themes .sort-by a').on('click',function(){
+            $('.sort-by a').removeClass('active');
+            $(this).addClass('active');
+            getContent($(this).attr('source'),$(this).attr('cont'));
+        })
+    })
+</script>
 @stop
 
