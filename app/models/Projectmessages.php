@@ -13,8 +13,8 @@ class Projectmessages extends \Eloquent {
 					->leftjoin('users','users.id','=',$this->table.'.from_user')
 					->where($this->table.'.project_id',$projectId)
 					->where(function($query){
-							$query->where($this->table.'.from_user',$this->userId)
-								  ->orWhere($this->table.'.to_user',$this->userId);
+							$query->where('project_messages.from_user',$this->userId)
+								  ->orWhere('project_messages.to_user',$this->userId);
 					})
 					->orderby($this->table.'.id','DESC');
 		if($toArray){ 
