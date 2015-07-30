@@ -33,7 +33,7 @@
                 </li>
                 <li class="<?php echo Request::segment(2)=='menus'?'active':''; ?>"><?php echo link_to('admin/menus','Меню'); ?></li>
                 <li class="<?php echo Request::segment(2)=='vote'?'active':''; ?>"><?php echo link_to('admin/vote','Опрос'); ?></li>           
-                <!-- <li class="<?php echo Request::segment(2)=='settings'?'active':''; ?>"><?php echo link_to('admin/settings/edit','Настройки'); ?></li>                                -->
+                <li class="<?php echo Request::segment(2)=='settings'?'active':''; ?>"><?php echo link_to('admin/settings/edit','Настройки'); ?></li>                               
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><?php echo link_to('auth/logout','Выход'); ?></li>

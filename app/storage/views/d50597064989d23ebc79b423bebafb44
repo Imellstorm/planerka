@@ -191,7 +191,7 @@
             $cover = $userInfo->cover;
         } 
         if(!isset($profile)){
-            $cover = '/assets/img/body_bg.png';
+            $cover = '/'.$mainCover;
         }
     ?>
     <header id="header" style="background: url('<?php echo $cover; ?>') no-repeat top center;   background-color: #726E68; background-size: 100%;">

@@ -33,7 +33,7 @@
                 </li>
                 <li class="{{ Request::segment(2)=='menus'?'active':'' }}">{{ link_to('admin/menus','Меню') }}</li>
                 <li class="{{ Request::segment(2)=='vote'?'active':'' }}">{{ link_to('admin/vote','Опрос') }}</li>           
-                <!-- <li class="{{ Request::segment(2)=='settings'?'active':'' }}">{{ link_to('admin/settings/edit','Настройки') }}</li>                                -->
+                <li class="{{ Request::segment(2)=='settings'?'active':'' }}">{{ link_to('admin/settings/edit','Настройки') }}</li>                               
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>{{ link_to('auth/logout','Выход') }}</li>

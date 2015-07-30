@@ -6,6 +6,7 @@ class BaseController extends Controller {
 		$this->getMenus();
 		$rules = Article::where('alias','rules')->first();
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
+        $mainCover = SiteSettings::first()->main_cover;
 		$additionalRoles = Role::where('type','другое')->get();
 		if(Auth::check()){
 			$this->userInfo = Userinfo::where('user_id',Auth::user()->id)->first();
@@ -22,6 +23,7 @@ class BaseController extends Controller {
 		}
 		View::share('additionalRoles',$additionalRoles);
 		View::share('roles',$roles);
+        View::share('mainCover',$mainCover);
 		
 		Auth::viaRemember();
 		$this->setOnline();
