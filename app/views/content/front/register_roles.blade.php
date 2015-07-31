@@ -56,5 +56,5 @@
     </div>                     
 </div>
 <div class="loading" style="text-align:center;display:none">
-    <img src="/assets/img/loading.gif" style="width:100px;margin-top:100px;">
+    <img src="/assets/img/loading.gif" style="width:40px;margin-top:100px;">
 </div>
