@@ -113,7 +113,7 @@ class UserController extends BaseController {
 				$randomStr = '1';
 			} else {
 				$randomStr = str_random(40);
-				mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr );
+				mail($user->email, 'Подтверждение Email', 'Для подтверждение email на сайте '.URL::to('/').' перейдите по ссылке '.URL::to('/').'/account/verifyemail/'.$randomStr, 'From: info@planerca.ru' );
 			}
 	        $user->email_verify	= $randomStr;
 
