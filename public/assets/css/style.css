@@ -2226,7 +2226,7 @@ input.btn-main {
   color: #3c3c3c;
 }
 .profile-info span.price {
-  margin-left: 25px;
+  display: block;
   color: #44b39b;
   font-family: 'NeuronItalic', sans-serif;
   font-size: 24px;
@@ -2542,7 +2542,7 @@ input.btn-main {
   font-weight: normal;
 }
 #user-page .btn-main {
-  font-size: 20px;
+  font-size: 18px;
 }
 /* == REVIEW ========> */
 .user-review {
