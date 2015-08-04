@@ -186,15 +186,15 @@
 <!-- HEADER
     ============================= -->
     <?php
-         $cover = '';
-         if(isset($userInfo->cover)&&!empty($userInfo->cover)){
+        $cover = '';
+        if(isset($userInfo->cover)&&!empty($userInfo->cover)){
             $cover = $userInfo->cover;
-        } 
-        if(!isset($profile)){
-            $cover = '/'.$siteSettings->main_cover;
+        }
+        if(!isset($profile) && isset($siteSettings->main_cover)){
+            $cover = $siteSettings->main_cover;
         }
     ?>
-    <header id="header" style="background: url('<?php echo $cover; ?>') no-repeat top center; background-color: #726E68; background-size: cover;">
+    <header id="header" style="background: url('/<?php echo $cover; ?>') no-repeat top center; background-color: #726E68; background-size: cover;">
     <?php if(Auth::check()): ?>           
         <div class="user-nav">
             <div class="container">

@@ -189,12 +189,12 @@
         $cover = '';
         if(isset($userInfo->cover)&&!empty($userInfo->cover)){
             $cover = $userInfo->cover;
-        } 
+        }
         if(!isset($profile) && isset($siteSettings->main_cover)){
-            $cover = '/'.$siteSettings->main_cover;
+            $cover = $siteSettings->main_cover;
         }
     ?>
-    <header id="header" style="background: url('{{ $cover }}') no-repeat top center; background-color: #726E68; background-size: cover;">
+    <header id="header" style="background: url('/{{ $cover }}') no-repeat top center; background-color: #726E68; background-size: cover;">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">

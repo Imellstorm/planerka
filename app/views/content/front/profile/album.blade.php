@@ -47,32 +47,38 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12 album-footer">
-				<div class="user-info">
-					<a href="#null" class="avatar">
-						<img src="{{ Common_helper::getUserAvatar($user->id) }}" alt="">
-					</a>
-					<div class="name">
-						<a href="#null">{{ $userInfo->name.' '.$userInfo->surname }}</a>
-						<span class="{{ $user->online?'online':'offline' }}"></span>
-						@if($userInfo->pro > date('Y-m-d'))
-							<span class="status">PRO</span>
-						@else
-							<span class="status not_active">PRO</span>
+				<div class="col-md-4">
+					<div class="user-info">
+						<a href="#null" class="avatar">
+							<img src="{{ Common_helper::getUserAvatar($user->id) }}" alt="">
+						</a>
+						<div class="name">
+							<a href="#null">{{ $userInfo->name.' '.$userInfo->surname }}</a>
+							<span class="{{ $user->online?'online':'offline' }}"></span>
+							@if($userInfo->pro > date('Y-m-d'))
+								<span class="status">PRO</span>
+							@else
+								<span class="status not_active">PRO</span>
+							@endif
+						</div>
+						<span class="place">{{ $userInfo->city }}</span>
+						<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $userInfo->rating }}</div>
+					</div>	
+				</div>	
+				<div class="col-md-3">		
+					<div class="user-btns">
+						<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>
+						@if(Auth::check() && Auth::user()->id!=$user->id)
+							<a href="/message/create/{{ $user->id }}" class="btn-purple fancybox_ajax_scroll">Написать сообщение</a>
 						@endif
 					</div>
-					<span class="place">{{ $userInfo->city }}</span>
-					<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $userInfo->rating }}</div>
-				</div>				
-				<div class="user-btns">
-					<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>
-					@if(Auth::check() && Auth::user()->id!=$user->id)
-						<a href="/message/create/{{ $user->id }}" class="btn-purple fancybox_ajax_scroll">Написать сообщение</a>
-					@endif
 				</div>				
 				@if(Auth::check() && Auth::user()->id==$user->id)
-					<div class="album-btns">
-						<a href="#upload-photo" class="fancybox add_photo">Добавить Фото</a>
-						<a href="/album/delete/{{ $album->id }}" class="del_album" onclick="return confirm('Удалить альбом?')?true:false;">Удалить Альбом</a>
+					<div class="col-md-5">
+						<div class="album-btns">
+							<a href="#upload-photo" class="fancybox add_photo">Добавить Фото</a>
+							<a href="/album/delete/{{ $album->id }}" class="del_album" onclick="return confirm('Удалить альбом?')?true:false;">Удалить Альбом</a>
+						</div>
 					</div>
 				@endif
 			</div>
