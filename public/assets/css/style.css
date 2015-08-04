@@ -676,7 +676,7 @@ input.btn-main {
   position: relative;
   max-width: 262px;
   margin: 0 auto;
-  background: black;
+  background: #3c4761;
   height: 260px;
 }
 .latest-posts .single-post .btn-more {

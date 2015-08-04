@@ -17,7 +17,7 @@
                     @foreach($frontArticles as $item)
                         <div class="single-post">
                             <div class="image">
-                                <img src="{{ $item->thumb }}" alt="" style="opacity:0.75">
+                                <img src="{{ $item->thumb }}" alt="" style="opacity:0.4">
                                 <a href="/page/{{ $item->alias }}" class="btn-more">Новости</a>
                                 <a href="/page/{{ $item->alias }}" class="post-title">{{ $item->title }}</a>
                             </div>
