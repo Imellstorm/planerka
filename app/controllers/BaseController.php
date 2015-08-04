@@ -6,7 +6,7 @@ class BaseController extends Controller {
 		$this->getMenus();
 		$rules = Article::where('alias','rules')->first();
 		$roles = Role::where('show_in_menu',1)->lists('id','name');
-        $siteSettings = SiteSettings::join('users','users.alias','=','sitesettings.cover_author')->join('user_info','users.id','=','user_info.user_id')->first();
+        $siteSettings = SiteSettings::leftjoin('users','users.alias','=','sitesettings.cover_author')->leftjoin('user_info','users.id','=','user_info.user_id')->first();
 		$additionalRoles = Role::where('type','другое')->get();
 		if(Auth::check()){
 			$this->userInfo = Userinfo::where('user_id',Auth::user()->id)->first();

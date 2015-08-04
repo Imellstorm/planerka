@@ -193,7 +193,6 @@
         if(!isset($profile) && isset($siteSettings->main_cover)){
             $cover = $siteSettings->main_cover;
         }
-        var_dump($cover);
     ?>
     <header id="header" style="background: url('/{{ $cover }}') no-repeat top center; background-color: #726E68; background-size: cover;">
     @if(Auth::check())           
