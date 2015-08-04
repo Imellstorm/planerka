@@ -16,7 +16,7 @@
                     <?php foreach($frontArticles as $item): ?>
                         <div class="single-post">
                             <div class="image">
-                                <img src="<?php echo $item->thumb; ?>" alt="" style="opacity:0.5">
+                                <img src="<?php echo $item->thumb; ?>" alt="" style="opacity:0.75">
                                 <a href="/page/<?php echo $item->alias; ?>" class="btn-more">Новости</a>
                                 <a href="/page/<?php echo $item->alias; ?>" class="post-title"><?php echo $item->title; ?></a>
                             </div>

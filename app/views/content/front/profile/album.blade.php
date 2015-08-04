@@ -135,8 +135,9 @@
 		myDropzone.on('removedfile',function(file,message){
 			if(myDropzone.getQueuedFiles().length==0){
 				$('.upload_process').hide();
-				$('.continue_btn').hide();
 				$.fancybox.update();
+			} else {
+				$('.continue_btn').hide();
 			}
 		})
 
