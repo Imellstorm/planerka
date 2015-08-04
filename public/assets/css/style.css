@@ -346,6 +346,8 @@ input.btn-main {
   overflow: hidden;
   padding: 10px 0;
   margin-top: 15px;
+  position: relative;
+  z-index: 100;
 }
 #header .login p {
   margin-left: 24px;
