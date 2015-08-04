@@ -194,7 +194,7 @@
             $cover = '/'.$siteSettings->main_cover;
         }
     ?>
-    <header id="header" style="background: url('<?php echo $cover; ?>') no-repeat top center;   background-color: #726E68; background-size: 100%;">
+    <header id="header" style="background: url('<?php echo $cover; ?>') no-repeat top center; background-color: #726E68; background-size: cover;">
     <?php if(Auth::check()): ?>           
         <div class="user-nav">
             <div class="container">
