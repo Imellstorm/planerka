@@ -326,7 +326,7 @@ input.btn-main {
 }
 /* == HEADER ========================> */
 #header {
-  height: 700px;
+  height: 610px;
 }
 #header .header-content {
   padding-top: 10px;
@@ -2208,7 +2208,7 @@ input.btn-main {
 /* == USER PROFILE ========> */
 .profile-info {
   margin: 20px 20px 20px 0;
-  width: 660px;
+  width: 100%;
   float: left;
   border-bottom: solid 1px #44B39B;
   position: relative;

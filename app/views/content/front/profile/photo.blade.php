@@ -13,70 +13,77 @@
                 <div class="col-sm-12">
                     <div class="info_cont">
                         @if(!empty($mainProf))
-                            <div class="profile-info">
-                                <h3>{{ $mainProf->name }}</h3>
-                                @if(isset($mainProf->price) && !empty($mainProf->price))
-                                    <span class="price">от {{ $mainProf->price }}</span>
-                                @endif
-                                <p>{{ $mainProf->description }}</p>
-                                @if(Auth::check() && Auth::user()->id==$user->id)
-                                    <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
-                                @endif
+                            <div class="col-md-7">
+                                <div class="profile-info">
+                                    <div class="col-md-8">
+                                        <h3>{{ $mainProf->name }}</h3>
+                                        @if(isset($mainProf->price) && !empty($mainProf->price))
+                                            <span class="price">от {{ $mainProf->price }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        @if(Auth::check() && Auth::user()->id==$user->id)
+                                            <a href="#create-album" class="fancybox btn-main">Создать новый альбом</a>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-12" style="margin:20px 0">{{ $mainProf->description }}</div>
+                                </div>
                             </div>
                         @endif
-                        <div class="profile-data">
-                         
-                                @if(!empty($userinfo->phone))
-                                    <dt>Мобильний телефон</dt>
-                                    <dd>{{ $userinfo->phone }}</dd>
-                                @endif
+                        <div class="col-md-5">
+                            <div class="profile-data">    
+                                    @if(!empty($userinfo->phone))
+                                        <dt>Мобильний телефон</dt>
+                                        <dd>{{ $userinfo->phone }}</dd>
+                                    @endif
 
-                                <dt>E-mail</dt>
-                                <dd style="color:#665e83;margin-bottom:10px;">{{ $user->email }}</dd>
+                                    <dt>E-mail</dt>
+                                    <dd style="color:#665e83;margin-bottom:10px;">{{ $user->email }}</dd>
 
-                                    
-                                @if(!empty($userinfo->site))
-                                    <dt>Сайт</dt>
-                                    <dd style="color:#665e83;margin-bottom:10px;">{{ $userinfo->site }}</dd>
-                                @endif 
+                                        
+                                    @if(!empty($userinfo->site))
+                                        <dt>Сайт</dt>
+                                        <dd style="color:#665e83;margin-bottom:10px;">{{ $userinfo->site }}</dd>
+                                    @endif 
 
-                                @if(!empty($userinfo->birthday))
-                                    <dt>Дата рождения</dt>
-                                    <dd>{{ date('d-m-Y',$userinfo->birthday) }}</dd>
-                                @endif
+                                    @if(!empty($userinfo->birthday))
+                                        <dt>Дата рождения</dt>
+                                        <dd>{{ date('d-m-Y',$userinfo->birthday) }}</dd>
+                                    @endif
 
-                                @if(!empty($userinfo->gender))
-                                    <dt>Пол</dt>
-                                    <dd>{{ $userinfo->gender=='male'?'Мужской':':Женский' }}</dd>
-                                @endif
+                                    @if(!empty($userinfo->gender))
+                                        <dt>Пол</dt>
+                                        <dd>{{ $userinfo->gender=='male'?'Мужской':':Женский' }}</dd>
+                                    @endif
 
-                                @if(!empty($userinfo->city))
-                                    <dt>Город</dt>
-                                    <dd>{{ $userinfo->city }}</dd>
-                                @endif     
+                                    @if(!empty($userinfo->city))
+                                        <dt>Город</dt>
+                                        <dd>{{ $userinfo->city }}</dd>
+                                    @endif     
 
-                                <dt>Просмотр профиля</dt>
-                                <dd>{{ round($userinfo->enters_count) }}</dd>
+                                    <dt>Просмотр профиля</dt>
+                                    <dd>{{ round($userinfo->enters_count) }}</dd>
 
-                                <dt>Лайков</dt>
-                                <dd>{{ $likesCount }}</dd>
+                                    <dt>Лайков</dt>
+                                    <dd>{{ $likesCount }}</dd>
 
+                                    @if($userInfo->role_id!=2)
+                                        <dt>Выполненных заказов</dt>
+                                        <dd>{{ $projectsDoneCount }}</dd>
+                                    @endif
+
+                                    <dt>Регистрация на сайте</dt>
+                                    <dd>
+                                        {{ Common_helper::getPastTime($user->created_at) }}
+                                    </dd>
+                              
                                 @if($userInfo->role_id!=2)
-                                    <dt>Выполненных заказов</dt>
-                                    <dd>{{ $projectsDoneCount }}</dd>
+                                    <footer>
+                                        <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
+                                        <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
+                                    </footer>
                                 @endif
-
-                                <dt>Регистрация на сайте</dt>
-                                <dd>
-                                    {{ Common_helper::getPastTime($user->created_at) }}
-                                </dd>
-                          
-                            @if($userInfo->role_id!=2)
-                                <footer>
-                                    <p>Выезжаю в другой город - <i class="fa {{ !empty($userinfo->city_departure)?'fa-check':'fa-times' }}"></i></p>
-                                    <p>Выезжаю за рубеж - <i class="fa {{ !empty($userinfo->country_departure)?'fa-check':'fa-times' }}"></i></p>
-                                </footer>
-                            @endif
+                            </div>
                         </div>
                     </div>
                     @if(count($albums))
@@ -108,12 +115,12 @@
 
                     @if(!empty($otherProf))
                         @foreach($otherProf as $key=>$val)
-                            <div class="profile-info" style="position:relative">
+                            <div class="profile-info">
                                 <h3>{{ $val->name }}</h3>
                                 <span class="price">от {{ $val->price }}</span>
                                 <p>{{ $val->description }}</p>
                                 @if(Auth::check() && Auth::user()->id==$user->id)
-                                    <a href="#create-album" class="fancybox btn-main" style="position:absolute; top:-5px; right:0">Создать новый альбом</a>
+                                    <a href="#create-album" class="fancybox btn-main">Создать новый альбом</a>
                                 @endif
                             </div>
                         @endforeach

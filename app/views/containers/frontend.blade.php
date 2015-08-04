@@ -186,11 +186,11 @@
 <!-- HEADER
     ============================= -->
     <?php
-         $cover = '';
-         if(isset($userInfo->cover)&&!empty($userInfo->cover)){
+        $cover = '';
+        if(isset($userInfo->cover)&&!empty($userInfo->cover)){
             $cover = $userInfo->cover;
         } 
-        if(!isset($profile)){
+        if(!isset($profile) && isset($siteSettings->main_cover)){
             $cover = '/'.$siteSettings->main_cover;
         }
     ?>

@@ -23,7 +23,7 @@
 }
 
 @media screen and (max-width: 991px) {
-	#header  { margin-top: 50px };
+	#header  { margin-top: 50px; height: auto };
 	#header .logo { top: 68px; }
 	#header .logo img { width: 90%; margin-left: -45%; }
 	#header .login { display: none }
@@ -77,6 +77,12 @@
 
 	/* middle content */
 	.latest-themes .theme-list .title { width: 100%; margin-bottom: 15px; }
+}
+
+@media (max-width: 700px){
+	.inner-nav li{
+		float: none;
+	}
 }
 
 @media (max-width: 500px) {
