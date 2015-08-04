@@ -22,9 +22,7 @@
 				<?php endif; ?>
 				<?php if(count($normal)): ?>
 					<?php foreach($normal as $item): ?>
-						<div class="user_card_cont">
-							<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-						</div>
+						<?php echo $__env->make('content.front.usercard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 					<?php endforeach; ?>
 				<?php endif; ?>
 				<?php if(!count($promo) && !count($normal)): ?>

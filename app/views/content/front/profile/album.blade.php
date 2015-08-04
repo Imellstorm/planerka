@@ -66,8 +66,8 @@
 					</div>	
 				</div>	
 				<div class="col-md-3">		
-					<div class="user-btns">
-						<a href="/{{ $user->alias }}" class="btn-gray">Обратно в профиль</a>
+					<div class="user-btns" style="padding-right:20px">
+						<a href="/{{ $user->alias }}" class="btn-gray" >Обратно в профиль</a>
 						@if(Auth::check() && Auth::user()->id!=$user->id)
 							<a href="/message/create/{{ $user->id }}" class="btn-purple fancybox_ajax_scroll">Написать сообщение</a>
 						@endif

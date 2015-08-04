@@ -13,12 +13,10 @@
 					Избранное
 				</div>
 			</div>
-			<div class="row">
+			<div class="row text-center">
 				@if(!empty($favorites))
 					@foreach($favorites as $item)
-						<div class="col-md-3 col-sm-6">
-							@include('content.front.usercard')
-						</div>
+						@include('content.front.usercard')
 					@endforeach
 				@endif
 			</div>

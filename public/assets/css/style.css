@@ -876,6 +876,8 @@ input.btn-main {
   /*overflow: hidden;*/
   position: relative;
   box-shadow: 0 1px 0px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  margin: 0 5px;
 }
 #card figure img {
   width: 261px;
@@ -2600,7 +2602,7 @@ input.btn-main {
   font-family: 'Neuron', sans-serif;
   font-size: 18px;
   line-height: 26px;
-  width: 460px;
+  width: 100%;
   margin-top: 150px;
   margin-right: 90px;
   display: inline-block;
@@ -4346,8 +4348,7 @@ form.project .checkbox span {
   max-height: 150px;
   max-width: 100%;
 }
-.user_card_cont{
-  margin:0 5px; 
+.user_card_cont{ 
   display:inline-block;
 }
 .social-login.mobile a{

@@ -23,9 +23,7 @@
 				@endif
 				@if(count($normal))
 					@foreach($normal as $item)
-						<div class="user_card_cont">
-							@include('content.front.usercard')
-						</div>
+						@include('content.front.usercard')
 					@endforeach
 				@endif
 				@if(!count($promo) && !count($normal))

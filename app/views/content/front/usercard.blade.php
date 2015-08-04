@@ -1,6 +1,6 @@
 <article id="card">
 	@if(!isset($hideDel))
-		<a href="/favorites/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;" style="right:25px"></a>
+		<a href="/favorites/delete/{{ $item->id }}" class="fa fa-times delete-image" onclick="return confirm('Удалить?')?true:false;"></a>
 	@endif
 	<figure>
 		<a href="/{{ $item->alias }}" class="usercard_photo">

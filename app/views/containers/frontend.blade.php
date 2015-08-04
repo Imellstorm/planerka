@@ -194,7 +194,7 @@
             $cover = $siteSettings->main_cover;
         }
     ?>
-    <header id="header" style="background: url('/{{ $cover }}') no-repeat top center; background-color: #726E68; background-size: cover;">
+    <header id="header" style="background: url('/{{ $cover }}') no-repeat top center; background-color: #000000; background-size: cover; opacity:0.9">
     @if(Auth::check())           
         <div class="user-nav">
             <div class="container">
