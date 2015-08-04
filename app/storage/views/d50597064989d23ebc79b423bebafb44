@@ -195,6 +195,7 @@
         }
     ?>
     <header id="header" style="background: url('/<?php echo $cover; ?>') no-repeat top center; background-color: #000000; background-size: cover; /*opacity:0.9*/">
+    <div class="shadow_mask"></div>
     <?php if(Auth::check()): ?>           
         <div class="user-nav">
             <div class="container">

@@ -27,6 +27,7 @@
 }
 
 @media screen and (max-width: 991px) {
+	.shadow_mask{ height: auto; }
 	#header  { margin-top: 50px; height: auto };
 	#header .logo { top: 68px; }
 	#header .logo img { width: 90%; margin-left: -45%; }

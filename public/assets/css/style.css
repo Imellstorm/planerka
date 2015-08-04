@@ -4366,3 +4366,10 @@ form.project .checkbox span {
 .cover_author a {
   color: white;
 }
+.shadow_mask{
+  position: absolute;
+  background: #000;
+  width: 100%;
+  opacity: 0.1;
+  height: 610px;
+}
