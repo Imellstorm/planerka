@@ -375,9 +375,9 @@
                 </div>
                 <?php endif; ?>
             </div>
-            <?php if(isset($siteSettings->cover_author) && !empty($siteSettings->cover_author)): ?>
-                <div class="cover_author">
-                    <a href="/<?php echo $siteSettings->cover_author; ?>">Автор Фото: <?php echo $siteSettings->cover_author; ?></a>
+            <?php if(isset($siteSettings->cover_author) && !empty($siteSettings->cover_author) && !isset($profile)): ?>
+                <div class="author-photo">
+                    Автор Фото: <a href="/<?php echo $siteSettings->cover_author; ?>"><?php echo $siteSettings->name; ?> <?php echo $siteSettings->surname; ?></a>
                 </div>
             <?php endif; ?>
         </div>

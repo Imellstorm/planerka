@@ -477,7 +477,7 @@ input.btn-main {
 }
 #header .author-photo {
   margin-left: 130px;
-  margin-top: 55px;
+  margin-top: 135px;
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   color: #fff;
@@ -698,7 +698,7 @@ input.btn-main {
   bottom: 0px;
   letter-spacing: 0.4px;
   /*background: rgba(0,0,0,0.5);*/
-  text-align: center;
+  text-align: left;
 }
 .latest-posts .single-post .post-title:hover {
   text-decoration: underline;

@@ -12,9 +12,11 @@
 					Закажите PROдвинутые услуги на ПЛАНЁРКЕ
 				</div>
 			</div>
-			<a href="#promo" class="by-promo" style="top:-30px">
-				Продлить ПРОМО-размещение на 7 дней за 239 руб.
-			</a>
+			@if(Auth::user()->role_id != 2)
+				<a class="by-promo" style="top:-30px; cursor:pointer">
+					Продлить ПРОМО-размещение на 7 дней за 239 руб.
+				</a>
+			@endif
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="price-tables">
@@ -144,4 +146,16 @@
 			@endif
 		</div>
 	</div>	
+@stop
+
+@section('scripts')
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.by-promo').on('click',function(){
+				$('html, body').animate({
+			        scrollTop: $("#promo").offset().top
+			    }, 1000);
+			})
+		})
+	</script>
 @stop

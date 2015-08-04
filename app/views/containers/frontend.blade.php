@@ -375,9 +375,9 @@
                 </div>
                 @endif
             </div>
-            @if(isset($siteSettings->cover_author) && !empty($siteSettings->cover_author))
-                <div class="cover_author">
-                    <a href="/{{ $siteSettings->cover_author }}">Автор Фото: {{ $siteSettings->cover_author }}</a>
+            @if(isset($siteSettings->cover_author) && !empty($siteSettings->cover_author) && !isset($profile))
+                <div class="author-photo">
+                    Автор Фото: <a href="/{{ $siteSettings->cover_author }}">{{ $siteSettings->name }} {{ $siteSettings->surname }}</a>
                 </div>
             @endif
         </div>
