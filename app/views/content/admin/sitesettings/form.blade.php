@@ -16,6 +16,10 @@
             <div class="form-group">
                 {{ Form::file('cover', array('id' => 'cover')) }}
             </div>
+            <div class="form-group">
+                {{ Form::label('usercard', 'Автор обложки') }}
+                {{ Form::text('cover_author',null,array('class' => 'form-control')) }}
+            </div>
 
             <div class='form-group' style="margin-top:40px">
                 {{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}

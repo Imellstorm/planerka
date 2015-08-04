@@ -92,11 +92,12 @@
 					<p>Купите аккаунт <span class="status"><a href="#null">PRO</a></span>чтобы загружать фотографии без ограничения</p>
 				</footer>
 			@endif
+			<div class="text-center foto_upload_error" style="color:red; display:none">Внимание! Некоторые файлы не могут быть загружены</div>
 			<div style="margin-top:20px">
-				<div class="btn-main upload_process" style="margin:0 auto">ПРОДОЛЖИТЬ</div>
+				<div class="btn-main upload_process" style="margin:0 auto">ЗАГРУЗИТЬ</div>
+				<a href="/{{ $user->alias }}/album/{{ $album->id }}" class="btn-main continue_btn" style="margin:0 auto; display:none">ЗАВЕРШИТЬ</a>
 				<img src="/assets/img/loading.gif" class="loading" style="display:none">
-			</div>	
-			<div class="text-center foto_upload_error" style="color:red; display:none">Внимание! Некоторые файлы не были загружены</div>					
+			</div>						
 		</div>
 	</div>
 </div>	
@@ -127,14 +128,15 @@
 			$('.dz-upload').fadeOut('normal');
 			$('.upload_process').show();
 			$('.foto_upload_error').hide();
+			$('.continue_btn').hide();
 			$.fancybox.update();	
 		})
 
 		myDropzone.on('removedfile',function(file,message){
 			if(myDropzone.getQueuedFiles().length==0){
 				$('.upload_process').hide();
-			} else {
-				$('.upload_process').show();
+				$('.continue_btn').hide();
+				$.fancybox.update();
 			}
 		})
 
@@ -144,12 +146,12 @@
 			$('.upload_process').hide();
 			$(file.previewElement).find('.dz-error-mark').show();
 			$('.foto_upload_error').show();
+			$('.continue_btn').show();
 			uploadErr = 1;
 				
 		})
 
 		myDropzone.on('success',function(file,message){
-			console.log(file.previewElement);
 			$(file.previewElement).find('.dz-success-mark').show();
 		})
 

@@ -17,11 +17,13 @@ class SiteSettingsController extends BaseController {
 		  App::abort(404);
 		}
 		$file = Input::file('cover');
+		$data['cover_author'] = Input::get('cover_author');
 		if(!empty($file)){
 			$path = 'images/'.Auth::user()->alias;
 			$image = Common_helper::fileUpload($file,$path);
-			$model->update(array('main_cover'=>$image['path']));
+			$data['main_cover'] = $image['path'];
 		}
+		$model->update( $data );
 		return Redirect::back();
 	}
 }

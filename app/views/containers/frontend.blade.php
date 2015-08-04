@@ -191,7 +191,7 @@
             $cover = $userInfo->cover;
         } 
         if(!isset($profile)){
-            $cover = '/'.$mainCover;
+            $cover = '/'.$siteSettings->main_cover;
         }
     ?>
     <header id="header" style="background: url('{{ $cover }}') no-repeat top center;   background-color: #726E68; background-size: 100%;">
@@ -375,6 +375,11 @@
                 </div>
                 @endif
             </div>
+            @if(isset($siteSettings->cover_author) && !empty($siteSettings->cover_author))
+                <div class="cover_author">
+                    <a href="/{{ $siteSettings->cover_author }}">Автор Фото: {{ $siteSettings->cover_author }}</a>
+                </div>
+            @endif
         </div>
     </header>
 
