@@ -1,1 +1,1 @@
-<div class="message-modal"><div><div class="title">{{ isset($title)?$title:'Внимание' }}</div><div class="message-text">{{ $message }}</div></div>
+<div class="message-modal"><div style="min-width:460px"><div class="title">{{ isset($title)?$title:'Внимание' }}</div><div class="message-text">{{ $message }}</div></div>
