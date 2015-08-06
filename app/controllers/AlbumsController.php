@@ -15,17 +15,6 @@ class AlbumsController extends BaseController {
 		return View::make('content.front.profile.albumslist', compact('albums'));
 	}
 
-	private function getFavorites($user){
-    	if(Auth::check()){
-			$favoriteExist = Favorites::where('selected_user_id',$user->id)->where('user_id',Auth::user()->id)->first();
-			if(!empty($favoriteExist)){
-				$favoriteExistVal=$favoriteExist->id;
-			} else {
-				$favoriteExistVal=false;
-			}	
-			return $favoriteExistVal;
-		}
-    }
 
 	/**
 	 * Display the specified resource.
