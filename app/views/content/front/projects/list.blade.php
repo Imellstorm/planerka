@@ -8,7 +8,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 section-title decor">
-						Лента проэктов
+						Лента проектов
 					</div>
 				</div>
 				@if(Auth::check() && Auth::user()->role_id!=2 && $userInfo->pro<date('Y-m-d'))

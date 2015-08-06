@@ -326,7 +326,7 @@
                         </div>
 
                         <div class="text-banner">
-                            Найдите лучшего исполнителя на ваше мероприятие <br> с <span>Planerka</span> - это легко :
+                            <?php echo $siteSettings->slogan; ?>
                         </div>
 
                         <div class="search">
@@ -476,8 +476,8 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
-                    <p>При использовании материалов  портала Planerka.ru ссылка на сайт первоисточник обязательна.</p>
-                    <p>Copyright 2014 Planerka.ru Все права защищены</p>
+                    <p>При использовании материалов  портала Planerca.ru ссылка на сайт первоисточник обязательна.</p>
+                    <p>Copyright <?php echo date('Y'); ?> Planerca.ru Все права защищены</p>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="social">

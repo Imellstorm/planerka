@@ -20,6 +20,10 @@
                 {{ Form::label('usercard', 'Автор обложки') }}
                 {{ Form::text('cover_author',null,array('class' => 'form-control')) }}
             </div>
+            <div class="form-group">
+                {{ Form::label('slogan', 'Слоган') }}
+                {{ Form::textarea('slogan',null,array('class' => 'form-control')) }}
+            </div>
 
             <div class='form-group' style="margin-top:40px">
                 {{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}

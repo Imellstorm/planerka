@@ -18,6 +18,7 @@ class SiteSettingsController extends BaseController {
 		}
 		$file = Input::file('cover');
 		$data['cover_author'] = Input::get('cover_author');
+		$data['slogan'] = Input::get('slogan');
 		if(!empty($file)){
 			$path = 'images/'.Auth::user()->alias;
 			$image = Common_helper::fileUpload($file,$path);

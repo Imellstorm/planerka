@@ -4377,3 +4377,6 @@ form.project .checkbox span {
   opacity: 0.1;
   height: 610px;
 }
+.page_content ul{
+  list-style: initial;
+}

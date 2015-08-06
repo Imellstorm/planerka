@@ -28,17 +28,15 @@ class AlbumsController extends BaseController {
 		if(empty($user)){
 			App::abort(404);
 		}
-
+		$this->getUserinfo($user->id);
 		$projectsDone = Userstoproject::where('user_id',$user->id)->where('status',6)->get();
-		//$this->getUserinfo($user->id);
-		$favoriteExist = $this->getFavorites($user);
-		View::share('favoriteExist',$favoriteExist);
+
 		View::share('profile',true);
 		View::share('projectsDoneCount',count($projectsDone));
 		View::share('user',$user);
 
 		$uploadsCount = 0;
-		if(!$this->isPro()){
+		if(Auth::check() && !$this->isPro()){
 			$date = new DateTime;
 			$date->modify('-1 week');
 			$formatted_date = $date->format('Y-m-d H:i:s');

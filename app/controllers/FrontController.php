@@ -6,7 +6,7 @@ class FrontController extends BaseController {
 	public function getIndex(){
 		setlocale(LC_ALL, "ru_RU.UTF-8");
 
-		$frontArticles = Article::where('onfront',1)->take(4)->orderBy('updated_at','DESC')->get();
+		$frontArticles = Article::where('onfront',1)->take(4)->orderBy('id','DESC')->get();
 
 		$blog = new BlogController;
 		$blogThemes = $blog->getLastblogthemes('month');

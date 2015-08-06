@@ -82,11 +82,7 @@ class ArticleController extends BaseController {
 		}
 
 		Session::flash('success', 'Статья создана!');
-		if(Auth::check() && Auth::User()->role->id == 1){
-			return Redirect::to('/admin/articles');
-		} else{
-			return Redirect::to('/');
-		}
+		return Redirect::back();
 	}
 
 	/**
@@ -169,11 +165,8 @@ class ArticleController extends BaseController {
 
     	$article->update($data);
 
-
-
 		Session::flash('success', 'Данные статьи обновлены!');
-
-		return Redirect::to('admin/articles');
+		return Redirect::back();
 	}
 
 	/**
