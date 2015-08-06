@@ -190,7 +190,7 @@
         if(isset($userInfo->cover)&&!empty($userInfo->cover)){
             $cover = $userInfo->cover;
         }
-        if(!isset($profile) && isset($siteSettings->main_cover)){
+        if(isset($siteSettings->main_cover)){
             $cover = $siteSettings->main_cover;
         }
     ?>
@@ -299,12 +299,12 @@
                         </div>
                         @if(Auth::check() && $userInfo->user_id!=Auth::user()->id)                 
                             <div class="star">
-                                @if(!$favoriteExist)
+                                @if(!in_array($userInfo->user_id,$favorites))
                                     <a href="/favorites/save/{{ $userInfo->alias }}">
                                         <img src="/assets/img/star.png" title="Добавить в избранное">
                                     </a>
                                 @else
-                                    <a href="/favorites/delete/{{ $favoriteExist }}">
+                                    <a href="/favorites/delete/{{ $userInfo->user_id }}">
                                         <img src="/assets/img/star_nocolor.png" title="Убрать из избранного">
                                     </a>
                                 @endif

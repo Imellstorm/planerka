@@ -15,8 +15,7 @@ class FavoritesController extends BaseController {
 		$model = new Favorites;
 		$exist = $model->where('selected_user_id',$selectedUser->id)->where('user_id',Auth::user()->id)->first();
 		if(!empty($exist)){
-			echo '<div class="text-center" style="padding:30px 20px 0 20px">Данный пользователь уже добавлен в избранное</div>';
-			exit;
+			return Redirect::back();
 		}
 
 		$model->user_id = Auth::user()->id;
@@ -35,8 +34,11 @@ class FavoritesController extends BaseController {
 	 */
 	public function getDelete($id)
 	{
-		$model = Favorites::find($id);
-		if(!empty($model) && $this->is_owner($model->user_id)){
+		if(!Auth::check()){
+			App::abort(404);
+		}
+		$model = Favorites::where('user_id',Auth::user()->id)->where('selected_user_id',$id)->first();
+		if(!empty($model)){
 			Favorites::destroy($model->id);
 			return Redirect::back();
 		}

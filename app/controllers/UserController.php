@@ -222,6 +222,12 @@ class UserController extends BaseController {
 
 	        if($this->is_admin() && Input::get('role')){
 				$data['role_id'] = Input::get('role');
+
+				$specialization = Specialization::where('user_id',$user->id)->where('role_id',$user->role_id)->delete();
+				$specialization = new Specialization;
+	        	$specialization->user_id = $user->id;
+	        	$specialization->role_id = $data['role_id'];
+	        	$specialization->save();
 			}
 
 			if($this->is_admin() && Input::get('balance')){

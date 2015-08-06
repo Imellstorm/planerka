@@ -61,7 +61,7 @@
 						<div class="col-sm-12">
 							<div class="proj-card">
 								<header>
-									@if(Auth::check() && Auth::user()->id==$project->user_id)
+									@if(Auth::check() && (Auth::user()->id==$project->user_id || Auth::user()->id==1))
 										<a href="/project/delete/{{ $project->project_id }}" style="margin-bottom:20px" class="btn-main">Удалить мероприятие</a>
 									@endif
 									<div class="title">{{ $project->title }}</div>

@@ -30,6 +30,8 @@
 										<a href="/album/setalbumcover/{{ $album->id.'/'.$image->id }}" class="hover_green">обложкой альбома</a>
 										@if($userInfo->pro>=date('Y-m-d'))
 											<a href="/album/setprofilecover/{{ $image->id }}" class="hover_green">баннером профиля</a>
+										@else
+											<a href="/account/shop" class="hover_green">баннером профиля</a>
 										@endif
 									</div>
 								@endif
@@ -150,10 +152,14 @@
 		myDropzone.on('error',function(file,message){
 			$('.dz-upload').fadeOut('normal');
 			$('.loading').hide();
-			$('.upload_process').hide();
 			$(file.previewElement).find('.dz-error-mark').show();
 			$('.foto_upload_error').show();
-			$('.continue_btn').show();
+			if(myDropzone.getQueuedFiles().length==0){
+				$('.continue_btn').show();
+				$('.upload_process').hide();
+			} else {
+				$('.upload_process').show();
+			}
 			uploadErr = 1;
 				
 		})

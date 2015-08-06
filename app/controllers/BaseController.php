@@ -13,7 +13,9 @@ class BaseController extends Controller {
 			$newMessages = Message::where('to',Auth::user()->id)->where('readed',0)->get();
 			$newProjectMessages = Projectmessages::leftjoin('projects','projects.id','=','project_messages.project_id')->where('projects.deleted','!=',1)->where('to_user',Auth::user()->id)->where('readed',0)->get();
 			$newNotifications = Notifications::where('to_user',Auth::user()->id)->where('readed',0)->get();
-			View::share('newProjectMessages',count($newProjectMessages));
+
+            View::share('favorites',$this->getFavorites());    
+            View::share('newProjectMessages',count($newProjectMessages));
 			View::share('newNotifications',count($newNotifications));
 			View::share('newMessages',count($newMessages));
 
@@ -27,6 +29,10 @@ class BaseController extends Controller {
 		
 		Auth::viaRemember();
 		$this->setOnline();
+    }
+
+    private function getFavorites(){
+        return Favorites::where('user_id',Auth::user()->id)->lists('selected_user_id','id');
     }
 
     private function setOnline(){

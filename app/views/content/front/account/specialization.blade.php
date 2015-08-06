@@ -51,6 +51,8 @@
 							</div>
 							@if(!count($otheRoles) && $userInfo->pro>=date('Y-m-d'))
 								<span class="add-specif">Добавить другую специализацию</span>
+							@elseif($userInfo->pro < date('Y-m-d'))
+								<a href="/account/shop" class="add-specif">Добавить другую специализацию</a>
 							@endif
 						</div>
 						@if(isset($otheRoles) && !empty($otheRoles))
@@ -108,7 +110,7 @@
 			});
 
 			var i=0;
-			$('body').on('click','.add-specif',function(){
+			$('body').on('click','span.add-specif',function(){
 				if(i < {{ $maxRoles }}){	
 					var selElem = $(this).parent().find('option:selected');
 					var selElemVal = $(this).parent().find('option:selected').val();

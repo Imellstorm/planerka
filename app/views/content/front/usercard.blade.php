@@ -48,10 +48,25 @@
 				<span class="status">PRO</span>
 			@endif
 			<span class="place">{{ $item->city }}</span>
+
 			<div class="meta">
-				<div class="review"><span>{{ $item->reviews }}</span>отзывов</div>
-				<div class="orders"><span>{{ $item->projects }}</span>заказов</div>
-				<!-- <div class="rait"><img src="/assets/img/star.png" alt=""></div> -->
+				<div class="pull-left">
+					<div class="review"><span>{{ $item->reviews }}</span>отзывов</div>
+					<div class="orders"><span>{{ $item->projects }}</span>заказов</div>
+				</div>
+				@if(Auth::check() && isset($hideDel))
+					<div style="float: right; margin-left: 10px;">
+						@if(!in_array($item->user_id,$favorites))
+		                    <a href="/favorites/save/{{ $item->alias }}">
+		                        <img src="/assets/img/star.png" title="Добавить в избранное">
+		                    </a>
+		                @else
+		                    <a href="/favorites/delete/{{ $item->user_id }}">
+		                        <img src="/assets/img/star_nocolor.png" title="Убрать из избранного">
+		                    </a>
+		                @endif
+		        	</div>
+	        	@endif
 			</div>
 		</header>
 		@if(count($item->albums))

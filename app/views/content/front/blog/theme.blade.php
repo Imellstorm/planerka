@@ -149,7 +149,7 @@
 
 									<ul class="meta">
 										<li>
-											<div style="margin-bottom:10px">{{ $post->text }}</div>
+											<div style="margin-bottom:10px; white-space:pre-wrap;">{{ $post->text }}</div>
 											<div>
 												@if(count($post->images))
 													@foreach($post->images as $image)

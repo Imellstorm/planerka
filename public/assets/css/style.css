@@ -486,6 +486,8 @@ input.btn-main {
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   color: #fff;
+  position: relative;
+  z-index: 100;
 }
 #header .author-photo a {
   color: #afb1b0;

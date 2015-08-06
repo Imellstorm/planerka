@@ -302,8 +302,8 @@ class ProjectController extends BaseController {
 	}
 
 	public function getDelete($id){
-		$project = Project::where('id',$id)->where('user_id',Auth::user()->id)->first();
-		if(empty($project)){
+		$project = Project::where('id',$id)->first();
+		if(empty($project) || !$this->is_owner($project->id)){
 			App::abort(404);
 		}
 		$project->update(array('deleted'=>1));
