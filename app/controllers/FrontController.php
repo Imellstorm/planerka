@@ -119,6 +119,10 @@ class FrontController extends BaseController {
 	private function getAdditionlUsersData($users){
 		foreach ($users as $key => $val) {
 			$val->specializations = Specialization::where('user_id',$val->user_id)->join('roles','roles.id','=','specializations.role_id')->get();
+			if($val->pro < date('Y-m-d') && $val->specializations[0]->id != $val->role_id){
+				unset($users[$key]);
+				continue;
+			}
 			$val->albums = Album::where('user_id',$val->user_id)->get();
 			$val->reviews = Review::where('to_user',$val->user_id)->count();
 			$val->projects = Userstoproject::where('user_id',$val->user_id)->where('status',6)->count();
