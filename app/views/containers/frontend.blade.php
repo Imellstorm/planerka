@@ -187,11 +187,11 @@
     ============================= -->
     <?php
         $cover = '';
-        if(isset($userInfo->cover)&&!empty($userInfo->cover)){
-            $cover = $userInfo->cover;
-        }
         if(isset($siteSettings->main_cover)){
             $cover = $siteSettings->main_cover;
+        }
+        if(isset($profile) && isset($userInfo->cover)&&!empty($userInfo->cover)){
+            $cover = $userInfo->cover;
         }
     ?>
     <header id="header" style="background: url('/{{ $cover }}') no-repeat top center; background-color: #000000; background-size: cover; /*opacity:0.9*/">
