@@ -55,7 +55,7 @@
 								<a href="/account/shop" class="add-specif">Добавить другую специализацию</a>
 							@endif
 						</div>
-						@if(isset($otheRoles) && !empty($otheRoles))
+						@if($userInfo->pro>=date('Y-m-d') && isset($otheRoles) && !empty($otheRoles))
 							@foreach($otheRoles as $key=>$val)
 								<div class="specif main key-{{ $key }}">
 									<div class="title">Дополнительная специализация</div>

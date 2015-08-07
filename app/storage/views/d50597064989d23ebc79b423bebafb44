@@ -213,13 +213,15 @@
                                     <span><?php echo $newMessages+$newProjectMessages+$newNotifications; ?></span>
                                 <?php endif; ?>
                             </div>
-                            <div class="count">
-                            <a href="/account/shop"><i class="fa fa-shopping-cart rub_icon"></i></a>
-                            </div>
-                            <?php if($userInfo->pro >= date('Y-m-d')): ?>
-                                <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
-                            <?php else: ?>
-                                <div class="status not_active" style="margin: 7px 7px 0 10px;">PRO</div>
+                            <?php if(Auth::check() && Auth::user()->role_id!=2): ?>
+                                <div class="count">
+                                    <a href="/account/shop"><i class="fa fa-shopping-cart rub_icon"></i></a>
+                                </div>
+                                <?php if($userInfo->pro >= date('Y-m-d')): ?>
+                                    <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                                <?php else: ?>
+                                    <div class="status not_active" style="margin: 7px 7px 0 10px;">PRO</div>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <div class="user" id="show-user-menu">
                                 <div class="name"><?php echo Auth::user()->username; ?></div>
@@ -286,6 +288,7 @@
                             <ul class="price">
                                 <?php foreach($userInfo->profs as $prof): ?>
                                     <li><?php echo $prof->name; ?> от <?php echo $prof->price; ?> р.</li>
+                                    <?php if($userInfo->pro<date('Y-m-d')) break ?>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>

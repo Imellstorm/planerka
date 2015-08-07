@@ -213,13 +213,15 @@
                                     <span>{{ $newMessages+$newProjectMessages+$newNotifications }}</span>
                                 @endif
                             </div>
-                            <div class="count">
-                            <a href="/account/shop"><i class="fa fa-shopping-cart rub_icon"></i></a>
-                            </div>
-                            @if($userInfo->pro >= date('Y-m-d'))
-                                <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
-                            @else
-                                <div class="status not_active" style="margin: 7px 7px 0 10px;">PRO</div>
+                            @if(Auth::check() && Auth::user()->role_id!=2)
+                                <div class="count">
+                                    <a href="/account/shop"><i class="fa fa-shopping-cart rub_icon"></i></a>
+                                </div>
+                                @if($userInfo->pro >= date('Y-m-d'))
+                                    <div class="status" style="margin: 7px 7px 0 10px;">PRO</div>
+                                @else
+                                    <div class="status not_active" style="margin: 7px 7px 0 10px;">PRO</div>
+                                @endif
                             @endif
                             <div class="user" id="show-user-menu">
                                 <div class="name">{{ Auth::user()->username }}</div>
@@ -286,6 +288,7 @@
                             <ul class="price">
                                 @foreach($userInfo->profs as $prof)
                                     <li>{{ $prof->name }} от {{ $prof->price }} р.</li>
+                                    <?php if($userInfo->pro<date('Y-m-d')) break ?>
                                 @endforeach
                             </ul>
                         @endif
