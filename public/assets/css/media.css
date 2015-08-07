@@ -3,7 +3,7 @@
 	#header .login p { width: 60%; }
 
 	#header .search { margin:20px; }
-	#header .author-photo { margin-left: 20px; margin-top: 40px; }
+	#header .author-photo { margin-left: 20px; }
 
 	.latest-themes .theme-list .title { width:  340px}
 
@@ -27,6 +27,8 @@
 }
 
 @media screen and (max-width: 991px) {
+	#header .author-photo { display: none; }
+
 	.shadow_mask{ height: auto; }
 	#header  { margin-top: 50px; height: auto };
 	#header .logo { top: 68px; }
