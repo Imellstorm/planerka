@@ -18,19 +18,19 @@
 		<div class="info-cont">
 			<div class="name">
 				@if(!empty($item->name) || !empty($item->surname))
-					<a href="/{{ $item->alias }}">{{ $item->name }} {{ $item->surname }}</a>
+					<a href="/{{ $item->alias }}">{{ Common_helper::cutString($item->name.' '.$item->surname,10) }}</a>
 				@else
-					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
+					<a href="/{{ $item->alias }}">{{ Common_helper::cutString($item->alias,10) }}</a>
+				@endif
+				<span class="{{ !empty($item->online)?'online':'offline' }}" style="margin: 8px 5px 0 5px;"></span>
+				@if($item->pro > date('Y-m-d'))
+					<span class="status">PRO</span>
+				@else
+					<span class="status not_active">PRO</span>
 				@endif
 			</div>
-			<div class="pull-left {{ !empty($item->online)?'online':'offline' }}" style="margin: 8px 5px 0 0;"></div>
-			@if($item->pro > date('Y-m-d'))
-				<span class="status">PRO</span>
-			@else
-				<span class="status not_active">PRO</span>
-			@endif
-			<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $item->rating }}</div>
 			<div class="place" style="height:20px">{{ $item->city }}</div>
+			<div class="rait">Рейтинг:&nbsp;&nbsp;{{ $item->rating }}</div>		
 		</div>
 	</div>
 	<div class="detail-info">
@@ -38,15 +38,17 @@
 			<a href="/{{ $item->alias }}" class="avatar"><img src="{{ Common_helper::getUserAvatar($item->user_id) }}" alt=""></a>
 			<div class="name">
 				@if(!empty($item->name) || !empty($item->surname))
-					<a href="/{{ $item->alias }}">{{ $item->name }} {{ $item->surname }}</a>
+					<a href="/{{ $item->alias }}">{{ Common_helper::cutString($item->name.' '.$item->surname,10) }}</a>
 				@else
-					<a href="/{{ $item->alias }}">{{ $item->alias }}</a>
+					<a href="/{{ $item->alias }}">{{ Common_helper::cutString($item->alias,10) }}</a>
 				@endif
 				<span class="{{ !empty($item->online)?'online':'offline' }}"></span>
+				@if($item->pro > date('Y-m-d'))
+					<span class="status">PRO</span>
+				@else
+					<span class="status not_active">PRO</span>
+				@endif
 			</div>
-			@if($item->pro > date('Y-m-d'))
-				<span class="status">PRO</span>
-			@endif
 			<span class="place">{{ $item->city }}</span>
 
 			<div class="meta">

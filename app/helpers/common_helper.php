@@ -321,4 +321,12 @@ class Common_helper {
         return $res;
     }
 
+    public static function cutString($str,$charsCount){
+        $result = mb_substr($str,0,$charsCount);
+        if(strlen($str) > strlen($result)){
+            $result.= '...';
+        }
+        return $result;
+    }
+
 }

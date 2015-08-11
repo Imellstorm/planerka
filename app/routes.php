@@ -21,6 +21,7 @@ Route::get('orders/success','OrderController@getSuccess');
 Route::get('orders/fail','OrderController@getFail');
 Route::controller('password', 'RemindersController');
 Route::controller('blog', 'BlogController');
+Route::controller('cron', 'CronController');
 
 
 /*

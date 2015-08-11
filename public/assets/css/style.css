@@ -889,7 +889,6 @@ input.btn-main {
 }
 #card .user-info {
   padding: 7px 8px;
-  min-height: 100px;
 }
 #card .detail-info {
   display: none;
@@ -1060,7 +1059,7 @@ input.btn-main {
 .user-info .avatar {
   display: block;
   float: left;
-  margin-right: 10px;
+  margin: 7px 10px 0 0;
 }
 .user-info .avatar img {
   width: 50px;
@@ -1081,10 +1080,6 @@ input.btn-main {
 .user-info .name a {
   font-family: 'PT Sans', sans-serif;
   color: #494848;
-}
-#card .user-info .name a{
-  display: block;
-  height: 25px;
 }
 .user-info .name a:hover {
   text-decoration: none;
